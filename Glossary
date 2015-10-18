@@ -1,0 +1,9 @@
+Some explanations for the key term present in the document:
+
+1) Passenger: The person who takes a taxi ride
+2) Requesting passenger: The passenger who has requested a taxi ride
+3) Taxi driver: The person who is licensed to drive a taxi cab
+4) The System: A software system, named myTaxiDriver, who dispatches the requests coming from the mobile app to the available taxi drivers
+5) Request: A message sent by a person through the myTaxiDriver mobile to the System, it contains all the information needed to send a taxi to the requesting passenger
+6) Zone: A square area, each taxi driver is assigned to a specific zone, the city is divided in zone
+7)

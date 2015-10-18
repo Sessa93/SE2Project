@@ -24,7 +24,7 @@ Scenarios/Use cases:
   Exit Cnd: The System notifies the selected taxi driver
   Exceptions:
     - No taxi available: The system immediately notifies the user
-    - No Response from the selected driver: the system repeat the procedure from point(?)
+    - No Response from the selected driver: the system repeat the procedure from point(3)
   Flow of Events:
     - The System receives the request(see use-case n1) and, taking into account the starting point of the ride, calculates the zone of the requesting user;
       Subsequently the System, basing on the distribution of taxi over the zones, extracts a taxi from the corresponding queue(FIFO) and assigns it to the user request.
@@ -100,7 +100,7 @@ Scenarios/Use cases:
     - When there are 10 minutes left, the system extracts a driver from the queue(calculated on the basis of the ride's starting point)
       and assigns him to the request(see use-case n4).
   Special Requirements:
-    - The system must acknowledges the driver within 1min from the submitting time of the reservation form.
+    - The system must acknowledges the driver within 1 min from the submitting time of the reservation form.
 
 --------------------------------------------------------------------------------
 
@@ -119,7 +119,15 @@ Scenarios/Use cases:
 
 --------------------------------------------------------------------------------
 
-8) User logout
+8) User Logout
+  Actors: User, the System
+  Entry Cnd: The user is logged into the system
+  Exit Cnd: The user is logged out from the system
+  Exceptions:
+    - Connection Lost: The mobile application immediately notifies the user
+  Flow of Events:
+    - The user wants to log out from the application, he presses the logout button
+    - The System notifies the user that he has been logged out from the System.
 
 --------------------------------------------------------------------------------
 
@@ -153,4 +161,5 @@ Assumptions:
 
 Questions:
   1) Fair?
-  2) Pre-conditions? Post-conditions ?
+  2) Pre-conditions? Post-conditions?
+  3) Registration?

@@ -3,50 +3,121 @@ Authors: Giorgio Pea, Andrea Sessa
 
 Scenarios/Use cases:
 
-1)A passenger requests of a taxi
+1) A passenger requests of a taxi
   Actors: Taxi(driver), Passengers, Server/Client app(the system)
   Entry Cnd: The passenger requests a taxi ride
-  Exit Cnd: The system acknowledges the passenger
+  Exit Cnd: The system acknowledge the passenger
+  Exceptions:
+    - Connection lost: The mobile application immediately notifies the user.
+    - No taxi available: The mobile application immediately notifies the user.
+  Flow of events:
+    - The user access the system through the mobile web app, no credentials required for a request.
+    - The user selects the origin and destination of the ride and the number of passengers, once the form is completed, it is submitted to the System.
+    - The System receives the request and, taking into account the starting point of the ride, calculates the zone of the requesting user;
+      Subsequently the System, basing on the distribution of taxi over the zones, extracts a taxi from the corresponding queue(FIFO) and assigns it to the user request.
+    - The driver of the selected taxi is notified by the System via the mobile app of the new request, the System includes in the notification
+      all the information provided by the user (see use-case n4).
+    - The System notifies the requesting user about the state of request(accepted or rejected), if accepted the System sends to the user
+      the taxi identification number and the estimated arrival time of the taxi at the origin point.
+  Special Requirements
+    - The user must be notified about the state of the request within 30 seconds from the submitting time.
+
+--------------------------------------------------------------------------------
 
 2) A taxi(driver) informs the system of his availability
-  Actors: Taxi(driver), the system
-  Entry Cnd: The taxi driver informs the system about his availability
-  Exit Cnd: The system acknowledges the taxi driver
+  Actors: A taxi driver, the System
+  Entry Cnd: The driver starts his shift
+  Exit Cnd: The driver receives an acknowledgement from the system
+  Exceptions:
+    - Connection Lost: The driver is immediately notified via the mobile application.
+  Flow of Events:
+    - The driver logs into myTaxiService inserting its credentials.
+    - The mobile app access automatically to the GPS system, retrieves the current position, and sends the data to the System
+    - The System receives the positioning data, calculates the zone, stores the taxi ID in the queue associated to the calculated zone
+      and recalculates the distribution of taxies over the zones.
+    - The System acknowledges the driver.
+  Special Requirements:
+    - The system must notifies the driver within 1min from the submitting time
 
-3) A taxi driver informs the system that he has terminated a request
-  Actors: Taxi(driver), the system, (passengers?)
-  Entry Cnd: The driver informs
-  Exit Cnd: The system acknowledges the driver
+--------------------------------------------------------------------------------
 
-4) A user reserve a ride
-  Actors: user, the system
-  Entry Cnd: The user requests a reserved ride
+3) A taxi driver informs the system that he has terminated a ride
+  Actors: Taxi(driver), the System
+  Entry Cnd: The driver has terminated a ride
   Exit Cnd: The system acknowledges the driver
+  Exceptions:
+    - Connection Lost: The driver is immediately notified via the mobile application.
+  Flow of Events:
+    - The driver logs into myTaxiService providing its credentials.
+    - The driver sets his current state to 'available'(glossary?), when the user submit the notification the mobile app access to GPS system,
+      retrieves the current position and attach the positioning information to the notification.
+    - The System receives the positioning data, calculates the zone, stores the taxi ID in the queue associated to the calculated zone
+      and recalculates the distribution of taxies over the zones.
+    - The System acknowledges the driver.
+  Special Requirements:
+    - The system must notifies the driver within 1min from the submitting time
+
+--------------------------------------------------------------------------------
+
+4) The driver receives a request
+  Actors: Taxi driver, the System
+  Entry Cnd: The System submit to the driver a new request
+  Exit Cnd: The driver acknowledges the System
+  Exceptions:
+    - The driver doesn't respond to the request.
+    - The passenger is not present at starting point of the ride.
+  Flow of Events:
+    - The driver receives a new request via the mobile application.
+    - The driver takes note(?) of the information(position, time, starting point, ending point, number of passengers) contained in the request.
+    - The driver acknowledges the system.
+    - The driver reaches the origin point of the ride.
+  Special Requirements:
+    - The driver must acknowledge the system within 5min otherwise the System assumes that the driver is out of service and proceeds to select another taxi to fullfill the request.
+    - The driver waits at the starting point of the ride at most 30 min.
+
+--------------------------------------------------------------------------------
+
+5) A user requests a reserved ride
+  Actors: Passenger, the System
+  Entry Cnd: The user want requests a reserved ride
+  Exit Cnd: The system acknowledges the driver
+  Exceptions:
+    - Connection Lost: The driver is immediately notified via the mobile application.
+    - No taxi available: The requesting user is immediately notified via the mobile application.
+  Flow of Events:
+    - The driver logs into myTaxiService mobile application, providing his credentials.
+    - The user selects the origin and destination of the ride, the number of passengers and the starting time, once the form is completed, it is submitted to the System.
+    - The System checks if the starting time is at least 2 hours greater than the current time, if so it stores the request.
+    - The System ackowledges the user.
+    - When there are 10 minutes left, the system extracts a driver from the queue(calculated on the basis of the ride's starting point)
+      and assigns him to the request(see use-case n4).
+  Special Requirements:
+    - The system must acknowledges the driver within 1min from the submitting time of the reservation form.
 
 (5 A request is rejected) <- Scenario?
 
-(6) No taxi available) <- Scenario?
+(6 No taxi available) <- Scenario?
 
-The System <-> myTaxiService
+The System <-> myTaxiService back end
 
-Requirements:
- 1) The user can undo a request (F)
- 2) The system has to guarantee that a taxi arrives at the origin of the ride within a fixed time(NF)
- 3) The user has to specify the origin of the ride(F)
- 4) The taxi driver waits for the passenger that has requested the ride at the origin point for a maximum amount of time, after that the taxi returns available(NF)
- 5) The user has to specify the time of departure when he reserves a taxi(F)
- 6) A taxi that joins this service has to mount a GPS system(to specify)(C)
- 7) The System uses the GPS information to determinate if a taxi is in service(F)
- 8) A taxi driver has to accept or not a request within a fixed time, otherwise the request is rejected(NF)
- 9) The System puts the user in a waiting list if no taxi is available(F) -> Scenario
- 10) The user can undo a reservation within 10 minutes from the meeting time(NF)
- 11) The taxies that partecipate to the service can only manage request and reservation from the service(C)
+Requirements(Functional -> F, Non Functional -> NF, Constraints -> C):
+  1) The user can undo a request (F)
+  2) The system has to guarantee that a taxi arrives at the origin of the ride within a fixed time(NF)
+  3) The user has to specify the origin of the ride(F)
+  4) The taxi driver waits for the passenger that has requested the ride at the origin point for a maximum amount of time, after that the taxi returns available(NF)
+  5) The user has to specify the time of departure when he reserves a taxi(F)
+  6) A taxi that joins this service has to mount a GPS system(to specify)(C)
+  7) The System uses the GPS information to determinate if a taxi is in service(F)
+  8) A taxi driver has to accept or not a request within a fixed time, otherwise the request is rejected(NF)
+  9) The System puts the user in a waiting list if no taxi is available(F) -> Scenario
+  10) The user can undo a reservation within 10 minutes from the meeting time(NF)
+  11) The taxies that partecipate to the service can only manage request and reservation from myTaxiService(C) -> ??
 
- Goals:
+Goals:
   1) A fair management of the taxi queue
   2) Possibility to request a taxi ride
   3) Possibility to reserve a taxi ride
 
 Questions:
   1) Fair?
-  2) A taxi accept passenger only
+  2) Pre-conditions? Post-conditions ?

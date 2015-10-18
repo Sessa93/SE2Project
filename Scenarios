@@ -4,34 +4,44 @@ Authors: Giorgio Pea, Andrea Sessa
 Scenarios/Use cases:
 
 1) A passenger requests of a taxi
-  Actors: Taxi(driver), Passengers, Server/Client app(the system)
+  Actors: Taxi(driver), Requesting passenger, the System
   Entry Cnd: The passenger requests a taxi ride
   Exit Cnd: The system acknowledge the passenger
   Exceptions:
     - Connection lost: The mobile application immediately notifies the user.
-    - No taxi available: The mobile application immediately notifies the user.
   Flow of events:
     - The user access the system through the mobile web app, no credentials required for a request.
     - The user selects the origin and destination of the ride and the number of passengers, once the form is completed, it is submitted to the System.
-    - The System receives the request and, taking into account the starting point of the ride, calculates the zone of the requesting user;
-      Subsequently the System, basing on the distribution of taxi over the zones, extracts a taxi from the corresponding queue(FIFO) and assigns it to the user request.
-    - The driver of the selected taxi is notified by the System via the mobile app of the new request, the System includes in the notification
-      all the information provided by the user (see use-case n4).
-    - The System notifies the requesting user about the state of request(accepted or rejected), if accepted the System sends to the user
-      the taxi identification number and the estimated arrival time of the taxi at the origin point.
+    - The requesting passenger receive an acknowledgement from the System
   Special Requirements
     - The user must be notified about the state of the request within 30 seconds from the submitting time.
 
 --------------------------------------------------------------------------------
 
-2) A taxi(driver) informs the system of his availability
+2) The System notifies a driver
+  Actors: The System, a taxi driver
+  Entry Cnd: The System has received a request for a ride from a requesting passenger
+  Exit Cnd: The System notifies the selected taxi driver
+  Exceptions:
+    - No taxi available: The system immediately notifies the user
+    - No Response from the selected driver: the system repeat the procedure from point(?)
+  Flow of Events:
+    - The System receives the request(see use-case n1) and, taking into account the starting point of the ride, calculates the zone of the requesting user;
+      Subsequently the System, basing on the distribution of taxi over the zones, extracts a taxi from the corresponding queue(FIFO) and assigns it to the user request.
+    - The driver of the selected taxi is notified by the System via the mobile app of the new request, the System includes in the notification
+      all the information provided by the user (see use-case n4).
+    - The System notifies the requesting user about the state of request(accepted or rejected), if accepted the System sends to the user
+      the taxi identification number and the estimated arrival time of the taxi at the origin point.
+
+--------------------------------------------------------------------------------
+
+3) A taxi(driver) informs the system of his availability
   Actors: A taxi driver, the System
   Entry Cnd: The driver starts his shift
   Exit Cnd: The driver receives an acknowledgement from the system
   Exceptions:
     - Connection Lost: The driver is immediately notified via the mobile application.
   Flow of Events:
-    - The driver logs into myTaxiService inserting its credentials.
     - The mobile app access automatically to the GPS system, retrieves the current position, and sends the data to the System
     - The System receives the positioning data, calculates the zone, stores the taxi ID in the queue associated to the calculated zone
       and recalculates the distribution of taxies over the zones.
@@ -41,14 +51,13 @@ Scenarios/Use cases:
 
 --------------------------------------------------------------------------------
 
-3) A taxi driver informs the system that he has terminated a ride
+4) A taxi driver informs the system that he has terminated a ride
   Actors: Taxi(driver), the System
-  Entry Cnd: The driver has terminated a ride
+  Entry Cnd: The driver has terminated a ride, the driver is logged into the System
   Exit Cnd: The system acknowledges the driver
   Exceptions:
     - Connection Lost: The driver is immediately notified via the mobile application.
   Flow of Events:
-    - The driver logs into myTaxiService providing its credentials.
     - The driver sets his current state to 'available'(glossary?), when the user submit the notification the mobile app access to GPS system,
       retrieves the current position and attach the positioning information to the notification.
     - The System receives the positioning data, calculates the zone, stores the taxi ID in the queue associated to the calculated zone
@@ -59,12 +68,11 @@ Scenarios/Use cases:
 
 --------------------------------------------------------------------------------
 
-4) The driver receives a request
+5) The driver receives a request
   Actors: Taxi driver, the System
   Entry Cnd: The System submit to the driver a new request
   Exit Cnd: The driver acknowledges the System
   Exceptions:
-    - The driver doesn't respond to the request.
     - The passenger is not present at starting point of the ride.
   Flow of Events:
     - The driver receives a new request via the mobile application.
@@ -77,10 +85,10 @@ Scenarios/Use cases:
 
 --------------------------------------------------------------------------------
 
-5) A user requests a reserved ride
-  Actors: Passenger, the System
-  Entry Cnd: The user want requests a reserved ride
-  Exit Cnd: The system acknowledges the driver
+6) A user requests a reserved ride
+  Actors: Requesting passenger, the System
+  Entry Cnd: The user want requests a reserved ride, the user is logged into the system
+  Exit Cnd: The system acknowledges the assigned driver
   Exceptions:
     - Connection Lost: The driver is immediately notified via the mobile application.
     - No taxi available: The requesting user is immediately notified via the mobile application.
@@ -88,11 +96,32 @@ Scenarios/Use cases:
     - The driver logs into myTaxiService mobile application, providing his credentials.
     - The user selects the origin and destination of the ride, the number of passengers and the starting time, once the form is completed, it is submitted to the System.
     - The System checks if the starting time is at least 2 hours greater than the current time, if so it stores the request.
-    - The System ackowledges the user.
+    - The System acknowledges the user.
     - When there are 10 minutes left, the system extracts a driver from the queue(calculated on the basis of the ride's starting point)
       and assigns him to the request(see use-case n4).
   Special Requirements:
     - The system must acknowledges the driver within 1min from the submitting time of the reservation form.
+
+--------------------------------------------------------------------------------
+
+7) User Login
+  Actors: User, the System
+  Entry Cnd: the user is offline and wants to log in the System
+  Exit Cnd: The user is logged in
+  Exceptions:
+    - Connection Lost: The mobile application immediately notifies the user
+    - Wrong Credentials: The mobile application ask to reenter it
+  Flow of Events:
+    - The user wants to log in the application he opens it on its mobile device.
+    - The System asks to provide credentials and to specify the user type(driver or passenger), showing a login form.
+    - The user provides the login information.
+    - The System authenticates the user and give access to corresponding front-end
+
+--------------------------------------------------------------------------------
+
+8) User logout
+
+--------------------------------------------------------------------------------
 
 (5 A request is rejected) <- Scenario?
 
@@ -117,6 +146,10 @@ Goals:
   1) A fair management of the taxi queue
   2) Possibility to request a taxi ride
   3) Possibility to reserve a taxi ride
+
+Assumptions:
+  1) One application both for requesting passengers and taxi drivers, when a user logs into the mobile application must provide the type of user.
+
 
 Questions:
   1) Fair?

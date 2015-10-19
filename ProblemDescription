@@ -11,4 +11,5 @@
     4- Notifies the system that they have successfully terminated a ride.
     5- Being notified by the system for a new request coming from a user.
   All the listed functionalities are accessed through a login/logout procedure(except for the functionality number 1).
+
    

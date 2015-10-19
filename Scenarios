@@ -34,23 +34,33 @@ Scenarios/Use cases:
   [Pre-cons]: the taxi driver has access to the myTaxiService application; the taxi driver
   has access to the web from the device used to access the application; the taxi driver is
   registered to myTaxiService as a driver; the taxi driver owns and uses on his taxi
-  a gps system that is used by the myTaxiService application to respond to taxi ride
-  requests
-  [Post-cons]: the myTaxiService knows the taxi that is going to take care of the
-  the ride request
-  Entry Cnd: The System has received a request for a ride from a requesting passenger
-  Exit Cnd: The System notifies the selected taxi driver
-  Exceptions:
-    - No taxi available: The system immediately notifies the user
-    - No Response from the selected driver: the system repeat the procedure from point(3)
-  Flow of Events:
-    - The System receives the request(see use-case n1) and, taking into account the starting point of the ride, calculates the zone of the requesting user;
-      Subsequently the System, basing on the distribution of taxi over the zones, extracts a taxi from the corresponding queue(FIFO) and assigns it to the user request.
-    - The driver of the selected taxi is notified by the System via the mobile app of the new request, the System includes in the notification
-      all the information provided by the user (see use-case n4).
-    - The System notifies the requesting user about the state of request(accepted or rejected), if accepted the System sends to the user
-      the taxi identification number and the estimated arrival time of the taxi at the origin point.
+  a gps system that provided by the myTaxiService application to respond to taxi ride
+  requests; the taxi driver has signaled via the app that has finished serving a passenger and is
+  ready for a new ride
+  [Post-cons]: the taxi driver knows that a passenger has requested a ride with the specified
+  details and has to accept it or not
+  [Entry Cnd]: the myTaxService app has received a request for a ride from a passenger
+  [Exit Cnd]: The System notifies the selected taxi driver
+  [Exceptions]:
+    - No taxi available: if the queue relative to taxi zone of the request is empty(no taxi available)
+    then the myTaxiService back-end uses the queue of one of the zones adjacent to the one we're considering
+    - No ack from the selected driver's app: the system repeats the forwarding of the request
+  [Flow of Events]:
+    - the myTaxiService back-end receives a ride request, calculates the taxi zone of the starting point of the ride
+      and extracts a taxi (using a FIFO logic) from the queue of taxies associated with the taxi zone and forwards to that taxi the ride request.
+    - the myTaxiService back-end notifies the selected taxi's driver of a new ride request along with all the details relative to it.
 
+
+    {Here we model just the fact that a ride request is forwarded to a taxi driver and that that taxi driver
+    receives it with success}
+    {We'll use another scenario to model the fact that a taxi driver that has received a ride request
+    accepts or not that request}
+    {When a taxi driver signals it has finished a ride(and this is mandatory) then we consider the
+    taxi available for a new ride, the system knows the work turn of each taxi driver so that a taxi
+    driver can't be non available when it has completed a ride}
+    {When a taxi driver receives a ride request he has only to signal the fact that is reaching the passenger
+    , it cannot decline a ride request, if the taxi driver does not signal is reaching the passenger
+    within a certain time than the systems uses another taxi and signals what happened to the admins}
 --------------------------------------------------------------------------------
 
 3) A taxi(driver) informs the system of his availability

@@ -1,0 +1,15 @@
+1) Main Purpose
+  The system main purpose is to provide a distributed platform(myTaxiService) to permit an optimal management of taxi rides
+  over a large metropolitan area(eg. a city of extension similar to Milano), also the system has the goal to simplify the access of
+  passengers to the taxi service.
+  There are two main functionalities offered to the user:
+    1- Requests a taxi ride
+    2- Reserves a taxi ride
+  The System has also provides an interface for taxi driver, the latters use the interface to
+  interact with the service in the following ways:
+    3- Notifies the system that they are currently on-line.
+    4- Notifies the system that they have successfully terminated a ride.
+    5- Being notified by the system for a new request coming from a user.
+  All the listed functionalities are accessed through a login/logout procedure(except for the functionality number 1).
+
+   

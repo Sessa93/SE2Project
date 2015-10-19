@@ -3,23 +3,41 @@ Authors: Giorgio Pea, Andrea Sessa
 
 Scenarios/Use cases:
 
-1) A passenger requests of a taxi
-  Actors: Taxi(driver), Requesting passenger, the System
-  Entry Cnd: The passenger requests a taxi ride
-  Exit Cnd: The system acknowledge the passenger
-  Exceptions:
+1) A passenger requests a taxi ride
+  [Actors]: the requesting passenger, the myTaxiService application
+  [Pre-cons]: the passenger has access to the myTaxiService application; the passenger
+  has access to the web from the device used to access the application; the passenger is
+  registered to myTaxiService as a passenger. The passenger wants to start the ride in less
+  than two hours
+  [Post-cons]: the taxi will arrive at the requested location as punctual as possible with
+  respect to the requested time
+  [Entry Cnd]: the passenger is willing to take a taxi. the passenger
+  [Exit Cnd]: the application acknowledges the passenger that a taxi is available and shows
+  the waiting time for the taxi along with a button to undo the taxi ride request.
+  [Exceptions]:
     - Connection lost: The mobile application immediately notifies the user.
-  Flow of events:
-    - The user access the system through the mobile web app, no credentials required for a request.
-    - The user selects the origin and destination of the ride and the number of passengers, once the form is completed, it is submitted to the System.
-    - The requesting passenger receive an acknowledgement from the System
-  Special Requirements
+  [Flow of events]:
+    - The passenger logs into the app
+    - The passenger hits the 'request ride' button
+    - The passenger fills and sends the request ride form by inserting the starting location, the ending location,
+    the time in which a taxi has to be ready and the number of passengers.
+    - The myTaxiService app aknowledges the passenger about its request by showing to him
+    the time before a taxi will be available, and if a taxi is available, the taxi arrival time.
+    If a taxi is not available the myTaxiService will let the user undo its ride request
+  [Special Requirements]:
     - The user must be notified about the state of the request within 30 seconds from the submitting time.
 
 --------------------------------------------------------------------------------
 
-2) The System notifies a driver
-  Actors: The System, a taxi driver
+2) A taxi driver receives a ride request by the myTaxiService application
+  [Actors]: a taxi driver, the myTaxiService application
+  [Pre-cons]: the taxi driver has access to the myTaxiService application; the taxi driver
+  has access to the web from the device used to access the application; the taxi driver is
+  registered to myTaxiService as a driver; the taxi driver owns and uses on his taxi
+  a gps system that is used by the myTaxiService application to respond to taxi ride
+  requests
+  [Post-cons]: the myTaxiService knows the taxi that is going to take care of the
+  the ride request
   Entry Cnd: The System has received a request for a ride from a requesting passenger
   Exit Cnd: The System notifies the selected taxi driver
   Exceptions:

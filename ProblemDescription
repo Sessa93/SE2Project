@@ -12,4 +12,7 @@
     5- Being notified by the system for a new request coming from a user.
   All the listed functionalities are accessed through a login/logout procedure(except for the functionality number 1).
 
-   
+2) Main Concepts
+
+3) Assumptions:
+  - One application both for requesting passengers and taxi drivers, when a user logs into the mobile application must provide the type of user.

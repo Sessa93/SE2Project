@@ -11,3 +11,4 @@ Some explanations for the key term present in the document:
 7) Mobile App: The front-end software component of myTaxiService, available both to the user and taxi driver.
 8) Credentials: A combination of username and password, used to access the myTaxiService application.
 9) User: A user of this application can be a requesting passenger or taxi driver.
+10) The System <-> myTaxiService back end

@@ -56,8 +56,7 @@ Scenarios/Use cases:
     {We'll use another scenario to model the fact that a taxi driver that has received a ride request
     accepts or not that request}
     {When a taxi driver signals it has finished a ride(and this is mandatory) then we consider the
-    taxi available for a new ride, the system knows the work turn of each taxi driver so that a taxi
-    driver can't be non available when it has completed a ride}
+    taxi available for a new ride}
     {When a taxi driver receives a ride request he has only to signal the fact that is reaching the passenger
     , it cannot decline a ride request, if the taxi driver does not signal is reaching the passenger
     within a certain time than the systems uses another taxi and signals what happened to the admins}
@@ -133,7 +132,7 @@ Scenarios/Use cases:
 --------------------------------------------------------------------------------
 
 7) User Login
-  Actors: User, the System
+  Actors: Passenger/Driver, the System
   Entry Cnd: the user is offline and wants to log in the System
   Exit Cnd: The user is logged in
   Exceptions:
@@ -148,7 +147,7 @@ Scenarios/Use cases:
 --------------------------------------------------------------------------------
 
 8) User Logout
-  Actors: User, the System
+  Actors: Passenger/Driver, the System
   Entry Cnd: The user is logged into the system
   Exit Cnd: The user is logged out from the system
   Exceptions:
@@ -159,11 +158,18 @@ Scenarios/Use cases:
 
 --------------------------------------------------------------------------------
 
-(5 A request is rejected) <- Scenario?
+9) User undo a reservation
+  Actors: Requesting passenger, the System
+  Entry Cnd: The passenger has reserved a ride successfully, the user is logged into the application
+  Exit Cnd: The System acknowledges the passenger
+  Exceptions:
+    - Connection Lost: The mobile application immediately notifies the user
+  Flow of Events:
+    - The user enters in the application area where he can see the list of reservation
+    - The user selects the reservation to eliminate and press the "cancel" button
+    - The System acknowledges the user
 
-(6 No taxi available) <- Scenario?
-
-The System <-> myTaxiService back end
+--------------------------------------------------------------------------------
 
 Requirements(Functional -> F, Non Functional -> NF, Constraints -> C):
   1) The user can undo a request (F)
@@ -182,10 +188,6 @@ Goals:
   1) A fair management of the taxi queue
   2) Possibility to request a taxi ride
   3) Possibility to reserve a taxi ride
-
-Assumptions:
-  1) One application both for requesting passengers and taxi drivers, when a user logs into the mobile application must provide the type of user.
-
 
 Questions:
   1) Fair?

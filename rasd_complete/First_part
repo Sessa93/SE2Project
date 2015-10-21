@@ -1,0 +1,26 @@
+DESCRIPTION
+MyTaxiService it's a mobile application that simplifies and speeds up the way people take taxies.
+With MyTaxiService a user can request or reserve a taxi and get realtime information
+about how long it will take to pick him up or about the taxi's current position and the taxi's code.
+MyTaxiService also offers to every user the possibility of sharing a ride with other people and
+provides an efficient way to allocate taxies by dividing the
+city in zones and by using a queue based allocation system, so that the waiting time
+for the user and the city's traffic are reduced.
+
+GOALS
+1. Simplify and speed up the process of taking a taxi
+  1.1 When a user has entered his taxi ride details and clicks or taps
+      the request button, then the MyTaxiService will find the first
+      available taxi compatible with the ride details inserted and reserve it to the user
+
+  1.2 When a user has entered his taxi reservation details and clicks or taps
+      the reserve button, then the MyTaxiService will reserve a taxi compatible with the
+      reservation details and for the meeting time indicated
+
+  1.3 If a user enables the sharing ride option then MyTaxiService, if possible, will reserve
+      a taxi for the user and this taxi will be shared with other people
+
+2. Guarantee an efficient and fair management of taxi queues
+    2.2 Guarantee a right distribution of taxies in the city
+    2.3 Guarantee low waiting times, more precisely guarantee low taxi availability times
+        and guarantee that the user will be picked up in low time

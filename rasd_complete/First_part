@@ -4,7 +4,7 @@ Thanks to MyTaxiService, a user can request or book a taxi and get realtime info
 about how long it will take to be picked up or about taxi's current position and code.
 In addition, MyTaxiService provides an efficient way to allocate taxies by dividing the
 city in zones and using a queue based allocation system, in order to reduce the
-waiting time and the city's traffic.
+waiting time and city's traffic.
 
 GOALS
 1. Simplify and speed up the process of taking a taxi

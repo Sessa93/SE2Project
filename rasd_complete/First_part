@@ -2,7 +2,7 @@ DESCRIPTION
 MyTaxiService is a mobile application that makes easier and quicker the way people take taxies.
 Thanks to MyTaxiService, a user can request or reserve a taxi and get realtime information
 about how long it will take to be picked up or about the taxi's current position and code.
-MyTaxiService also provides an efficient way to allocate taxies by dividing the
+In addition, MyTaxiService provides an efficient way to allocate taxies by dividing the
 city in zones and by using a queue based allocation system, so that the waiting time
 for the user and the city's traffic are reduced.
 

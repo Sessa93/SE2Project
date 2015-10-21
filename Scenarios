@@ -60,9 +60,10 @@ Scenarios/Use cases:
     {When a taxi driver receives a ride request he has only to signal the fact that is reaching the passenger
     , it cannot decline a ride request, if the taxi driver does not signal is reaching the passenger
     within a certain time than the systems uses another taxi and signals what happened to the admins}
+
 --------------------------------------------------------------------------------
 
-3) A taxi(driver) informs the system of his availability
+3) A taxi(driver) informs the system of his availability [TO BE REMOVED]
   Actors: A taxi driver, the System
   Entry Cnd: The driver starts his shift
   Exit Cnd: The driver receives an acknowledgement from the system
@@ -95,7 +96,8 @@ Scenarios/Use cases:
 
 --------------------------------------------------------------------------------
 
-5) The driver receives a request
+5) The driver signals he starts driving towards the passenger whose ride request
+  he has received
   Actors: Taxi driver, the System
   Entry Cnd: The System submit to the driver a new request
   Exit Cnd: The driver acknowledges the System

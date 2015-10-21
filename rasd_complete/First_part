@@ -14,9 +14,8 @@ GOALS
 
   1.2 When a user has entered his taxi reservation details and clicks or taps
       the book button, then MyTaxiService will book a taxi tha fits for the
-      inserted booking details and for the indicated meeting time 
+      inserted booking details and for the indicated meeting time
 
 2. Guarantee an efficient and fair management of taxi queues
     2.2 Guarantee a right distribution of taxies in the city
-    2.3 Guarantee low waiting times, more precisely guarantee low taxi availability times
-        and guarantee that the user will be picked up in low time
+    2.3 Guarantee short taxi availability times and short user waiting times

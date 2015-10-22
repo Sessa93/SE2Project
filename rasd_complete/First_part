@@ -19,3 +19,28 @@ GOALS
 2. Guarantee an efficient and fair management of taxi queues
     2.2 Guarantee a right distribution of taxies in the city
     2.3 Guarantee short taxi availability times and short waiting times
+
+
+PRELIMINARY ASSUMPTIONS
+1. MyTaxiService has been commissioned by a company that gathers several taxies.
+This company provides each taxi with a device used to see incoming ride requests or reservations and
+to signal the acceptance of these ones, along with a gps device used to track the taxi's position.
+Given that, each of the above mentioned taxies is forced to accept ride request/ reservations only
+using MyTaxiService
+2. MyTaxiService is aware of the work time table of each taxies, so there's no need to consider
+the case in which a taxi has no pending request but is not available: taxies are unavailable
+if and only if they are serving a ride/reservation request. There might be exception which will
+be discussed later
+3. Once a user sends a ride request, he or she cannot change any detail of the request nor can
+undo the request
+4. The amount of taxies available are enough to satisfy the medium number of ride
+request or reservation
+5. MyTaxiService is aware of the characteristics of each taxies (number of passengers)
+6. The starting location associated with a taxi request / reservation is always accessible
+by taxies
+
+GLOSSARY AND DEFINITIONS
+1. MyTaxiService(F) : The front end of MyTaxiService, that is to say the components
+of the application that manages the interaction with the user and the logic behind
+this interaction
+2. MyTexiService(B) : The back end of MyTaxiService, that is to say

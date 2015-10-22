@@ -41,6 +41,21 @@ by taxies
 
 GLOSSARY AND DEFINITIONS
 1. MyTaxiService(F) : The front end of MyTaxiService, that is to say the components
-of the application that manages the interaction with the user and the logic behind
+of the application that manage the interaction with the user and the logic behind
 this interaction
-2. MyTexiService(B) : The back end of MyTaxiService, that is to say
+2. MyTexiService(B) : The back end of MyTaxiService, that is to say the components
+of the application that manage the forwarding of the ride / reservation request with all
+their associated notifications, the search of available taxies
+that are compatible with the request/reservation inserted, and other internal tasks
+not exposed to the user or the taxies
+3. Taxi: a taxi that uses the myTaxiService
+4. Acceptance of a ride/reservation request: accepting a ride /reservation request means
+signalling that the taxi has already left in order to pick the user up
+5. Ride request: a user that wants to be picked as soon as possible make this kind of request,
+specifing the number of passengers and the location in where it wants to be picked up
+6. Reservation request: a user that wants to be picked at a given time but within at least
+two hourse later than the making of a request makes this kind of request, specifing the starting
+location, the ending location and the time
+7. User: a set of people, usually the cardinality of this set is 1, but it can be more than one,
+in this last case the user will be forced to indicate in the request, a number of passengers that
+is more than one

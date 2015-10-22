@@ -4,3 +4,22 @@ ACTORS
 3. Taxi driver
 4. MyTaxiService(F)
 5. MyTaxiService(B)
+
+Scenario1
+
+Funes is a product manager with a very busy schedule. At 11.00 he has a meeting
+with a group of clients to discuss about the features of a new product he's following
+this meeting is located non in the company headquartes, where is in the moment, but in another place.
+He used to take a lot of taxies and he tried myTaxiService to efficient its movements.
+Its half past ten and Funes decides to take a taxi via myTaxiService. So it opens the app
+on its smartphone, the app remebers he's logged and does not ask him to do it another
+time, it inserts the address of the company, one passenger is fine, and it taps
+the big request button. The app signals to him that is finding a taxi. Near
+Funes location a taxi has finished serving a passengers myTaxiService signals him
+funes request, Incapax the taxi driver wants to take a cofee even if is in work time
+so he does not answer the request. After 5 min myTaxiService tries to find a new taxi
+for Funes and it does so successfully, Becero's taxi is selected, Becero's immediatly signals
+is serving the request and myTaxiService alerts funes that its taxi will arrive in 3 mins
+. The taxi arrives and in 10 min funes is in the company in time for the meeting. MyTaxiService
+signals the behaviour of Incapax to its supervisors and he receives a warning and a fine
+of 200€

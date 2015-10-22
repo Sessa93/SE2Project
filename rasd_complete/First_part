@@ -1,6 +1,6 @@
 DESCRIPTION
-MyTaxiService is a mobile application that makes easier and quicker the way people take taxies.
-Thanks to MyTaxiService, a user can request or book a taxi and get realtime information
+MyTaxiService is a mobile application that makes easier and quicker taking taxies.
+Thanks to MyTaxiService, anyone can request or book a taxi and get realtime information
 about how long it will take to be picked up or about taxi's current position and code.
 In addition, MyTaxiService provides an efficient way to allocate taxies by dividing the
 city in zones and using a queue based allocation system, in order to reduce the
@@ -56,6 +56,5 @@ specifing the number of passengers and the location in where it wants to be pick
 6. Reservation request: a user that wants to be picked at a given time but within at least
 two hourse later than the making of a request makes this kind of request, specifing the starting
 location, the ending location and the time
-7. User: a set of people, usually the cardinality of this set is 1, but it can be more than one,
-in this last case the user will be forced to indicate in the request, a number of passengers that
-is more than one
+7. User: a person that need to use a taxi. This person can be together with other people
+8. Registered user: a set of people that need to use a taxi with at least one of them has registered to myTaxiService.

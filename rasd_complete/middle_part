@@ -1,0 +1,6 @@
+ACTORS
+1. User
+2. Registered user
+3. Taxi driver
+4. MyTaxiService(F)
+5. MyTaxiService(B)

@@ -73,8 +73,8 @@
         and forces drivers to accept ride request/reservations only using MyTaxiService.
         During the registration process taxi drivers are asked to provide their personal and vehicle data and work time table.
         At the end of the registration process a unique code will be assigned to each taxi.
-        The city's local government provides each taxi with a device used to see incoming ride requests or reservations and
-        to signal the acceptance of these ones, along with a gps device used to track the taxi's position.
+        Eventually, the city's local government provides each taxi a device. This device is used to see incoming ride requests or reservations
+        and to signal their acceptance
 
         2. MyTaxiService is aware of the work time table of each taxi, so there's no need to consider
         the case in which a taxi has no pending requests but is not available: taxies are unavailable

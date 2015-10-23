@@ -97,32 +97,22 @@
         8. Visitor: A generic person that is not registered to the service.
 
 
-2) REQUIREMENTS SPECIFICATION
-  2.1) Main Actors(Spostare nella sezione centrale)
-    In this section are defined all the actors that interact with the myTaxiService during its operation.
-      - Visitor
-          A user can only see the login page and complete the registration(which is mandatory to use the service)
-          to be able to access to all the functionality of the application.
+    REQUIREMENTS SPECIFICATION
+      Main Actors(Spostare nella sezione centrale)
+      In this section are defined all the actors that interact with the myTaxiService during its operation.
+        - Visitor
+            A user can only see the login page and complete the registration(which is mandatory to use the service)
+            to be able to access to all the functionality of the application.
 
-      - Registered User
-          A registered user can, after a successful login, access all the functionality of the application: it can
-          request/reserve a taxi ride, view the status of older reservations and cancel a already confirmed taxi reservation.
+        - Registered User
+            A registered user can, after a successful login, access all the functionality of the application: it can
+            request/reserve a taxi ride, view the status of older reservations and cancel a already confirmed taxi reservation.
 
-      - Taxi driver
-          A taxi driver, after a successful login, is granted to: being notified by the system of an incoming request,
-          notify the system about the conclusion of a taxi ride.
+        - Taxi driver
+            A taxi driver, after a successful login, is granted to: being notified by the system of an incoming request,
+            notify the system about the conclusion of a taxi ride.
 
-      - MyTaxiService(B)
-          This actor represent the back-end part of the myTaxiService software system, its main purpose is to forward request
-          coming from users to a taxi available in the zone, also it has to collect informations relative to the availability
-          of the taxi drivers.
-
-    2.3) Functional Requirements
-
-    2.4) Non Functional Requirements
-
-    2.5) Constraints
-
-    2.6) Jackson-Zave approach
-
-3) Scenarios definition - Use Case diagram
+        - MyTaxiService(B)
+            This actor represent the back-end part of the myTaxiService software system, its main purpose is to forward request
+            coming from users to a taxi available in the zone, also it has to collect informations relative to the availability
+            of the taxi drivers.

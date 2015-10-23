@@ -10,29 +10,29 @@
     the customer and the developer.
 
   1.2) Scope of the project
-    The aim of this project is to develop a new software-based taxies management service called myTaxiService.
-    The software has to improve the older human-based system in which the management of passengers request is
-    up to the taxi driver itself.
-    In order to do this the software system has to guarantee a simplified access of passengers to the service;
-    A passenger can request a taxi ride via a simple mobile application, or he/she can reserve a
-    a ride by specifying the time and place of departure.
-    The system also has the scope to guarantee a "fair" management of the request distribution among the available taxies.
-    The driver of a taxi, who subscribes himself to the myTaxiService, is notified, via an appropriate mobile application,
-    of the incoming request by the passengers.
+    The aim of this project is to develop an application myTaxiService, a web/mobile applications that makes easier and quicker taking taxies.
+    Thanks to MyTaxiService, anyone can request or book a taxi and get realtime information
+    about how long it will take to be picked up or about taxi's current position and code.
+    In addition, MyTaxiService provides an efficient way to allocate taxies by dividing the
+    city in zones and using a queue based allocation system, in order to reduce the
+    waiting time and city's traffic.
 
     1.3) Goals
-      In this subsection we describe a set of high level goals that our project is proposed to reach.
+      In this subsection we describe a set of high level goals that myTaxiService is proposed to achieve.
 
-      [G1] - The myTaxiService system has to simplify the access of passengers to the taxi service.
-             Simplify means that the user can request a taxi ride from every point of the city, the passenger
-             has not to find a taxi instead is the taxi that finds the passenger.
+      1. Simplify and speed up the process of taking a taxi
+        1.1 When a user has entered his taxi ride details and clicks or taps
+        the request button, then MyTaxiService will find the first
+        available taxi that fits for the inserted ride details, booking it to the user
 
-      [G2] - The myTaxiService system has to guarantee a fair(optimal) management of the taxi queue.
-             The city is divided in zones of equal area(e.g. 2km^2), to each zone is associated a queue of taxi.
-             When a taxi becomes available its identifier is stored, according to the GPS data, in the corresponding queue.
-             A fair management means that:
-              - Each taxi is equal to another one, from the system perspective.
-              - Each queue has to be managed through a true FIFO policy
+      1.2 When a user has entered his taxi reservation details and clicks or taps
+        the book button, then MyTaxiService will book a taxi that fits for the
+        inserted booking details and for the indicated meeting time
+
+      2. Guarantee an efficient and fair management of taxi queues
+        2.2 Guarantee a right distribution of taxies in the city
+
+        2.3 Guarantee short taxi availability times and short waiting times
 
     1.4) Glossary
 
@@ -56,6 +56,30 @@
       - Specification Document: MyTaxiService-AA2015-2016.pdf
       - IEEE Std 830-1998 IEEE Recommended Practice for Software Requirements Specifications.
       - IEEE Std 1016 tm -2009 Standard for Information Tecnology-System Design-Software Design Descriptions.
+      PRELIMINARY ASSUMPTIONS
+    ASSUMPTIONS
+      1. MyTaxiService has been commissioned by the city local government.
+        Each taxi in the city must have a taxi licence provided by the local government. This licence requires the registration to the myTaxiService
+        and forces drivers to accept ride request/reservations only using MyTaxiService.
+        During the registration process taxi drivers are asked to provide their personal and vehicle and work time table.
+        At the end of the registration process each taxi will be provided an unique code.
+        The city's local government provides each taxi with a device used to see incoming ride requests or reservations and
+        to signal the acceptance of these ones, along with a gps device used to track the taxi's position.  
+
+        2. MyTaxiService is aware of the work time table of each taxi, so there's no need to consider
+        the case in which a taxi has no pending requests but is not available: taxies are unavailable
+        if and only if they are serving a ride/reservation request; an exception to this case is that a taxi could have an accident.  After a taxi has finished serving a passenger he has to notify that
+        to myTaxiService and so myTaxiService will consider the taxi available again. Considering that myTaxiService knows the position
+        of the taxi and the destination of each ride there is no chance a taxi drive can cheat by not signalling he hasn't yet finished service a passenger.
+
+        3. Once a user sends a ride request, he or she cannot change any detail of the request nor can
+          undo the request.
+
+        4. MyTaxiService is aware of the characteristics of each taxies (number of passengers)
+
+        5. MyTaxiService is aware of all the possible valid location in the city, so the user is forced to select one of them and not insert one of them.
+
+        6. Taxi can accept only ride reservation/request within the city borders.
 
 2) REQUIREMENTS SPECIFICATION
   2.1) Main Actors(Spostare nella sezione centrale)

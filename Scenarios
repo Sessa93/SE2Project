@@ -4,8 +4,8 @@ Authors: Giorgio Pea, Andrea Sessa
 Scenarios/Use cases:
 
 1) A passenger requests a taxi ride
-  [Actors]: the requesting passenger, the myTaxiService application
-  [Pre-cons]: the passenger has access to the myTaxiService application; the passenger
+  [Actors]: the requesting passenger, the myTaxiService(B) application
+  [Pre-cons]: the passenger has access to the myTaxiService(F) application; the passenger
   has access to the web from the device used to access the application; the passenger is
   registered to myTaxiService as a passenger. The passenger wants to start the ride in less
   than two hours
@@ -17,38 +17,38 @@ Scenarios/Use cases:
   [Exceptions]:
     - Connection lost: The mobile application immediately notifies the user.
   [Flow of events]:
-    - The passenger logs into the app
+    - The passenger logs into the myTaxiService(F) application
     - The passenger hits the 'request ride' button
     - The passenger fills and sends the request ride form by inserting the starting location, the ending location,
     the time in which a taxi has to be ready and the number of passengers.
-    - The myTaxiService app aknowledges the passenger about its request by showing to him
+    - The myTaxiService(F) application acknowledges the passenger about its request by showing to him
     the time before a taxi will be available, and if a taxi is available, the taxi arrival time.
-    If a taxi is not available the myTaxiService will let the user undo its ride request
+    If there are no taxi available then myTaxiService(F) will notify the passenger
   [Special Requirements]:
     - The user must be notified about the state of the request within 30 seconds from the submitting time.
 
 --------------------------------------------------------------------------------
 
-2) A taxi driver receives a ride request by the myTaxiService application
-  [Actors]: a taxi driver, the myTaxiService application
+2) A taxi driver receives a ride request by the myTaxiService(F) application
+  [Actors]: a taxi driver, the myTaxiService(F) application
   [Pre-cons]: the taxi driver has access to the myTaxiService application; the taxi driver
   has access to the web from the device used to access the application; the taxi driver is
   registered to myTaxiService as a driver; the taxi driver owns and uses on his taxi
-  a gps system that provided by the myTaxiService application to respond to taxi ride
+  a gps system provided by the myTaxiService service to respond to taxi ride
   requests; the taxi driver has signaled via the app that has finished serving a passenger and is
   ready for a new ride
   [Post-cons]: the taxi driver knows that a passenger has requested a ride with the specified
   details and has to accept it or not
-  [Entry Cnd]: the myTaxService app has received a request for a ride from a passenger
-  [Exit Cnd]: The System notifies the selected taxi driver
+  [Entry Cnd]: the myTaxService(F) has received a request for a ride from a passenger
+  [Exit Cnd]: myTaxService(B) notifies the selected taxi driver
   [Exceptions]:
     - No taxi available: if the queue relative to taxi zone of the request is empty(no taxi available)
-    then the myTaxiService back-end uses the queue of one of the zones adjacent to the one we're considering
+    then the myTaxiService(B) uses the queue of one of the zones adjacent to the one we're considering
     - No ack from the selected driver's app: the system repeats the forwarding of the request
   [Flow of Events]:
-    - the myTaxiService back-end receives a ride request, calculates the taxi zone of the starting point of the ride
+    - the myTaxiService(B) receives a ride request, calculates the taxi zone of the starting point of the ride
       and extracts a taxi (using a FIFO logic) from the queue of taxies associated with the taxi zone and forwards to that taxi the ride request.
-    - the myTaxiService back-end notifies the selected taxi's driver of a new ride request along with all the details relative to it.
+    - the myTaxiService(B) notifies the selected taxi's driver of a new ride request along with all the details relative to it.
 
 
     {Here we model just the fact that a ride request is forwarded to a taxi driver and that that taxi driver
@@ -62,7 +62,7 @@ Scenarios/Use cases:
     within a certain time than the systems uses another taxi and signals what happened to the admins}
 --------------------------------------------------------------------------------
 
-3) A taxi(driver) informs the system of his availability
+{3) A taxi(driver) informs the system of his availability
   Actors: A taxi driver, the System
   Entry Cnd: The driver starts his shift
   Exit Cnd: The driver receives an acknowledgement from the system
@@ -74,41 +74,41 @@ Scenarios/Use cases:
       and recalculates the distribution of taxies over the zones.
     - The System acknowledges the driver.
   Special Requirements:
-    - The system must notifies the driver within 1min from the submitting time
+    - The system must notifies the driver within 1min from the submitting time }
 
 --------------------------------------------------------------------------------
 
-4) A taxi driver informs the system that he has terminated a ride
-  Actors: Taxi(driver), the System
+4) A taxi driver informs the myTaxiService(B) that he has terminated a ride
+  Actors: Taxi(driver), myTaxiService(B)
   Entry Cnd: The driver has terminated a ride, the driver is logged into the System
   Exit Cnd: The system acknowledges the driver
   Exceptions:
     - Connection Lost: The driver is immediately notified via the mobile application.
   Flow of Events:
-    - The driver sets his current state to 'available'(glossary?), when the user submit the notification the mobile app access to GPS system,
+    - The driver sets his current state to 'available', when the drive submit the notification the mobile app access to GPS system,
       retrieves the current position and attach the positioning information to the notification.
-    - The System receives the positioning data, calculates the zone, stores the taxi ID in the queue associated to the calculated zone
+    - myTaxiService(B) receives the positioning data, calculates the zone, stores the taxi ID in correct queue
       and recalculates the distribution of taxies over the zones.
-    - The System acknowledges the driver.
+    - myTaxiService(B) acknowledges the driver via myTaxiService(F).
   Special Requirements:
-    - The system must notifies the driver within 1min from the submitting time
+    - myTaxiService(B) must notifies the driver within 1min from the submitting time
 
 --------------------------------------------------------------------------------
 
 5) The driver receives a request
-  Actors: Taxi driver, the System
-  Entry Cnd: The System submit to the driver a new request
+  Actors: Taxi driver, myTaxiService(B)
+  Entry Cnd: myTaxiService(B) submit to the driver a new request
   Exit Cnd: The driver acknowledges the System
   Exceptions:
-    - The passenger is not present at starting point of the ride.
+    - The passenger is not present at starting point of the ride: The driver waits at the starting point of the ride at most 30 minutes, then it notifies
+      myTaxiService(B) that he has terminated the ride(see Use Case 4)
+    - The driver doesn't acknowledge myTaxiService(B) within 5min: myTaxiService(B) assumes that the driver is out of service and proceeds to select another taxi to fullfill the request.
   Flow of Events:
     - The driver receives a new request via the mobile application.
-    - The driver takes note(?) of the information(position, time, starting point, ending point, number of passengers) contained in the request.
-    - The driver acknowledges the system.
+    - The driver takes note of the information(position, time, starting point, ending point, number of passengers) contained in the request.
+    - The driver acknowledges myTaxiService(B).
     - The driver reaches the origin point of the ride.
-  Special Requirements:
-    - The driver must acknowledge the system within 5min otherwise the System assumes that the driver is out of service and proceeds to select another taxi to fullfill the request.
-    - The driver waits at the starting point of the ride at most 30 min.
+
 
 --------------------------------------------------------------------------------
 
@@ -122,7 +122,7 @@ Scenarios/Use cases:
   Flow of Events:
     - The driver logs into myTaxiService mobile application, providing his credentials.
     - The user selects the origin and destination of the ride, the number of passengers and the starting time, once the form is completed, it is submitted to the System.
-    - The System checks if the starting time is at least 2 hours greater than the current time, if so it stores the request.
+    - myTaxiService(B) checks if the starting time is at least 2 hours greater than the current time, if so it stores the request.
     - The System acknowledges the user.
     - When there are 10 minutes left, the system extracts a driver from the queue(calculated on the basis of the ride's starting point)
       and assigns him to the request(see use-case n4).
@@ -136,40 +136,66 @@ Scenarios/Use cases:
   Entry Cnd: the user is offline and wants to log in the System
   Exit Cnd: The user is logged in
   Exceptions:
-    - Connection Lost: The mobile application immediately notifies the user
-    - Wrong Credentials: The mobile application ask to reenter it
+    - Connection Lost: myTaxiService(F) immediately notifies the user
+    - Wrong Credentials: myTaxiService(F) asks to reenter it
   Flow of Events:
     - The user wants to log in the application he opens it on its mobile device.
     - The System asks to provide credentials and to specify the user type(driver or passenger), showing a login form.
     - The user provides the login information.
-    - The System authenticates the user and give access to corresponding front-end
+    - myTaxiService(B) authenticates the user and give access to the application functions
 
 --------------------------------------------------------------------------------
 
 8) User Logout
-  Actors: Passenger/Driver, the System
+  Actors: Passenger/Driver, myTaxiService(B)
   Entry Cnd: The user is logged into the system
   Exit Cnd: The user is logged out from the system
   Exceptions:
-    - Connection Lost: The mobile application immediately notifies the user
+    - Connection Lost: myTaxiService(F) immediately notifies the user
   Flow of Events:
     - The user wants to log out from the application, he presses the logout button
-    - The System notifies the user that he has been logged out from the System.
+    - myTaxiService(B) notifies the user that he has been logged out from the System.
 
 --------------------------------------------------------------------------------
 
 9) User undo a reservation
-  Actors: Requesting passenger, the System
+  Actors: Requesting passenger, myTaxiService(B)
   Entry Cnd: The passenger has reserved a ride successfully, the user is logged into the application
   Exit Cnd: The System acknowledges the passenger
   Exceptions:
-    - Connection Lost: The mobile application immediately notifies the user
+    - Connection Lost: myTaxiService(F) immediately notifies the user
   Flow of Events:
     - The user enters in the application area where he can see the list of reservation
     - The user selects the reservation to eliminate and press the "cancel" button
-    - The System acknowledges the user
+    - myTaxiService(B) acknowledges the user via myTaxiService(F)
 
 --------------------------------------------------------------------------------
+
+10) A driver receive a zone change order
+  Actors: A taxi driver, myTaxiService(B)
+  Entry Cnd: myTaxiService(B) detects(calculating the distribution of taxies among zones) that some zones have too much taxies assigned
+            and some zones have a too small number of taxies assigned(or no taxies at all)
+  Exit Cnd: The driver acknowledges myTaxiService(B)
+  Exceptions:
+    - Connection Lost: myTaxiService(F) immediately notifies the user
+  Flow of Events:
+    - After previous calculations based on the taxies distribution myTaxiService(B) sends a notification to the selected driver.
+    - The driver receives the notification and displays it on myTaxiService(F)
+    - The driver takes note of the new zone
+    - The driver acknowledges myTaxiService(B)
+
+--------------------------------------------------------------------------------
+
+11) A driver notifies myTaxiService(B) due to an accident
+  Actors: A taxi driver, myTaxiService(B)
+  Entry Cnd: A driver needs to notify the system due to an accident
+  Exit Cnd: myTaxiService(B) acknowledges the driver
+  Exceptions:
+    - Connection Lost: myTaxiService(F) immediately notifies the user
+  Flow of Events
+    - The driver hits the 'notify accident' button
+    - myTaxiService(B) receives the notification and set the driver state to 'unavailable'
+    - myTaxiService(B) acknowledges the driver
 
 Requirements(Functional -> F, Non Functional -> NF, Constraints -> C):
   1) The user can undo a request (F)
@@ -183,13 +209,3 @@ Requirements(Functional -> F, Non Functional -> NF, Constraints -> C):
   9) The System puts the user in a waiting list if no taxi is available(F) -> Scenario
   10) The user can undo a reservation within 10 minutes from the meeting time(NF)
   11) The taxies that partecipate to the service can only manage request and reservation from myTaxiService(C) -> ??
-
-Goals:
-  1) A fair management of the taxi queue
-  2) Possibility to request a taxi ride
-  3) Possibility to reserve a taxi ride
-
-Questions:
-  1) Fair?
-  2) Pre-conditions? Post-conditions?
-  3) Registration?

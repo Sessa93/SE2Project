@@ -1,0 +1,114 @@
+1) INTRODUCTION
+  1.1) Purpose
+    This document represent the Requirement Analysis and Specification Document
+    (RASD). The main goal of this document is to completely describe the system
+    in terms of functional and non-functional requirements, to show the constraints and the limit
+    of the software and simulate the typical use cases that will occur after the
+    development. This document is intended to all developer and programmer who
+    have to implement the requirements, to system analyst who want to integrate
+    other system with this one, and could be used as a contractual basis between
+    the customer and the developer.
+
+  1.2) Scope of the project
+    The aim of this project is to develop an application myTaxiService, a web/mobile applications that makes easier and quicker taking taxies.
+    Thanks to MyTaxiService, anyone can request or book a taxi and get realtime information
+    about how long it will take to be picked up or about taxi's current position and code.
+    In addition, MyTaxiService provides an efficient way to allocate taxies by dividing the
+    city in zones and using a queue based allocation system, in order to reduce the
+    waiting time and city's traffic.
+
+    1.3) Goals
+      In this subsection we describe a set of high level goals that myTaxiService is proposed to achieve.
+
+      1. Simplify and speed up the process of taking a taxi
+        1.1 When a user has entered his taxi ride details and clicks or taps
+        the request button, then MyTaxiService will find the first
+        available taxi that fits for the inserted ride details, booking it to the user
+
+      1.2 When a user has entered his taxi reservation details and clicks or taps
+        the book button, then MyTaxiService will book a taxi that fits for the
+        inserted booking details and for the indicated meeting time
+
+      2. Guarantee an efficient and fair management of taxi queues
+        2.2 Guarantee a right distribution of taxies in the city
+
+        2.3 Guarantee short taxi availability times and short waiting times
+
+    1.4) Glossary
+
+      1.4.1) Terms disambiguation
+        - Taxi driver: The person who is licensed to drive a taxi cab
+        - The System: The back-end software component of myTaxiService, who dispatches the requests coming from the mobile app to the available taxi drivers
+        - Request: An electronic message sent by a registered user through the myTaxiDriver mobile application
+          to the System, it contains all the information needed to send a taxi to the requesting passenger
+        - Zone: A square area, each taxi driver is assigned to a specific zone, the city is divided in zone
+        - Mobile Application: The front-end software component of myTaxiService, available both to the user and taxi driver.
+        - Credentials: A combination of username and password, used by a registered user to access the myTaxiService application.
+        - Taxi ride: A movement of people, through a taxi cab, from one geogrphical point to another
+        - Queue: A data structure managed with a FIFO(First in First Out) policy.
+        - Taxi identifier: how we choose a valid identifier for a taxi? <- TARGA?
+
+      1.4.2) Acronyms
+        - RASD: Requirements Analysis and Specification Document
+        - FIFO: First In First Out
+
+    1.5) Reference Documents
+      - Specification Document: MyTaxiService-AA2015-2016.pdf
+      - IEEE Std 830-1998 IEEE Recommended Practice for Software Requirements Specifications.
+      - IEEE Std 1016 tm -2009 Standard for Information Tecnology-System Design-Software Design Descriptions.
+      PRELIMINARY ASSUMPTIONS
+    ASSUMPTIONS
+      1. MyTaxiService has been commissioned by the city local government.
+        Each taxi in the city must have a taxi licence provided by the local government. This licence requires the registration to the myTaxiService
+        and forces drivers to accept ride request/reservations only using MyTaxiService.
+        During the registration process taxi drivers are asked to provide their personal and vehicle and work time table.
+        At the end of the registration process each taxi will be provided an unique code.
+        The city's local government provides each taxi with a device used to see incoming ride requests or reservations and
+        to signal the acceptance of these ones, along with a gps device used to track the taxi's position.  
+
+        2. MyTaxiService is aware of the work time table of each taxi, so there's no need to consider
+        the case in which a taxi has no pending requests but is not available: taxies are unavailable
+        if and only if they are serving a ride/reservation request; an exception to this case is that a taxi could have an accident.  After a taxi has finished serving a passenger he has to notify that
+        to myTaxiService and so myTaxiService will consider the taxi available again. Considering that myTaxiService knows the position
+        of the taxi and the destination of each ride there is no chance a taxi drive can cheat by not signalling he hasn't yet finished service a passenger.
+
+        3. Once a user sends a ride request, he or she cannot change any detail of the request nor can
+          undo the request.
+
+        4. MyTaxiService is aware of the characteristics of each taxies (number of passengers)
+
+        5. MyTaxiService is aware of all the possible valid location in the city, so the user is forced to select one of them and not insert one of them.
+
+        6. Taxi can accept only ride reservation/request within the city borders.
+
+2) REQUIREMENTS SPECIFICATION
+  2.1) Main Actors(Spostare nella sezione centrale)
+    In this section are defined all the actors that interact with the myTaxiService during its operation.
+      - Visitor
+          All visitor users can only see the login page and complete the registration(which is mandatory to use the service)
+          to be able to access to all the functionality of the application.
+
+      - Registered User
+          This type of user, after a successful login, is granted to access all the functionality of the application:
+          request/reserve a taxi ride, view the status of older reservations and cancel a already confirmed taxi reservation.
+
+      - Taxi driver
+          This type of user, after a successful login, is granted to: being notified by the system of an incoming request,
+          notify the system about the conclusion of a taxi ride.
+
+      - (The BackEnd System ???)
+          This actor represent the back-end part of the myTaxiService software system, its main purpose is to forward request
+          coming from users to a taxi available in the zone, also it has to collect informations relative to the availability
+          of the taxi drivers.
+
+    2.2) Assumption
+
+    2.3) Functional Requirements
+
+    2.4) Non Functional Requirements
+
+    2.5) Constraints
+
+    2.6) Jackson-Zave approach
+
+3) Scenarios definition - Use Case diagram

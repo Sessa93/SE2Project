@@ -77,9 +77,12 @@
         and to signal their acceptance
 
         2. Since MyTaxiService is aware of the work timetable of each taxi, taxies are considered unavailable
-        if and only if they are serving a ride/reservation request; an exception to this case is that a taxi could have an accident.  After a taxi has finished serving a passenger he has to notify that
+        if and only if they are serving a ride/reservation request.  After a taxi has finished serving a passenger he has to notify that
         to myTaxiService and so myTaxiService will consider the taxi available again. Considering that myTaxiService knows the position
         of the taxi and the destination of each ride there is no chance a taxi drive can cheat by not signalling he hasn't yet finished service a passenger.
+
+        2.a A Taxi might have an accident, if that happens, the taxi driver can report it and so the taxi
+        is considered unavailable
 
         3. Once a user sends a ride request, he or she cannot change any detail of the request nor can
           undo the request.

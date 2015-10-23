@@ -1,0 +1,5 @@
+#Ignoring file for LaTex
+*.aux
+*.log
+*.synctex.gz
+*.toc

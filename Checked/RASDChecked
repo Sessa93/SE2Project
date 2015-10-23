@@ -45,10 +45,10 @@
           their associated notifications, the search of available taxies compatible with the request/reservation inserted, and other internal
           tasks not exposed to the user or the taxies
         - MyTaxiService: MyTaxiService(F) + MyTaxiService(B)
-        - Taxi driver: The person who is licensed to drive a Taxi.
-        - Taxi(with capital T): a taxi that uses the MyTaxiService
+        - Taxi driver: The person licensed to drive a Taxi.
+        - Taxi(with capital T): a taxi that uses MyTaxiService
         - Request: An electronic message sent by a user through MyTaxiService(F)
-          to MyTaxiService(B). This electronic message refers to the case in which the user wants to be picked up by a taxi asap.
+          to MyTaxiService(B). This electronic message refers to the case in which the user wants to be picked up as soon as possible by a taxi.
         - Reservation: An electronic message sent by a user through MyTaxiService(F)
            to MyTaxiService(B). This electronic message refers to the case in which the user wants to be picked up by a taxi at a specific time.
         - Zone: An area of the city.

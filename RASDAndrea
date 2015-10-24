@@ -100,9 +100,12 @@
         9. Exists an unique application(myTaxiService(F)) both for taxi driver and normal user, myTaxiService(F) give access to the proper set of functionalities
         according to the login credentials.
 
+        10. Exists an unique application(myTaxiService(F)) both for taxi driver and normal user, myTaxiService(F) give access to the proper set of functionalities
+        according to the login credentials.
+
 
     REQUIREMENTS SPECIFICATION
-      Main Actors(Spostare nella sezione centrale)
+      2.1)Main Actors
       In this section are defined all the actors that interact with the myTaxiService during its operation.
         - Visitor
             A user can only see the login page and complete the registration(which is mandatory to use the service)
@@ -118,3 +121,38 @@
 
         - MyTaxiService(B)
             This actor represents the back-end part of the myTaxiService software system as described in the Glossary
+
+      2.2)FUNCTIONAL REQUIREMENTS
+        [FR1] Visitor must not be already registred to perform registration process.
+        [FR2] Visitor must choose a username not already used by another user.
+        [FR3] Visitor can only access to registration form.
+        [FR4] User can not sign up twice but only once for session.
+        [FR5] The login is successful iff the user inserts the correct credentials
+        [FR6] The user, after a successful login can submit a taxi request
+        [FR7] The user, after a successful login can submit a taxi reservation
+        [FR8] The user can undo a reservation
+        [FR9] The user has to specify the origin of the ride(F)
+        [FR10] The user has to specify the time of departure when he reserves a taxi(F)
+        [FR11] myTaxiService uses the GPS information to determinate if a taxi is in service(F)
+        [FR12] The user can undo a reservation within 10 minutes from the meeting time(NF)
+        [FR13] The user can make multiple reservations
+        [FR114] Users, after a successfull login, can view the status of previous reservations
+
+      2.3) NON FUNCTIONAL REQUIREMENTS
+        [NFR1] The system has to guarantee that a taxi arrives at the origin of the ride within a fixed time(NF)
+        [NFR2] The taxi driver waits for the passenger that has requested the ride at the origin point for a maximum amount of time, after that the taxi returns available(NF)
+        [NFR3] A taxi driver has to accept or not a request within a fixed time, otherwise another taxi is selected by myTaxiService(B)
+        [NFR4] After a failure myTaxiService(B) has to be restarted within 1 hour
+        [NFR5] myTaxiService must be available 24/7
+        [NFR6] myTaxiService has as target users taxi driver and people who use the city taxi service
+        [NFR7] Users are able to properly use all the functionalities after a training time of at most 1 hour
+        [NFR8] All the functionalities have be reached by the user with at most 3 clicks from the starting page
+
+
+      2.4) CONSTRAINTS
+        [C1] A taxi that joins this service has to mount a GPS system
+        [C2] The taxies that partecipate to the service can only manage request and reservation from myTaxiService
+
+      2.5) DOMAIN PROPERTIES
+        [D1] Time must be included between 00.00 and 23.59.
+        [D2] Email address used for registration must be formally correct.

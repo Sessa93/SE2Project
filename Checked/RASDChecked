@@ -76,13 +76,13 @@
         Eventually, the city's local government provides each taxi a device. This device is used to see incoming ride requests or reservations
         and to signal their acceptance
 
-        2. Since MyTaxiService is aware of the work timetable of each taxi, taxies are considered unavailable
+        2. Since MyTaxiService is aware of the work timetable of each taxi and GPS data, taxies are considered unavailable
         if and only if they are serving a ride/reservation request.  After a taxi has finished serving a passenger he has to notify that
         to myTaxiService and so myTaxiService will consider the taxi available again. Considering that myTaxiService knows the position
         of the taxi and the destination of each ride there is no chance a taxi drive can cheat by not signalling he hasn't yet finished service a passenger.
 
         2.a A Taxi might have an accident, if that happens, the taxi driver can report it and so the taxi
-        is considered unavailable
+        is considered unavailable.
 
         3. Once a user sends a ride request, he or she cannot change any detail of the request nor can
           undo the request.
@@ -96,6 +96,9 @@
         7. Accepting a ride/reservation request by the taxi driver: signaling that the taxi has already left in order to pick a registered user up.
 
         8. Visitor: A generic person that is not registered to the service.
+
+        9. Exists an unique application(myTaxiService(F)) both for taxi driver and normal user, myTaxiService(F) give access to the proper set of functionalities
+        according to the login credentials.
 
 
     REQUIREMENTS SPECIFICATION

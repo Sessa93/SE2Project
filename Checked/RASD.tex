@@ -153,13 +153,16 @@
         and forces drivers to accept ride request/reservations only using MyTaxiService.
         During the registration process taxi drivers are asked to provide their personal and vehicle data and work time table.
         At the end of the registration process a unique code will be assigned to each taxi.
-        The city's local government provides each taxi with a device used to see incoming ride requests or reservations and
-        to signal the acceptance of these ones, along with a gps device used to track the taxi's position.
+        Eventually, the city's local government provides each taxi a device. This device is used to see incoming ride requests or reservations
+        and to signal their acceptance
 
-        \item Since MyTaxiService is aware of the work timetable of each taxi, taxies are considered unavailable
-        if and only if they are serving a ride/reservation request; an exception to this case is that a taxi could have an accident.  After a taxi has finished serving a passenger he has to notify that
+        \item Since MyTaxiService is aware of the work timetable of each taxi and GPS data, taxies are considered unavailable
+        if and only if they are serving a ride/reservation request.  After a taxi has finished serving a passenger he has to notify that
         to myTaxiService and so myTaxiService will consider the taxi available again. Considering that myTaxiService knows the position
         of the taxi and the destination of each ride there is no chance a taxi drive can cheat by not signalling he hasn't yet finished service a passenger.
+
+        \item A Taxi might have an accident, if that happens, the taxi driver can report it and so the taxi
+        is considered unavailable.
 
         \item Once a user sends a ride request, he or she cannot change any detail of the request nor can
           undo the request.
@@ -173,6 +176,9 @@
         \item Accepting a ride/reservation request by the taxi driver: signaling that the taxi has already left in order to pick a registered user up.
 
         \item Visitor: A generic person that is not registered to the service.
+
+        \item Exists an unique application(myTaxiService(F)) both for taxi driver and normal user, myTaxiService(F) give access to the proper set of functionalities
+        according to the login credentials.
     \end{enumerate}
 
   \subsection{Main Actors}
@@ -196,13 +202,17 @@
           of the taxi drivers.
     \end{description}
 
-    2.3) Functional Requirements
+\section{Requirements Specification}
+    \subsection {Functional Requirements}
 
-    2.4) Non Functional Requirements
+    \subsection {Non Functional Requirements}
 
-    2.5) Constraints
+    \subsection {Constraints}
 
-    2.6) Jackson-Zave approach
+    \subsection {Jackson-Zave approach}
 
-3) Scenarios definition - Use Case diagram
+    \subsection {Scenarios definition}
+
+\section {UML Diagrams}
+  \subsection Use Case diagram
 \end{document}

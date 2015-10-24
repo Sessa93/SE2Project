@@ -156,3 +156,50 @@
       2.5) DOMAIN PROPERTIES
         [D1] Time must be included between 00.00 and 23.59.
         [D2] Email address used for registration must be formally correct.
+
+3)Scenarios + UML Diagrams
+    3.1) Scenarios identification
+        1)Funes is a product manager with a very busy schedule. At 11.00 he has a meeting
+          with a group of clients to discuss about the features of a new product he's following
+          this meeting is located non in the company headquartes, where is in the moment, but in another place.
+          He used to take a lot of taxies and he tried myTaxiService to efficient its movements.
+          Its half past ten and Funes decides to take a taxi via myTaxiService. So it opens the app
+          on its smartphone, the app remebers he's logged and does not ask him to do it another
+          time, it inserts the address of the company, one passenger is fine, and it taps
+          the big request button. The app signals to him that is finding a taxi. Near
+          Funes location a taxi has finished serving a passengers myTaxiService signals him
+          funes request, Incapax the taxi driver wants to take a cofee even if is in work time
+          so he does not answer the request. After 5 min myTaxiService tries to find a new taxi
+          for Funes and it does so successfully, Becero's taxi is selected, Becero's immediatly signals
+          is serving the request and myTaxiService alerts funes that its taxi will arrive in 3 mins.
+          The taxi arrives and in 10 min funes is in the company in time for the meeting. MyTaxiService
+          signals the behaviour of Incapax to its supervisors and he receives a warning and a fine of 200€
+
+        2) It's monday morning and Bob, an important manager of a very big company, as to attend an important
+           conference on Tuesday at 9:00 AM. Unfortunately he has no one
+           to take him to the airport on Tuesday morning, also he is very worried to miss his flight tomorrow
+           morning due to the lack of available taxi(Tuesday morning is a terrible day!).
+           If he will miss the conference, his boss will fire him! Suddenly he remember that the myTaxiService
+           application give him the possibility to reserve a taxi ride.
+           He pick-up his smartphone, opens the myTaxiService app, enters his credentials and access to the application.
+           On the main page he press the 'Reserve' button, a form appear and he enters the time of departure, the point of departure
+           and the number of passengers(he himself) then he press the 'Submit' button. The myTaxiService backend receives the request
+           and after some calculus notify Bob of the successful registration of its request. Bob is very happy and continues
+           its work with a smile on his face.
+
+        3) It's Friday, 11 AM and Ann has been on holiday for three weeks. It's time to go home!
+           Ann has booked her return flight for today at 12 AM. Ann has carefully planned the return trip, indeed
+           yesterday she made a taxi ride reservation through the myTaxiService web site, but the taxi is in late!
+           So she take her smartphone opens the myTaxiService application, enters her credentials and after a successful login
+           she presses the 'View Status' button and discovers that her taxi is stuck in a terrible traffic jam.
+           "I'll miss my flight!" she thinks, and starts to wait with the heart full of hope.
+
+        4) Dave, an experienced taxi driver of big city, have received, through myTaxiService, a request for a ride
+           from a passenger. "It's not too much far from where i am now" he thinks, "It'll be easy" and through the
+           myTaxiService mobile application it notifies the system the he will take care of the call.
+           So he starts moving toward the passenger position, but suddenly, while he is crossing a very busy crossroad,
+           a reckless driver coming from the left crosses at high speed the crossroads and hits with violence the
+           taxi cab of the poor Dave. Fortunately nobody gets hurt but the taxi of Dave has been seriously damaged.
+           Dave cannot fulfill the passenger request so he takes his smartphone, opens the myTaxiervice application,
+           sets his state to 'Critical' and press the 'Submit' button. The backend system of myTaxiService receives the
+           notification and after some calculus selects and notifies another driver to fulfill the passenger request. 

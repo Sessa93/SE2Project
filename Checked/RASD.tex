@@ -156,8 +156,7 @@
         The city's local government provides each taxi with a device used to see incoming ride requests or reservations and
         to signal the acceptance of these ones, along with a gps device used to track the taxi's position.
 
-        \item MyTaxiService is aware of the work time table of each taxi, so there's no need to consider
-        the case in which a taxi has no pending requests but is not available: taxies are unavailable
+        \item Since MyTaxiService is aware of the work timetable of each taxi, taxies are considered unavailable
         if and only if they are serving a ride/reservation request; an exception to this case is that a taxi could have an accident.  After a taxi has finished serving a passenger he has to notify that
         to myTaxiService and so myTaxiService will consider the taxi available again. Considering that myTaxiService knows the position
         of the taxi and the destination of each ride there is no chance a taxi drive can cheat by not signalling he hasn't yet finished service a passenger.

@@ -36,7 +36,7 @@ INTRODUCTION
 
       2.3 Guarantee short taxi availability times and short waiting times
 
-  ASSUMPTIONS
+  Assumptions
     1. MyTaxiService has been commissioned by the city local government.
       Each taxi in the city must have a taxi license provided by the local government.
       This license requires the registration to MyTaxiService
@@ -102,20 +102,21 @@ INTRODUCTION
 
 
 
-    REQUIREMENTS SPECIFICATION
-      Main Actors(Spostare nella sezione centrale)
-      In this section are defined all the actors that interact with the MyTaxiService during its operation.
-        - Visitor
-            A user can only see the login page and complete the registration(which is mandatory to use the service)
-            to be able to access to all the functionality of the application.
+REQUIREMENTS SPECIFICATION
 
-        - Registered User
-            A registered user can, after a successful login, access all the functionality of the application: it can
-            request/reserve a taxi ride, view the status of older bookings and cancel a already confirmed taxi booking.
+SCENARIOS, USE CASES AND UML MODELS
+    Actors
+      - Visitor
+          A user can only see the login page and complete the registration(which is mandatory to use the service)
+          to be able to access to all the functionality of the application.
 
-        - Taxi driver
-            A taxi driver, after a successful login, is granted to: being notified by the system of an incoming request,
-            notify the system about the conclusion of a taxi ride.
+      - Registered User
+          A registered user can, after a successful login, access all the functionality of the application: it can
+          request/reserve a taxi ride, view the status of older bookings and cancel a already confirmed taxi booking.
 
-        - MyTaxiService(B)
-            This actor represents the back-end part of the MyTaxiService software system as described in the Glossary
+      - Taxi driver
+          A taxi driver, after a successful login, is granted to: being notified by the system of an incoming request,
+          notify the system about the conclusion of a taxi ride.
+
+      - MyTaxiService(B)
+          This actor represents the back-end part of the MyTaxiService software system as described in the "Terms and definition section"

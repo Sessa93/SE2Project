@@ -39,8 +39,7 @@ INTRODUCTION
   Assumptions
     1. MyTaxiService has been commissioned by the city local government.
       Each taxi in the city must have a taxi license provided by the local government.
-      This license requires the registration to MyTaxiService
-      and forces drivers to accept ride request/bookings only using MyTaxiService.
+      This license requires the registration to MyTaxiService and forces drivers to accept ride request/bookings only using MyTaxiService.
       During the registration process taxi drivers are asked to provide their personal and vehicle data and work time table.
       At the end of the registration process a unique code will be assigned to each taxi.
       Eventually, the city's local government provides each taxi a device. This device is used to see incoming ride requests or bookings
@@ -50,7 +49,7 @@ INTRODUCTION
     2. Since MyTaxiService is aware of the work timetable of each taxi, taxies are considered unavailable
       if and only if they are serving a ride/booking request.  After a taxi has finished serving a passenger, he has to notify that
       to MyTaxiService so MyTaxiService will consider the taxi available again. Considering that MyTaxiService knows the position
-      of each taxi and the destination of each ride there, there's no chance a taxi driver can cheat by not signaling he hasn't completed a ride yet.
+      of each taxi and the destination of each ride, there's no chance a taxi driver can cheat by not signaling he hasn't completed a ride yet.
 
     3. A Taxi might have an accident, if that happens, the taxi driver can report it and therefore
       can be considered unavailable
@@ -60,9 +59,9 @@ INTRODUCTION
 
     5. MyTaxiService is aware of the characteristics of each taxies (number of passengers)
 
-    6. MyTaxiService is aware of all the possible valid location in the city, so the user is forced to select one of them and not insert one of them.
+    6. MyTaxiService is aware of all the possible valid location in the city, so the user is forced to select one of them.
 
-    7. Taxi can accept only ride request/booking within the city borders.
+    7. Taxies can accept only ride request/booking within the city borders.
 
     8. Accepting a ride/booking request by the taxi driver: signaling that the taxi has already left in order to pick a registered user up.
 
@@ -81,7 +80,7 @@ INTRODUCTION
         tasks not exposed to the user or the taxies
       - MyTaxiService: MyTaxiService(F) + MyTaxiService(B)
       - Taxi driver: The person licensed by the local government to drive a taxi
-      - Taxi(with capital T): a taxi whose driver is a Taxi driver
+      - taxi: a taxi whose driver is a Taxi driver
       - Request: An electronic message sent by a user through MyTaxiService(F)
         to MyTaxiService(B). This electronic message refers to the case in which a user wants to be picked up as soon as possible by a taxi
       - booking: An electronic message sent by a user through MyTaxiService(F)

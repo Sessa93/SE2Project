@@ -77,7 +77,7 @@ Scenarios/Use cases:
 --------------------------------------------------------------------------------
 
 4) A taxi driver informs myTaxiService(B) that he has finished serving a passenger
-  Actors: Taxi driver, myTaxiService(B)
+  Actors: Taxi driver, myTaxiService(F)
   [Pre-cons]: The taxi's current location is the ending location of the taxi's last ride
   [Post-cons]: MyTaxiService(B) considers the taxi available
   [Entry Cnd]: The driver has finished serving a passenger
@@ -95,16 +95,20 @@ Scenarios/Use cases:
 
 --------------------------------------------------------------------------------
 
-5) The driver receives a request
-  Actors: Taxi driver, myTaxiService(B)
-  Entry Cnd: myTaxiService(B) submit to the driver a new request
-  Exit Cnd: The driver acknowledges the System
+5) A taxi driver receives a ride request
+  Actors: Taxi driver, myTaxiService
+  [Entry Cnd]: MyTaxiService(B) has to manage a ride request and has found the taxi
+  suitable to complete that request
+  [Exit Cnd]: MyTaxiService(F) informs MyTaxiService(B) that it has received the request
+  [Pre cons]: The taxi has to be available. The taxi has to be compatible with the ride
+  request in terms of number of passengers
+  [Post cons]: The taxi driver will fullfil that request
   Exceptions:
     - The passenger is not present at starting point of the ride: The driver waits at the starting point of the ride at most 30 minutes, then it notifies
       myTaxiService(B) that he has terminated the ride(see Use Case 4)
     - The driver doesn't acknowledge myTaxiService(B) within 5min: myTaxiService(B) assumes that the request is rejected and proceeds to select another taxi to fullfill the request.
   Flow of Events:
-    - The driver receives a new request via the mobile application.
+    - MyTaxiService(B) notifies MyTaxiService()
     - The driver takes note of the information(position, time, starting point, ending point, number of passengers) contained in the request.
     - The driver acknowledges myTaxiService(B).
     - The driver reaches the origin point of the ride.

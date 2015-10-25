@@ -28,7 +28,7 @@ Scenarios/Use cases:
 
 --------------------------------------------------------------------------------
 
-2) A taxi driver receives a ride request via the myTaxiService(F) application
+2) myTaxiService(B) forwards a received request to a driver
   [Actors]: a taxi driver, the myTaxiService(F) application
   [Pre-cons]: the taxi driver has access to the myTaxiService application; the taxi driver
   has access to the web from the device used to access the application; the taxi driver is
@@ -196,6 +196,24 @@ Scenarios/Use cases:
     - The driver hits the 'notify accident' button
     - myTaxiService(B) receives the notification and set the driver state to 'unavailable'
     - myTaxiService(B) acknowledges the driver
+
+--------------------------------------------------------------------------------
+
+12) Visitor registration
+  Actors: Visitor, myTaxiService(B)
+  Entry Cnd: The visitor is not yet registered
+  Exit Cnd: The visitor is registered
+  Notes: This procedure doesn't apply for driver registration(see Assumptions point 1)
+         This procedure applies both for the registration via mobile application and web site
+  Exceptions:
+    - Connection Lost: myTaxiService(F) immediately notifies the user
+  Flow of Events:
+    - The visitor access the registration area
+    - The visitor enters Name, Surname, Username, email(used for user verifiacation) and finally chooses a password
+    - The visitor press the submit button
+    - myTaxiService(B) receive the registration request and sends to the user a email containing a link to activate the account
+    - The visitor opens the email clicks the activation link
+    - The visitor visualizes the message "You've been successfully registered to myTaxiService!"
 
 Requirements(Functional -> F, Non Functional -> NF, Constraints -> C):
   1) The user can undo a request (F)

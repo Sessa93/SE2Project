@@ -67,14 +67,14 @@ INTRODUCTION
     8. Accepting a ride/booking request by the taxi driver: signaling that the taxi has already left in order to pick a registered user up.
 
     9. Visitor: A generic person that is not registered to the service.
-    
+
     10. Exists an unique application(myTaxiService(F)) both for taxi driver and normal user, myTaxiService(F) give access to the proper set of functionalities
     according to the login credentials.
 
   Terms and definitions
       - MyTaxiService(F) : The front end of MyTaxiService, that is to say, the components
         of the application that manage the interaction with the user and the logic behind
-        this interaction
+        this interaction, this term refers both to the mobile application and the web site.
       - MyTaxiService(B) : The back end of MyTaxiService, that is to say, the components
         of the application that manage the forwarding of the ride / booking request with all
         their associated notifications, the search of available taxies compatible with the request/booking inserted, and other internal

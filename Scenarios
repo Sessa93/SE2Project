@@ -8,7 +8,7 @@ Scenarios/Use cases:
   [Pre-cons]: the passenger has access to the myTaxiService(F) application; the passenger
   has access to the web from the device used to access the application; the passenger is
   registered to myTaxiService as a passenger. The passenger wants to start the ride in less
-  than two hours
+  than two hours; The passenger is logged into the myTaxiService(F) application(web or mobile).
   [Post-cons]: the taxi will arrive at the requested location as punctual as possible with
   respect to the requested time
   [Entry Cnd]: the passenger is willing to take a taxi. the passenger
@@ -17,7 +17,6 @@ Scenarios/Use cases:
   [Exceptions]:
     - Connection lost: The mobile application immediately notifies the user.
   [Flow of events]:
-    - The passenger logs into the myTaxiService(F) application
     - The passenger hits the 'request ride' button
     - The passenger fills and sends the request ride form by inserting the starting location, the ending location,
     the time in which a taxi has to be ready and the number of passengers.
@@ -29,14 +28,14 @@ Scenarios/Use cases:
 
 --------------------------------------------------------------------------------
 
-2) A taxi driver receives a ride request by the myTaxiService(F) application
+2) A taxi driver receives a ride request via the myTaxiService(F) application
   [Actors]: a taxi driver, the myTaxiService(F) application
   [Pre-cons]: the taxi driver has access to the myTaxiService application; the taxi driver
   has access to the web from the device used to access the application; the taxi driver is
   registered to myTaxiService as a driver; the taxi driver owns and uses on his taxi
   a gps system provided by the myTaxiService service to respond to taxi ride
   requests; the taxi driver has signaled via the app that has finished serving a passenger and is
-  ready for a new ride
+  ready for a new ride('Available' state)
   [Post-cons]: the taxi driver knows that a passenger has requested a ride with the specified
   details and has to accept it or not
   [Entry Cnd]: the myTaxService(F) has received a request for a ride from a passenger
@@ -102,7 +101,7 @@ Scenarios/Use cases:
   Exceptions:
     - The passenger is not present at starting point of the ride: The driver waits at the starting point of the ride at most 30 minutes, then it notifies
       myTaxiService(B) that he has terminated the ride(see Use Case 4)
-    - The driver doesn't acknowledge myTaxiService(B) within 5min: myTaxiService(B) assumes that the driver is out of service and proceeds to select another taxi to fullfill the request.
+    - The driver doesn't acknowledge myTaxiService(B) within 5min: myTaxiService(B) assumes that the request is rejected and proceeds to select another taxi to fullfill the request.
   Flow of Events:
     - The driver receives a new request via the mobile application.
     - The driver takes note of the information(position, time, starting point, ending point, number of passengers) contained in the request.
@@ -114,13 +113,12 @@ Scenarios/Use cases:
 
 6) A user requests a reserved ride
   Actors: Requesting passenger, the System
-  Entry Cnd: The user want requests a reserved ride, the user is logged into the system
-  Exit Cnd: The system acknowledges the assigned driver
+  Entry Cnd: The user want requests a reserved ride, the user is logged into the system.
+  Exit Cnd: The system acknowledges the assigned driver.
   Exceptions:
     - Connection Lost: The driver is immediately notified via the mobile application.
     - No taxi available: The requesting user is immediately notified via the mobile application.
   Flow of Events:
-    - The driver logs into myTaxiService mobile application, providing his credentials.
     - The user selects the origin and destination of the ride, the number of passengers and the starting time, once the form is completed, it is submitted to the System.
     - myTaxiService(B) checks if the starting time is at least 2 hours greater than the current time, if so it stores the request.
     - The System acknowledges the user.
@@ -135,6 +133,7 @@ Scenarios/Use cases:
   Actors: Passenger/Driver, the System
   Entry Cnd: the user is offline and wants to log in the System
   Exit Cnd: The user is logged in
+  Notes: This procedure applies both for the login from the web site
   Exceptions:
     - Connection Lost: myTaxiService(F) immediately notifies the user
     - Wrong Credentials: myTaxiService(F) asks to reenter it
@@ -148,8 +147,9 @@ Scenarios/Use cases:
 
 8) User Logout
   Actors: Passenger/Driver, myTaxiService(B)
-  Entry Cnd: The user is logged into the system
-  Exit Cnd: The user is logged out from the system
+  Entry Cnd: The user is logged into myTaxiService(B); the user wants to logout from myTaxiService
+  Exit Cnd: The user is logged out from myTaxiService
+  Notes: This procedure applies both for the website/mobile application version of myTaxiServie
   Exceptions:
     - Connection Lost: myTaxiService(F) immediately notifies the user
   Flow of Events:
@@ -160,7 +160,7 @@ Scenarios/Use cases:
 
 9) User undo a reservation
   Actors: Requesting passenger, myTaxiService(B)
-  Entry Cnd: The passenger has reserved a ride successfully, the user is logged into the application
+  Entry Cnd: The passenger has reserved a ride successfully, the user is logged into the application, the passenger has reserved a taxi ride
   Exit Cnd: The System acknowledges the passenger
   Exceptions:
     - Connection Lost: myTaxiService(F) immediately notifies the user

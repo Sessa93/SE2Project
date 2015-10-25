@@ -39,7 +39,7 @@
       1.4.1) Terms disambiguation
         - MyTaxiService(F) : The front end of MyTaxiService, that is to say, the components
           of the application that manage the interaction with the user and the logic behind
-          this interaction
+          this interaction, this term refers both to the mobile application and the web site.
         - MyTaxiService(B) : The back end of MyTaxiService, that is to say, the components
           of the application that manage the forwarding of the ride / reservation request with all
           their associated notifications, the search of available taxies compatible with the request/reservation inserted, and other internal
@@ -131,14 +131,16 @@
         [FR6] The user, after a successful login can submit a taxi request
         [FR7] The user, after a successful login can submit a taxi reservation
         [FR8] The user can undo a reservation
-        [FR9] The user has to specify the origin of the ride(F)
+        [FR9] The user has to specify the origin of the ride both for requests and reservations
         [FR10] The driver can accept or reject a request
-        [FR11] The user has to specify the time of departure when he reserves a taxi(F)
-        [FR12] myTaxiService uses the GPS information to determinate if a taxi is in service(F)
-        [FR13] The user can undo a reservation within 10 minutes from the meeting time(NF)
+        [FR11] The user has to specify the time of departure when he reserves a taxi
+        [FR12] myTaxiService uses the GPS information to determinate if a taxi is in service
+        [FR13] The user can undo a reservation within 10 minutes from the meeting time
         [FR14] The user can make multiple reservations
-        [FR15] Users, after a successfull login, can view the status of previous reservations
+        [FR15] Registered users, after a successful login, can view the status of previous reservations
         [FR16] myTaxiService(B) can send request to the taxi to redistribute the taxies among the queues
+        [FR17] A visitor can register himself both via the mobile application and the web-site
+        [FR18] A taxi driver can only log in via the mobile application
 
       2.3) NON FUNCTIONAL REQUIREMENTS
         [NFR1] The system has to guarantee that a taxi arrives at the origin of the ride within a fixed time(NF)

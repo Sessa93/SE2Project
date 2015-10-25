@@ -64,11 +64,12 @@ INTRODUCTION
     7. Taxies can accept only ride request/booking within the city borders.
 
     8. Accepting a ride/booking request by the taxi driver: signaling that the taxi has already left in order to pick a registered user up.
-
+    [?]
     9. Visitor: A generic person that is not registered to the service.
+    [?]
 
     10. Exists an unique application(myTaxiService(F)) both for taxi driver and normal user, myTaxiService(F) give access to the proper set of functionalities
-    according to the login credentials.
+    according to the login credentials.[?]
 
   Terms and definitions
       - MyTaxiService(F) : The front end of MyTaxiService, that is to say, the components
@@ -80,7 +81,7 @@ INTRODUCTION
         tasks not exposed to the user or the taxies
       - MyTaxiService: MyTaxiService(F) + MyTaxiService(B)
       - Taxi driver: The person licensed by the local government to drive a taxi
-      - taxi: a taxi whose driver is a Taxi driver
+      - Taxi: a taxi whose driver is a Taxi driver
       - Request: An electronic message sent by a user through MyTaxiService(F)
         to MyTaxiService(B). This electronic message refers to the case in which a user wants to be picked up as soon as possible by a taxi
       - booking: An electronic message sent by a user through MyTaxiService(F)
@@ -91,6 +92,7 @@ INTRODUCTION
       - Queue: A data structure managed with a FIFO policy.
       - User: A person who wants to take a taxi and is not registered to MyTaxiService.
       - Registered User: A person who needs to take a taxi and is registered to MyTaxiService.
+      - Visitor: A generic person that is not registered to MyTaxiService.
 
     Acronyms
       - RASD: Requirements Analysis and Specification Document

@@ -3,146 +3,136 @@ Authors: Giorgio Pea, Andrea Sessa
 
 Scenarios/Use cases:
 
-1) A passenger requests a taxi ride
-  [Actors]: the requesting passenger, the myTaxiService(B) application
-  [Pre-cons]: the passenger has access to the myTaxiService(F) application; the passenger
-  has access to the web from the device used to access the application; the passenger is
-  registered to myTaxiService as a passenger. The passenger wants to start the ride in less
-  than two hours; The passenger is logged into the myTaxiService(F) application(web or mobile).
-  [Post-cons]: the taxi will arrive at the requested location as punctual as possible with
-  respect to the requested time
-  [Entry Cnd]: the passenger is willing to take a taxi. the passenger
-  [Exit Cnd]: the application acknowledges the passenger that a taxi is available and shows
-  the waiting time for the taxi along with a button to undo the taxi ride request.
+1) A registered user requests a mtaxi ride
+  [Actors]: A registered user, MyTaxiService
+  [Pre-cons]: The registered user has logged into MyTaxiService.
+  [Post-cons]: MyTaxiService(B) receives the ride request and tries to find an available taxi to fulfill it.
+  [Entry Cnd]: A registered user wants to be picked up by a mtaxi as soon as possible.
+  [Exit Cnd]: MyTaxiService(F) is informed that MyTaxiService(B) has received successfully the ride
+  request
   [Exceptions]:
-    - Connection lost: The mobile application immediately notifies the user.
+    - Connection lost on the smartphone: MyTaxiService(F) immediately notifies the registered user with the last
+    available waiting time for the requested ride
   [Flow of events]:
-    - The passenger hits the 'request ride' button
-    - The passenger fills and sends the request ride form by inserting the starting location, the ending location,
-    the time in which a taxi has to be ready and the number of passengers.
-    - The myTaxiService(F) application acknowledges the passenger about its request by showing to him
-    the time before a taxi will be available, and if a taxi is available, the taxi arrival time.
-    If there are no taxi available then myTaxiService(F) will notify the passenger
+    - The registered user taps/clicks the "REQUEST TAXI" button
+    - The registered user is redirected to a screen dedicated to the insertion
+    of the requested ride details
+    - The registered user fills out a form for the ride request, inserting the ride's starting and ending location,
+    the number of passengers and the time for which be picked up.
+    - The registered user submits to MyTaxiService(B) the form by clicking/tapping the "CONFIRM REQUEST" button
   [Special Requirements]:
-    - The user must be notified about the state of the request within 30 seconds from the submitting time.
-
+    - MyTaxiService(F) must be informed that MyTaxiService(B) has received successfully the registered user ride
+    request within 1 min
+[OK]
 --------------------------------------------------------------------------------
 
-2) myTaxiService(B) forwards a received request to a driver
-  [Actors]: a taxi driver, the myTaxiService(F) application
-  [Pre-cons]: the taxi driver has access to the myTaxiService application; the taxi driver
-  has access to the web from the device used to access the application; the taxi driver is
-  registered to myTaxiService as a driver; the taxi driver owns and uses on his taxi
-  a gps system provided by the myTaxiService service to respond to taxi ride
-  requests; the taxi driver has signaled via the app that has finished serving a passenger and is
-  ready for a new ride('Available' state)
-  [Post-cons]: the taxi driver knows that a passenger has requested a ride with the specified
-  details and has to accept it or not
-  [Entry Cnd]: the myTaxService(F) has received a request for a ride from a passenger
-  [Exit Cnd]: myTaxService(B) notifies the selected taxi driver
+2) MyTaxiService(B) forwards a received ride request to a mtaxi driver
+  [Actors]: A mtaxi driver, MyTaxiService(F)(T)
+  [Pre-cons]: The mtaxi driver has informed MyTaxiService(B) that he has finished serving a passenger and so is
+  ready for a new ride
+  [Post-cons]: The mtaxi driver knows that a passenger has requested a ride with the specified
+  details and is ready to fullfil it
+  [Entry Cnd]: MyTaxService(B) has received a request for a ride from a registered user
+  [Exit Cnd]: MyTaxiService(B) is informed that MyTaxiService(F)(T) has received successfully the mtaxi driver's
+  notification
   [Exceptions]:
-    - No taxi available: if the queue relative to taxi zone of the request is empty(no taxi available)
-    then the myTaxiService(B) uses the queue of one of the zones adjacent to the one we're considering
-    - No ack from the selected driver's app: the system repeats the forwarding of the request
+    - No mtaxi available for city zone relative to the ride request: MyTaxyService(B) tries
+    to find a mtaxi that fits the request located in the adjacent zones
+    - No mtaxi available: MyTaxyService(B) notifies the passenger that made the request that
+    no taxi is available and he should try later
+    - No ack from the mtaxi driver MyTaxiService(F)(T): MyTaxiService(B) tries to find a new mtaxi to fullfil
+    the request
   [Flow of Events]:
-    - the myTaxiService(B) receives a ride request, calculates the taxi zone of the starting point of the ride
-      and extracts a taxi (using a FIFO logic) from the queue of taxies associated with the taxi zone and forwards to that taxi the ride request.
-    - the myTaxiService(B) notifies the selected taxi's driver of a new ride request along with all the details relative to it.
+    - MyTaxyService(B) extracts the city zone relative to the starting point of the ride request
+    - MyTaxyService(B) selects a mtaxi (using a FIFO logic) from the queue of available mtaxies
+      for the city zone above mentioned.
+    - MyTaxyService(B) forwards the ride request to the selected mtaxi
 
+[OK]
 
-    {Here we model just the fact that a ride request is forwarded to a taxi driver and that that taxi driver
-    receives it with success}
-    {We'll use another scenario to model the fact that a taxi driver that has received a ride request
-    accepts or not that request}
-    {When a taxi driver signals it has finished a ride(and this is mandatory) then we consider the
-    taxi available for a new ride}
-    {When a taxi driver receives a ride request he has only to signal the fact that is reaching the passenger
-    , it cannot decline a ride request, if the taxi driver does not signal is reaching the passenger
-    within a certain time than the systems uses another taxi and signals what happened to the admins}
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
-{3) A taxi(driver) informs the system of his availability
-  Actors: A taxi driver, the System
-  Entry Cnd: The driver starts his shift
-  Exit Cnd: The driver receives an acknowledgement from the system
-  Exceptions:
-    - Connection Lost: The driver is immediately notified via the mobile application.
-  Flow of Events:
-    - The mobile app access automatically to the GPS system, retrieves the current position, and sends the data to the System
-    - The System receives the positioning data, calculates the zone, stores the taxi ID in the queue associated to the calculated zone
-      and recalculates the distribution of taxies over the zones.
-    - The System acknowledges the driver.
-  Special Requirements:
-    - The system must notifies the driver within 1min from the submitting time }
+4) A taxi driver informs myTaxiService(B) that he has finished serving a passenger
+  Actors: A mtaxi driver, myTaxiService(F)
+  [Pre-cons]: The mtaxi's current location is the ending location of its last ride
+  [Post-cons]: MyTaxiService(B) considers the mtaxi available
+  [Entry Cnd]: The mtaxi driver has finished serving a passenger
+  [Exit Cnd]: MyTaxiService(F)(T) is informed that MyTaxiService(B) has received successfully the mtaxi driver's
+  notification
+  [Exceptions]:
+    - Connection Lost: the mtaxi driver is immediately notified by MyTaxiService(F)(T), who suggests to retry the operation
+    later.
+  [Flow of Events]:
+    - The mtaxi driver taps the "END RIDE" button on the screen of his MyTaxiServiceDevice
+    - MyTaxiService(F)(T) notifies MyTaxiService(B) that the mtaxi driver has finished serving a passenger
+  [Special Requirements]:
+    - MyTaxiService(F)(T) must be informed that MyTaxiService(B) has received successfully the mtaxi driver notification within 1 min
+
+[OK]
 
 --------------------------------------------------------------------------------
 
-4) A taxi driver informs the myTaxiService(B) that he has terminated a ride
-  Actors: Taxi(driver), myTaxiService(B)
-  Entry Cnd: The driver has terminated a ride, the driver is logged into the System
-  Exit Cnd: The system acknowledges the driver
-  Exceptions:
-    - Connection Lost: The driver is immediately notified via the mobile application.
-  Flow of Events:
-    - The driver sets his current state to 'available', when the drive submit the notification the mobile app access to GPS system,
-      retrieves the current position and attach the positioning information to the notification.
-    - myTaxiService(B) receives the positioning data, calculates the zone, stores the taxi ID in correct queue
-      and recalculates the distribution of taxies over the zones.
-    - myTaxiService(B) acknowledges the driver via myTaxiService(F).
-  Special Requirements:
-    - myTaxiService(B) must notifies the driver within 1min from the submitting time
-
---------------------------------------------------------------------------------
-
-5) The driver receives a request
-  Actors: Taxi driver, myTaxiService(B)
-  Entry Cnd: myTaxiService(B) submit to the driver a new request
-  Exit Cnd: The driver acknowledges the System
-  Exceptions:
-    - The passenger is not present at starting point of the ride: The driver waits at the starting point of the ride at most 30 minutes, then it notifies
-      myTaxiService(B) that he has terminated the ride(see Use Case 4)
-    - The driver doesn't acknowledge myTaxiService(B) within 5min: myTaxiService(B) assumes that the request is rejected and proceeds to select another taxi to fullfill the request.
-  Flow of Events:
-    - The driver receives a new request via the mobile application.
-    - The driver takes note of the information(position, time, starting point, ending point, number of passengers) contained in the request.
-    - The driver acknowledges myTaxiService(B).
-    - The driver reaches the origin point of the ride.
+5) A taxi driver manages a ride request from MyTaxiService(B)
+  Actors: A mtaxi driver, MyTaxiService(B), MyTaxyService(F)(T)
+  [Entry Cnd]: MyTaxiService(B) has forwarded successfully a ride request to MyTaxyService
+  (F)(T)
+  [Exit Cnd]: MyTaxiService(F)(T) is informed that MyTaxiService(B) has received successfully the notification
+  of the ride acceptance.
+  [Post cons]: The mtaxy driver has started driving to the starting point of the ride
+  [Exceptions]:
+    - If MyTaxyService(B) does not receive the acceptance of the request by the mtaxy driver
+    within 5 mins, then it selects another mtaxi to fullfil the request, and signals to the supervisors
+    of MyTaxyService the behavior of the mtaxy driver
+  [Flow of Events]:
+    - The mtaxy driver plans the picking up of the passenger.
+    - The mtaxi driver taps the "SERVE REQUEST" button, notifying MyTaxiService(B)
+    - The mtaxi driver start reaching the starting point of the ride request
 
 
 --------------------------------------------------------------------------------
 
-6) A user requests a reserved ride
-  Actors: Requesting passenger, the System
-  Entry Cnd: The user want requests a reserved ride, the user is logged into the system.
-  Exit Cnd: The system acknowledges the assigned driver.
-  Exceptions:
-    - Connection Lost: The driver is immediately notified via the mobile application.
-    - No taxi available: The requesting user is immediately notified via the mobile application.
-  Flow of Events:
-    - The user selects the origin and destination of the ride, the number of passengers and the starting time, once the form is completed, it is submitted to the System.
-    - myTaxiService(B) checks if the starting time is at least 2 hours greater than the current time, if so it stores the request.
-    - The System acknowledges the user.
-    - When there are 10 minutes left, the system extracts a driver from the queue(calculated on the basis of the ride's starting point)
-      and assigns him to the request(see use-case n4).
-  Special Requirements:
-    - The system must acknowledges the driver within 1 min from the submitting time of the reservation form.
+1) A registered user books a mtaxi
+  [Actors]: A registered user, MyTaxiService
+  [Pre-cons]: The registered user has logged into MyTaxiService.
+  [Post-cons]: MyTaxiService(B) receives the book request and registers it. Then 10 mins before
+  the chosen picking up time, it will try to find an available taxi to fullfill the request.
+  [Entry Cnd]: A registered user wants to be picked up by a mtaxi at a precise moment.
+  [Exit Cnd]: MyTaxiService(F) is informed that MyTaxiService(B) has received successfully the ride
+  request
+  [Exceptions]:
+    - Connection lost on the smartphone: MyTaxiService(F) immediately notifies the registered user with the last
+    available status information for the requested booking
+  [Flow of events]:
+    - The registered user taps/clicks the "BOOK TAXI" button
+    - The registered user is redirected to a screen dedicated to the insertion
+    of the requested booking details
+    - The registered user fills out a form for the booking request, inserting the ride's starting and ending location,
+    the number of passengers and the time for which be picked up.
+    - The registered user submits to MyTaxiService(B) the form by clicking/tapping the "CONFIRM BOOKING" button
+  [Special Requirements]:
+    - MyTaxiService(F) must be informed that MyTaxiService(B) has received successfully the registered user booking
+    request within 1 min
+[OK]
 
 --------------------------------------------------------------------------------
 
-7) User Login
-  Actors: Passenger/Driver, the System
-  Entry Cnd: the user is offline and wants to log in the System
-  Exit Cnd: The user is logged in
+7) Registered user Login
+  Actors: A registered user, MyTaxiService(B)
+  Entry Cnd: the registered user wants to use MyTaxyService
+  Exit Cnd: MyTaxyService(B) grants access to the functionalities
+  Pre Cnd: the registered user has not already logged in
+  Post Cnd: The registered user is logged into MyTaxyService therefore he has access
+  to its functionalities
   Notes: This procedure applies both for the login from the web site
   Exceptions:
     - Connection Lost: myTaxiService(F) immediately notifies the user
-    - Wrong Credentials: myTaxiService(F) asks to reenter it
+    - Wrong Credentials: the registered user is asked to insert its credentials again
   Flow of Events:
-    - The user wants to log in the application he opens it on its mobile device.
-    - The System asks to provide credentials and to specify the user type(driver or passenger), showing a login form.
-    - The user provides the login information.
-    - myTaxiService(B) authenticates the user and give access to the application functions
-
+    - The registered user opens MyTaxyService app or access MyTaxyService website, and a login
+    scree with the option to registrare is show to the user.
+    - The registered user inserts his credentials
+    - The registered user clicks/taps the "LOGIN" button
+[OK]
 --------------------------------------------------------------------------------
 
 8) User Logout
@@ -188,6 +178,7 @@ Scenarios/Use cases:
 
 11) A driver notifies myTaxiService(B) due to an accident
   Actors: A taxi driver, myTaxiService(B)
+
   Entry Cnd: A driver needs to notify the system due to an accident
   Exit Cnd: myTaxiService(B) acknowledges the driver
   Exceptions:

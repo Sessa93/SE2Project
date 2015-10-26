@@ -130,27 +130,37 @@
         [FR5] The login is successful iff the user inserts the correct credentials
         [FR6] The user, after a successful login can submit a taxi request
         [FR7] The user, after a successful login can submit a taxi reservation
-        [FR8] The user can undo a reservation
+        [FR8] The user can only undo a reservation only 10 minutes before the inserted
+        picking up time
+        [FR9] The user can undo only reservations
         [FR9] The user has to specify the origin of the ride both for requests and reservations
-        [FR10] The driver can accept or reject a request
+        [FR10] The driver must accept every request
         [FR11] The user has to specify the time of departure when he reserves a taxi
-        [FR12] myTaxiService uses the GPS information to determinate if a taxi is in service
-        [FR13] The user can undo a reservation within 10 minutes from the meeting time
+        [FR12] myTaxiService uses the GPS information to determinate if a taxi is in service ??
         [FR14] The user can make multiple reservations
-        [FR15] Registered users, after a successful login, can view the status of previous reservations
-        [FR16] myTaxiService(B) can send request to the taxi to redistribute the taxies among the queues
+        [FR14] The user can make a ride request iff it hasn't made a previous one
+        [FR15] Registered users, after a successful login, can view the status of their reservations/ride
+        [FR16] myTaxiService(B) can send redistribuite taxies among different zones
+        [FR19321we]  Taxi manages everything with queues for zone and choses taxies from the top of them ....
+        [HGADAD]
         [FR17] A visitor can register himself both via the mobile application and the web-site
-        [FR18] A taxi driver can only log in via the mobile application
+        [FR18] A taxi driver can only log in via the mobile application??
+        [GF] User in order to access all functionalities should be registred
+        []The user can registerlkdshkjfad kfjakgjfad gfai
+        [] The website and the mobile app have the same functionalities
 
       2.3) NON FUNCTIONAL REQUIREMENTS
         [NFR1] The system has to guarantee that a taxi arrives at the origin of the ride within a fixed time(NF)
         [NFR2] The taxi driver waits for the passenger that has requested the ride at the origin point for a maximum amount of time, after that the taxi returns available(NF)
         [NFR3] A taxi driver has to accept or not a request within a fixed time, otherwise another taxi is selected by myTaxiService(B)
         [NFR4] After a failure myTaxiService(B) has to be restarted within 1 hour
-        [NFR5] myTaxiService must be available 24/7
+        [NFR5] myTaxiService must be available 24h/7d
         [NFR6] myTaxiService has as target users taxi driver and people who use the city taxi service
-        [NFR7] Users are able to properly use all the functionalities after a training time of at most 1 hour
-        [NFR8] All the functionalities have be reached by the user with at most 3 clicks from the starting page
+        [] The systems divides the city in zones
+
+
+        [NFR7] Users are able to properly use all the functionalities after a training time of at most 15 mins
+        [NFR8] All the functionalities have be reached by the user with at most 3 clicks/taps from the starting page
 
 
       2.4) CONSTRAINTS
@@ -164,22 +174,25 @@
 3)Scenarios + UML Diagrams
     3.1) Scenarios identification
         1)Funes is a product manager with a very busy schedule. At 11.00 he has a meeting
-          with a group of clients to discuss about the features of a new product he's following
-          this meeting is located non in the company headquartes, where is in the moment, but in another place.
-          He used to take a lot of taxies and he tried myTaxiService to efficient its movements.
-          Its half past ten and Funes decides to take a taxi via myTaxiService. So it opens the app
-          on its smartphone, the app remebers he's logged and does not ask him to do it another
-          time, it inserts the address of the company, one passenger is fine, and it taps
-          the big request button. The app signals to him that is finding a taxi. Near
-          Funes location a taxi has finished serving a passengers myTaxiService signals him
-          funes request, Incapax the taxi driver wants to take a cofee even if is in work time
-          so he does not answer the request. After 5 min myTaxiService tries to find a new taxi
-          for Funes and it does so successfully, Becero's taxi is selected, Becero's immediatly signals
-          is serving the request and myTaxiService alerts funes that its taxi will arrive in 3 mins.
-          The taxi arrives and in 10 min funes is in the company in time for the meeting. MyTaxiService
-          signals the behaviour of Incapax to its supervisors and he receives a warning and a fine of 200€
+          with a group of clients to discuss about the features of a new product.
+          This meeting is located in a another part of the city.
+          For his shifts Funes usually takes taxies, and, in order to speed up this process, he
+          started using MyTaxiService.
+          Its 10:30 and Funes decides to take a taxi via myTaxiService. He opens the app,
+          the app remembers his credentials and logs him in.
+          Funes inserts the address of the meeting and of his current location, choses one passenger and taps
+          the big request button. MyTaxiService then alerts him that is finding a taxi.
+          Near Funes' location, a Taxi has finished serving a passenger, so myTaxiService(B) signals to it
+          Funes' request. Assuan, the driver of the Taxi, despite the fact that it's still work time, wants to take a coffee
+          and so ignores the request. After 5 mins myTaxiService tries to find a new Taxi
+          for Funes: Nabucodonosor's Taxi is available and MyTaxiService forwards Funes' request to it.
+          Nabucodonosor receives the request and alerts MyTaxiService that he's going to take care of it.
+          myTaxiService alerts Funes that his taxi will arrive in 3 mins.
+          The Taxi arrives, and in 10 min Funes reaches the meeting place. MyTaxiService
+          signals the behavior of Assuan to his supervisors, and, after a few weeks, Assuan receives a warning and a fine of 200€.
+          [OK]
 
-        2) It's monday morning and Bob, an important manager of a very big company, as to attend an important
+        2) It's Monday morning and Bob, an important manager of a very big company, as to attend an important
            conference on Tuesday at 9:00 AM. Unfortunately he has no one
            to take him to the airport on Tuesday morning, also he is very worried to miss his flight tomorrow
            morning due to the lack of available taxi(Tuesday morning is a terrible day!).
@@ -190,6 +203,7 @@
            and the number of passengers(he himself) then he press the 'Submit' button. The myTaxiService backend receives the request
            and after some calculus notify Bob of the successful registration of its request. Bob is very happy and continues
            its work with a smile on his face.
+           [ALREADY CONSIDERED]
 
         3) It's Friday, 11 AM and Ann has been on holiday for three weeks. It's time to go home!
            Ann has booked her return flight for today at 12 AM. Ann has carefully planned the return trip, indeed
@@ -197,39 +211,58 @@
            So she take her smartphone opens the myTaxiService application, enters her credentials and after a successful login
            she presses the 'View Status' button and discovers that her taxi is stuck in a terrible traffic jam.
            "I'll miss my flight!" she thinks, and starts to wait with the heart full of hope.
+           [?]
 
-        4) Dave, an experienced taxi driver of big city, have received, through myTaxiService, a request for a ride
-           from a passenger. "It's not too much far from where i am now" he thinks, "It'll be easy" and through the
-           myTaxiService mobile application it notifies the system the he will take care of the call.
-           So he starts moving toward the passenger position, but suddenly, while he is crossing a very busy crossroad,
-           a reckless driver coming from the left crosses at high speed the crossroads and hits with violence the
-           taxi cab of the poor Dave. Fortunately nobody gets hurt but the taxi of Dave has been seriously damaged.
-           Dave cannot fulfill the passenger request so he takes his smartphone, opens the myTaxiervice application,
-           sets his state to 'Critical' and press the 'Submit' button. The backend system of myTaxiService receives the
-           notification and after some calculus selects and notifies another driver to fulfill the passenger request.
+        4) Dave, an experienced taxi driver of the city, has received, through myTaxiService, a request for a ride
+           from a passenger. "It's not too much far from where i am now", he thinks, "It'll be easy", and notifies
+           MyTaxiService that he'll take care of the request. He starts driving toward the passenger's position, but suddenly
+           , while he's crossing a very busy crossroad,
+           a reckless driver coming from the left crosses at high speed the crossroad and hits with violence
+           Dave's taxi cab. Luckily nobody gets hurt, but Dave's taxi cabe has been seriously damaged.
+           Dave cannot fulfill the passenger's request so he takes his smartphone, opens the myTaxiService app,
+           and taps the "REPORT ACCIDENT" button, he accesses a screen where he inserts the accident details and taps the "SUBMIT" button.
+           MyTaxiService(B) receives the Dave's report and after some computations selects and notifies another driver to fulfill the passenger request.
+           [OK]
 
-        5) Mike, a taxi driver friend of Dave, is driving in a very busy Wednesday afternoon. A passenger, Bob, is walking
-           in the same zone where Mike is. Bob is in hurry because he needs to reach the railway station of the city.
+        5) It's a very busy Wednesday afternoon in city, and Mike is driving his taxi. A passenger, Bob, is walking
+           in the same zone where Mike is. Bob is in hurry because he needs to take a train in time.
            "I need a taxi!" Bob thinks, so he takes his smartphone, opens myTaxiService app, enters his credentials and
            after a successful login press the 'Request' button. MyTaxiService(B) receives the request and, after having
            carefully analysed the situation, select Mike to fulfill the request. Unfortunately Mike is stuck in very bad
            traffic jam, Mike receives and displays the request through the myTaxiService mobile application but Mike thinks
            that he can't reach the passenger before 30 minutes, so he rejects the request by pressing the 'Reject' button.
            The back-end of myTaxiService acknowledges the driver and start calculating another possible driver to fulfill the request.
+           [?]
 
-        6) Ann, the girlfriend of Bob, is going to take a trip to Milano with his boyfriend during the weekend.
-           She has carefully planned all the journey and she has already reserved a taxi ride for Saturday morning.
-           Unfortunately the unpredictable Bob has decided that no taxi is needed: they will take the car!
-           So Ann needs to cancel the reservation, he opens the myTaxiService application, enters his credentials and after
-           a successful login visualizes the list of the reservations, select the correct reservation and press the
-           'Remove' button, myTaxiService(B) receives the notification and acknowledge the driver.
 
-        7) It's Thursday, 14:00 and George, a young taxi driver, is driving in the city centre.
-           He has recognized many colleagues driving in the same zone, "Too many taxi for few people".
-           Meanwhile myTaxiService(B) after some calculus on GPS data recognizes that there are to many taxies
-           in the zone where George is driving and no request is coming from that zone. The system also indentifies
-           some zones of the city where there are a small number of taxies. According to some statistical data
-           the system knows the within 1 hour many request may come from those zones. So myTaxiService(B) selects a
-           group of 10 taxies, including George, that have to moves from the centre zone then it sends them a notification.
-           George reads the notification on his smartphone through the myTaxiService application, ackonowledges the system,
-           and starts moving toward the indicated zone.
+
+        6)
+          Ann, a young female student from Texas, is visiting Italy with his boyfriend Bob.
+          It's Friday morning, they are walking on the streets of Milan and they're thinking
+          about visiting the Expo on Saturday. Ann proposes to use a taxi to reach Expo's location,
+          Bob agrees. Ann is a very cautious person so she thinks its better to book a taxi, for this
+          reason she searches on Google "taxi milano book" and discovers MyTaxiService.
+          She downloads the app on her Iphone. She opens the app which displays a log in screen with
+          a registration button, she taps that button and so access a registration screen she inserts
+          her mail address, she choses a password, she confirms that password, she accepts the legal
+          terms of the app and taps the confirm button; after that Ann is ready to use the app.
+          In order to book a taxi for Saturday for the Expo, Ann accesses the booking section of the app,
+          taps the "ADD BOOKING" button and in the add booking screen inserts the Expo's location by selecting the right item in a dropdown menu, inserts the time and location of the picking
+          , choses two passengers and taps the big "BOOK TAXI" button, MyTaxiService responds by alerting Ann that her booking
+          has been processed successfully. Ann is happy about the fact that everything has proceeded without problems.
+          Bob instead is not so happy because he thinks that the Milan's transportation system is perfect
+          to reach Expo and its far way cheaper than taking a taxi. Bob and Ann have a brief discussion
+          about this and, at the end, Ann agrees with Bob. Given that, Ann tries to undo the booking:
+          she opens the app, she logs in, she accesses the booking section and there she sees her booking for Saturday, she taps
+          the bin icon to delete the booking, she confirms her intention to do that and everything is done.
+          [OK]
+
+        7) It's Thursday, 14:00 and George, a young taxi driver, is driving in the city's center.
+           He noticed that many of his colleagues waiting for requests in their cabs.
+           Meanwhile MyTaxiService(B), by making some analysis on the taxies' GPS data, realizes that there are to many taxies
+           in the city's center in relation with the number of ride requests for that zone. The system also indentifies
+           some zones of the city where the concentration of taxies is too low. According to a policy based on some statistical data
+           MyTaxiService(B) decides to move 10 taxies, including the George's one, from the city's center to the city's zones mentioned above.
+          As a consequence of that, George receives by MyTaxiService a notification that alerts him to move to zone C (one of the city's zones
+          with low concentration of taxies). George start driving towards zone C and continues his work.
+          [OK]

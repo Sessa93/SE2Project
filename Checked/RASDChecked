@@ -42,7 +42,7 @@ INTRODUCTION
       This license requires the registration to MyTaxiService and forces drivers to accept ride request/bookings only using MyTaxiService.
       During the registration process taxi drivers are asked to provide their personal and vehicle data and work time table.
       At the end of the registration process a unique code will be assigned to each taxi.
-      Eventually, the city's local government provides each taxi a device. This device is used to see incoming ride requests or bookings
+      Eventually, the city's local government provides each taxi with a device(MyTaxyServiceBox). This device is used to see incoming ride requests or bookings
       and to signal their acceptance. In addition to this device, taxi drivers receive a gps system used by MyTaxiService to
       track their position
 
@@ -63,11 +63,8 @@ INTRODUCTION
 
     7. Taxies can accept only ride request/booking within the city borders.
 
-    8. Accepting a ride/booking request by the taxi driver: signaling that the taxi has already left in order to pick a registered user up.
-    [?]
-    9. Visitor: A generic person that is not registered to the service.
-    [?]
-
+    9. Using gps data from the mtaxies and public traffic data, MyTaxyService(B) can balance the assigment
+    of the request so that  .... 
     10. Exists an unique application(myTaxiService(F)) both for taxi driver and normal user, myTaxiService(F) give access to the proper set of functionalities
     according to the login credentials.[?]
 
@@ -93,6 +90,11 @@ INTRODUCTION
       - User: A person who wants to take a taxi and is not registered to MyTaxiService.
       - Registered User: A person who needs to take a taxi and is registered to MyTaxiService.
       - Visitor: A generic person that is not registered to MyTaxiService.
+
+          8. Accepting a ride/booking request by the taxi driver: signaling that the taxi has already left in order to pick a registered user up.
+          [?]
+          9. Visitor: A generic person that is not registered to the service.
+          [?]
 
     Acronyms
       - RASD: Requirements Analysis and Specification Document

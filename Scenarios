@@ -91,38 +91,48 @@ Scenarios/Use cases:
 
 --------------------------------------------------------------------------------
 
-6) A user requests a reserved ride
-  Actors: Requesting passenger, the System
-  Entry Cnd: The user want requests a reserved ride, the user is logged into the system.
-  Exit Cnd: The system acknowledges the assigned driver.
-  Exceptions:
-    - Connection Lost: The driver is immediately notified via the mobile application.
-    - No taxi available: The requesting user is immediately notified via the mobile application.
-  Flow of Events:
-    - The user selects the origin and destination of the ride, the number of passengers and the starting time, once the form is completed, it is submitted to the System.
-    - myTaxiService(B) checks if the starting time is at least 2 hours greater than the current time, if so it stores the request.
-    - The System acknowledges the user.
-    - When there are 10 minutes left, the system extracts a driver from the queue(calculated on the basis of the ride's starting point)
-      and assigns him to the request(see use-case n4).
-  Special Requirements:
-    - The system must acknowledges the driver within 1 min from the submitting time of the reservation form.
+1) A registered user books a mtaxi
+  [Actors]: A registered user, MyTaxiService
+  [Pre-cons]: The registered user has logged into MyTaxiService.
+  [Post-cons]: MyTaxiService(B) receives the book request and registers it. Then 10 mins before
+  the chosen picking up time, it will try to find an available taxi to fullfill the request.
+  [Entry Cnd]: A registered user wants to be picked up by a mtaxi at a precise moment.
+  [Exit Cnd]: MyTaxiService(F) is informed that MyTaxiService(B) has received successfully the ride
+  request
+  [Exceptions]:
+    - Connection lost on the smartphone: MyTaxiService(F) immediately notifies the registered user with the last
+    available status information for the requested booking
+  [Flow of events]:
+    - The registered user taps/clicks the "BOOK TAXI" button
+    - The registered user is redirected to a screen dedicated to the insertion
+    of the requested booking details
+    - The registered user fills out a form for the booking request, inserting the ride's starting and ending location,
+    the number of passengers and the time for which be picked up.
+    - The registered user submits to MyTaxiService(B) the form by clicking/tapping the "CONFIRM BOOKING" button
+  [Special Requirements]:
+    - MyTaxiService(F) must be informed that MyTaxiService(B) has received successfully the registered user booking
+    request within 1 min
+[OK]
 
 --------------------------------------------------------------------------------
 
-7) User Login
-  Actors: Passenger/Driver, the System
-  Entry Cnd: the user is offline and wants to log in the System
-  Exit Cnd: The user is logged in
+7) Registered user Login
+  Actors: A registered user, MyTaxiService(B)
+  Entry Cnd: the registered user wants to use MyTaxyService
+  Exit Cnd: MyTaxyService(B) grants access to the functionalities
+  Pre Cnd: the registered user has not already logged in
+  Post Cnd: The registered user is logged into MyTaxyService therefore he has access
+  to its functionalities
   Notes: This procedure applies both for the login from the web site
   Exceptions:
     - Connection Lost: myTaxiService(F) immediately notifies the user
-    - Wrong Credentials: myTaxiService(F) asks to reenter it
+    - Wrong Credentials: the registered user is asked to insert its credentials again
   Flow of Events:
-    - The user wants to log in the application he opens it on its mobile device.
-    - The System asks to provide credentials and to specify the user type(driver or passenger), showing a login form.
-    - The user provides the login information.
-    - myTaxiService(B) authenticates the user and give access to the application functions
-
+    - The registered user opens MyTaxyService app or access MyTaxyService website, and a login
+    scree with the option to registrare is show to the user.
+    - The registered user inserts his credentials
+    - The registered user clicks/taps the "LOGIN" button
+[OK]
 --------------------------------------------------------------------------------
 
 8) User Logout

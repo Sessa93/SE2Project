@@ -5,15 +5,14 @@ Scenarios/Use cases:
 
 1) A registered user requests a taxi ride
   [Actors]: A registered user, myTaxiService
-  [Pre-cons]: The registered wants to be picked up in less than two hours.
-  The passenger is logged into the myTaxiService.
+  [Pre-cons]: The registered user has logged into myTaxiService.
   [Post-cons]: MyTaxiService(B) receives the ride request and tries to find an available taxi to fulfill it.
-  [Entry Cnd]: A registered user is willing to take a taxi
-  [Exit Cnd]: MyTaxiService(F) is informed that MyTaxiService(B) has received the registered user ride
+  [Entry Cnd]: A registered user wants to be picked up by a mtaxi as soon as possible.
+  [Exit Cnd]: MyTaxiService(F) is informed that MyTaxiService(B) has received successfully the ride
   request
   [Exceptions]:
-    - Connection lost: The mobile application immediately notifies the user with the last
-    available waiting time for the ride
+    - Connection lost on the smartphone: MyTaxiService(F) immediately notifies the registered user with the last
+    available waiting time for the requested ride
   [Flow of events]:
     - The registered user taps/clicks the "REQUEST TAXI" button
     - The registered user is redirected to a screen dedicated to the insertion
@@ -22,7 +21,7 @@ Scenarios/Use cases:
     the number of passengers and the time for which be picked up.
     - The registered user submits to MyTaxiService(B) the form by clicking/tapping the "CONFIRM REQUEST" button
   [Special Requirements]:
-    - MyTaxiService(F) must be informed that MyTaxiService(B) has received the registered user ride
+    - MyTaxiService(F) must be informed that MyTaxiService(B) has received successfully the registered user ride
     request within 1 min
 [OK]
 --------------------------------------------------------------------------------
@@ -77,19 +76,20 @@ Scenarios/Use cases:
 --------------------------------------------------------------------------------
 
 4) A taxi driver informs myTaxiService(B) that he has finished serving a passenger
-  Actors: Taxi driver, myTaxiService(F)
-  [Pre-cons]: The taxi's current location is the ending location of the taxi's last ride
-  [Post-cons]: MyTaxiService(B) considers the taxi available
-  [Entry Cnd]: The driver has finished serving a passenger
-  [Exit Cnd]: MyTaxiService(F) is informed that MyTaxiService(B) has received the taxi driver's
+  Actors: A mtaxi driver, myTaxiService(F)
+  [Pre-cons]: The mtaxi's current location is the ending location of its last ride
+  [Post-cons]: MyTaxiService(B) considers the mtaxi available
+  [Entry Cnd]: The mtaxi driver has finished serving a passenger
+  [Exit Cnd]: MyTaxiService(F) is informed that MyTaxiService(B) has received successfully the mtaxi driver's
   notification
   [Exceptions]:
-    - Connection Lost: The driver is immediately notified via the mobile application.
+    - Connection Lost: the mtaxi driver is immediately notified by MyTaxiService(F)(T), who suggest to retry the operation
+    later.
   [Flow of Events]:
-    - The taxi driver taps the "END RIDE" button
-    - MyTaxiService(F) notifies MyTaxiService(B)
+    - The mtaxi driver taps the "END RIDE" button on the screen of his MyTaxiServiceDevice
+    - MyTaxiService(F)(T) notifies MyTaxiService(B) that the mtaxi driver has finished serving a passenger
   [Special Requirements]:
-    - MyTaxiService(F) must be informed that MyTaxiService(B) has received the taxi driver notification within 1 min
+    - MyTaxiService(F)(T) must be informed that MyTaxiService(B) has received successfully the mtaxi driver notification within 1 min
 
 [OK]
 

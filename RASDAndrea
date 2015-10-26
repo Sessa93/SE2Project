@@ -130,17 +130,24 @@
         [FR5] The login is successful iff the user inserts the correct credentials
         [FR6] The user, after a successful login can submit a taxi request
         [FR7] The user, after a successful login can submit a taxi reservation
-        [FR8] The user can undo a reservation
+        [FR8] The user can only undo a reservation only 10 minutes before the inserted
+        picking up time
+        [FR9] The user can undo only reservations
         [FR9] The user has to specify the origin of the ride both for requests and reservations
-        [FR10] The driver can accept or reject a request??
+        [FR10] The driver must accept every request
         [FR11] The user has to specify the time of departure when he reserves a taxi
         [FR12] myTaxiService uses the GPS information to determinate if a taxi is in service ??
-        [FR13] The user can undo a reservation within 10 minutes from the meeting time
         [FR14] The user can make multiple reservations
-        [FR15] Registered users, after a successful login, can view the status of previous reservations
-        [FR16] myTaxiService(B) can send request to the taxi to redistribute the taxies among the queues??
+        [FR14] The user can make a ride request iff it hasn't made a previous one
+        [FR15] Registered users, after a successful login, can view the status of their reservations/ride
+        [FR16] myTaxiService(B) can send redistribuite taxies among different zones
+        [FR19321we]  Taxi manages everything with queues for zone and choses taxies from the top of them ....
+        [HGADAD]
         [FR17] A visitor can register himself both via the mobile application and the web-site
         [FR18] A taxi driver can only log in via the mobile application??
+        [GF] User in order to access all functionalities should be registred
+        []The user can registerlkdshkjfad kfjakgjfad gfai
+        [] The website and the mobile app have the same functionalities
 
       2.3) NON FUNCTIONAL REQUIREMENTS
         [NFR1] The system has to guarantee that a taxi arrives at the origin of the ride within a fixed time(NF)
@@ -149,6 +156,9 @@
         [NFR4] After a failure myTaxiService(B) has to be restarted within 1 hour
         [NFR5] myTaxiService must be available 24h/7d
         [NFR6] myTaxiService has as target users taxi driver and people who use the city taxi service
+        [] The systems divides the city in zones
+
+
         [NFR7] Users are able to properly use all the functionalities after a training time of at most 15 mins
         [NFR8] All the functionalities have be reached by the user with at most 3 clicks/taps from the starting page
 

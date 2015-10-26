@@ -26,21 +26,20 @@ Scenarios/Use cases:
 [OK]
 --------------------------------------------------------------------------------
 
-2) myTaxiService(B) forwards a received request to a driver
-  [Actors]: a taxi driver, the myTaxiService(F) application
-  [Pre-cons]: the taxi driver has access to the myTaxiService application; the taxi driver
-  has access to the web from the device used to access the application; the taxi driver is
-  registered to myTaxiService as a driver; the taxi driver owns and uses on his taxi
-  a gps system provided by the myTaxiService service to respond to taxi ride
-  requests; the taxi driver has signaled via the app that has finished serving a passenger and is
-  ready for a new ride('Available' state)
-  [Post-cons]: the taxi driver knows that a passenger has requested a ride with the specified
-  details and has to accept it or not
-  [Entry Cnd]: the myTaxService(F) has received a request for a ride from a passenger
-  [Exit Cnd]: myTaxService(B) notifies the selected taxi driver
+2) MyTaxiService(B) forwards a received ride request to a mtaxi driver
+  [Actors]: A mtaxi driver, myTaxiService(F)(T)
+  [Pre-cons]: The mtaxi driver has informed MyTaxiService(B) that he has finished serving a passenger and so is
+  ready for a new ride
+  [Post-cons]: The mtaxi driver knows that a passenger has requested a ride with the specified
+  details and is ready to fullfil it
+  [Entry Cnd]: MyTaxService(B) has received a request for a ride from a registered user
+  and, after some computations, it has chosen the mtaxi in discussion as the one that
+  has to fullfil the user request.
+  [Exit Cnd]: MyTaxService(B) notifies the mtaxi driver through MyTaxiService(F)(T) with
+  the ride request
   [Exceptions]:
     - No taxi available: if the queue relative to taxi zone of the request is empty(no taxi available)
-    then the myTaxiService(B) uses the queue of one of the zones adjacent to the one we're considering
+    then the myTaxiService(B) uses the queue of one of the zones adjacent to the one we're considering[NO]
     - No ack from the selected driver's app: the system repeats the forwarding of the request
   [Flow of Events]:
     - the myTaxiService(B) receives a ride request, calculates the taxi zone of the starting point of the ride

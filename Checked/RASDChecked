@@ -22,80 +22,80 @@ INTRODUCTION
 
     1. Simplify and speed up the process of taking a taxi
 
-      1.1 When a user has entered his taxi ride details and clicks or taps
-      the request button, then MyTaxiService will find the first
-      available taxi that fits for the inserted ride details, booking it to the user
+      1.1 When a registered user has entered his taxi ride details and clicks or taps
+      the "REQUEST TAXI" button, MyTaxiService will find the first
+      available taxi that fits for the inserted ride details, and this taxi will
+      pick up the user as soon as possible
 
-      1.2 When a user has entered his taxi booking details and clicks or taps
-        the book button, then MyTaxiService will book a taxi that fits for the
-        inserted booking details and for the indicated meeting time
+      1.2 When a registered user has entered his booking details and clicks or taps
+        the "BOOK TAXI" button, MyTaxiService will book a taxi that fits for the
+        inserted booking details and for the indicated pick up time
 
     2. Guarantee an efficient and fair management of taxi queues
 
-      2.2 Guarantee a right distribution of taxies in the city
+      2.2 Guarantee a balanced distribution of taxies in the city, in order
+      to have always taxies available for different city zones
 
       2.3 Guarantee short taxi availability times and short waiting times
 
   Assumptions
     1. MyTaxiService has been commissioned by the city local government.
-      Each taxi in the city must have a taxi license provided by the local government.
-      This license requires the registration to MyTaxiService and forces drivers to accept ride request/bookings only using MyTaxiService.
-      During the registration process taxi drivers are asked to provide their personal and vehicle data and work time table.
-      At the end of the registration process a unique code will be assigned to each taxi.
-      Eventually, the city's local government provides each taxi with a device(MyTaxyServiceBox). This device is used to see incoming ride requests or bookings
-      and to signal their acceptance. In addition to this device, taxi drivers receive a gps system used by MyTaxiService to
+      Taxi drivers that work in the city can join MyTaxiService via a registration to be
+      done in the local government public transport office.
+      During this registration process taxi drivers are asked to provide their personal and vehicle data along with their work timetable.
+      After that taxi drivers receive a unique code that identifies their taxi cab in relation to MyTaxiService.
+      To make MyTaxiService functional, the local government provides each mtaxi with a device similar to a small navigator, which
+      to see incoming ride requests or bookings and to signal their acceptance; this device has a built in gps module through which MyTaxiService can
       track their position
 
-    2. Since MyTaxiService is aware of the work timetable of each taxi, taxies are considered unavailable
-      if and only if they are serving a ride/booking request.  After a taxi has finished serving a passenger, he has to notify that
-      to MyTaxiService so MyTaxiService will consider the taxi available again. Considering that MyTaxiService knows the position
-      of each taxi and the destination of each ride, there's no chance a taxi driver can cheat by not signaling he hasn't completed a ride yet.
+    2. Since MyTaxiService is aware of the work timetable of each mtaxi, mtaxies are considered unavailable
+      if and only if they are serving a ride/booking request.  After a mtaxi has finished serving a passenger, its driver has to notify
+      MyTaxiService(B) of the event, so MyTaxiService(B) will consider the mtaxi available again.
+      Considering that MyTaxiService(B) knows the position of each mtaxi and the destination of each ride, there's no chance a mtaxi driver
+      can cheat by not signaling he hasn't completed a ride yet.
 
-    3. A Taxi might have an accident, if that happens, the taxi driver can report it and therefore
-      can be considered unavailable
+    3. A mtaxi might have an accident, if that happens, its driver can report it and therefore
+       be considered unavailable
 
-    4. Once a user sends a ride request, he or she cannot change any detail of the request nor can
-        undo the request.
+    4. Once a registered user sends a ride request, he or she cannot change any detail of the request nor can
+        undo the request(FR)
 
-    5. MyTaxiService is aware of the characteristics of each taxies (number of passengers)
+    5. MyTaxiService(B) is aware of the characteristics of each mtaxies (number of passengers, unique code)
 
-    6. MyTaxiService is aware of all the possible valid location in the city, so the user is forced to select one of them.
+    6. MyTaxiService(B) is aware of all the possible valid location in the city, so a registered user that wants to request a ride or a booking is forced to select one among them.
 
-    7. Taxies can accept only ride request/booking within the city borders.
+    7. Mtaxies can accept only ride request/booking within the city borders
+
+    8. Mtaxies can only serve only ride/booking requests forwarded by MyTaxiService(B)
 
     9. Using gps data from the mtaxies and public traffic data, MyTaxyService(B) can balance the assigment
-    of the request so that  .... 
-    10. Exists an unique application(myTaxiService(F)) both for taxi driver and normal user, myTaxiService(F) give access to the proper set of functionalities
-    according to the login credentials.[?]
+    of the request so that  .... (RF)
 
   Terms and definitions
-      - MyTaxiService(F) : The front end of MyTaxiService, that is to say, the components
-        of the application that manage the interaction with the user and the logic behind
-        this interaction, this term refers both to the mobile application and the web site.
-      - MyTaxiService(B) : The back end of MyTaxiService, that is to say, the components
-        of the application that manage the forwarding of the ride / booking request with all
-        their associated notifications, the search of available taxies compatible with the request/booking inserted, and other internal
-        tasks not exposed to the user or the taxies
+      - MyTaxiService(F) : The front end of MyTaxiService for non mtaxi drivers users, that is to say, those software components
+        that manage the interaction with the user and the logic behind
+        this interaction; this term refers both to the mobile application and the web application.
+      - MyTaxiService(F)(T) : The front end of MyTaxiService for mtaxi drivers users, that is to say, those software components
+        that manage the interaction with the user and the logic behind
+        this interaction.
+      - MyTaxiService(B) : The back end of MyTaxiService, that is to say, those software components
+        that manage the forwarding of ride / booking requests to the mtaxi drivers, the search of available mtaxies compatible with the received ride/booking requests, and other internal
+        tasks not exposed to user or the mtaxi drivers
       - MyTaxiService: MyTaxiService(F) + MyTaxiService(B)
-      - Taxi driver: The person licensed by the local government to drive a taxi
-      - Taxi: a taxi whose driver is a Taxi driver
-      - Request: An electronic message sent by a user through MyTaxiService(F)
-        to MyTaxiService(B). This electronic message refers to the case in which a user wants to be picked up as soon as possible by a taxi
-      - booking: An electronic message sent by a user through MyTaxiService(F)
-         to MyTaxiService(B). This electronic message refers to the case in which a user wants to be picked up by a taxi at a specific time
+      - Mtaxi: a taxi whose driver has joined MyTaxyService
+      - Ride request: An electronic message sent by a registered user
+        to MyTaxiService(B). This electronic message refers to the case in which the registered user wants to be picked up as soon as possible by a mtaxi
+      - Booking request: An electronic message sent by a registered user
+         to MyTaxiService(B). This electronic message refers to the case in which the registered user wants to be picked up by a mtaxi at a specific time
       - Zone: An area of the city
       - Credentials: A combination of username and password, used by a registered user to access the MyTaxiService application
       - Taxi ride: A movement of people, through a taxi cab, from one geographical point to another
       - Queue: A data structure managed with a FIFO policy.
       - User: A person who wants to take a taxi and is not registered to MyTaxiService.
-      - Registered User: A person who needs to take a taxi and is registered to MyTaxiService.
-      - Visitor: A generic person that is not registered to MyTaxiService.
-
-          8. Accepting a ride/booking request by the taxi driver: signaling that the taxi has already left in order to pick a registered user up.
-          [?]
-          9. Visitor: A generic person that is not registered to the service.
-          [?]
-
+      - Registered User: A person who is not a mtaxy driver, who needs to take a taxi and is registered to MyTaxiService.
+      - Visitor: A generic person not registered to MyTaxiService
+      - Ride/booking request acceptance: a mtaxi has left in oder to pick up registered user that has requested a ride or that
+        has booked a ride
     Acronyms
       - RASD: Requirements Analysis and Specification Document
       - FIFO: First In First Out

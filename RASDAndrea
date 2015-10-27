@@ -203,15 +203,14 @@
            and the number of passengers(he himself) then he press the 'Submit' button. The myTaxiService backend receives the request
            and after some calculus notify Bob of the successful registration of its request. Bob is very happy and continues
            its work with a smile on his face.
-           [ALREADY CONSIDERED]
+           [OK]
 
         3) It's Friday, 11 AM and Ann has been on holiday for three weeks. It's time to go home!
            Ann has booked her return flight for today at 12 AM. Ann has carefully planned the return trip, indeed
            yesterday she made a taxi ride reservation through the myTaxiService web site, but the taxi is in late!
            So she take her smartphone opens the myTaxiService application, enters her credentials and after a successful login
            she presses the 'View Status' button and discovers that her taxi is stuck in a terrible traffic jam.
-           "I'll miss my flight!" she thinks, and starts to wait with the heart full of hope.
-           [?]
+           "I'll miss my flight!" she thinks, and starts to wait with the heart full of hope.[OK]
 
         4) Dave, an experienced taxi driver of the city, has received, through myTaxiService, a request for a ride
            from a passenger. "It's not too much far from where i am now", he thinks, "It'll be easy", and notifies
@@ -223,18 +222,6 @@
            and taps the "REPORT ACCIDENT" button, he accesses a screen where he inserts the accident details and taps the "SUBMIT" button.
            MyTaxiService(B) receives the Dave's report and after some computations selects and notifies another driver to fulfill the passenger request.
            [OK]
-
-        5) It's a very busy Wednesday afternoon in city, and Mike is driving his taxi. A passenger, Bob, is walking
-           in the same zone where Mike is. Bob is in hurry because he needs to take a train in time.
-           "I need a taxi!" Bob thinks, so he takes his smartphone, opens myTaxiService app, enters his credentials and
-           after a successful login press the 'Request' button. MyTaxiService(B) receives the request and, after having
-           carefully analysed the situation, select Mike to fulfill the request. Unfortunately Mike is stuck in very bad
-           traffic jam, Mike receives and displays the request through the myTaxiService mobile application but Mike thinks
-           that he can't reach the passenger before 30 minutes, so he rejects the request by pressing the 'Reject' button.
-           The back-end of myTaxiService acknowledges the driver and start calculating another possible driver to fulfill the request.
-           [?]
-
-
 
         6)
           Ann, a young female student from Texas, is visiting Italy with his boyfriend Bob.

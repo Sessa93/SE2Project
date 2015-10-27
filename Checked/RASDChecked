@@ -160,7 +160,7 @@ REQUIREMENTS SPECIFICATION
 
 
 SCENARIOS, USE CASES AND UML MODELS
-    Actors(see Terms and Definitions section)
+    Main Actors(see Terms and Definitions section)
       - Visitor
       - Registered User
       - Mtaxi driver
@@ -359,7 +359,7 @@ SCENARIOS, USE CASES AND UML MODELS
 
       --------------------------------------------------------------------------------
 
-      {10. A mtaxi driver receives a zone change order
+      10. A mtaxi driver receives a zone change order
         [Actors]: A mtaxi driver, MyTaxiService(B)
         [Pre cons]: The mtaxi is available
         [Post cons]: The distribution of the mtaxies in the city's zones is more balanced
@@ -376,7 +376,7 @@ SCENARIOS, USE CASES AND UML MODELS
           a more balanced distribution of mtaxies among all the city's zones
           - The driver receives the notification and displays it on myTaxiService(F)
           - The driver takes note of the new zone
-          - The driver acknowledges myTaxiService(B)}
+          - The driver acknowledges myTaxiService(B)
 
       --------------------------------------------------------------------------------
 
@@ -393,3 +393,9 @@ SCENARIOS, USE CASES AND UML MODELS
           - Connection Lost: the mtaxi driver is immediately notified of the event
         [Flow of Events]:
           - The mtaxy driver taps the "REPORT ACCIDENT" button on the screen of his MYT
+
+      --------------------------------------------------------------------------------
+
+      12 A taxi driver wants to register to MyTaxiService
+        [Actors] A taxi driver
+        [Pre cons]: the driver is not already registered to myTaxiService

@@ -158,6 +158,9 @@ REQUIREMENTS SPECIFICATION
       [NFR7] Users are able to properly use all the functionalities after a training time of at most 15 mins
       [NFR8] All the functionalities have be reached by the user with at most 3 clicks/taps from the starting page
 
+      [GENERAL NON FUNCTIONAL REQUIREMENTS]
+        - General architecture, security, interface(API)
+
 
 SCENARIOS, USE CASES AND UML MODELS
     Main Actors(see Terms and Definitions section)

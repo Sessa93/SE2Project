@@ -210,14 +210,14 @@ SCENARIOS, USE CASES AND UML MODELS
        The Taxi arrives, and in 10 mins Bob reaches the meeting place. MyTaxiService(B)
        signals the behavior of Charlene to her supervisors, and, after a few weeks, Charlene receives a warning and a fine of 200€
 
-    3. It's Friday, 10 a.m, Paris, Ann, a young american tourist, has to take a flight at 12 a.m to return to New York City.
+    2. It's Friday, 10 a.m, Paris, Ann, a young american tourist, has to take a flight at 12 a.m to return to New York City.
         Ann has carefully planned the return trip, infact
        yesterday she made a taxi booking via MyTaxiService web site for 9:45 a.m , but the mtaxi has not arrived yet.
        So she take her smartphone opens the MyTaxiService application, enters her credentials and after a successful login
        she discovers that her mtaxi is stuck in a terrible traffic jam and that MyTaxiService is trying to find a new mtaxi.
        "I'll miss my flight!" she thinks, and starts to wait with the heart full of hope
 
-    4. Dave, an experienced taxi driver of the city, has received, through MyTaxiService, a request for a ride
+    3. Dave, an experienced taxi driver of the city, has received, through MyTaxiService, a request for a ride
        from a passenger. "It's not too much far from where i am now", he thinks, "It'll be easy", and notifies
        MyTaxiService that he'll take care of the request. He starts driving toward the passenger's position, but suddenly
        , while he's crossing a very busy crossroad,
@@ -227,7 +227,7 @@ SCENARIOS, USE CASES AND UML MODELS
        and taps the "REPORT ACCIDENT" button, he accesses a screen where he inserts the accident details and taps the "SUBMIT" button.
        MyTaxiService(B) receives the Dave's report and after some computations selects and notifies another driver to fulfill the passenger request.
 
-    6.Ann, a young female student from Texas, is visiting Italy with his boyfriend Bob.
+    4.Ann, a young female student from Texas, is visiting Italy with his boyfriend Bob.
       It's Friday morning, they are walking on the streets of Milan and they're thinking
       about visiting the Expo on Saturday. Ann proposes to use a taxi to reach Expo's location and
       Bob agrees. Ann is a very cautious person so she thinks it's better to book a taxi, for this
@@ -246,7 +246,7 @@ SCENARIOS, USE CASES AND UML MODELS
       she opens the app, she logs in, she accesses the booking section and there she sees her booking for Saturday, she taps
       the bin icon to delete the booking, she confirms her intention to do that and everything is done.
 
-    7.It's Thursday, 14:00 and George, a young mtaxi driver, is driving in the city's center.
+    5.It's Thursday, 14:00 and George, a young mtaxi driver, is driving in the city's center.
        He noticed many of his colleagues waiting for requests in their cabs.
        Meanwhile MyTaxiService(B), by making some analysis on the mtaxies' GPS data, realizes that there are too many mtaxies
        in the city's center in relation with the number of ride requests for that zone. The system also indentifies

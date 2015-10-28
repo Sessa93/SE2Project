@@ -42,19 +42,28 @@ INTRODUCTION
     1. MyTaxiService has been commissioned by the city local government.
       Taxi drivers that work in the city can join MyTaxiService via a registration to be
       done in the local government public transport office.
+
+      [Taxi drivers that work in the city can join MyTaxiService via a special registration phase(see UseCase 12)]
+
       During this registration process taxi drivers are asked to provide their personal and vehicle data along with their work timetable.
       After that taxi drivers receive a unique code that identifies their taxi cab in relation to MyTaxiService.
       To make MyTaxiService functional, the local government provides each mtaxi with a device similar to a small navigator(MYT), which is used
       to see incoming ride requests or bookings and to signal their acceptance; this device has a built in gps module through which MyTaxiService can
       track their position
+
+
     2. The registration of taxies to MyTaxyService is done manually by the local government public transportation
     officiers by inserting records in a db accessed by MyTaxyService, hence in this document that process is
     not modelled
+      [The registration phase is done by the driver himself through the website of MyTaxiService, here the driver will provide is personal data
+      and he will also insert its timetable and ]
+
     3. Since MyTaxiService is aware of the work timetable of each mtaxi, mtaxies are considered unavailable
       if and only if they are serving a ride/booking request.  After a mtaxi has finished serving a passenger, its driver has to notify
       MyTaxiService(B) of the event, so MyTaxiService(B) will consider the mtaxi available again.
       Considering that MyTaxiService(B) knows the position of each mtaxi and the destination of each ride, there's no chance a mtaxi driver
       can cheat by not signaling he hasn't completed a ride yet.
+
     4. Mtaxies can only serve only ride/booking requests forwarded by MyTaxiService(B)
 
 
@@ -146,6 +155,11 @@ REQUIREMENTS SPECIFICATION
 
       [GENERAL NON FUNCTIONAL REQUIREMENTS]
         - General architecture, security, interface(API)
+    Domain Properties
+      - The data provided by the users during the registration phase are not fake data
+      - The data provided by the GPS are reliable
+      - The data relative to traffic state are reliable
+      - Address and email provided by the user are formally correct
 
 
 SCENARIOS, USE CASES AND UML MODELS
@@ -322,7 +336,7 @@ SCENARIOS, USE CASES AND UML MODELS
             screen is shown, along with the option to register to the service
           - The visitor taps/click the "REGISTER TO THE SERVICE" button
           - The visitor is redirected to a screen with a form to be filled out with Name, Surname, email a password.
-          The visitor fills the form
+          - The visitor fills the form
           - The visitor press the "CONFIRM BUTTON" and so submits the form to MyTaxyService(B)
 
       --------------------------------------------------------------------------------
@@ -366,7 +380,7 @@ SCENARIOS, USE CASES AND UML MODELS
 
       --------------------------------------------------------------------------------
 
-      11 A mtaxi driver reports an accident
+      11. A mtaxi driver reports an accident
         [Actors]: A mtaxi driver, MyTaxiService(B)
         [Pre cons]: The mtaxi driver is be able to use MYT. MYT has not been damaged and so
         is fully functional
@@ -378,4 +392,22 @@ SCENARIOS, USE CASES AND UML MODELS
         [Exceptions]:
           - Connection Lost: the mtaxi driver is immediately notified of the event
         [Flow of Events]:
-          - The mtaxy driver taps the "REPORT ACCIDENT" button on the screen of his MYT
+          - The mtaxy driver taps the "REPORT ACCIDENT" button on the screen of his MYT and set his state to 'Critical'
+
+      --------------------------------------------------------------------------------
+
+      12. mtaxi driver registration
+        [Actors]: A taxi driver, MyTaxiService(B)
+        [Pre cons]: The taxi driver is not yet registered to MyTaxiService
+        [Post cons]: The taxi driver becomes a mtaxi driver.
+        [Entry Cnd]: A taxi driver wants to register himself to MyTaxiService
+        [Exit Cnd]: The taxi driver is acknowledged that MyTaxiService(B) has registered him
+        [Exceptions]:
+          - Connection Lost: the taxi driver is immediately notified of the event
+        [Flow of Events]:
+          - The taxi driver access the MyTaxyService website, and a login
+            screen is shown, along with the option to register to the service
+          - The taxi driver click the "REGISTER TO THE SERVICE AS NEW DRIVER" button
+          - The taxi driver is redirected to a screen with a form to be filled out with Name, Surname, email a password, home address.
+          - The taxi driver fills the form
+          - The taxi driver press the "CONFIRM BUTTON" and so submits the form to MyTaxyService(B)

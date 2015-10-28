@@ -40,23 +40,14 @@ INTRODUCTION
 
   Assumptions
     1. MyTaxiService has been commissioned by the city local government.
-      Taxi drivers that work in the city can join MyTaxiService via a registration to be
-      done in the local government public transport office.
+       A taxi drivers that work in the city can join MyTaxiService via a special registration phase available from MyTaxiService website(see UseCase 12)]
 
-      [Taxi drivers that work in the city can join MyTaxiService via a special registration phase(see UseCase 12)]
-
-      During this registration process taxi drivers are asked to provide their personal and vehicle data along with their work timetable.
+    2.During the registration process taxi drivers are asked to provide their personal and vehicle data along with their work timetable.
       After that taxi drivers receive a unique code that identifies their taxi cab in relation to MyTaxiService.
       To make MyTaxiService functional, the local government provides each mtaxi with a device similar to a small navigator(MYT), which is used
       to see incoming ride requests or bookings and to signal their acceptance; this device has a built in gps module through which MyTaxiService can
-      track their position
-
-
-    2. The registration of taxies to MyTaxyService is done manually by the local government public transportation
-    officiers by inserting records in a db accessed by MyTaxyService, hence in this document that process is
-    not modelled
-      [The registration phase is done by the driver himself through the website of MyTaxiService, here the driver will provide is personal data
-      and he will also insert its timetable and ]
+      track their position. The MYT device is sent by the local government to the postal address(which is provided during the registration phase)
+      of the taxi driver.
 
     3. Since MyTaxiService is aware of the work timetable of each mtaxi, mtaxies are considered unavailable
       if and only if they are serving a ride/booking request.  After a mtaxi has finished serving a passenger, its driver has to notify
@@ -144,7 +135,9 @@ REQUIREMENTS SPECIFICATION
       - MyTaxyService has to offer to mtaxi drivers the possibility of reporting an accident and there for be considered available
 
     Non functional requirements
-      - MyTaxyService has to guarantee that a mtaxi arrives at the start location of a ride within a fixed time
+
+    [GENERAL]
+      - MyTaxyService has to guarantee that a mtaxi arrives at the start location of a ride within a 15 minutes
       - The taxi driver waits for the passenger that has requested the ride at the origin point for a maximum amount of time, after that the taxi returns available(NF)
       - A mtaxi driver has to accept a ride/booking request within a fixed time
       - After a failure MyTaxiService has to be restarted within 1 hour
@@ -153,13 +146,31 @@ REQUIREMENTS SPECIFICATION
       - All the functionalities of MyTaxyService have to be reachable by a registered user with at most 3 clicks/taps from the starting screen
       of the web / mobile app
 
-      [GENERAL NON FUNCTIONAL REQUIREMENTS]
-        - General architecture, security, interface(API)
+      [Security]
+        [Interface Side]
+          MyTaxiService implements a login system to protect personal data of the user, so particular attention must be focused on security on the interface/application side
+          In order to guarantee an adeguate level of security password are saved in a particular area of the database using an cryptography mechanism(for example using RSA encryption).
+          Further, a secure implementation of MyTaxiService must respect the following requirements:
+          - MyTaxiService requires that the password chosen by the user is at least 8 characters long and must contain at least 2 numbers.
+          - MyTaxiService requires a captcha mechanism in order to prevent botnet attack
+          - MyTaxiService provides the user with a small guide on how to choose a strong password
+          - MyTaxiService should filter all inputs inserted by users through an SQL filter; Maliciuos users can indeed inject some malicious SQL code in order to obtain access to reserved data.
+          - MyTaxiService should use an encrypted communication protocol(for example HTTPS) for every communication with the server side(MyTaxiServiceB)
+
+        [SERVER SIDE]
+          On the server a classical 3 tier architecture should be implemented.
+          In this type of architecture the web server,the application server and the database are physically separated forming
+          three distinct zone. All zones are divided by firewalls, so malicious users are not granted to directly access(and damage) the application server
+          and the database. All access coming from the internet are restricted to the web server zone.
+
+      [GENERAL ARCHITECTURE]
+        TODO: GIORGIO
+
     Domain Properties
-      - The data provided by the users during the registration phase are not fake data
+      - The personal data provided by the users during the registration phase valid and corresponds to existent people
       - The data provided by the GPS are reliable
       - The data relative to traffic state are reliable
-      - Address and email provided by the user are formally correct
+      - Email provided by the user during the registration phase are formally correct
 
 
 SCENARIOS, USE CASES AND UML MODELS

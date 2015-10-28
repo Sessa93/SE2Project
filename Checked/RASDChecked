@@ -10,86 +10,74 @@ INTRODUCTION
     the customer and the developer.
 
   Scope of the project
-    The aim of this project is to develop MyTaxiService, a web/mobile application that makes easier and quicker taking taxies.
+    The aim of this project is to develop MyTaxiService, a web/mobile application that makes easier and quicker taking taxies
+    within the city's borders.
     Thanks to MyTaxiService, anyone can request or book a taxi and get realtime information
-    about how long it will take to be picked up or about taxi's current position and code.
-    In addition, MyTaxiService provides an efficient way to allocate taxies by dividing the
+    about how long it will take to be picked up or about the taxi's current position and code.
+    In addition to that, MyTaxiService provides an efficient way to allocate taxies by dividing the
     city in zones and using a queue based allocation system, in order to reduce the
     waiting time and city's traffic.
 
   Goals
-    In this subsection we describe a set of high level goals that MyTaxiService is proposed to achieve.
 
-    1. Simplify and speed up the process of taking a taxi
+    1. Simplify and speed up the process of taking a taxi within the city's borders
 
       1.1 When a registered user has entered his taxi ride details and clicks or taps
       the "REQUEST TAXI" button, MyTaxiService will find the first
-      available taxi that fits for the inserted ride details, and this taxi will
+      available mtaxi that fits for the inserted ride details, and this mtaxi will
       pick up the user as soon as possible
 
       1.2 When a registered user has entered his booking details and clicks or taps
-        the "BOOK TAXI" button, MyTaxiService will book a taxi that fits for the
+        the "BOOK TAXI" button, MyTaxiService will book a mtaxi that fits for the
         inserted booking details and for the indicated pick up time
 
     2. Guarantee an efficient and fair management of taxi queues
 
-      2.2 Guarantee a balanced distribution of taxies in the city, in order
-      to have always taxies available for different city zones
+      2.2 Guarantee a balanced distribution of mtaxies in the city, in order
+      to have them always available for different city zones
 
-      2.3 Guarantee short taxi availability times and short waiting times
+      2.3 Guarantee short mtaxi availability times and short waiting times
 
   Assumptions
-    1. MyTaxiService has been commissioned by the city local government.
-      Taxi drivers that work in the city can join MyTaxiService via a registration to be
-      done in the local government public transport office.
+    1. MyTaxiService has been commissioned by the city's local government.
+      Taxi drivers that work in the city can join MyTaxiService via a registration to be done using MytaxiService website.
+      To make MyTaxiService functional, the local government provides each mtaxi with a device similar to a small navigator(MYT). This device is used
+      to: see and accept ride/booking requests, see zone change orders, report accidents; it has a built in gps module through which MyTaxiService can
+      track the position of the mtaxi's on which is mounted
 
-      [Taxi drivers that work in the city can join MyTaxiService via a special registration phase(see UseCase 12)]
-
-      During this registration process taxi drivers are asked to provide their personal and vehicle data along with their work timetable.
-      After that taxi drivers receive a unique code that identifies their taxi cab in relation to MyTaxiService.
-      To make MyTaxiService functional, the local government provides each mtaxi with a device similar to a small navigator(MYT), which is used
-      to see incoming ride requests or bookings and to signal their acceptance; this device has a built in gps module through which MyTaxiService can
-      track their position
-
-
-    2. The registration of taxies to MyTaxyService is done manually by the local government public transportation
-    officiers by inserting records in a db accessed by MyTaxyService, hence in this document that process is
-    not modelled
-      [The registration phase is done by the driver himself through the website of MyTaxiService, here the driver will provide is personal data
-      and he will also insert its timetable and ]
-
-    3. Since MyTaxiService is aware of the work timetable of each mtaxi, mtaxies are considered unavailable
-      if and only if they are serving a ride/booking request.  After a mtaxi has finished serving a passenger, its driver has to notify
+    2. Since MyTaxiService is aware of the work timetable of each mtaxi, mtaxies are considered unavailable
+      if and only if they are serving a ride/booking request. After a mtaxi has finished serving a passenger, its driver has to notify
       MyTaxiService(B) of the event, so MyTaxiService(B) will consider the mtaxi available again.
       Considering that MyTaxiService(B) knows the position of each mtaxi and the destination of each ride, there's no chance a mtaxi driver
       can cheat by not signaling he hasn't completed a ride yet.
 
-    4. Mtaxies can only serve only ride/booking requests forwarded by MyTaxiService(B)
+    3. Mtaxies can only serve ride/booking requests forwarded by MyTaxiService(B)
+
+    4. Mtaxies operate only whithin the city's borders
 
 
   Terms and definitions
+      - Mtaxi: a taxi that joined MytaxiService
       - MyTaxiService(B) : The back end of MyTaxiService, that is to say, those software components
-        that manage the forwarding of ride / booking requests to the mtaxi drivers, the search of available mtaxies compatible with the received ride/booking requests, and other internal
-        tasks not exposed to user or the mtaxi drivers
-      - Mtaxi: a taxi whose driver has joined MyTaxyService
+        that manage the forwarding of ride/booking requests to the mtaxi drivers, the search of available mtaxies compatible with the received ride/booking requests, and other internal
+        tasks not exposed to users or mtaxi drivers
+      - Ride: a movement of people, through a taxi cab, from one location to another
       - Ride request: An electronic message sent by a registered user
         to MyTaxiService(B). This electronic message refers to the case in which the registered user wants to be picked up as soon as possible by a mtaxi
       - Booking request: An electronic message sent by a registered user
          to MyTaxiService(B). This electronic message refers to the case in which the registered user wants to be picked up by a mtaxi at a specific time
-      - Mtaxy booking: when a registered user wants to be picked up by a mtaxi at a specific time
+      - Mtaxi booking, booking a ride: if a registered user wants to be picked up by a mtaxi at specific time in a specific date, he books a ride or a mtaxi
       - MYT: the device the local government provides to taxi drivers that has registered to MyTaxiService. This
-      device integrates a client for MyTaxiService that the is used by the mtaxi driver to see ride/booking requests and zone change orderds, accept
+      device integrates a client for MyTaxiService that the is used by the mtaxi driver to see ride/booking requests and zone change orders, accept
       these requests and report accidents
       - A mtaxi is available: a mtaxi has finished serving a passenger and is ready for a new ride
-      - Zone: An area of the city
+      - Zone: An area of the city about 2km^2 wide
       - Credentials: A combination of username and password, used by a registered user to access the MyTaxiService application
-      - Mtaxi ride: A movement of people, through a taxi cab, from one geographical point to another
       - Queue: A data structure managed with a FIFO policy.
-      - User: A person who wants to take a taxi and is not registered to MyTaxiService.
-      - Registered User: A person who is not a mtaxy driver, who needs to take a taxi and is registered to MyTaxiService.
-      - Visitor: A generic person not registered to MyTaxiService
-      - Ride/booking request acceptance: a mtaxi has left in oder to pick up registered user that has requested a ride or that
-        has booked a ride
+      - Passenger: a registered user that has requested a mtaxi ride/booking
+      - Registered User: A person that is registered to MyTaxiService.
+      - User: A generic person not registered to MyTaxiService
+      - Ride/booking request acceptance: a mtaxi has left in order to pick up a passenger
     Acronyms
       - RASD: Requirements Analysis and Specification Document
       - FIFO: First In First Out
@@ -102,55 +90,61 @@ INTRODUCTION
 
 REQUIREMENTS SPECIFICATION
     Functional requirements
-      - A person must not be already registered to MyTaxiService in order perform the registration process
-      - During the registration process, a visitor must choose an email address not already used by another registered user.
-      - During the registration process, MyTaxyService has to be able to check the validity (logical and formal) of the
-      data inserted by the user/visitor
-      - MyTaxiService has to only accept registrations with valid data (logical and formal)
-      - Visitors/Users can only access to the MyTaxiService registration form.
+      - Only logged registered users must have access to all the functionalities of MyTaxiService
+      - Users and non logged registered users have access only to the registration functionality of MyTaxiService
+      - A user can register to MyTaxiService only and only once
+      - The registration functionality of MyTaxiService is no more accessible after the login
+      - During the registration process, a user must choose an email address not already used by another registered user.
+      - During the registration process, MyTaxiService has to be able to check the formal validity of the
+      data inserted by the user
+      - MyTaxiService has to only accept registrations with mail addresses already used by other
+      registered users
+      - MyTaxiService has to only accept registrations whose data formal validity has been
+      check successfully
       - Registered users can undo only reservations
-      - Registered users can  undo a reservation only 10 minutes before the inserted
+      - Registered users can undo a reservation only 10 minutes before the inserted
       picking up time
       - MyTaxiService has to allow multiple mtaxi bookings by the same registered user
       - MyTaxiService has not to allow multiple ride requests by the same registered user
       (a registered user can't make a new ride request until his last requested ride has been completed)
-      - MyTaxiService has to force a registered user to chose as locations only valid city's locations
-      (MyTaxiService has to force a registered user to chose among a list of only valid city's locations )
-      - MyTaxiService(B) can accept only ride requests that specify a starting location, an ending location
+      - MyTaxiService can accept only ride requests that specify a starting location, an ending location
       and a number of passengers
-      - MyTaxiService(B) has to be able, using the gps data of the mtaxies and public data about the city's, to understand the
-      traffic situation of the city zone per zone
-      - MyTaxiService(B) has to be able, using the gps data of the mtaxies, to analyse the mtaxies'
-      distribution among the different city's zone and understand if there's the need to change this
-      distribution in relation to the average number of ride /booking requests per city's zone.
-      If there's this need, MyTaxiService(B) has to be able to send change zone order to mtaxies
-      - MyTaxiService(B) has to be able, using the gps data of the mtaxies, to analyse the mtaxies'
-      distribution among the different city's zone and build the queues used to forward ride / booking
-      requests
-      - MyTaxiService(B) has to be able to manage a situation in which a mtaxi does not accept a ride / booking request within a fixed time.
+      - MyTaxiService has to be able to access a list of every valid city's location
+      - MyTaxiService has to force a registered user to choose as locations only valid city's locations
+      (MyTaxiService has to force a registered user to chose among a list of only valid city's locations )
+      - MyTaxiService(B) has to be able to retrieve the position of each mtaxies using the gps system of their MYT devices
+      - MyTaxiService(B) has to be able to logically divide the city in zones and associate sets of gps
+      coordinates to these zones
+      - MyTaxiService(B) has to be able to map a gps coordinate with a valid city's location
+      - MyTaxiService(B) has to be able, using the mtaxies' gps data and the city's public data, to understand the
+      city's traffic situation zone by zone
+      - MyTaxiService(B) has to be able, using the mtaxies' gps coordinates, to analyze their
+      distribution among the different city's zones and understand if there's the need to change this
+      distribution in relation to the average number of ride/booking requests per city's zone.
+      - MyTaxiService(B) has to be able to send change zone order to mtaxies
+      - MyTaxiService(B) has to be able, using mtaxies' gps coordinates, to analyze the mtaxies'
+      distribution among the different city's zone and build queues of available mtaxies for each zone
+      - MyTaxiDriver(B) has to manage the forwarding of ride/booking requests using the queue based system discussed above:
+      a ride/booking request is forwarded to the first mtaxi in the queue that corresponds to the city's zone of the requested ride's
+      starting location
+      - MyTaxiService(B) has to be able to manage a situation in which a mtaxi does not accept a ride/booking request within a fixed time.
       In this situation MyTaxiService has to find a new mtaxi to forward the request
-      - MyTaxiDriver has to manage the forwarding of ride / booking requests using a FIFO queue based system and
-      a division of the city in zones of ~2km^2: foreach city's zone a queue of available mtaxies is associated,
-      MyTaxiDriver(B) forward a ride/booking request that corresponds to first mtaxy of the queue that corresponds to the city's
-      zone of the starting location of the ride
-      - Only logged registered users must have access to all the functionalities of MyTaxiService
-      - Non logged people have access only to the registration functionality of MyTaxiService
       - MyTaxiService app and website must have the same functionalities
       - MyTaxiService(B) has to have access to the characteristics of each mtaxies (number of passengers, unique code)
       - MyTaxiService(B) has to have access to the mtaxi drivers' work timetable, in order to know when a mtaxi
-      should take a break from serving users
+      should take a break from serving passengers
       - MyTaxiService has to consider unavailable only mtaxies that or are serving a ride/booking request or have reported an accident or
       are taking a break according to the work timetable, no other exceptions are allowed
-      - MyTaxyService has to offer to mtaxi drivers the possibility of reporting an accident and there for be considered available
+      - MytaxiService has to offer to mtaxi drivers the possibility of reporting an accident and therefor be considered unavailable
 
     Non functional requirements
-      - MyTaxyService has to guarantee that a mtaxi arrives at the start location of a ride within a fixed time
+      - MytaxiService has to guarantee that a mtaxi arrives at the start location of a ride within a fixed time
       - The taxi driver waits for the passenger that has requested the ride at the origin point for a maximum amount of time, after that the taxi returns available(NF)
       - A mtaxi driver has to accept a ride/booking request within a fixed time
       - After a failure MyTaxiService has to be restarted within 1 hour
       - MyTaxiService must be available 24h/7d
       - Registered users are able to use properly all the functionalities after a training time of at most 15 mins
-      - All the functionalities of MyTaxyService have to be reachable by a registered user with at most 3 clicks/taps from the starting screen
+      - All the functionalities of MytaxiService have to be reachable by a registered user with at most 3 clicks/taps from the starting screen
       of the web / mobile app
 
       [GENERAL NON FUNCTIONAL REQUIREMENTS]
@@ -164,7 +158,7 @@ REQUIREMENTS SPECIFICATION
 
 SCENARIOS, USE CASES AND UML MODELS
     Main Actors(see Terms and Definitions section)
-      - Visitor
+      - User
       - Registered User
       - Mtaxi driver
       - MyTaxiService(B)
@@ -225,23 +219,23 @@ SCENARIOS, USE CASES AND UML MODELS
         [Post-cons]: The mtaxi driver knows that a passenger has requested a ride with the specified
         details and is ready to fulfill it
         [Entry Cnd]: MyTaxService(B) has received a ride request from a registered user
-        [Exit Cnd]: MyTaxiService(B) is acknowledged that the mtaxy driver has received successfully the ride request
+        [Exit Cnd]: MyTaxiService(B) is acknowledged that the mtaxi driver has received successfully the ride request
         (this is automatically done by the MyTaxiService client installed in MYT)
         [Exceptions]:
-          - No mtaxi is available for city zone relative to the ride request: MyTaxyService(B) tries
+          - No mtaxi is available for city zone relative to the ride request: MytaxiService(B) tries
           to find a mtaxi that fits the ride request details(in terms of number of passengers) and that is located in the city zones adjacent
           to the one above mentioned
-          - No mtaxi available: MyTaxyService(B) notifies the registered user that made the request that
+          - No mtaxi available: MytaxiService(B) notifies the registered user that made the request that
           no mtaxi is available and that he should try again to request a ride later
           - No ackacknowledge from the mtaxi driver the ride request has been forwarded to: MyTaxiService(B) tries to find a new mtaxi to fulfill
           the request
         [Flow of Events]:
-          - MyTaxyService(B) extracts the city zone relative to the starting location of the ride request
-          - MyTaxyService(B) selects a mtaxi that suits the ride requests details (in terms of number of passengers) from the queue of available mtaxies
+          - MytaxiService(B) extracts the city zone relative to the starting location of the ride request
+          - MytaxiService(B) selects a mtaxi that suits the ride requests details (in terms of number of passengers) from the queue of available mtaxies
             for the city zone above mentioned
-          - MyTaxyService(B) checks if the traffic conditions in the zone where the selected mtaxi is located are acceptable
-          (they allow the mtaxy to reach the registered user to pick up within a fixed time)
-          - MyTaxyService(B) forwards the ride request to the driver of the selected mtaxi
+          - MytaxiService(B) checks if the traffic conditions in the zone where the selected mtaxi is located are acceptable
+          (they allow the mtaxi to reach the registered user to pick up within a fixed time)
+          - MytaxiService(B) forwards the ride request to the driver of the selected mtaxi
 
 
       -------------------------------------------------------------------------------
@@ -251,7 +245,7 @@ SCENARIOS, USE CASES AND UML MODELS
         [Pre-cons]: The mtaxi current location is the ending location of his last ride
         [Post-cons]: MyTaxiService(B) considers the mtaxi available
         [Entry Cnd]: The mtaxi driver has finished serving a passenger
-        [Exit Cnd]: The mtaxy driver is acknowledged that MyTaxiService(B) has received successfully his
+        [Exit Cnd]: The mtaxi driver is acknowledged that MyTaxiService(B) has received successfully his
         notification
         [Exceptions]:
           - Connection Lost: the mtaxi driver is immediately notified by the MyTaxiService client, who suggests to try again the operation
@@ -260,7 +254,7 @@ SCENARIOS, USE CASES AND UML MODELS
           - The mtaxi driver taps the "END RIDE" button on the screen of his MYT and so notifies MyTaxiService(B) that
           he has ended serving a passenger and is now available for other ride/booking requests
         [Special Requirements]:
-          - The mtaxy driver must be acknowledged that MyTaxiService(B) has received successfully his
+          - The mtaxi driver must be acknowledged that MyTaxiService(B) has received successfully his
           notification within 1 min
 
 
@@ -269,12 +263,12 @@ SCENARIOS, USE CASES AND UML MODELS
       5. A mtaxi driver manages a ride request from MyTaxiService(B)
         [Actors]: A mtaxi driver, MyTaxiService(B)
         [Pre cons]: The mtaxi has to be available
-        [Post cons]: The mtaxy driver has started driving to the starting location of the requested ride
-        [Entry Cnd]: MyTaxiService(B) has forwarded successfully a ride request to the mtaxy driver
-        [Exit Cnd]: The mtaxy driver is acknowledged that MyTaxiService(B) has received successfully his notification
+        [Post cons]: The mtaxi driver has started driving to the starting location of the requested ride
+        [Entry Cnd]: MyTaxiService(B) has forwarded successfully a ride request to the mtaxi driver
+        [Exit Cnd]: The mtaxi driver is acknowledged that MyTaxiService(B) has received successfully his notification
         of ride acceptance.
         [Exceptions]:
-          - If MyTaxyService(B) does not receive the acceptance of the ride request by the mtaxy driver
+          - If MytaxiService(B) does not receive the acceptance of the ride request by the mtaxi driver
           within 5 mins, it selects another mtaxi to fullfil the request, and signals to the supervisors
           of the mtaxi driver in discussion his behavior
         [Flow of Events]:
@@ -284,31 +278,31 @@ SCENARIOS, USE CASES AND UML MODELS
 
       --------------------------------------------------------------------------------
 
-      6. A registered user logs into MyTaxyService
+      6. A registered user logs into MytaxiService
         [Actors]: A registered user, MyTaxiService(B)
-        [Pre Cnd]: The registered user is not logged into MyTaxyService. The registered
-        user has access to the MyTaxyService app or website
+        [Pre Cnd]: The registered user is not logged into MytaxiService. The registered
+        user has access to the MytaxiService app or website
         [Post Cnd]: The registered user has access to all the functionalities of
-        MyTaxyService
-        [Entry Cnd]: The registered user wants to access the functionalities offered by MyTaxyService
+        MytaxiService
+        [Entry Cnd]: The registered user wants to access the functionalities offered by MytaxiService
         [Exit Cnd]:  The registered user is acknowledged that MyTaxiService(B) has recognized as valid the inserted
-        credentials. MyTaxyService(B) will grant the registered user the access to all the functionalities
+        credentials. MytaxiService(B) will grant the registered user the access to all the functionalities
         of the application.
         [Exceptions]:
           - Connection Lost: the registered user is immediately notified of the event
           - Wrong Credentials: the registered user is asked to insert his credentials again
         [Flow of Events]:
-          - The registered user opens the MyTaxyService app or access the MyTaxyService website, and a login
+          - The registered user opens the MytaxiService app or access the MytaxiService website, and a login
           screen is shown, along with the option to register to the service
           - The registered user inserts his credentials in the relative fields
           - The registered user clicks/taps the "LOGIN" button
 
       --------------------------------------------------------------------------------
 
-      7. A registered user logs out from MyTaxyService
-        [Actors]: A registered user, MyTaxyService(B)
-        [Pre cons]: The registerd user is logged into MyTaxyService
-        [Post cons]: The registered user has no access to MyTaxyService functionalities
+      7. A registered user logs out from MytaxiService
+        [Actors]: A registered user, MytaxiService(B)
+        [Pre cons]: The registerd user is logged into MytaxiService
+        [Post cons]: The registered user has no access to MytaxiService functionalities
         until a new login
         [Entry Cnd]: The registered user wants to logout from MyTaxiService
         [Exit Cnd]: The registered user is acknowledged that MyTaxiService(B) has logged him out from
@@ -321,40 +315,40 @@ SCENARIOS, USE CASES AND UML MODELS
 
       --------------------------------------------------------------------------------
 
-      8. A Visitor wants to register to MyTaxiService
-        [Actors]: A visitor, myTaxiService(B)
-        [Pre cons]: The visitor has access to the MyTaxyService app or website
-        [Post cons]: The visitor becomes a registered user
-        [Entry Cnd]: The visitor wants to register to MyTaxiService in order
+      8. A User wants to register to MyTaxiService
+        [Actors]: A user, myTaxiService(B)
+        [Pre cons]: The user has access to the MytaxiService app or website
+        [Post cons]: The user becomes a registered user
+        [Entry Cnd]: The user wants to register to MyTaxiService in order
         to access its functionalities
-        [Exit Cnd]: The visitor is acknowledged that MyTaxiService(B) has registered him
+        [Exit Cnd]: The user is acknowledged that MyTaxiService(B) has registered him
         [Exceptions]:
-          - Connection Lost: the visitor is immediately notified of the event
-          - Invalid data: the visitor is immediately notified and forced to insert valid data
+          - Connection Lost: the user is immediately notified of the event
+          - Invalid data: the user is immediately notified and forced to insert valid data
         [Flow of Events]:
-          - The visitor opens the MyTaxyService app or access the MyTaxyService website, and a login
+          - The user opens the MytaxiService app or access the MytaxiService website, and a login
             screen is shown, along with the option to register to the service
-          - The visitor taps/click the "REGISTER TO THE SERVICE" button
-          - The visitor is redirected to a screen with a form to be filled out with Name, Surname, email a password.
-          - The visitor fills the form
-          - The visitor press the "CONFIRM BUTTON" and so submits the form to MyTaxyService(B)
+          - The user taps/click the "REGISTER TO THE SERVICE" button
+          - The user is redirected to a screen with a form to be filled out with Name, Surname, email a password.
+          - The user fills the form
+          - The user press the "CONFIRM BUTTON" and so submits the form to MytaxiService(B)
 
       --------------------------------------------------------------------------------
 
-      9. A registered user undos a mtaxy booking
+      9. A registered user undos a mtaxi booking
         [Actors]: A registered user, MyTaxiService(B)
         [Pre cons]: The registered user is logged into MyTaxiService. The registered user
-        has made a successful booking request. The mtaxy booking the registered user wants to undo
+        has made a successful booking request. The mtaxi booking the registered user wants to undo
         specifies a pickup time so that pickuptime - currentime > 10 mins
         [Post cons]: The scheduled booking is no more
-        [Entry Cnd]: The registered user wants to undo a mtaxy booking
+        [Entry Cnd]: The registered user wants to undo a mtaxi booking
         [Exit Cnd]: MyTaxiService(B) acknowledges the registered user that the scheduled booking
         has been deleted
         [Exceptions]:
           - Connection Lost: the registered user is immediatly notified of the event
         [Flow of Events]:
-          - The registered user access the MyTaxyService app/website area where he can see the list of his bookings
-          - The registered user taps/click the recycle bin icon located in the row that corresponds to the mtaxy booking
+          - The registered user access the MytaxiService app/website area where he can see the list of his bookings
+          - The registered user taps/click the recycle bin icon located in the row that corresponds to the mtaxi booking
           he wants to undo
           - The registered user confirm his choice by clicking/tapping the "CONFIRM" button on
           the popup that has just apparead
@@ -369,12 +363,12 @@ SCENARIOS, USE CASES AND UML MODELS
         [Entry Cnd]: MyTaxiService(B) has detected that some city's zones have too much mtaxies assigned
         and some others not, all with respect to average number of ride requests per zone. MyTaxiService
         has assigned the mtaxi in discussion to another city's zone
-        [Exit Cnd]: MyTaxyService(B) is acknowledged by the mtaxi driver that he has received successfully
+        [Exit Cnd]: MytaxiService(B) is acknowledged by the mtaxi driver that he has received successfully
         the zone change order
         [Exceptions]:
           - Connection Lost: the mtaxi driver is immediately notified of the event
         [Flow of Events]:
-          - MyTaxiService(B) forwards to the mtaxy a change zone order, since the mtaxi has been assigned to another city's zone in order to guarantee
+          - MyTaxiService(B) forwards to the mtaxi a change zone order, since the mtaxi has been assigned to another city's zone in order to guarantee
           a more balanced distribution of mtaxies among all the city's zones
           - The mtaxi driver receives the order
 
@@ -384,30 +378,32 @@ SCENARIOS, USE CASES AND UML MODELS
         [Actors]: A mtaxi driver, MyTaxiService(B)
         [Pre cons]: The mtaxi driver is be able to use MYT. MYT has not been damaged and so
         is fully functional
-        [Post cons]: MyTaxiService(B) considers the mtaxy not available and store the data
+        [Post cons]: MyTaxiService(B) considers the mtaxi not available and store the data
         relative to the accident for statical uses
-        [Entry Cnd]: A mtaxy driver had an accident and wants to report it(has to report it)
+        [Entry Cnd]: A mtaxi driver had an accident and wants to report it(has to report it)
         [Exit Cnd]: MyTaxiService(B) acknowledges the driver about the fact that it has received
         successfully the accident report
         [Exceptions]:
           - Connection Lost: the mtaxi driver is immediately notified of the event
         [Flow of Events]:
-          - The mtaxy driver taps the "REPORT ACCIDENT" button on the screen of his MYT and set his state to 'Critical'
+          - The mtaxi driver taps the "REPORT ACCIDENT" button on the screen of his MYT and set his state to 'Critical'
 
       --------------------------------------------------------------------------------
 
-      12. mtaxi driver registration
+      12. mtaxi registration
         [Actors]: A taxi driver, MyTaxiService(B)
         [Pre cons]: The taxi driver is not yet registered to MyTaxiService
         [Post cons]: The taxi driver becomes a mtaxi driver.
-        [Entry Cnd]: A taxi driver wants to register himself to MyTaxiService
-        [Exit Cnd]: The taxi driver is acknowledged that MyTaxiService(B) has registered him
+        [Entry Cnd]: A taxi driver wants to register to MyTaxiService
+        [Exit Cnd]: The taxi driver is acknowledged that MyTaxiService(B) has registered him. MyTaxiService(B)
+        assigns to the taxi a unique identification number
         [Exceptions]:
           - Connection Lost: the taxi driver is immediately notified of the event
         [Flow of Events]:
-          - The taxi driver access the MyTaxyService website, and a login
+          - The taxi driver access the MytaxiService website, and a login
             screen is shown, along with the option to register to the service
           - The taxi driver click the "REGISTER TO THE SERVICE AS NEW DRIVER" button
-          - The taxi driver is redirected to a screen with a form to be filled out with Name, Surname, email a password, home address.
+          - The taxi driver is redirected to a screen with a form to be filled out with personal information (name, surname, address, SSN) and
+           taxi cab information(brand and model, license plate number)
           - The taxi driver fills the form
-          - The taxi driver press the "CONFIRM BUTTON" and so submits the form to MyTaxyService(B)
+          - The taxi driver press the "CONFIRM BUTTON" and so submits the form to MytaxiService(B)

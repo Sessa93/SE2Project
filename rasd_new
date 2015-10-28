@@ -39,7 +39,6 @@ INTRODUCTION
       2.3 Guarantee short mtaxi availability times and short waiting times
 
   Assumptions
-<<<<<<< HEAD
     1. MyTaxiService has been commissioned by the city's local government.
       Taxi drivers that work in the city can join MyTaxiService via a registration to be done using MytaxiService website.
       To make MyTaxiService functional, the local government provides each mtaxi with a device similar to a small navigator(MYT). This device is used
@@ -47,21 +46,7 @@ INTRODUCTION
       track the position of the mtaxi's on which is mounted
 
     2. Since MyTaxiService is aware of the work timetable of each mtaxi, mtaxies are considered unavailable
-      if and only if they are serving a ride/booking request. After a mtaxi has finished serving a passenger, its driver has to notify
-=======
-    1. MyTaxiService has been commissioned by the city local government.
-       A taxi drivers that work in the city can join MyTaxiService via a special registration phase available from MyTaxiService website(see UseCase 12)]
-
-    2.During the registration process taxi drivers are asked to provide their personal and vehicle data along with their work timetable.
-      After that taxi drivers receive a unique code that identifies their taxi cab in relation to MyTaxiService.
-      To make MyTaxiService functional, the local government provides each mtaxi with a device similar to a small navigator(MYT), which is used
-      to see incoming ride requests or bookings and to signal their acceptance; this device has a built in gps module through which MyTaxiService can
-      track their position. The MYT device is sent by the local government to the postal address(which is provided during the registration phase)
-      of the taxi driver.
-
-    3. Since MyTaxiService is aware of the work timetable of each mtaxi, mtaxies are considered unavailable
       if and only if they are serving a ride/booking request.  After a mtaxi has finished serving a passenger, its driver has to notify
->>>>>>> c7dae667e2aa8df8f956c592f0cb6e0aa539e618
       MyTaxiService(B) of the event, so MyTaxiService(B) will consider the mtaxi available again.
       Considering that MyTaxiService(B) knows the position of each mtaxi and the destination of each ride, there's no chance a mtaxi driver
       can cheat by not signaling he hasn't completed a ride yet.
@@ -157,15 +142,8 @@ REQUIREMENTS SPECIFICATION
 
 
     Non functional requirements
-<<<<<<< HEAD
       - MyTaxiService has to guarantee that a mtaxi arrives at the start location of a ride within a fixed time
       - MyTaxiService taxi driver waits for the passenger that has requested the ride at the origin point for a maximum amount of time, after that the taxi returns available(NF)
-=======
-
-    [GENERAL]
-      - MyTaxyService has to guarantee that a mtaxi arrives at the start location of a ride within a 15 minutes
-      - The taxi driver waits for the passenger that has requested the ride at the origin point for a maximum amount of time, after that the taxi returns available(NF)
->>>>>>> c7dae667e2aa8df8f956c592f0cb6e0aa539e618
       - A mtaxi driver has to accept a ride/booking request within a fixed time
       - After a failure MyTaxiService has to be restarted within 1 hour
       - MyTaxiService must be available 24h/7d
@@ -176,12 +154,9 @@ REQUIREMENTS SPECIFICATION
       to guarantee security
 
 
-<<<<<<< HEAD
     Domain Properties
       - The coordinates provided by the gps systems of the mtaxies' MYT device is considered
         exact
-      - The public city's data about traffic is considered exact
-=======
       [Security]
         [Interface Side]
           MyTaxiService implements a login system to protect personal data of the user, so particular attention must be devoted to the security of the interface/application side.
@@ -206,8 +181,7 @@ REQUIREMENTS SPECIFICATION
       - The personal data provided by the users during the registration phase valid and corresponds to existent people
       - The data provided by the GPS are reliable
       - The data relative to traffic state are reliable
-      - Email provided by the user during the registration phase are formally correct
->>>>>>> c7dae667e2aa8df8f956c592f0cb6e0aa539e618
+      - Passengers are
 
 
 SCENARIOS, USE CASES AND UML MODELS

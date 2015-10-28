@@ -148,7 +148,7 @@ REQUIREMENTS SPECIFICATION
 
       [Security]
         [Interface Side]
-          MyTaxiService implements a login system to protect personal data of the user, so particular attention must be focused on security on the interface/application side
+          MyTaxiService implements a login system to protect personal data of the user, so particular attention must be devoted to the security of the interface/application side.
           In order to guarantee an adeguate level of security password are saved in a particular area of the database using an cryptography mechanism(for example using RSA encryption).
           Further, a secure implementation of MyTaxiService must respect the following requirements:
           - MyTaxiService requires that the password chosen by the user is at least 8 characters long and must contain at least 2 numbers.

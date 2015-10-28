@@ -78,6 +78,7 @@ INTRODUCTION
       - Registered User: A person that is registered to MyTaxiService.
       - User: A generic person not registered to MyTaxiService
       - Ride/booking request acceptance: a mtaxi has left in order to pick up a passenger
+      - The city: the city that is served by MyTaxyService and its taxies
     Acronyms
       - RASD: Requirements Analysis and Specification Document
       - FIFO: First In First Out
@@ -137,23 +138,24 @@ REQUIREMENTS SPECIFICATION
       are taking a break according to the work timetable, no other exceptions are allowed
       - MytaxiService has to offer to mtaxi drivers the possibility of reporting an accident and therefor be considered unavailable
 
+
     Non functional requirements
-      - MytaxiService has to guarantee that a mtaxi arrives at the start location of a ride within a fixed time
-      - The taxi driver waits for the passenger that has requested the ride at the origin point for a maximum amount of time, after that the taxi returns available(NF)
+      - MyTaxiService has to guarantee that a mtaxi arrives at the start location of a ride within a fixed time
+      - MyTaxiService taxi driver waits for the passenger that has requested the ride at the origin point for a maximum amount of time, after that the taxi returns available(NF)
       - A mtaxi driver has to accept a ride/booking request within a fixed time
       - After a failure MyTaxiService has to be restarted within 1 hour
       - MyTaxiService must be available 24h/7d
-      - Registered users are able to use properly all the functionalities after a training time of at most 15 mins
-      - All the functionalities of MytaxiService have to be reachable by a registered user with at most 3 clicks/taps from the starting screen
-      of the web / mobile app
+      - Registered users have to be able to use properly all MyTaxiService's functionalities after a training time of at most 15 mins
+      - All MyTaxiService's functionalities have to be reachable by a registered user with at most 3 clicks/taps from the after login screen
+      of the web/mobile app
+      - The communication between MyTaxiService(B) and the mtaxies has to be encrypted in order
+      to guarantee security
 
-      [GENERAL NON FUNCTIONAL REQUIREMENTS]
-        - General architecture, security, interface(API)
+
     Domain Properties
-      - The data provided by the users during the registration phase are not fake data
-      - The data provided by the GPS are reliable
-      - The data relative to traffic state are reliable
-      - Address and email provided by the user are formally correct
+      - The coordinates provided by the gps systems of the mtaxies' MYT device is considered
+        exact
+      - The public city's data about traffic is considered exact
 
 
 SCENARIOS, USE CASES AND UML MODELS

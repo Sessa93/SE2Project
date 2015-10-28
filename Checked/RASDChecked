@@ -192,6 +192,7 @@ SCENARIOS, USE CASES AND UML MODELS
         [Exceptions]:
           - Connection lost on the smartphone: the registered user is immediately notified of the fact and
           he can only check the last retrieved status of his ride request
+          - Invalid Data: the registered user is asked to insert the data again
         [Flow of events]:
           - The registered user taps/clicks the "REQUEST TAXI" button
           - The registered user is redirected to a screen dedicated to the insertion
@@ -216,6 +217,7 @@ SCENARIOS, USE CASES AND UML MODELS
          [Exceptions]:
            - Connection lost on the smartphone: MyTaxiService(F) immediately notifies the registered user with the last
            available status information for the requested booking
+           - Invalid Data: the registered user is asked to insert the data again
          [Flow of events]:
            - The registered user taps/clicks the "BOOK TAXI" button on the home screen of the app / website
            - The registered user is redirected to a screen dedicated to the insertion

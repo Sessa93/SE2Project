@@ -91,14 +91,15 @@ INTRODUCTION
 Main Actors(see Terms and Definitions section)
         - User
         - Registered User
-        - Passenger
         - Mtaxi driver
+        - Taxi driver
         - MyTaxiService(B)
+
 REQUIREMENTS SPECIFICATION
     Functional requirements
 
-      The following table shows the functionalities of MyTaxiService accessible by
-      different actors:
+      The following table shows the only functionalities of MyTaxiService accessible by
+      the different actors:
 
       USER
       - User registration
@@ -115,7 +116,7 @@ REQUIREMENTS SPECIFICATION
       - Undo a ride booking (If possible)
 
 
-      CITY'S TAXI DRIVER
+      TAXI DRIVER
       - Taxi driver registration
 
       MTAXI DRIVER
@@ -148,6 +149,7 @@ REQUIREMENTS SPECIFICATION
       - MyTaxiService has to be able to access realtime data about the city's traffic
       - MyTaxiService has to force a logged registered user to choose as starting/ending locations of a ride only valid city's locations
       (MyTaxiService has to force a logged registered user to chose among a list of only valid city's locations )
+      - MyTaxiService has to force a logged registered user not choose the same location as starting and ending location of a ride
       - MyTaxiService(B) has to be able to retrieve the position of each mtaxies using the gps system of their MYT devices
       - MyTaxiService(B) has to be able to logically divide the city in zones and associate sets of gps
       coordinates to these zones
@@ -183,7 +185,7 @@ REQUIREMENTS SPECIFICATION
       - All MyTaxiService's functionalities have to be reachable by a registered user with at most 3 clicks/taps from the after login screen
       of the web/mobile app
 
-      Security
+      Interface
 
 
 

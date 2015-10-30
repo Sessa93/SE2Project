@@ -1,17 +1,22 @@
 sig Integer{}
 sig Strings{}
+
 sig Location{
 	address : one Strings,
 	longitudeRange: one Strings,
 	latitudeRange: one Strings
 }
+
 abstract sig Person {
 	name : one Strings,
 	lastName: one Strings
 }
+
 abstract sig TaxiState{}
 abstract sig UserState{}
+
 sig User extends Person {}
+
 sig RegisteredUser extends Person {
 	email : one Strings,
 	password: one Strings,
@@ -25,6 +30,7 @@ one sig Available, Unavailable extends TaxiState {}
 one sig Logged, NonLogged extends UserState {}
 
 sig TaxiDriver extends Person {}
+
 sig MtaxiDriver extends TaxiDriver{
 	workTimeTable : one WorkTimeTable,
 	taxi : one Mtaxi,
@@ -88,20 +94,22 @@ fact DiffUsersDiffMail {
 	all u1, u2 : RegisteredUser | 	u1!=u2  implies 	u1.email  != u2.email
 }
 fact DiffReqsDiffUsers {
-	all r1, r2 : RideRequest | 	r1!=r2  implies 	r1.user  != r2.user
+	all r1, r2 : RideRequest | r1!=r2  implies 	r1.user  != r2.user
 }
 fact DiffBooksDiffUsers {
-	all r1, r2 : BookingRequest | 	r1!=r2  implies 	r1.user  != r2.user
+	all r1, r2 : BookingRequest | r1!=r2  implies 	r1.user  != r2.user
 }
-fact RequestLoggedReg {
+fact RequestLoggedReg_1 {
 	all r : RideRequest | (r.user).userState = Logged
 }
-fact BookingLoggedReg {
+fact BookingLoggedReg_2 {
 	all r : BookingRequest | (r.user).userState = Logged
 }
-fact BookingLoggedReg {
+
+fact BookingLoggedReg_3{
 	all u : RegisteredUser, r: RideRequest | u.rideRequest=r iff r.user = u
 }
+
 //ASSERT
 assert checkDiffRideRequestDiffTaxi {
 	
@@ -109,6 +117,6 @@ assert checkDiffRideRequestDiffTaxi {
 pred show {
 	#RegisteredUser = 2
 	#RideRequest > 1
-	#Mtaxi = 1
+	#Mtaxi > 1
 }
-run show for 2
+run show for 5

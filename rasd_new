@@ -9,6 +9,11 @@ INTRODUCTION
     other systems with this one, and could be used as a contractual basis between
     the customer and the developer.
 
+  Actual System
+    The whole project is built on the assumption that no preexistent system exists.
+    Every feature and component of the new system has to be built without modifying
+    or reusing parts of a previous system.
+
   Scope of the project
     The aim of this project is to develop MyTaxiService, a web/mobile application that makes easier and quicker taking taxies
     within the city's borders.
@@ -173,23 +178,35 @@ REQUIREMENTS SPECIFICATION
       serving passengers, should take a lunch break or should finish all activities
       - MyTaxiService has to consider unavailable only mtaxies that or are serving a ride/booking request or have reported an accident or
       are taking a break according to the work timetable, no other exceptions are allowed
-      - MyTaxiService has to offer to mtaxi drivers the possibility of reporting an accident and therefor be considered unavailable
+      - MyTaxiService has to offer to mtaxi drivers the possibility of reporting an accident and therefore be considered unavailable
 
 
     Non functional requirements
-      - MyTaxiService has to guarantee that a mtaxi arrives at the start location of a ride within a fixed time
-      - A mtaxi driver has to accept a ride/booking request within a fixed time
+      - MyTaxiService has to guarantee that a mtaxi arrives at the start location of a ride within 10 minutes
+      - A mtaxi driver has to accept a ride/booking request within 2 minutes
       - After a failure MyTaxiService has to be restarted within 1 hour
       - MyTaxiService must be available 24h/7d
       - Registered users have to be able to use properly all MyTaxiService's functionalities after a training time of at most 15 mins
       - All MyTaxiService's functionalities have to be reachable by a registered user with at most 3 clicks/taps from the after login screen
       of the web/mobile app
 
+      Security
+        Among non functional requirements particular attention must be devoted to security aspects.
+        During the login MyTaxiService has to prevent malicious users from phishing sensible data(password, username etc) by adopting suitable
+        protection mechanism(password encryption, encrypted communication protocols etc).
+        From the server side MyTaxiService must guarantee that data access from remotes users is controlled and filtered such that
+        no unauthorized access(SQL injection, MITM attack, etc) to sensible data is permitted.
+
       Interface
+        Here the images of the interface
 
+    Constraints
+      - MyTaxiService rquires Android 2.0 (or later) or IOS 6.0 (or later)
 
-
-
+    Domain Properties
+      - Traffic information are reliable
+      - GPS data are reliable
+      - If a registered user request a RideRequest then then he will be present at the starting point when the taxi arrives
 
 SCENARIOS, USE CASES AND UML MODELS
 

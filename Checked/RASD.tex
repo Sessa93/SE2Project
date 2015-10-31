@@ -293,10 +293,51 @@
         protection mechanism(password encryption, encrypted communication protocols etc).
         From the server side MyTaxiService must guarantee that data access from remotes users is controlled and filtered such that
         no unauthorized access(SQL injection, MITM attack, etc) to sensible data is permitted.
-
+\newpage
       \subsubsection{Interfaces Requirements}
+       In this section is shown a series of mock up that specify a set of requirements over the user interface.\newline
+       Each mock up is valid both for the web site and mobile application version of MyTaxiService\newline 
+        \newline
+        This mock up shows the user login page\newline
+       \newline
         \includegraphics[scale=0.52]{loginInt.png}\newline
+        \newpage
+        \noindent
+        This  mock up shows the user registration page\newline
+	\newline
         \includegraphics[scale=0.52]{userRegInt.png}\newline
+        \newpage
+        \noindent
+        This mock up shows the user ride request page\newline
+        \newline
+        \includegraphics[scale=0.52]{taxiReqInt.png}\newline
+        \newpage
+        \noindent
+        This mock up shows the user ride booking page\newline
+       \newline
+        \includegraphics[scale=0.52]{taxiBookInt.png}\newline
+        \newpage
+        \noindent
+        This mock up shows the empty booking/ride request view page\newline
+        \newline
+        \includegraphics[scale=0.52]{viewEmptyInt.png}\newline
+        \newpage
+        \noindent
+        This mock up shows the booking/ride request view page when the user has requested a ride \newline
+        \newline
+        \includegraphics[scale=0.52]{viewReqInt.png}\newline
+        \newpage
+        \noindent
+        This mock up shows the booking/ride request view page when the user has booked and requested a ride\newline
+        \newline
+        \includegraphics[scale=0.52]{viewReqBookPage.png}\newline
+        \newpage
+        \noindent
+        This mock up shows the deletion of a booking request by a registered user\newline
+        \newline
+        \includegraphics[scale=0.52]{deleteBookInt.png}\newline
+        \newline
+        
 
     \subsection{Constraints}
 	\begin{enumerate}
@@ -310,73 +351,75 @@
 	      \item If a registered user request a RideRequest then then he will be present at the starting point when the taxi arrives
 	\end{enumerate}
 
-SCENARIOS, USE CASES AND UML MODELS
+\section {Scenarios, Use Case and UML diagrams}
 
-    Scenarios
-    1. Bob is a product manager with a very busy schedule. At 11.00 he has a meeting
-       with a group of clients to discuss about the features of a new product.
-       This meeting is located in a another part of the city.
-       For his shifts Bob usually takes taxies, and, in order to speed up this process, he
-       started using MyTaxiService.
-       It's 10:30 and Bob decides to take a taxi via MyTaxiService. He opens the app,
-       the app remembers his credentials and logs him in.
-       Bob inserts the address of the meeting and of his current location, choses one passenger and taps
-       the "REQUEST TAXI" button. MyTaxiService then alerts him that is finding a mtaxi.
-       Near Bob's location, a mtaxi has finished serving a passenger, so MyTaxiService(B) signals to it
-       Bob's request. Charlene, the driver of the mtaxi, despite the fact that it's still work time, she wants to take a coffee
-       and so ignores the request. After 5 mins MyTaxiService(B) tries to find a new mtaxi
-       for Bob: Albert's mtaxi is available and MyTaxiService(B) forwards Bob's request to it.
-       Albert receives the request and alerts MyTaxiService(B) that he's going to take care of the ride.
-       MyTaxiService alerts Bob that his taxi will arrive in 3 mins.
-       The Taxi arrives, and in 10 mins Bob reaches the meeting place. MyTaxiService(B)
-       signals the behavior of Charlene to her supervisors, and, after a few weeks, Charlene receives a warning and a fine of 200 euro
+    \subsection{Scenarios}
+	\begin{enumerate}
+	    \item Bob is a product manager with a very busy schedule. At 11.00 he has a meeting
+	       with a group of clients to discuss about the features of a new product.
+	       This meeting is located in a another part of the city.
+	       For his shifts Bob usually takes taxies, and, in order to speed up this process, he
+	       started using MyTaxiService.
+	       It's 10:30 and Bob decides to take a taxi via MyTaxiService. He opens the app,
+	       the app remembers his credentials and logs him in.
+	       Bob inserts the address of the meeting and of his current location, choses one passenger and taps
+	       the "REQUEST TAXI" button. MyTaxiService then alerts him that is finding a mtaxi.
+	       Near Bob's location, a mtaxi has finished serving a passenger, so MyTaxiService(B) signals to it
+	       Bob's request. Charlene, the driver of the mtaxi, despite the fact that it's still work time, she wants to take a coffee
+	       and so ignores the request. After 5 mins MyTaxiService(B) tries to find a new mtaxi
+	       for Bob: Albert's mtaxi is available and MyTaxiService(B) forwards Bob's request to it.
+	       Albert receives the request and alerts MyTaxiService(B) that he's going to take care of the ride.
+	       MyTaxiService alerts Bob that his taxi will arrive in 3 mins.
+	       The Taxi arrives, and in 10 mins Bob reaches the meeting place. MyTaxiService(B)
+	       signals the behavior of Charlene to her supervisors, and, after a few weeks, Charlene receives a warning and a fine of 200 euro
+	
+	    \item It's Friday, 10 a.m, Paris, Ann, a young american tourist, has to take a flight at 12 a.m to return to New York City.
+	        Ann has carefully planned the return trip, infact
+	       yesterday she made a taxi booking via MyTaxiService web site for 9:45 a.m , but the mtaxi has not arrived yet.
+	       So she take her smartphone opens the MyTaxiService application, enters her credentials and after a successful login
+	       she discovers that her mtaxi is stuck in a terrible traffic jam and that MyTaxiService is trying to find a new mtaxi.
+	       "I'll miss my flight!" she thinks, and starts to wait with the heart full of hope
+	
+	    \item Dave, an experienced taxi driver of the city, has received, through MyTaxiService, a request for a ride
+	       from a passenger. "It's not too much far from where i am now", he thinks, "It'll be easy", and notifies
+	       MyTaxiService that he'll take care of the request. He starts driving toward the passenger's position, but suddenly
+	       , while he's crossing a very busy crossroad,
+	       a reckless driver coming from the left crosses at high speed the crossroad and hits with violence
+	       Dave's taxi cab. Luckily nobody gets hurt, but Dave's taxi cabe has been seriously damaged.
+	       Dave cannot fulfill the passenger's request so he takes his smartphone, opens the MyTaxiService app,
+	       and taps the "REPORT ACCIDENT" button, he accesses a screen where he inserts the accident details and taps the "SUBMIT" button.
+	       MyTaxiService(B) receives the Dave's report and after some computations selects and notifies another driver to fulfill the passenger request.
+	
+	    \item Ann, a young female student from Texas, is visiting Italy with his boyfriend Bob.
+	      It's Friday morning, they are walking on the streets of Milan and they're thinking
+	      about visiting the Expo on Saturday. Ann proposes to use a taxi to reach Expo's location and
+	      Bob agrees. Ann is a very cautious person so she thinks it's better to book a taxi, for this
+	      reason she searches on Google "taxi milano book" and discovers MyTaxiService.
+	      She downloads the app on her Iphone; she opens the app, which displays a login screen with
+	      a registration button, and taps that button being so redirected to a registration screen; she inserts
+	      her mail address, choses and confirm a password, accepts the legal
+	      terms of the app and taps the confirm button; after that Ann is ready to use the app.
+	      In order to book a taxi for Saturday for the Expo, Ann accesses the booking section of the app,
+	      taps the "ADD BOOKING" button and in the add booking screen inserts the Expo's location by selecting the right item in a dropdown menu, inserts the time and location of the picking
+	      , choses two passengers and taps the big "BOOK TAXI" button, MyTaxiService responds by alerting Ann that her booking
+	      has been processed successfully. Ann is happy about the fact that everything has proceeded without problems.
+	      Bob instead is not so happy because he thinks that the Milan's transportation system is perfect
+	      to reach Expo and its far way cheaper than taking a taxi. Bob and Ann have a brief discussion
+	      about this and, at the end, Ann agrees with Bob. Given that, Ann tries to undo the booking:
+	      she opens the app, she logs in, she accesses the booking section and there she sees her booking for Saturday, she taps
+	      the bin icon to delete the booking, she confirms her intention to do that and everything is done.
+	
+	    \item It's Thursday, 14:00 and George, a young mtaxi driver, is driving in the city's center.
+	       He noticed many of his colleagues waiting for requests in their cabs.
+	       Meanwhile MyTaxiService(B), by making some analysis on the mtaxies' GPS data, realizes that there are too many mtaxies
+	       in the city's center in relation with the number of ride requests for that zone. The system also indentifies
+	       some zones of the city where the concentration of taxies is too low. According to a policy based on some statistical data
+	       MyTaxiService(B) decides to move 10 mtaxies, including the George's one, from the city's center to the city's zones mentioned above.
+	       As a consequence of that, George receives by MyTaxiService a notification that alerts him to move to zone C (one of the city's zones
+	       with low concentration of mtaxies). George start driving towards zone C and continues his work.
+	\end{enumerate}
 
-    2. It's Friday, 10 a.m, Paris, Ann, a young american tourist, has to take a flight at 12 a.m to return to New York City.
-        Ann has carefully planned the return trip, infact
-       yesterday she made a taxi booking via MyTaxiService web site for 9:45 a.m , but the mtaxi has not arrived yet.
-       So she take her smartphone opens the MyTaxiService application, enters her credentials and after a successful login
-       she discovers that her mtaxi is stuck in a terrible traffic jam and that MyTaxiService is trying to find a new mtaxi.
-       "I'll miss my flight!" she thinks, and starts to wait with the heart full of hope
-
-    3. Dave, an experienced taxi driver of the city, has received, through MyTaxiService, a request for a ride
-       from a passenger. "It's not too much far from where i am now", he thinks, "It'll be easy", and notifies
-       MyTaxiService that he'll take care of the request. He starts driving toward the passenger's position, but suddenly
-       , while he's crossing a very busy crossroad,
-       a reckless driver coming from the left crosses at high speed the crossroad and hits with violence
-       Dave's taxi cab. Luckily nobody gets hurt, but Dave's taxi cabe has been seriously damaged.
-       Dave cannot fulfill the passenger's request so he takes his smartphone, opens the MyTaxiService app,
-       and taps the "REPORT ACCIDENT" button, he accesses a screen where he inserts the accident details and taps the "SUBMIT" button.
-       MyTaxiService(B) receives the Dave's report and after some computations selects and notifies another driver to fulfill the passenger request.
-
-    4.Ann, a young female student from Texas, is visiting Italy with his boyfriend Bob.
-      It's Friday morning, they are walking on the streets of Milan and they're thinking
-      about visiting the Expo on Saturday. Ann proposes to use a taxi to reach Expo's location and
-      Bob agrees. Ann is a very cautious person so she thinks it's better to book a taxi, for this
-      reason she searches on Google "taxi milano book" and discovers MyTaxiService.
-      She downloads the app on her Iphone; she opens the app, which displays a login screen with
-      a registration button, and taps that button being so redirected to a registration screen; she inserts
-      her mail address, choses and confirm a password, accepts the legal
-      terms of the app and taps the confirm button; after that Ann is ready to use the app.
-      In order to book a taxi for Saturday for the Expo, Ann accesses the booking section of the app,
-      taps the "ADD BOOKING" button and in the add booking screen inserts the Expo's location by selecting the right item in a dropdown menu, inserts the time and location of the picking
-      , choses two passengers and taps the big "BOOK TAXI" button, MyTaxiService responds by alerting Ann that her booking
-      has been processed successfully. Ann is happy about the fact that everything has proceeded without problems.
-      Bob instead is not so happy because he thinks that the Milan's transportation system is perfect
-      to reach Expo and its far way cheaper than taking a taxi. Bob and Ann have a brief discussion
-      about this and, at the end, Ann agrees with Bob. Given that, Ann tries to undo the booking:
-      she opens the app, she logs in, she accesses the booking section and there she sees her booking for Saturday, she taps
-      the bin icon to delete the booking, she confirms her intention to do that and everything is done.
-
-    5.It's Thursday, 14:00 and George, a young mtaxi driver, is driving in the city's center.
-       He noticed many of his colleagues waiting for requests in their cabs.
-       Meanwhile MyTaxiService(B), by making some analysis on the mtaxies' GPS data, realizes that there are too many mtaxies
-       in the city's center in relation with the number of ride requests for that zone. The system also indentifies
-       some zones of the city where the concentration of taxies is too low. According to a policy based on some statistical data
-       MyTaxiService(B) decides to move 10 mtaxies, including the George's one, from the city's center to the city's zones mentioned above.
-       As a consequence of that, George receives by MyTaxiService a notification that alerts him to move to zone C (one of the city's zones
-       with low concentration of mtaxies). George start driving towards zone C and continues his work.
-
-    Use cases of the application
+    \subsection{Use cases of the application}
 
       1. A registered user makes a ride request
         [Actors]: A registered user, MyTaxiService(B)

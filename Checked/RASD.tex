@@ -420,245 +420,314 @@
 	\end{enumerate}
 
     \subsection{Use cases of the application}
+	\begin{enumerate}	
 
-      1. A registered user makes a ride request
-        [Actors]: A registered user, MyTaxiService(B)
-        [Pre-cons]: The registered user has logged into MyTaxiService.
-        [Post-cons]: MyTaxiService(B) receives the ride request and tries to find an available taxi to fulfill it.
-        [Entry Cnd]: A registered user wants to be picked up by a mtaxi as soon as possible in a given place.
-        [Exit Cnd]: The registered user is acknowledged that MyTaxiService(B) has received successfully the ride
-        request
-        [Exceptions]:
-          - Connection lost(for the mobile app): the registered user is immediately notified of the event and
-          asked to try again later
-        [Flow of events]:
-          - The registered user taps/clicks the "REQUEST TAXI" button
-          - The registered user is redirected to a screen dedicated to the insertion
-          of the requested ride's details
-          - The registered user fills out a form for the ride request inserting the ride's starting and ending location
-          (chosen from a list of every valid city's location) and the number of passengers
-          - The registered user submits to MyTaxiService(B) the form by clicking/tapping the "CONFIRM REQUEST" button
+	      \item A registered user makes a ride request
+		\begin{description}
+		        \item [Use case name:] Ride request 
+		        \item [Actors:] A registered user, MyTaxiService(B)
+		        \item [Pre-cons:] The registered user has logged into MyTaxiService.
+		        \item [Post-cons:] MyTaxiService(B) receives the ride request and tries to find an available taxi to fulfill it.
+		        \item [Entry Cnd:] A registered user wants to be picked up by a mtaxi as soon as possible in a given place.
+		        \item [Exit Cnd:] The registered user is acknowledged that MyTaxiService(B) has received successfully the ride
+		        request
+		        \item [Exceptions]\hfill
+			\begin{enumerate}
+			          \item Connection lost(for the mobile app): the registered user is immediately notified of the event and
+			          asked to try again later
+			          \item Invalid input: the registered user is asked to reenter the information
+			\end{enumerate}
+		        \item [Flow of events]\hfill
+			\begin{enumerate}
+			          \item The registered user taps/clicks the "REQUEST TAXI" button
+			          \item The registered user is redirected to a screen dedicated to the insertion
+			          of the requested ride's details
+			          \item The registered user fills out a form for the ride request inserting the ride's starting and ending location
+			          (chosen from a list of every valid city's location) and the number of passengers
+			          \item The registered user submits to MyTaxiService(B) the form by clicking/tapping the "CONFIRM REQUEST" button
+			\end{enumerate}
+		\end{description}
+	
+	
+	      \item A registered user makes a booking request
+		\begin{description}
+		         \item [Use case name:] Booking request
+		         \item [Actors:] A registered user, MyTaxiService(B)
+		         \item [Pre-cons:] The registered user has logged into MyTaxiService.
+		         \item [Post-cons:] MyTaxiService(B) receives the booking request and registers it; 10 mins before
+		         the chosen picking up time, MyTaxiService(B) will try to find an available taxi to fullfill the request
+		         \item [Entry Cnd:] A registered user wants to book a mtaxi in order to be picked up at a specific date and time
+		         \item [Exit Cnd:] The registered user is acknowledged that MyTaxiService(B) has received successfully the ride
+		         request
+		         \item [Exceptions]\hfill
+			\begin{enumerate}
+			           \item Connection lost(for the mobile app): the registered user is immediately notified of the event and
+			           asked to try again later
+				\item Invalid input: the registered user is asked to reenter the information
+			\end{enumerate}
+		         \item [Flow of events]\hfill
+			\begin{enumerate}
+			           \item The registered user taps/clicks the "BOOK TAXI" button on the home screen of the app/website
+			           \item The registered user is redirected to a screen dedicated to the insertion
+			           of the requested booking details
+			           \item The registered user fills out a form for the booking request, inserting the ride's starting and ending location,
+			           the number of passengers, the date and the time for which be picked up.
+			           \item The registered user submits to MyTaxiService(B) the form by clicking/tapping the "CONFIRM BOOKING" button
+			\end{enumerate}
+		\end{description}
+	
+	      \item  MyTaxiService(B) forwards a received ride request to a mtaxi driver
+		\begin{description}
+		        \item [Use case name:] Request forward
+		        \item [Actors:] A mtaxi driver, MyTaxiService(B)
+		        \item [Pre-cons:] The mtaxi driver has informed MyTaxiService(B) that he has finished serving a passenger and so is
+		        ready for a new ride
+		        \item [Post-cons:] The mtaxi driver knows that a registered user has requested a ride with the specified
+		        details and is ready to fulfill it
+		        \item [Entry Cnd:] MyTaxService(B) has received a ride request from a logged registered user
+		        \item [Exit Cnd:] MyTaxiService(B) is acknowledged that the mtaxi driver has received successfully the ride request
+		        \item [Exceptions]\hfill
+			\begin{enumerate}
+			          \item No mtaxi is available for the city's zone relative to the ride request: MyTaxiService(B) tries
+			          to find a mtaxi that fits the ride request details(in terms of number of passengers) and that is located in the city's zones adjacent
+			          to the one above mentioned
+			          \item No mtaxi available: MyTaxiService(B) notifies the registered user who made the request, that
+			          no mtaxi is available and that he should try again later
+			\end{enumerate}
+		        \item [Flow of Events]\hfill
+			\begin{enumerate}
+			          \item MyTaxiService(B) extracts the city zone relative to the starting location of the ride request
+			          \item MyTaxiService(B) selects a mtaxi that suits the ride requests details (in terms of number of passengers) from the queue of available mtaxies
+			            for the city zone above mentioned
+			          \item MyTaxiService(B) checks if the traffic conditions in the zone where the selected mtaxi is located are acceptable
+			          (they allow the mtaxi to reach the registered user to pick up within a fixed time)
+			          \item MyTaxiService(B) forwards the ride request to the driver of the selected mtaxi
+			\end{enumerate}
+		\end{description}
 
-      --------------------------------------------------------------------------------
+	
+	       \item A mtaxi driver informs MyTaxiService(B) that he has finished serving a passenger
+		\begin{description}
+		        \item [Use case name:] Call terminated
+		        \item [Actors:] A mtaxi driver, MyTaxiService(B)
+		        \item [Pre-cons:] The mtaxi current location is the ending location of his last ride
+		        \item [Post-cons:] MyTaxiService(B) considers the mtaxi available
+		        \item [Entry Cnd:] The mtaxi driver has finished serving a passenger
+		        \item [Exit Cnd:] The mtaxi driver is acknowledged that MyTaxiService(B) has received successfully his
+		        notification
+		        \item [Exceptions]\hfill
+			\begin{enumerate}
+			          \item Connection Lost: the mtaxi driver is immediately notified of the event and is asked to try again
+			          later
+			\end{enumerate}
+		        \item [Flow of Events]\hfill
+			\begin{enumerate}
+			          \item The mtaxi driver taps the "END RIDE" button on the screen of his MYT and so notifies MyTaxiService(B) that
+			          he has ended serving a passenger and is now available for other ride/booking requests
+			\end{enumerate}
+		\end{description}
+	
+	
+	        \item A mtaxi driver manages a ride request from MyTaxiService(B)
+		\begin{description}
+		        \item [Use case name]: Manage request
+		        \item [Actors]: A mtaxi driver, MyTaxiService(B)
+		        \item [Pre cons]: The mtaxi has to be available
+		        \item [Post cons]: The mtaxi driver has started driving to the starting location of the requested ride
+		        \item [Entry Cnd]: MyTaxiService(B) has forwarded successfully a ride request to the mtaxi driver
+		        \item [Exit Cnd]: The mtaxi driver is acknowledged that MyTaxiService(B) has received successfully his notification
+		        of ride acceptance.
+		        \item [Exceptions]\hfill
+			\begin{enumerate}
+			          \item If MyTaxiService(B) does not receive the acceptance of the ride request by the mtaxi driver
+			          within 5 mins, it selects another mtaxi to fullfil the request, and signals to the supervisors
+			          of the mtaxi driver in discussion his behavior
+			\end{enumerate}
+		        \item [Flow of Events]\hfill
+			\begin{enumerate}
+			          \item The mtaxi driver taps the "ACCEPT REQUEST" button on the screen of his MYT, and so notifies MyTaxiService(B)
+			          that he's going to take immediately care of the request
+			\end{enumerate}
+		\end{description}
+	
+	
+	        \item A registered user logs into MyTaxiService
+		\begin{description}
+		        \item [Use case name:] Log in
+		        \item [Actors:] A registered user, MyTaxiService(B)
+		        \item [Pre Cnd:] The registered user is not logged into MyTaxiService. The registered
+		        user has access to MyTaxiService app or website
+		        \item [Post Cnd:] The registered user has access to all the functionalities of
+		        MyTaxiService reserved to registered users(see functional reqs)
+		        \item [Entry Cnd:] The registered user wants to access the functionalities offered by MyTaxiService
+		        \item [Exit Cnd:]  The registered user is acknowledged that MyTaxiService(B) has recognized as valid the inserted
+		        credentials. MyTaxiService(B) will grant the registered user the access to all the functionalities
+		        reserved to registered users(see functional reqs)
+		        \item [Exceptions]\hfill
+			\begin{enumerate}
+			          \item Connection Lost: the registered user is immediately notified of the event and the entire process
+			          has to be redone
+			          \item Wrong Credentials(credentials that do no match any registered used): the registered user is asked to insert his credentials again
+			\end{enumerate}
+		        \item [Flow of Events]\hfill
+			\begin{enumerate}
+			          \item The registered user opens the MyTaxiService app or access the MyTaxiService website, and a login
+			          screen is shown, along with the option to register to the service and to rembember the login
+			          \item The registered user inserts his credentials in the relative fields
+			          \item The registered user clicks/taps the "LOGIN" button
+			\end{enumerate}
+		\end{description}
+	
+	       \item A registered user logs out from MyTaxiService
+		\begin{description}
+		        \item [Use case name:] Log out
+		        \item [Actors:] A registered user, MyTaxiService(B)
+		        \item [Pre cons:] The registered user is logged into MyTaxiService
+		        \item [Post cons:] The registered user has no access to MyTaxiService functionalities
+		        until a new login
+		        \item [Entry Cnd:] The registered user wants to logout from MyTaxiService
+		        \item [Exit Cnd:] The registered user is acknowledged that MyTaxiService(B) has logged him out from
+		        the service
+		        \item [Exceptions]\hfill
+			\begin{enumerate}
+			          \item Connection Lost: the registered user is immediately notified of the event and the entire process
+			          has to be redone
+			\end{enumerate}
+		        \item [Flow of Events]\hfill
+			\begin{enumerate}
+			          \item The registered user taps/clicks the "LOGOUT" button on a screen of the app/website
+			          (every screen of the app/website has the "LOGOUT" button)
+			\end{enumerate}
+		\end{description}
+	
+	       \item A User wants to register to MyTaxiService
+		\begin{description}
+		        \item [Use case name:] User Registration
+		        \item [Actors:] A user, myTaxiService(B)
+		        \item [Pre cons:] The user has access to the MyTaxiService app or website
+		        \item [Post cons:] The user becomes a registered user
+		        \item [Entry Cnd:] The user wants to register to MyTaxiService in order
+		        to access its functionalities
+		        \item [Exit Cnd:] The user is acknowledged that MyTaxiService(B) has registered him
+		        \item [Exceptions]\hfill
+			\begin{enumerate}
+			          \item Connection Lost: the user is immediately notified of the event and the entire process
+			          has to be redone
+			          \item Invalid data(non correctly formatted data or a email already
+			          user by another registered user): the user is immediately notified and forced to insert valid data
+			\end{enumerate}
+		        \item [Flow of Events]\hfill
+			\begin{enumerate}
+			          \item The user opens the MyTaxiService app or access the MyTaxiService website, and a login
+			            screen is shown, along with the option to register to the service
+			          \item The user taps/click the "REGISTER TO THE SERVICE" button
+			          \item The user is redirected to a screen with a form to be filled out with Name, Surname, email a password.
+			          \item The user fills the form
+			          \item The user press the "CONFIRM BUTTON" and so submits the form to MyTaxiService(B)
+			\end{enumerate}
+		\end{description}
+	
+	
+	       \item A registered user undoes a mtaxi booking
+		\begin{description}
+		        \item [Use case name:] Booking undo
+		        \item [Actors:] A registered user, MyTaxiService(B)
+		        \item [Pre cons:] The registered user is logged into MyTaxiService. The registered user
+		        has made a successful booking request. The mtaxi booking the registered user wants to undo
+		        specifies a pickup time so that (pickuptime - currentime) > 10 mins
+		        \item [Post cons:] The scheduled booking is no more
+		        \item [Entry Cnd:] The registered user wants to undo a mtaxi booking
+		        \item [Exit Cnd:] MyTaxiService(B) acknowledges the registered user that the scheduled booking
+		        has been deleted
+		        \item [Exceptions]\hfill
+			\begin{enumerate}
+			          \item Connection Lost: the registered user is immediatly notified of the event and the entire process
+			          has to be redone
+			\end{enumerate}
+		        \item [Flow of Events]\hfill
+			\begin{enumerate}
+			          \item The registered user accesses the MyTaxiService app/website area where he can see the list of his bookings
+			          \item The registered user taps/click the recycle bin icon located in the row that corresponds to the mtaxi booking
+			          he wants to undo
+			          \item The registered user confirm his choice by clicking/tapping the "CONFIRM" button on
+			          the popup that has just apparead
+			\end{enumerate}
+		\end{description}
+	
+	
+	      \item A mtaxi driver receives a zone change order
+		\begin{description}
+		        \item [Use case name:] Zone change order
+		        \item [Actors:] A mtaxi driver, MyTaxiService(B)
+		        \item [Pre cons:] The mtaxi is available
+		        \item [Post cons:] The distribution of mtaxies in the city's zones is more balanced
+		        with respect to the average number of ride requests per zone
+		        \item [Entry Cnd:] MyTaxiService(B) has detected that some city's zones have too much mtaxies assigned
+		        and some others not, all with respect to average number of ride requests per zone. MyTaxiService
+		        has assigned the mtaxi in discussion to another city's zone
+		        \item [Exit Cnd:] MyTaxiService(B) is acknowledged by the mtaxi driver that he has received successfully
+		        the zone change order
+		        \item [Exceptions]\hfill
+			\begin{enumerate}
+			          \item Connection Lost: the mtaxi driver is immediately notified of the event and the entire process has to be redone
+			\end{enumerate}
+		        \item [Flow of Events]\hfill
+			\begin{enumerate}
+			          \item MyTaxiService(B) forwards to the mtaxi a change zone order, since the mtaxi has been assigned to another city's zone in order to guarantee
+			          a more balanced distribution of mtaxies among all the city's zones
+			          \item The mtaxi driver receives the order
+			\end{enumerate}
+		\end{description}
+	
+	
+	      \item A mtaxi driver reports an accident
+		\begin{description}
+		        \item [Use case name:] Accident report
+		        \item [Actors:] A mtaxi driver, MyTaxiService(B)
+		        \item [Pre cons:] The mtaxi driver has access to and can use MYT. MYT has not been damaged and so
+		        is fully functional
+		        \item [Post cons:] MyTaxiService(B) considers the mtaxi unavailable and stores the data
+		        relative to the accident for statical uses
+		        \item [Entry Cnd:] A mtaxi driver had an accident and wants to report it(has to report it)
+		        \item [Exit Cnd] MyTaxiService(B) acknowledges the driver about the fact that it has received
+		        successfully the accident report
+		        \item [Exceptions]\hfill
+			\begin{enumerate}
+			          \item Connection Lost: the mtaxi driver is immediately notified of the event and the entire process has to be redone
+			\end{enumerate}
+		       \item [Flow of Events]\hfill
+			\begin{enumerate}
+			          \item The mtaxi driver taps the "REPORT ACCIDENT" button on the screen of his MYT
+			\end{enumerate}
+		\end{description}
+	
+	
+	      \item mtaxi registration
+		\begin{description}
+		        \item [Actors]: A taxi driver, MyTaxiService(B)
+		        \item [Pre cons]: The taxi driver is not yet registered to MyTaxiService
+		        \item [Post cons]: The taxi driver becomes a mtaxi driver.
+		        \item [Entry Cnd]: A taxi driver wants to register to MyTaxiService
+		        \item [Exit Cnd]: The taxi driver is acknowledged that MyTaxiService(B) has registered him. MyTaxiService(B)
+		        assigns to the taxi a unique identification number
+		        \item [Exceptions] \hfill
+			\begin{enumerate}
+			          \item Connection Lost: the taxi driver is immediately notified of the event
+			          \item The taxi is not registered as a city's taxi: the taxi driver is immediately notified
+			          and forced to change personal and taxi cab information inserted
+			\end{enumerate}
+		        \item [Flow of Events]\hfill
+			\begin{enumerate}
+			          \item The taxi driver access the MyTaxiService website, and a login
+			            screen is shown, along with the option to register to the service
+			          \item The taxi driver click the "REGISTER TO THE SERVICE AS NEW DRIVER" button
+			          \item The taxi driver is redirected to a screen with a form to be filled out with personal information (name, surname, address, SSN) and
+			           taxi cab information(brand and model, license plate number)
+			          \item The taxi driver fills the form
+			          \item The taxi driver press the "CONFIRM BUTTON" and so submits the form to MyTaxiService(B)
+			\end{enumerate}
+		\end{description}
 
-      2. A registered user makes a booking request
-         [Actors]: A registered user, MyTaxiService(B)
-         [Pre-cons]: The registered user has logged into MyTaxiService.
-         [Post-cons]: MyTaxiService(B) receives the booking request and registers it; 10 mins before
-         the chosen picking up time, MyTaxiService(B) will try to find an available taxi to fullfill the request
-         [Entry Cnd]: A registered user wants to book a mtaxi in order to be picked up at a specific date and time
-         [Exit Cnd]: The registered user is acknowledged that MyTaxiService(B) has received successfully the ride
-         request
-         [Exceptions]:
-           - Connection lost(for the mobile app): the registered user is immediately notified of the event and
-           asked to try again later
-         [Flow of events]:
-           - The registered user taps/clicks the "BOOK TAXI" button on the home screen of the app/website
-           - The registered user is redirected to a screen dedicated to the insertion
-           of the requested booking details
-           - The registered user fills out a form for the booking request, inserting the ride's starting and ending location,
-           the number of passengers, the date and the time for which be picked up.
-           - The registered user submits to MyTaxiService(B) the form by clicking/tapping the "CONFIRM BOOKING" button
-
-      --------------------------------------------------------------------------------
-
-      3. MyTaxiService(B) forwards a received ride request to a mtaxi driver
-        [Actors]: A mtaxi driver, MyTaxiService(B)
-        [Pre-cons]: The mtaxi driver has informed MyTaxiService(B) that he has finished serving a passenger and so is
-        ready for a new ride
-        [Post-cons]: The mtaxi driver knows that a registered user has requested a ride with the specified
-        details and is ready to fulfill it
-        [Entry Cnd]: MyTaxService(B) has received a ride request from a logged registered user
-        [Exit Cnd]: MyTaxiService(B) is acknowledged that the mtaxi driver has received successfully the ride request
-        [Exceptions]:
-          - No mtaxi is available for the city's zone relative to the ride request: MyTaxiService(B) tries
-          to find a mtaxi that fits the ride request details(in terms of number of passengers) and that is located in the city's zones adjacent
-          to the one above mentioned
-          - No mtaxi available: MyTaxiService(B) notifies the registered user who made the request, that
-          no mtaxi is available and that he should try again later
-        [Flow of Events]:
-          - MyTaxiService(B) extracts the city zone relative to the starting location of the ride request
-          - MyTaxiService(B) selects a mtaxi that suits the ride requests details (in terms of number of passengers) from the queue of available mtaxies
-            for the city zone above mentioned
-          - MyTaxiService(B) checks if the traffic conditions in the zone where the selected mtaxi is located are acceptable
-          (they allow the mtaxi to reach the registered user to pick up within a fixed time)
-          - MyTaxiService(B) forwards the ride request to the driver of the selected mtaxi
-
-
-      -------------------------------------------------------------------------------
-
-      4. A mtaxi driver informs MyTaxiService(B) that he has finished serving a passenger
-        [Actors]: A mtaxi driver, MyTaxiService(B)
-        [Pre-cons]: The mtaxi current location is the ending location of his last ride
-        [Post-cons]: MyTaxiService(B) considers the mtaxi available
-        [Entry Cnd]: The mtaxi driver has finished serving a passenger
-        [Exit Cnd]: The mtaxi driver is acknowledged that MyTaxiService(B) has received successfully his
-        notification
-        [Exceptions]:
-          - Connection Lost: the mtaxi driver is immediately notified of the event and is asked to try again
-          later
-        [Flow of Events]:
-          - The mtaxi driver taps the "END RIDE" button on the screen of his MYT and so notifies MyTaxiService(B) that
-          he has ended serving a passenger and is now available for other ride/booking requests
-
-
-      --------------------------------------------------------------------------------
-
-      5. A mtaxi driver manages a ride request from MyTaxiService(B)
-        [Actors]: A mtaxi driver, MyTaxiService(B)
-        [Pre cons]: The mtaxi has to be available
-        [Post cons]: The mtaxi driver has started driving to the starting location of the requested ride
-        [Entry Cnd]: MyTaxiService(B) has forwarded successfully a ride request to the mtaxi driver
-        [Exit Cnd]: The mtaxi driver is acknowledged that MyTaxiService(B) has received successfully his notification
-        of ride acceptance.
-        [Exceptions]:
-          - If MyTaxiService(B) does not receive the acceptance of the ride request by the mtaxi driver
-          within 5 mins, it selects another mtaxi to fullfil the request, and signals to the supervisors
-          of the mtaxi driver in discussion his behavior
-        [Flow of Events]:
-          - The mtaxi driver taps the "ACCEPT REQUEST" button on the screen of his MYT, and so notifies MyTaxiService(B)
-          that he's going to take immediately care of the request
-
-
-      --------------------------------------------------------------------------------
-
-      6. A registered user logs into MyTaxiService
-        [Actors]: A registered user, MyTaxiService(B)
-        [Pre Cnd]: The registered user is not logged into MyTaxiService. The registered
-        user has access to MyTaxiService app or website
-        [Post Cnd]: The registered user has access to all the functionalities of
-        MyTaxiService reserved to registered users(see functional reqs)
-        [Entry Cnd]: The registered user wants to access the functionalities offered by MyTaxiService
-        [Exit Cnd]:  The registered user is acknowledged that MyTaxiService(B) has recognized as valid the inserted
-        credentials. MyTaxiService(B) will grant the registered user the access to all the functionalities
-        reserved to registered users(see functional reqs)
-        [Exceptions]:
-          - Connection Lost: the registered user is immediately notified of the event and the entire process
-          has to be redone
-          - Wrong Credentials(credentials that do no match any registered used): the registered user is asked to insert his credentials again
-        [Flow of Events]:
-          - The registered user opens the MyTaxiService app or access the MyTaxiService website, and a login
-          screen is shown, along with the option to register to the service and to rembember the login
-          - The registered user inserts his credentials in the relative fields
-          - The registered user clicks/taps the "LOGIN" button
-
-      --------------------------------------------------------------------------------
-
-      7. A registered user logs out from MyTaxiService
-        [Actors]: A registered user, MyTaxiService(B)
-        [Pre cons]: The registered user is logged into MyTaxiService
-        [Post cons]: The registered user has no access to MyTaxiService functionalities
-        until a new login
-        [Entry Cnd]: The registered user wants to logout from MyTaxiService
-        [Exit Cnd]: The registered user is acknowledged that MyTaxiService(B) has logged him out from
-        the service
-        [Exceptions]:
-          - Connection Lost: the registered user is immediately notified of the event and the entire process
-          has to be redone
-        [Flow of Events]:
-          - The registered user taps/clicks the "LOGOUT" button on a screen of the app/website
-          (every screen of the app/website has the "LOGOUT" button)
-
-      --------------------------------------------------------------------------------
-
-      8. A User wants to register to MyTaxiService
-        [Actors]: A user, myTaxiService(B)
-        [Pre cons]: The user has access to the MyTaxiService app or website
-        [Post cons]: The user becomes a registered user
-        [Entry Cnd]: The user wants to register to MyTaxiService in order
-        to access its functionalities
-        [Exit Cnd]: The user is acknowledged that MyTaxiService(B) has registered him
-        [Exceptions]:
-          - Connection Lost: the user is immediately notified of the event and the entire process
-          has to be redone
-          - Invalid data(non correctly formatted data or a email already
-          user by another registered user): the user is immediately notified and forced to insert valid data
-        [Flow of Events]:
-          - The user opens the MyTaxiService app or access the MyTaxiService website, and a login
-            screen is shown, along with the option to register to the service
-          - The user taps/click the "REGISTER TO THE SERVICE" button
-          - The user is redirected to a screen with a form to be filled out with Name, Surname, email a password.
-          - The user fills the form
-          - The user press the "CONFIRM BUTTON" and so submits the form to MyTaxiService(B)
-
-      --------------------------------------------------------------------------------
-
-      9. A registered user undoes a mtaxi booking
-        [Actors]: A registered user, MyTaxiService(B)
-        [Pre cons]: The registered user is logged into MyTaxiService. The registered user
-        has made a successful booking request. The mtaxi booking the registered user wants to undo
-        specifies a pickup time so that (pickuptime - currentime) > 10 mins
-        [Post cons]: The scheduled booking is no more
-        [Entry Cnd]: The registered user wants to undo a mtaxi booking
-        [Exit Cnd]: MyTaxiService(B) acknowledges the registered user that the scheduled booking
-        has been deleted
-        [Exceptions]:
-          - Connection Lost: the registered user is immediatly notified of the event and the entire process
-          has to be redone
-        [Flow of Events]:
-          - The registered user accesses the MyTaxiService app/website area where he can see the list of his bookings
-          - The registered user taps/click the recycle bin icon located in the row that corresponds to the mtaxi booking
-          he wants to undo
-          - The registered user confirm his choice by clicking/tapping the "CONFIRM" button on
-          the popup that has just apparead
-
-      --------------------------------------------------------------------------------
-
-      10. A mtaxi driver receives a zone change order
-        [Actors]: A mtaxi driver, MyTaxiService(B)
-        [Pre cons]: The mtaxi is available
-        [Post cons]: The distribution of mtaxies in the city's zones is more balanced
-        with respect to the average number of ride requests per zone
-        [Entry Cnd]: MyTaxiService(B) has detected that some city's zones have too much mtaxies assigned
-        and some others not, all with respect to average number of ride requests per zone. MyTaxiService
-        has assigned the mtaxi in discussion to another city's zone
-        [Exit Cnd]: MyTaxiService(B) is acknowledged by the mtaxi driver that he has received successfully
-        the zone change order
-        [Exceptions]:
-          - Connection Lost: the mtaxi driver is immediately notified of the event and the entire process has to be redone
-        [Flow of Events]:
-          - MyTaxiService(B) forwards to the mtaxi a change zone order, since the mtaxi has been assigned to another city's zone in order to guarantee
-          a more balanced distribution of mtaxies among all the city's zones
-          - The mtaxi driver receives the order
-
-      --------------------------------------------------------------------------------
-
-      11. A mtaxi driver reports an accident
-        [Actors]: A mtaxi driver, MyTaxiService(B)
-        [Pre cons]: The mtaxi driver has access to and can use MYT. MYT has not been damaged and so
-        is fully functional
-        [Post cons]: MyTaxiService(B) considers the mtaxi not available and stores the data
-        relative to the accident for statical uses
-        [Entry Cnd]: A mtaxi driver had an accident and wants to report it(has to report it)
-        [Exit Cnd]: MyTaxiService(B) acknowledges the driver about the fact that it has received
-        successfully the accident report
-        [Exceptions]:
-          - Connection Lost: the mtaxi driver is immediately notified of the event and the entire process has to be redone
-        [Flow of Events]:
-          - The mtaxi driver taps the "REPORT ACCIDENT" button on the screen of his MYT
-
-      --------------------------------------------------------------------------------
-
-      12. mtaxi registration
-        [Actors]: A taxi driver, MyTaxiService(B)
-        [Pre cons]: The taxi driver is not yet registered to MyTaxiService
-        [Post cons]: The taxi driver becomes a mtaxi driver.
-        [Entry Cnd]: A taxi driver wants to register to MyTaxiService
-        [Exit Cnd]: The taxi driver is acknowledged that MyTaxiService(B) has registered him. MyTaxiService(B)
-        assigns to the taxi a unique identification number
-        [Exceptions]:
-          - Connection Lost: the taxi driver is immediately notified of the event
-          - The taxi is not registered as a city's taxi: the taxi driver is immediately notified
-          and forced to change personal and taxi cab information inserted
-        [Flow of Events]:
-          - The taxi driver access the MyTaxiService website, and a login
-            screen is shown, along with the option to register to the service
-          - The taxi driver click the "REGISTER TO THE SERVICE AS NEW DRIVER" button
-          - The taxi driver is redirected to a screen with a form to be filled out with personal information (name, surname, address, SSN) and
-           taxi cab information(brand and model, license plate number)
-          - The taxi driver fills the form
-          - The taxi driver press the "CONFIRM BUTTON" and so submits the form to MyTaxiService(B)
-
-
+	\end{enumerate}
 
 \end{document}

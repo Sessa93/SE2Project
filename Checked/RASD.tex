@@ -418,11 +418,14 @@
 	       As a consequence of that, George receives by MyTaxiService a notification that alerts him to move to zone C (one of the city's zones
 	       with low concentration of mtaxies). George start driving towards zone C and continues his work.
 	\end{enumerate}
+	\newpage
 
-		     \newpage
     \subsection{Use cases of the application}
+	\subsubsection{General use case diagram}
+	\begin{center}
+	\includegraphics[scale=0.52]{usecaseGeneral.png}
+	\end{center}
 	\begin{enumerate}	
-
 	      \item A registered user makes a ride request
 		\begin{description}
 		        \item [Use case name:] Ride request 
@@ -783,10 +786,26 @@
 		\end{center}
 	\end{enumerate}
 	\newpage
-	\subsection{General use case diagram}
 
 	\subsection{State chart diagrams}
-
+	In this section are present some state chart diagrams to illustrate the dynamic behaviour of MyTaxiService.\newline
+	\newline 
+	This state chart diagram illustrates the state of a generic Mytaxi driver
+	\begin{center}
+	\includegraphics[scale=0.52]{statechartdriver.png}
+	\end{center}
+	This state chart driver illusrates the state of a generic registered user\newline
+	\newline
+	\begin{center}
+	\includegraphics[scale=0.52]{statechartuser.png}
+	\end{center}
+	\newpage
+	This state chart diagram illustrates the behaviour of a generic registered user during the use of MyTaxiService\newline
+	\newline
+	\begin{center}
+	\includegraphics[scale=0.52]{statechartgeneral.png}
+	\end{center} 
+	\newpage
 	\subsection{Class diagram}
 
 	\section{Alloy model}
@@ -795,5 +814,19 @@
 	\subsection{Facts}
 	\subsection{Assertions}
 	\subsection{Predicates}
+
+	\section{Appendix}
+	\subsection{Tools}
+		\begin{itemize}
+			\item Latex: to redact and produce this document
+			\item Start UML: to produce the UML diagrams attached to this document
+			\item Alloy Analyzer 4.2: to prove the consistency of the model defined in this document
+		\end{itemize}
+	\subsection{Hours of work}
+		\begin{itemize}
+			\item Giorgio Pea: 
+			\item Andrea Sessa:
+		\end{itemize}
+		
 
 \end{document}

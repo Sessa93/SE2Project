@@ -510,7 +510,7 @@
 			          \item MyTaxiService(B) selects a mtaxi that suits the ride requests details (in terms of number of passengers) from the queue of available mtaxies
 			            for the city zone above mentioned
 			          \item MyTaxiService(B) checks if the traffic conditions in the zone where the selected mtaxi is located are acceptable
-			          (they allow the mtaxi to reach the registered user to pick up within a fixed time)
+			          (they allow the mtaxi to reach the registered user to pick up within 10 minutes)
 			          \item MyTaxiService(B) forwards the ride request to the driver of the selected mtaxi
 			\end{enumerate}
 		\end{description}
@@ -771,8 +771,8 @@
 			          \item The taxi driver access the MyTaxiService website, and a login
 			            screen is shown, along with the option to register to the service
 			          \item The taxi driver click the "REGISTER TO THE SERVICE AS NEW DRIVER" button
-			          \item The taxi driver is redirected to a screen with a form to be filled out with personal information (name, surname, address, SSN) and
-			           taxi cab information(brand and model, license plate number)
+			          \item The taxi driver is redirected to a screen with a form to be filled out with personal information (name, surname, address, SSN),
+			           taxi cab information(brand and model, license plate number) and working timetable information
 			          \item The taxi driver fills the form
 			          \item The taxi driver press the "CONFIRM BUTTON" and so submits the form to MyTaxiService(B)
 			\end{enumerate}

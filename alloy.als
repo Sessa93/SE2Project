@@ -1,22 +1,17 @@
 //We suppose to snapshot the status of the system in a specific time and to consider as if requests have been just made
 
+//START ENTITIES
+
+//Models integer values
 sig Integer{}
+//Models string values
 sig Strings{}
 
-sig Location{
-	address : one Strings,
-	longitudeRange: one Strings,
-	latitudeRange: one Strings
-}
 
 abstract sig Person {
 	name : one Strings,
 	lastName: one Strings
 }
-
-abstract sig TaxiState{}
-
-abstract sig UserState{}
 
 sig User extends Person {}
 
@@ -28,30 +23,10 @@ sig RegisteredUser extends Person {
 	userState: one UserState
 }
 
-one sig Available, Unavailable extends TaxiState {}
+abstract sig UserState{}
+
 one sig Logged, NonLogged extends UserState {}
 
-sig TaxiDriver extends Person {}
-
-sig MtaxiDriver extends TaxiDriver{
-	workTimeTable : one WorkTimeTable,
-	taxi : one Mtaxi,
-}
-abstract sig Request{
-	id : one Integer,
-	numPassengers: one Integer,
-	startingLocation : one Location,
-	endingLocation: one Location,
-	user : one RegisteredUser
-}
-sig RideRequest extends Request {
-	taxi : one Mtaxi,
-}
-sig BookingRequest extends Request{
-	taxi: lone Mtaxi,
-	date : one Strings,
-	time: one Strings
-}
 sig Mtaxi {
 	id : one Integer,
 	licensePlateNumber: one Strings,
@@ -61,53 +36,102 @@ sig Mtaxi {
 	driver: one MtaxiDriver,
 	state : one TaxiState
 }
+
+abstract sig TaxiState{}
+
+one sig Available, Unavailable extends TaxiState {}
+
+sig TaxiDriver extends Person {}
+
+sig MtaxiDriver extends TaxiDriver{
+	workTimeTable : one WorkTimeTable,
+	taxi : one Mtaxi,
+}
+
+
+abstract sig Request{
+	id : one Integer,
+	numPassengers: one Integer,
+	startingLocation : one Location,
+	endingLocation: one Location,
+	user : one RegisteredUser
+}
+
+sig RideRequest extends Request {
+	taxi : one Mtaxi,
+}
+
+sig BookingRequest extends Request{
+	taxi: lone Mtaxi,
+	date : one Strings,
+	time: one Strings
+}
+
+sig Location {
+	address : one Strings,
+	longitudeRange: one Strings,
+	latitudeRange: one Strings
+}
+
+sig Zone {
+	id: one Strings,
+	locations: some Location
+}
+
 sig Queue {
 	id : one Strings,
 	taxies: set Mtaxi,
 	zone : one Zone
 }
-sig Zone {
-	id: one Strings,
-	locations: some Location
-}
+
 sig WorkTimeTable {
 	startingTime: one Strings,
 	endingTime: one Strings,
 	startingLunchTime: one Strings,
 	endingLunchTime: one Strings
 }
+//ENDING ENTITIES
 
-//FACTS
-fact DiffRideRequestDiffTaxi {
+//STARTING FACTS
+// D -> Different
+// R -> Request
+//Different requests correspond to different mtaxies
+fact DRequestsDMtaxies  {
+	//Different requests correspond to different mtaxies
 	all r1, r2 : RideRequest | r1!=r2  implies	r1.taxi  != r2.taxi
-}
-fact DiffBookingRequest {
+	//Different booking requests correspond to different mtaxies if these two different requests are associated to two taxies
 	all r1, r2 : BookingRequest | r1!=r2 and #r1.taxi = 1 and #r2.taxi = 1  implies	r1.taxi  != r2.taxi
+	//Mixed case
+	all r1 : RideRequest, r2: BookingRequest | #r2.taxi = 1 and	r1.taxi  != r2.taxi
 }
-fact DiffBookingRide {
- 	all r1 : RideRequest, r2: BookingRequest |	r1.taxi  != r2.taxi
-}
-fact zoneQueue {
+//A zone is associated to a specif queue and a queue is associated to a specific zone
+fact zonesQueues {
+	//Every zone is associated with just one queue
 	all z : Zone | one q: Queue | q.zone = z
-}
-fact DiffQueuesDiffZones {
+	//Different queues correspond to different zones
 	all q1, q2 : Queue | 	q1!=q2  implies	q1.zone  != q2.zone
 }
-fact DiffRequestDiffId {
+
+fact IdsConsistency {
+	//Different requests have different request ids
 	all r1, r2 : Request | 	r1!=r2  implies 	r1.id  != r2.id
-}
-fact DiffTaxiDiffId {
+	//Different mtaxies have different mtaxi ids
 	all t1, t2 : Mtaxi | 	t1!=t2  implies 	t1.id  != t2.id
+	//Different queues have different ids
+	all q1, q2: Queue | q1 != q2 implies q1.id != q2.id
 }
-fact DiffUsersDiffMail {
+//Different registered users have different emails
+fact DUsersDMails {
 	all u1, u2 : RegisteredUser | 	u1!=u2  implies 	u1.email  != u2.email
 }
-fact DiffReqsDiffUsers {
+//Different requests are associated to different users
+fact DRideRequestsDUsers {
+	//Ride requests case
 	all r1, r2 : RideRequest | r1!=r2  implies 	r1.user  != r2.user
-}
-fact DiffBooksDiffUsers {
+	//Booking request case
 	all r1, r2 : BookingRequest | r1!=r2  implies 	r1.user  != r2.user
 }
+
 fact RequestLoggedUser {
 	all r : Request | (r.user).userState = Logged
 }
@@ -115,37 +139,44 @@ fact RequestLoggedUser {
 fact BookingLoggedReg_3{
 	all u : RegisteredUser, r: RideRequest | u.rideRequest=r iff r.user = u
 }
-fact DiffQueuesDiffID {
-	all q1, q2: Queue | q1 != q2 implies q1.id != q2.id
-}
-fact DiffZonesDiffLocation {
+//Two different zones aggregate different locations
+fact DZonesDLocations {
 	all z1, z2: Zone | z1 != z2 implies no l: Location | l in z1.locations and l in z2.locations
 }
 fact LocationConstency {
+	//Two different location can't have the same address
 	all l1, l2: Location | l1 != l2 implies l1.address != l2.address
+	//Like above but for longitude range
 	all l1, l2: Location | l1 != l2 implies l1.longitudeRange != l2.longitudeRange
+	//Like above but for latitude range
 	all l1, l2: Location | l1 != l2 implies l1.latitudeRange != l2.latitudeRange
 }
-fact AvailableTaxiRequest {
-	all r: RideRequest | some t: Mtaxi | r.taxi = t and t.state = Available
+//Only available mtaxies can fullfil a ride request
+fact RideRequestAvailableMtaxi {
+	all r: RideRequest | (r.taxi).state = Available
 }
 fact OneDriverOneTaxi {
 	all t: Mtaxi, d: MtaxiDriver | t.driver = d iff d.taxi = t
 }
-fact DifferentLocations {
+//A request has a diffrent start and ending location
+fact DStartingEndingLocations {
 	all r: Request | r.startingLocation != r.endingLocation
 }
 fact WorktimeTableConsistency {
+	//All mtaxies are actually supposed to work
 	all w: WorkTimeTable | w.startingTime !=  w.endingTime
+	//All mtaxies are actually supposed to have time to have lunch
 	all w: WorkTimeTable | w.startingLunchTime !=  w.endingLunchTime
 }
-fact noUsersToSameBookingreq {
+//A registered user can't book two or more taxies for the same date and time
+fact NonUbiquosUsers {
 	all u: RegisteredUser | all b1,b2:BookingRequest | b1 != b2 and b2 in u.bookingRequest and b1 in u.bookingRequest implies b2.date != b1.date and b2.time != b1.time 
 }
+//A queue aggregates only available mtaxies
 fact queuesOfAvailableTaxies {
 	all q: Queue | all t: Mtaxi | t in q.taxies and t.state = Available
 }
-//ASSERT
+//START ASSERTIONS
 assert  NoRequestWithoutUserDriver {
 	all r: RideRequest | some u: RegisteredUser, t: Mtaxi | r.taxi = t and r.user = u 
 }

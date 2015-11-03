@@ -1,6 +1,3 @@
-//We suppose to snapshot the status of the system in a specific time and to consider as if a ride requests have been just made
-//and a booking request has been just forwarded to a mtaxi
-
 //START ENTITIES
 
 //Models integer values
@@ -49,7 +46,6 @@ sig MtaxiDriver extends TaxiDriver{
 	taxi : one Mtaxi,
 }
 
-
 abstract sig Request{
 	id : one Integer,
 	numPassengers: one Integer,
@@ -63,7 +59,7 @@ sig RideRequest extends Request {
 }
 
 sig BookingRequest extends Request{
-	taxi: one Mtaxi,
+	taxi: lone Mtaxi, //MOD
 	date : one Strings,
 	time: one Strings
 }
@@ -194,7 +190,6 @@ assert  NoRequestsWithoutUserOrMtaxies {
 }
 check  NoRequestsWithoutUserOrMtaxies for 5
 
-
 assert NoUserUbiquos {
 	all u: RegisteredUser | no b1,b2 : BookingRequest | b1 != b2 and b1 in u.bookingRequest and b2 in u.bookingRequest and b1.date = b2.date and b1.time  = b2.time
 }
@@ -212,6 +207,7 @@ assert RequestsMapOnlyAvailableMtaxies {
 	all r: BookingRequest | (r.taxi).state = Available
 }
 check RequestsMapOnlyAvailableMtaxies for 5
+
 //ENDING ASSERTIONS
 
 //STARTING PREDICATES
@@ -224,7 +220,6 @@ pred show {
 	#Mtaxi > 1
 }
 run show for 5
-
 
 //Show a world which enlights ride/booking request properties
 pred RideBookingRequestProperties {

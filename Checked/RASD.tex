@@ -61,7 +61,7 @@
 %%% The "real" document content comes below...
 \titlepic{\includegraphics[scale=0.60]{polimi_logo.jpg}}
 \title{\textbf{R}equirements \textbf{A}nalysis and \textbf{S}pecifications \textbf{D}ocument}
-\author{Giorgio Pea, Andrea Sessa}
+\author{Giorgio Pea(Mat. 000000), Andrea Sessa(Mat. 850082)}
 \date{} % Activate to display a given date or no date (if empty),
          % otherwise the current date is printed
 
@@ -98,6 +98,11 @@
     In addition to that, MyTaxiService provides an efficient way to allocate taxies by dividing the
     city in zones and using a queue based allocation system, in order to reduce the average
     waiting time and city's traffic.
+
+  \subsection{Future Implementations}
+	Further possible modifications/extension are represented by adding to the described system 
+	the possibility of managing "Taxi Sharing". In this case users are allowed to "share" a taxi ride with others
+	users going in the same directions.
 
   \subsection{Goals}
 	\begin{enumerate}
@@ -809,25 +814,38 @@
 	\end{center} 
 	\newpage
 	\subsection{Class diagram}
+	\includegraphics[scale=0.55]{classdiagram.png}
 
 	\section{Alloy model}
 
-	\subsection{General model}
+	\subsection{Sigs}
+		\includegraphics[scale=0.8]{sig1.png}
+		\newpage
+		\includegraphics[scale=0.8]{sig2.png}
+		
 	\subsection{Facts}
+		\includegraphics[scale=0.78]{fact1.png}
+		\newpage
+		\includegraphics[scale=0.8]{fact2.png}
+
 	\subsection{Assertions}
+		\includegraphics[scale=0.8]{assertions.png}
 	\subsection{Predicates}
+
+	\subsection{Results}
 
 	\section{Appendix}
 	\subsection{Tools}
 		\begin{itemize}
-			\item Latex: to redact and produce this document
+			\item Latex/Atom: to redact and produce this document
+			\item Git: to manage the collaboration of the team members
 			\item Start UML: to produce the UML diagrams attached to this document
 			\item Alloy Analyzer 4.2: to prove the consistency of the model defined in this document
 		\end{itemize}
 	\subsection{Hours of work}
 		\begin{itemize}
 			\item Giorgio Pea: 
-			\item Andrea Sessa:
+			\item Andrea Sessa: 36 hours
 		\end{itemize}
 		
 

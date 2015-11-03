@@ -1,4 +1,5 @@
-//We suppose to snapshot the status of the system in a specific time and to consider as if requests have been just made
+//We suppose to snapshot the status of the system in a specific time and to consider as if a ride requests have been just made
+//and a booking request has been just forwarded to a mtaxi
 
 //START ENTITIES
 
@@ -62,7 +63,7 @@ sig RideRequest extends Request {
 }
 
 sig BookingRequest extends Request{
-	taxi: lone Mtaxi,
+	taxi: one Mtaxi,
 	date : one Strings,
 	time: one Strings
 }
@@ -94,15 +95,14 @@ sig WorkTimeTable {
 
 //STARTING FACTS
 // D -> Different
-// R -> Request
 //Different requests correspond to different mtaxies
 fact DRequestsDMtaxies  {
 	//Different requests correspond to different mtaxies
 	all r1, r2 : RideRequest | r1!=r2  implies	r1.taxi  != r2.taxi
 	//Different booking requests correspond to different mtaxies if these two different requests are associated to two taxies
-	all r1, r2 : BookingRequest | r1!=r2 and #r1.taxi = 1 and #r2.taxi = 1  implies	r1.taxi  != r2.taxi
+	all r1, r2 : BookingRequest | r1!=r2  implies	r1.taxi  != r2.taxi
 	//Mixed case
-	all r1 : RideRequest, r2: BookingRequest | #r2.taxi = 1 and	r1.taxi  != r2.taxi
+	all r1 : RideRequest, r2: BookingRequest | r1.taxi  != r2.taxi
 }
 //A zone is associated to a specif queue and a queue is associated to a specific zone
 fact zonesQueues {
@@ -131,13 +131,16 @@ fact DRideRequestsDUsers {
 	//Booking request case
 	all r1, r2 : BookingRequest | r1!=r2  implies 	r1.user  != r2.user
 }
-
+//A ride request has to be performed by a logged user
 fact RequestLoggedUser {
-	all r : Request | (r.user).userState = Logged
+	all r : RideRequest | (r.user).userState = Logged
 }
-
-fact BookingLoggedReg_3{
+//If a registered user is associated with a request than that request is associated with that user
+fact TwoWayBindingUserRequests{
+	//Ride requests case
 	all u : RegisteredUser, r: RideRequest | u.rideRequest=r iff r.user = u
+	//Booking requests case
+	all u : RegisteredUser, r: BookingRequest | u.bookingRequest = r iff r.user = u
 }
 //Two different zones aggregate different locations
 fact DZonesDLocations {
@@ -151,10 +154,14 @@ fact LocationConstency {
 	//Like above but for latitude range
 	all l1, l2: Location | l1 != l2 implies l1.latitudeRange != l2.latitudeRange
 }
-//Only available mtaxies can fullfil a ride request
+//Only available mtaxies can fullfil a requests
 fact RideRequestAvailableMtaxi {
+	//Ride requests case
 	all r: RideRequest | (r.taxi).state = Available
+	//Booking requests case
+	all r: BookingRequest | (r.taxi).state = Available
 }
+//If a mtaxi is associated with a mtaxi driver than that driver is associated with that mtaxi
 fact OneDriverOneTaxi {
 	all t: Mtaxi, d: MtaxiDriver | t.driver = d iff d.taxi = t
 }
@@ -176,27 +183,38 @@ fact NonUbiquosUsers {
 fact queuesOfAvailableTaxies {
 	all q: Queue | all t: Mtaxi | t in q.taxies and t.state = Available
 }
+
 //START ASSERTIONS
-assert  NoRequestWithoutUserDriver {
-	all r: RideRequest | some u: RegisteredUser, t: Mtaxi | r.taxi = t and r.user = u 
+
+assert  NoRequestsWithoutUserOrMtaxies {
+	//RideRequest case
+	all r: RideRequest | one u: RegisteredUser, t: Mtaxi | r.taxi = t and r.user = u 
+	//BookingRequest case
+	all r: BookingRequest | one u: RegisteredUser, t: Mtaxi | r.taxi = t and r.user = u 
 }
-check  NoRequestWithoutUserDriver for 5
+check  NoRequestsWithoutUserOrMtaxies for 5
+
 
 assert NoUserUbiquos {
 	all u: RegisteredUser | no b1,b2 : BookingRequest | b1 != b2 and b1 in u.bookingRequest and b2 in u.bookingRequest and b1.date = b2.date and b1.time  = b2.time
 }
 check NoUserUbiquos for 5
+
 assert NoMtaxiWithoutDriver {
-	all t: Mtaxi | some d: MtaxiDriver | t.driver = d
+	all t: Mtaxi | one d: MtaxiDriver | t.driver = d
 }
 check NoMtaxiWithoutDriver for 5
 
-assert NoUnavailableTaxiToRequest {
-	all t: Mtaxi, r: RideRequest | t.state = Available and r.taxi = t
+assert RequestsMapOnlyAvailableMtaxies {
+	//Ride request case
+	all r: RideRequest | (r.taxi).state = Available
+	//Booking request case
+	all r: BookingRequest | (r.taxi).state = Available
 }
-check NoUnavailableTaxiToRequest for 5
+check RequestsMapOnlyAvailableMtaxies for 5
+//ENDING ASSERTIONS
 
-//Predicates section
+//STARTING PREDICATES
 
 //General world generation
 pred show {
@@ -207,14 +225,6 @@ pred show {
 }
 run show for 5
 
-//Show a world in which there are no taxi available but some user has made a BookingRequest
-pred  NoTaxiAvailable {
-	some u: RegisteredUser, r: BookingRequest | r.user = u
-	no t: Mtaxi | t.state = Available
-	#Mtaxi > 1
-	#MtaxiDriver > 1
-}
-run NoTaxiAvailable for 5
 
 //Show a world which enlights ride/booking request properties
 pred RideBookingRequestProperties {

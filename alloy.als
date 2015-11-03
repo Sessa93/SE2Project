@@ -208,9 +208,27 @@ assert RequestsMapOnlyAvailableMtaxies {
 }
 check RequestsMapOnlyAvailableMtaxies for 5
 
+//Verify that remove and operation are consistent
+assert DelUndoAdd {
+	all q,q',q'': Queue, t: Mtaxi | addTaxiToQueue[q,q',t] and delTaxiFromQueue[q',q'',t] implies q.taxies = q''.taxies
+}
+check DelUndoAdd for 5
+
 //ENDING ASSERTIONS
 
 //STARTING PREDICATES
+
+//Simulates the add of a taxi to a queue
+pred addTaxiToQueue(q,q': Queue, t: Mtaxi) {
+	q'.taxies = q.taxies + t
+}
+run  addTaxiToQueue for 5
+
+//Simulates the deletion of a taxi from a queue
+pred delTaxiFromQueue(q,q': Queue, t: Mtaxi) {
+	q'.taxies = q.taxies - t
+}
+run  addTaxiToQueue for 5
 
 //General world generation
 pred show {
@@ -230,6 +248,9 @@ pred RideBookingRequestProperties {
 	#BookingRequest = 1
 }
 run RideBookingRequestProperties for 5
+
+
+
 
 
 

@@ -120,6 +120,10 @@ fact IdsConsistency {
 fact DUsersDMails {
 	all u1, u2 : RegisteredUser | 	u1!=u2  implies 	u1.email  != u2.email
 }
+//Each mtaxi belong(if available) to exactly one queue 
+fact EachQueueDiffTaxi {
+	all q1, q2: Queue | no t: Mtaxi | q1 != q2 and t in q1.taxies and t in q2.taxies
+}
 //Different requests are associated to different users
 fact DRideRequestsDUsers {
 	//Ride requests case
@@ -177,7 +181,7 @@ fact NonUbiquosUsers {
 }
 //A queue aggregates only available mtaxies
 fact queuesOfAvailableTaxies {
-	all q: Queue | all t: Mtaxi | t in q.taxies and t.state = Available
+	all q: Queue, t: Mtaxi | t in q.taxies implies t.state = Available
 }
 
 //START ASSERTIONS
@@ -210,7 +214,7 @@ check RequestsMapOnlyAvailableMtaxies for 5
 
 //Verify that remove and add operations are consistent
 assert DelUndoAdd {
-	all q,q',q'': Queue, t: Mtaxi | addTaxiToQueue[q,q',t] and delTaxiFromQueue[q',q'',t] implies q.taxies = q''.taxies
+	all q,q',q'': Queue, t: Mtaxi |t not in q.taxies and addTaxiToQueue[q,q',t] and delTaxiFromQueue[q',q'',t] implies q.taxies = q''.taxies
 }
 check DelUndoAdd for 5
 
@@ -228,15 +232,16 @@ run  addTaxiToQueue for 5
 pred delTaxiFromQueue(q,q': Queue, t: Mtaxi) {
 	q'.taxies = q.taxies - t
 }
-run  addTaxiToQueue for 5
+run  delTaxiFromQueue for 5
 
 //General world generation
 pred show {
 	#RegisteredUser = 2
-	#RideRequest = 1
+	#RideRequest > 1
 	#BookingRequest = 1
-	#Mtaxi = 2
-	#WorkTimeTable = 1
+	#Mtaxi > 2
+	#WorkTimeTable > 1
+	#Queue > 1
 }
 run show for 5
 

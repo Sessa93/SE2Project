@@ -61,7 +61,7 @@
 %%% The "real" document content comes below...
 \titlepic{\includegraphics[scale=0.60]{polimi_logo.jpg}}
 \title{\textbf{R}equirements \textbf{A}nalysis and \textbf{S}pecifications \textbf{D}ocument}
-\author{Giorgio Pea(Mat. 000000), Andrea Sessa(Mat. 850082)}
+\author{Giorgio Pea(Mat. 853872), Andrea Sessa(Mat. 850082)}
 \date{} % Activate to display a given date or no date (if empty),
          % otherwise the current date is printed
 
@@ -87,7 +87,7 @@
   \subsection{Actual System}
     The whole project is built on the assumption that no preexistent system exists.
     Every feature and component of the new system has to be built without modifying
-    or reusing parts of a previous system.
+    or reusing parts of any previous systems.
 
   \subsection{Scope of the project}
     The aim of this project is to develop MyTaxiService, a web/mobile application that makes easier and quicker taking taxies
@@ -100,9 +100,9 @@
     waiting time and city's traffic.
 
   \subsection{Future Implementations}
-	Further possible modifications/extension are represented by adding to the described system 
+	Further possible modifications/extensions are represented by adding to the described system 
 	the possibility of managing "Taxi Sharing". In this case users are allowed to "share" a taxi ride with others
-	users going in the same directions.
+	users going in the same direction.
 
   \subsection{Goals}
 	\begin{enumerate}
@@ -132,20 +132,23 @@
 	    \item MyTaxiService has been commissioned by the city's local government.
 	
 	    \item The local government provides each mtaxi with a device similar to a small navigator(MYT). This device is used
-	      to: see and accept ride/booking requests, see zone change orders, report accidents; it has a built in gps module through which MyTaxiService can
+	      to: see and accept ride/booking requests, see zone change orders, report accidents; it has a built-in gps module through which MyTaxiService can
 	      track the position of the mtaxi on which is mounted
+
+	    \item Every MYT device is strictly asscociated to a Mtaxi driver, so that when MYT is turned on the mtaxi driver is automatically logged into MyTaxiService  
 	
 	    \item Mtaxies can only serve ride/booking requests forwarded by MyTaxiService(B)
 	
 	    \item Mtaxies operate only whithin the city's borders
+
 	\end{enumerate}
 
   \subsection{Terms and definitions}
 	\begin{description}
 	      \item [User] \hfill \\A generic person not registered to MyTaxiService
-	      \item [Passenger] \hfill \\ a registered user that has requested a mtaxi ride/booking
+	      \item [Passenger] \hfill \\ A registered user that has requested a mtaxi ride/booking
 	      \item [Registered User] \hfill \\ A generic person that is registered to MyTaxiService
-	      \item [Mtaxi] \hfill \\ a taxi that joined MyTaxiService
+	      \item [Mtaxi] \hfill \\ A taxi that joined MyTaxiService
 	      \item [MyTaxiService(B)] \hfill \\ The back end of MyTaxiService, that is to say, those software components
 	        that manage the forwarding of ride/booking requests to mtaxi drivers, the search of available mtaxies compatible with the received ride/booking requests, the distribution
 	        of mtaxies in the different city's zones and other internal tasks not exposed to users or mtaxi drivers
@@ -160,7 +163,7 @@
 	      these requests and report accidents
 	      \item [A mtaxi is available] \hfill \\ A mtaxi has finished serving a passenger and is ready for a new ride
 	      \item [A mtaxi is unavailable]\hfill \\ A mtaxi is considered unavailable if and only if or is serving a passenger or has reported an accident or
-	      is stuck in the traffic(and this has been detected by MyTaxiService(B))
+	      is stuck in the traffic(and this has been detected by \newline MyTaxiService(B))
 	      \item [Zone] \hfill \\An area of the city about $2km^2$ wide
 	      \item [Credentials] \hfill \\ A combination of username and password, used by a registered user to access the MyTaxiService application
 	      \item [Queue] \hfill \\ A data structure managed with a FIFO policy.
@@ -173,6 +176,7 @@
       \begin{itemize}
 		\item \textbf{RASD:} Requirements Analysis and Specification Document
       		\item \textbf{FIFO:} First In First Out
+		\item \textbf{MITM:} Man In The Middle
       \end{itemize}
 
     \subsection{Reference Documents}
@@ -237,12 +241,15 @@
 	      opens next time the MyTaxiService app or website, he has not to log in again (Remember me functionality)
 	      \item MyTaxiService has to implement a user registration process that requires the user to insert: name, lastname,
 	      email, password
-	      \item MyTaxiService has to implement a taxi driver registration process that requires the user to insert: name, lastname,
-	      email, password
+	      \item MyTaxiService has to implement a taxi driver registration process that requires the driver to insert personal data(name, lastname, address, ssn), vehicle data(brand and model, license plate number) and 
+	      the work time table 
 	      \item During the user registration process, MyTaxiService has to be able to check the formal validity of the
-	      data inserted by the user
+	      data inserted
+	      \item During the taxi driver registration process, MyTaxiService has to be able to check the formal validity of the
+	      data inserted 
 	      \item MyTaxiService has to only accept user registrations with mail addresses not already used by other
 	      registered users
+	      \item MyTaxiService has to only accept taxi driver registrations with ssn and license plate number not already used by other mtaxidrivers
 	      \item MyTaxiService has to only accept registrations whose data formal validity has been
 	      check successfully
 	      \item Logged registered users can undo a reservation only 10 minutes before the inserted
@@ -255,8 +262,10 @@
 	      \item MyTaxiService has to be able to access a list of every valid city's location
 	      \item MyTaxiService has to be able to access realtime data about the city's traffic
 	      \item MyTaxiService has to force a logged registered user to choose as starting/ending locations of a ride only valid city's locations
-	      \item MyTaxiService has to force a logged registered user to chose among a list of only valid city's locations
+	      \item MyTaxiService has to force a logged registered user to chose among a list of only valid city's locations 
+	      \item MyTaxiService has to force a logged registered user, in the context of a booking request, to chose among a list of only valid hours, minutes, dates 
 	      \item MyTaxiService has to force a logged registered user not choose the same location as starting and ending location of a ride
+	      \item MyTaxiService has to force a logged registered user not to make a booking request that is a copy, in terms of date and time, of a previous non completed booking request
 	      \item MyTaxiService(B) has to be able to retrieve the position of each mtaxies using the gps system of their MYT devices
 	      \item MyTaxiService(B) has to be able to logically divide the city in zones and associate sets of gps
 	      coordinates to these zones
@@ -266,17 +275,17 @@
 	      \item MyTaxiService(B) has to be able, using the mtaxies' gps coordinates, to analyze their
 	      distribution among the different city's zones and understand if there's the need to change this
 	      distribution in relation to the average number of ride/booking requests per city's zone.
-	      \item MyTaxiService(B) has to be able to send change zone order to mtaxies
+	      \item MyTaxiService(B) has to be able to send change zone orders to mtaxies
 	      \item MyTaxiService(B) has to be able, using mtaxies' gps coordinates, to analyze the mtaxies'
 	      distribution among the different city's zone and build queues of available mtaxies for each zone
 	      \item MyTaxiDriver(B) has to manage the forwarding of ride/booking requests using the queue based system discussed above:
 	      a ride/booking request is forwarded to the first mtaxi in the queue that corresponds to the city's zone of the requested ride's
 	      starting location
-	      \item MyTaxiService(B) has to be able to manage a situation in which a mtaxi does not accept a ride/booking request within a fixed time.
+	      \item MyTaxiService(B) has to be able to manage a situation in which a mtaxi does not accept a ride/booking request within 2 mins.
 	      In this situation MyTaxiService has to find a new mtaxi to forward the request
-	      \item MyTaxiService app and website must have the same functionalities
+	      \item MyTaxiService app and website have to  have the same functionalities
 	      \item MyTaxiService(B) has to have access to the characteristics of each mtaxies (number of passengers, unique code)
-	      \item MyTaxiService(B) has to have access to the mtaxi drivers' work timetable, in order to know when a mtaxi should start
+	      \item MyTaxiService(B) has to use the mtaxi drivers' work timetable, in order to know when a mtaxi should start
 	      serving passengers, should take a lunch break or should finish all activities
 	      \item MyTaxiService has to consider unavailable only mtaxies that or are serving a ride/booking request or have reported an accident or
 	      are taking a break according to the work timetable, no other exceptions are allowed
@@ -285,8 +294,8 @@
 
     \subsection{Non functional requirements}
 	\begin{enumerate}
-	      \item MyTaxiService has to guarantee that a mtaxi arrives at the start location of a ride within 10 minutes
-	      \item A mtaxi driver has to accept a ride/booking request within 2 minutes
+	      \item MyTaxiService has to guarantee that a mtaxi arrives at the start location of a ride within 10 mins
+	      \item A mtaxi driver has to accept a ride/booking request within 2 mins
 	      \item After a failure MyTaxiService has to be restarted within 1 hour
 	      \item MyTaxiService must be available 24h/7d
 	      \item Registered users have to be able to use properly all MyTaxiService's functionalities after a training time of at most 15 mins
@@ -297,54 +306,62 @@
       \subsubsection{Security}
         Among non functional requirements particular attention must be devoted to security aspects.
         During the login MyTaxiService has to prevent malicious users from phishing sensible data(password, username etc) by adopting suitable
-        protection mechanism(password encryption, encrypted communication protocols etc).
+        protection mechanisms(password encryption, encrypted communication protocols etc).
         From the server side MyTaxiService must guarantee that data access from remotes users is controlled and filtered such that
         no unauthorized access(SQL injection, MITM attack, etc) to sensible data is permitted.
 \newpage
       \subsubsection{Interfaces Requirements}
-       In this section is shown a series of mock up that specify a set of requirements over the user interface.\newline
-       Each mock up is valid both for the web site and mobile application version of MyTaxiService\newline 
+       In this section is shown a series of mockups that specify a set of requirements over the user interface.\newline
+       Each mockup is valid both for the website and mobile application version of MyTaxiService\newline 
         \newline
-        This mock up shows the user login page\newline
+        This mockup shows the user login page\newline
        \newline
         \includegraphics[scale=0.52]{loginInt.png}\newline
         \newpage
         \noindent
-        This  mock up shows the user registration page\newline
+        This  mockup shows the user registration page\newline
 	\newline
         \includegraphics[scale=0.52]{userRegInt.png}\newline
         \newpage
+       
         \noindent
-        This mock up shows the user ride request page\newline
+        This  mockup shows the user registration page\newline
+        \newline
+        \begin{center}
+        \includegraphics[scale=0.40]{taxiRegInt.png}\newline
+        \end{center}
+        \newpage
+
+        \noindent
+        This mockup shows the ride request page\newline
         \newline
         \includegraphics[scale=0.52]{taxiReqInt.png}\newline
         \newpage
         \noindent
-        This mock up shows the user ride booking page\newline
+        This mockup shows the booking request page\newline
        \newline
         \includegraphics[scale=0.52]{taxiBookInt.png}\newline
         \newpage
         \noindent
-        This mock up shows the empty booking/ride request view page\newline
+        This mockup shows the home page with no booking/ride pending requests\newline
         \newline
         \includegraphics[scale=0.52]{viewEmptyInt.png}\newline
         \newpage
         \noindent
-        This mock up shows the booking/ride request view page when the user has requested a ride \newline
+        This mockup shows the home page with one pending requests\newline
         \newline
         \includegraphics[scale=0.52]{viewReqInt.png}\newline
         \newpage
         \noindent
-        This mock up shows the booking/ride request view page when the user has booked and requested a ride\newline
+        This mockup shows the home page with one pending ride and booking request\newline
         \newline
         \includegraphics[scale=0.52]{viewReqBookPage.png}\newline
         \newpage
         \noindent
-        This mock up shows the deletion of a booking request by a registered user\newline
+        This mockup shows the deletion of a booking request by a registered user\newline
         \newline
         \includegraphics[scale=0.52]{deleteBookInt.png}\newline
         \newline
-        
 
     \subsection{Constraints}
 	\begin{enumerate}
@@ -353,9 +370,9 @@
 
     \subsection {Domain Properties}
 	\begin{enumerate}
-	      \item Traffic information are reliable
+	      \item Traffic information is  reliable
 	      \item GPS data are reliable
-	      \item If a registered user request a RideRequest then then he will be present at the starting point when the taxi arrives
+	      \item If a registered user requests a ride request then he will be present at the starting point when the mtaxi arrives
 	\end{enumerate}
 
 \section {Scenarios, Use Case and UML diagrams}
@@ -418,11 +435,11 @@
 	
 	    \item It's Thursday, 14:00 and George, a young mtaxi driver, is driving in the city's center.
 	       He noticed many of his colleagues waiting for requests in their cabs.
-	       Meanwhile MyTaxiService(B), by making some analysis on the mtaxies' GPS data, realizes that there are too many mtaxies
+	       Meanwhile MyTaxiService(B), by making some analysis on the mtaxies' gps data, realizes that there are too many mtaxies
 	       in the city's center in relation with the number of ride requests for that zone. The system also indentifies
-	       some zones of the city where the concentration of taxies is too low. According to a policy based on some statistical data
+	       some zones of the city where the concentration of mtaxies is too low. According to a policy based on some statistical data
 	       MyTaxiService(B) decides to move 10 mtaxies, including the George's one, from the city's center to the city's zones mentioned above.
-	       As a consequence of that, George receives by MyTaxiService a notification that alerts him to move to zone C (one of the city's zones
+	       As a consequence of, George receives by MyTaxiService a notification that alerts him to move to zone C (one of the city's zones
 	       with low concentration of mtaxies). George start driving towards zone C and continues his work.
 	\end{enumerate}
 	\newpage
@@ -438,7 +455,7 @@
 		        \item [Use case name:] Ride request 
 		        \item [Actors:] A registered user, MyTaxiService(B)
 		        \item [Pre-cons:] The registered user has logged into MyTaxiService.
-		        \item [Post-cons:] MyTaxiService(B) receives the ride request and tries to find an available taxi to fulfill it.
+		        \item [Post-cons:] MyTaxiService(B) receives the ride request and tries to find an available mtaxi to fulfill it.
 		        \item [Entry Cnd:] A registered user wants to be picked up by a mtaxi as soon as possible in a given place.
 		        \item [Exit Cnd:] The registered user is acknowledged that MyTaxiService(B) has received successfully the ride
 		        request
@@ -487,7 +504,7 @@
 			           \item The registered user is redirected to a screen dedicated to the insertion
 			           of the requested booking details
 			           \item The registered user fills out a form for the booking request, inserting the ride's starting and ending location,
-			           the number of passengers, the date and the time for which be picked up.
+			           the number of passengers, the date and the time(chosen from a list of every valid dates and times) for which be picked up.
 			           \item The registered user submits to MyTaxiService(B) the form by clicking/tapping the "CONFIRM BOOKING" button
 			\end{enumerate}
 		\end{description}
@@ -569,7 +586,7 @@
 		        \item [Exceptions]\hfill
 			\begin{enumerate}
 			          \item If MyTaxiService(B) does not receive the acceptance of the ride request by the mtaxi driver
-			          within 5 mins, it selects another mtaxi to fullfil the request, and signals to the supervisors
+			          within 2 mins, it selects another mtaxi to fullfil the request, and signals to the supervisors
 			          of the mtaxi driver in discussion his behavior
 			\end{enumerate}
 		        \item [Flow of Events]\hfill
@@ -587,7 +604,7 @@
 	
 	        \item A registered user logs into MyTaxiService
 		\begin{description}
-		        \item [Use case name:] Log in
+		        \item [Use case name:] Login
 		        \item [Actors:] A registered user, MyTaxiService(B)
 		        \item [Pre Cnd:] The registered user is not logged into MyTaxiService. The registered
 		        user has access to MyTaxiService app or website
@@ -618,7 +635,7 @@
 	
 	       \item A registered user logs out from MyTaxiService
 		\begin{description}
-		        \item [Use case name:] Log out
+		        \item [Use case name:] Logout
 		        \item [Actors:] A registered user, MyTaxiService(B)
 		        \item [Pre cons:] The registered user is logged into MyTaxiService
 		        \item [Post cons:] The registered user has no access to MyTaxiService functionalities
@@ -677,12 +694,12 @@
 	
 	       \item A registered user undoes a mtaxi booking
 		\begin{description}
-		        \item [Use case name:] Booking undo
+		        \item [Use case name:] Mtaxi booking undo
 		        \item [Actors:] A registered user, MyTaxiService(B)
 		        \item [Pre cons:] The registered user is logged into MyTaxiService. The registered user
 		        has made a successful booking request. The mtaxi booking the registered user wants to undo
-		        specifies a pickup time so that (pickuptime - currentime) > 10 mins
-		        \item [Post cons:] The scheduled booking is no more
+		        specifies a pickup time so that: \newline $(pickuptime - currentime) > 10 mins$
+		        \item [Post cons:] The scheduled mtaxi booking is no more
 		        \item [Entry Cnd:] The registered user wants to undo a mtaxi booking
 		        \item [Exit Cnd:] MyTaxiService(B) acknowledges the registered user that the scheduled booking
 		        has been deleted
@@ -763,7 +780,7 @@
 	
 	      \item A taxi driver wants to register to MyTaxiService
 		\begin{description}
-		        \item [Use case name:] Driver Registration
+		        \item [Use case name:] Taxi driver Registration
 		        \item [Actors]: A taxi driver, MyTaxiService(B)
 		        \item [Pre cons]: The taxi driver is not yet registered to MyTaxiService
 		        \item [Post cons]: The taxi driver becomes a mtaxi driver.
@@ -778,11 +795,10 @@
 			\end{enumerate}
 		        \item [Flow of Events]\hfill
 			\begin{enumerate}
-			          \item The taxi driver access the MyTaxiService website, and a login
-			            screen is shown, along with the option to register to the service
-			          \item The taxi driver click the "REGISTER TO THE SERVICE AS NEW DRIVER" button
-			          \item The taxi driver is redirected to a screen with a form to be filled out with personal information (name, surname, address, SSN),
-			           taxi cab information(brand and model, license plate number) and working timetable information
+			          \item The taxi driver accesses the MyTaxiService website
+			          \item The taxi driver click the "REGISTER AS DRIVER" button
+			          \item The taxi driver is redirected to a screen with a form to be filled out with personal information (name, last name, address, SSN),
+			           taxi cab information(brand and model, license plate number) and working work timetable information
 			          \item The taxi driver fills the form
 			          \item The taxi driver press the "CONFIRM BUTTON" and so submits the form to MyTaxiService(B)
 			\end{enumerate}
@@ -854,12 +870,12 @@
 			\item Git: to manage the collaboration of the team members
 			\item Start UML: to produce the UML diagrams attached to this document
 			\item Alloy Analyzer 4.2: to prove the consistency of the model defined in this document
+			\item Mockups.com: to produce the mockups for the interfacesS
 		\end{itemize}
 	\subsection{Hours of work}
 		\begin{itemize}
-			\item Giorgio Pea: 34 hours
+			\item Giorgio Pea: 36 hours
 			\item Andrea Sessa: 36 hours
 		\end{itemize}
 		
-
 \end{document}

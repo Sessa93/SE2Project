@@ -235,7 +235,7 @@ pred show {
 	#RegisteredUser = 2
 	#RideRequest = 1
 	#BookingRequest = 1
-	#Mtaxi = 1
+	#Mtaxi = 2
 	#WorkTimeTable = 1
 }
 run show for 5

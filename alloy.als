@@ -208,7 +208,7 @@ assert RequestsMapOnlyAvailableMtaxies {
 }
 check RequestsMapOnlyAvailableMtaxies for 5
 
-//Verify that remove and operation are consistent
+//Verify that remove and add operations are consistent
 assert DelUndoAdd {
 	all q,q',q'': Queue, t: Mtaxi | addTaxiToQueue[q,q',t] and delTaxiFromQueue[q',q'',t] implies q.taxies = q''.taxies
 }
@@ -235,7 +235,8 @@ pred show {
 	#RegisteredUser = 2
 	#RideRequest = 1
 	#BookingRequest = 1
-	#Mtaxi > 1
+	#Mtaxi = 1
+	#WorkTimeTable = 1
 }
 run show for 5
 
@@ -246,8 +247,9 @@ pred RideBookingRequestProperties {
 	all d: Mtaxi | d.state = Available
 	#RideRequest = 1
 	#BookingRequest = 1
+	#WorkTimeTable = 1
 }
-run RideBookingRequestProperties for 5
+run RideBookingRequestProperties for 3
 
 
 

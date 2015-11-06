@@ -252,7 +252,7 @@
 	      \item MyTaxiService has to only accept taxi driver registrations with ssn and license plate number not already used by other mtaxidrivers
 	      \item MyTaxiService has to only accept registrations whose data formal validity has been
 	      check successfully
-	      \item Logged registered users can undo a reservation only 10 minutes before the inserted
+	      \item Logged registered users can undo a reservation up to 10 minutes before the inserted
 	      picking up time
 	      \item MyTaxiService has to allow multiple mtaxi bookings by the same logged registered user
 	      \item MyTaxiService has not to allow multiple ride requests by the same logged registered user
@@ -281,8 +281,8 @@
 	      \item MyTaxiDriver(B) has to manage the forwarding of ride/booking requests using the queue based system discussed above:
 	      a ride/booking request is forwarded to the first mtaxi in the queue that corresponds to the city's zone of the requested ride's
 	      starting location
-	      \item MyTaxiService(B) has to be able to manage a situation in which a mtaxi does not accept a ride/booking request within 2 mins.
-	      In this situation MyTaxiService has to find a new mtaxi to forward the request
+	      \item MyTaxiService(B) has to be able to manage a situation in which a mtaxi does not accept a ride/booking request within 10 mins.
+	      In this situation MyTaxiService has to find a new mtaxi to forward the request and to report this behavior to the mtaxi driver's supervisors
 	      \item MyTaxiService app and website have to  have the same functionalities
 	      \item MyTaxiService(B) has to have access to the characteristics of each mtaxies (number of passengers, unique code)
 	      \item MyTaxiService(B) has to use the mtaxi drivers' work timetable, in order to know when a mtaxi should start
@@ -290,15 +290,17 @@
 	      \item MyTaxiService has to consider unavailable only mtaxies that or are serving a ride/booking request or have reported an accident or
 	      are taking a break according to the work timetable, no other exceptions are allowed
 	      \item MyTaxiService has to offer to mtaxi drivers the possibility of reporting an accident and therefore be considered unavailable
+	      \item MyTaxiService has to be able to check if the location of a Mtaxi ,when its driver taps the "END RIDE" button, is the ending location of its current ride. If this check fails MyTaxiService has to report this behaviour to the Mtaxi driver supervisor
+	     \item MyTaxiService(B) has to be able to manage a situation in which a mtaxi that has arrived to the ending location of its current ride doesn't tap the "END RIDE" button within 10 mins. In this situation MyTaxiService has to report this behavoiur to the Mtaxi driver's supervisor.
 	\end{enumerate}
 
     \subsection{Non functional requirements}
 	\begin{enumerate}
 	      \item MyTaxiService has to guarantee that a mtaxi arrives at the start location of a ride within 10 mins
-	      \item A mtaxi driver has to accept a ride/booking request within 2 mins
 	      \item After a failure MyTaxiService has to be restarted within 1 hour
-	      \item MyTaxiService must be available 24h/7d
-	      \item Registered users have to be able to use properly all MyTaxiService's functionalities after a training time of at most 15 mins
+	      \item MyTaxiService must be available 24h/7d, with a down time of 1 hour per year
+	      \item MyTaxiService has support a maximum of 1000 ride/booking requests per hour
+	      \item Registered users have to be able to use properly all MyTaxiService's functionalities after a training time of at most 10 mins
 	      \item All MyTaxiService's functionalities have to be reachable by a registered user with at most 3 clicks/taps from the after login screen
 	      of the web/mobile app
 	\end{enumerate}
@@ -365,7 +367,9 @@
 
     \subsection{Constraints}
 	\begin{enumerate}
-	      \item MyTaxiService rquires Android 2.0 (or later) or IOS 6.0 (or later)
+	      \item MyTaxiService requires Android 2.0 (or later) or IOS 6.0 (or later)
+	      \item MyTaxiService requires a browser that supports Javascript, CSS, HTML
+	      \item MyTaxiService requires an internet connection(3G or Wifi)
 	\end{enumerate}
 
     \subsection {Domain Properties}

@@ -270,8 +270,9 @@
 	      \item MyTaxiService(B) has to be able to logically divide the city in zones and associate sets of gps
 	      coordinates to these zones
 	      \item MyTaxiService(B) has to be able to map a gps coordinate with a valid city's location
-	      \item MyTaxiService(B) has to be able, using the mtaxies' gps data and the city's public data, to understand the
+	      \item MyTaxiService(B) has to be able, using the mtaxies' gps coordinates and the city's public data, to understand the
 	      city's traffic situation zone by zone (High traffic, normal traffic, low traffic)
+	      \item MyTaxiService has to able using, the mtaxi GPS coordinates, to determine an extimated waiting time for the passenger served by the taxiS
 	      \item MyTaxiService(B) has to be able, using the mtaxies' gps coordinates, to analyze their
 	      distribution among the different city's zones and understand if there's the need to change this
 	      distribution in relation to the average number of ride/booking requests per city's zone.
@@ -290,8 +291,8 @@
 	      \item MyTaxiService has to consider unavailable only mtaxies that or are serving a ride/booking request or have reported an accident or
 	      are taking a break according to the work timetable, no other exceptions are allowed
 	      \item MyTaxiService has to offer to mtaxi drivers the possibility of reporting an accident and therefore be considered unavailable
-	      \item MyTaxiService has to be able to check if the location of a Mtaxi ,when its driver taps the "END RIDE" button, is the ending location of its current ride. If this check fails MyTaxiService has to report this behaviour to the Mtaxi driver supervisor
-	     \item MyTaxiService(B) has to be able to manage a situation in which a mtaxi that has arrived to the ending location of its current ride doesn't tap the "END RIDE" button within 10 mins. In this situation MyTaxiService has to report this behavoiur to the Mtaxi driver's supervisor.
+	      \item MyTaxiService has to be able to check if the location of a Mtaxi ,when its driver taps the "END RIDE" button, is the ending location of its current ride. If this check fails MyTaxiService has to report this behavior to the Mtaxi driver supervisor
+	     \item MyTaxiService(B) has to be able to manage a situation in which a mtaxi that has arrived to the ending location of its current ride doesn't tap the "END RIDE" button within 10 mins. In this situation MyTaxiService has to report this behavior to the Mtaxi driver's supervisor.
 	\end{enumerate}
 
     \subsection{Non functional requirements}

@@ -55,14 +55,16 @@
 \renewcommand{\labelitemiii}{$\diamond$}
 \renewcommand{\labelitemiv}{$\ast$}
 
+\usepackage[section]{placeins}
+
 %%% END Article customizations
 
 
 %%% The "real" document content comes below...
 \titlepic{\includegraphics[scale=0.60]{polimi_logo.jpg}}
-\title{\textbf{R}equirements \textbf{A}nalysis and \textbf{S}pecifications \textbf{D}ocument}
+\title{\textbf{R}equirements \textbf{A}nalysis and \textbf{S}pecifications \textbf{D}ocument \\ \vspace{1cm} \large{Version 1.1}} 
 \author{Giorgio Pea(Mat. 853872), Andrea Sessa(Mat. 850082)}
-\date{} % Activate to display a given date or no date (if empty),
+\date{13/11/2015} % Activate to display a given date or no date (if empty),
          % otherwise the current date is printed
 
 \begin{document}
@@ -100,7 +102,7 @@
     waiting time and city's traffic.
 
   \subsection{Future Implementations}
-	Further possible modifications/extensions are represented by adding to the described system 
+	Further possible modifications/extensions are represented by adding to the described system
 	the possibility of managing "Taxi Sharing". In this case users are allowed to "share" a taxi ride with others
 	users going in the same direction.
 
@@ -112,17 +114,17 @@
 		      the "REQUEST TAXI" button, MyTaxiService will find the first
 		      available mtaxi that fits for the inserted ride details, and this mtaxi will
 		      pick up the registered user as soon as possible
-		
+
 		      \item When a registered user has entered his booking details and clicks or taps
 		        the "BOOK TAXI" button, MyTaxiService will book a mtaxi that fits for the
 		        inserted booking details and for the indicated pick up time
 		\end{enumerate}
-	
+
 	    \item Guarantee an efficient and fair management of taxi queues
 	  	\begin{enumerate}
 		      \item Guarantee a balanced distribution of mtaxies in the city, in order
 		      to have them always available for different city zones
-		
+
 		      \item Guarantee short mtaxi availability times and short waiting times
 		\end{enumerate}
 	\end{enumerate}
@@ -130,16 +132,20 @@
   \subsection{Assumptions}
 	\begin{enumerate}
 	    \item MyTaxiService has been commissioned by the city's local government.
-	
+
 	    \item The local government provides each mtaxi with a device similar to a small navigator(MYT). This device is used
 	      to: see and accept ride/booking requests, see zone change orders, report accidents; it has a built-in gps module through which MyTaxiService can
 	      track the position of the mtaxi on which is mounted
 
-	    \item Every MYT device is strictly asscociated to a Mtaxi driver, so that when MYT is turned on the mtaxi driver is automatically logged into MyTaxiService  
-	
+	    \item Every MYT device is strictly asscociated to a Mtaxi driver, so that when MYT is turned on the mtaxi driver is automatically logged into MyTaxiService
+
 	    \item Mtaxies can only serve ride/booking requests forwarded by MyTaxiService(B)
-	
+
 	    \item Mtaxies operate only whithin the city's borders
+
+      \item MyTaxiService does not offer any payments feature, so mtaxies driver can accept and manage payments the way they want
+
+
 
 	\end{enumerate}
 
@@ -206,13 +212,13 @@
 		\begin{enumerate}
 		      \item User registration
 		\end{enumerate}
-	
+
 	      \item REGISTERED USER
 		\begin{enumerate}
 		      \item Login
 		      \item Remember me (see below for details)
 		\end{enumerate}
-	
+
 	      \item LOGGED REGISTERED USER
 		\begin{enumerate}
 		      \item Logout
@@ -221,13 +227,13 @@
 		      \item View the status of a ride (requested or booked)
 		      \item Undo a ride booking (If possible)
 		\end{enumerate}
-	
-	
+
+
 	      \item TAXI DRIVER
 		\begin{enumerate}
 		      \item Taxi driver registration
 		\end{enumerate}
-	
+
 	      \item MTAXI DRIVER
 		\begin{enumerate}
 		      \item Accept a ride request/booking
@@ -235,18 +241,18 @@
 		      \item View the details of ride request/booking
 		      \item Report an accident
 		\end{enumerate}
-	
+
 	      \item A user can register to MyTaxiService only and only once
 	      \item MyTaxiService has to be able to remember logged sessions so that when a registered user
 	      opens next time the MyTaxiService app or website, he has not to log in again (Remember me functionality)
 	      \item MyTaxiService has to implement a user registration process that requires the user to insert: name, lastname,
 	      email, password
-	      \item MyTaxiService has to implement a taxi driver registration process that requires the driver to insert personal data(name, lastname, address, ssn), vehicle data(brand and model, license plate number) and 
-	      the work time table 
+	      \item MyTaxiService has to implement a taxi driver registration process that requires the driver to insert personal data(name, lastname, address, ssn), vehicle data(brand and model, license plate number) and
+	      the work time table
 	      \item During the user registration process, MyTaxiService has to be able to check the formal validity of the
 	      data inserted
 	      \item During the taxi driver registration process, MyTaxiService has to be able to check the formal validity of the
-	      data inserted 
+	      data inserted
 	      \item MyTaxiService has to only accept user registrations with mail addresses not already used by other
 	      registered users
 	      \item MyTaxiService has to only accept taxi driver registrations with ssn and license plate number not already used by other mtaxidrivers
@@ -262,8 +268,8 @@
 	      \item MyTaxiService has to be able to access a list of every valid city's location
 	      \item MyTaxiService has to be able to access realtime data about the city's traffic
 	      \item MyTaxiService has to force a logged registered user to choose as starting/ending locations of a ride only valid city's locations
-	      \item MyTaxiService has to force a logged registered user to chose among a list of only valid city's locations 
-	      \item MyTaxiService has to force a logged registered user, in the context of a booking request, to chose among a list of only valid hours, minutes, dates 
+	      \item MyTaxiService has to force a logged registered user to chose among a list of only valid city's locations
+	      \item MyTaxiService has to force a logged registered user, in the context of a booking request, to chose among a list of only valid hours, minutes, dates
 	      \item MyTaxiService has to force a logged registered user not choose the same location as starting and ending location of a ride
 	      \item MyTaxiService has to force a logged registered user not to make a booking request that is a copy, in terms of date and time, of a previous non completed booking request
 	      \item MyTaxiService(B) has to be able to retrieve the position of each mtaxies using the gps system of their MYT devices
@@ -315,7 +321,7 @@
 \newpage
       \subsubsection{Interfaces Requirements}
        In this section is shown a series of mockups that specify a set of requirements over the user interface.\newline
-       Each mockup is valid both for the website and mobile application version of MyTaxiService\newline 
+       Each mockup is valid both for the website and mobile application version of MyTaxiService\newline
         \newline
         This mockup shows the user login page\newline
        \newline
@@ -326,7 +332,7 @@
 	\newline
         \includegraphics[scale=0.52]{userRegInt.png}\newline
         \newpage
-       
+
         \noindent
         This  mockup shows the taxi driver registration page\newline
         \newline
@@ -373,11 +379,12 @@
 	      \item MyTaxiService requires an internet connection(3G or Wifi)
 	\end{enumerate}
 
-    \subsection {Domain Properties}
+    \subsection{Domain Properties}
 	\begin{enumerate}
 	      \item Traffic information is  reliable
 	      \item GPS data are reliable
 	      \item If a registered user requests a ride request then he will be present at the starting point when the mtaxi arrives
+        \item
 	\end{enumerate}
 
 \section {Scenarios, Use Case and UML diagrams}
@@ -401,14 +408,14 @@
 	       MyTaxiService alerts Bob that his taxi will arrive in 3 mins.
 	       The Taxi arrives, and in 10 mins Bob reaches the meeting place. MyTaxiService(B)
 	       signals the behavior of Charlene to her supervisors, and, after a few weeks, Charlene receives a warning and a fine of 200 euro
-	
+
 	    \item It's Friday, 10 a.m, Paris, Ann, a young american tourist, has to take a flight at 12 a.m to return to New York City.
 	        Ann has carefully planned the return trip, infact
 	       yesterday she made a taxi booking via MyTaxiService web site for 9:45 a.m , but the mtaxi has not arrived yet.
 	       So she take her smartphone opens the MyTaxiService application, enters her credentials and after a successful login
 	       she discovers that her mtaxi is stuck in a terrible traffic jam and that MyTaxiService is trying to find a new mtaxi.
 	       "I'll miss my flight!" she thinks, and starts to wait with the heart full of hope
-	
+
 	    \item Dave, an experienced taxi driver of the city, has received, through MyTaxiService, a request for a ride
 	       from a passenger. "It's not too much far from where i am now", he thinks, "It'll be easy", and notifies
 	       MyTaxiService that he'll take care of the request. He starts driving toward the passenger's position, but suddenly
@@ -418,7 +425,7 @@
 	       Dave cannot fulfill the passenger's request so he takes his smartphone, opens the MyTaxiService app,
 	       and taps the "REPORT ACCIDENT" button, he accesses a screen where he inserts the accident details and taps the "SUBMIT" button.
 	       MyTaxiService(B) receives the Dave's report and after some computations selects and notifies another driver to fulfill the passenger request.
-	
+
 	    \item Ann, a young female student from Texas, is visiting Italy with his boyfriend Bob.
 	      It's Friday morning, they are walking on the streets of Milan and they're thinking
 	      about visiting the Expo on Saturday. Ann proposes to use a taxi to reach Expo's location and
@@ -437,7 +444,7 @@
 	      about this and, at the end, Ann agrees with Bob. Given that, Ann tries to undo the booking:
 	      she opens the app, she logs in, she accesses the booking section and there she sees her booking for Saturday, she taps
 	      the bin icon to delete the booking, she confirms her intention to do that and everything is done.
-	
+
 	    \item It's Thursday, 14:00 and George, a young mtaxi driver, is driving in the city's center.
 	       He noticed many of his colleagues waiting for requests in their cabs.
 	       Meanwhile MyTaxiService(B), by making some analysis on the mtaxies' gps data, realizes that there are too many mtaxies
@@ -454,10 +461,10 @@
 	\begin{center}
 	\includegraphics[scale=0.52]{usecaseGeneral.png}
 	\end{center}
-	\begin{enumerate}	
+	\begin{enumerate}
 	      \item A registered user makes a ride request
 		\begin{description}
-		        \item [Use case name:] Ride request 
+		        \item [Use case name:] Ride request
 		        \item [Actors:] A registered user, MyTaxiService(B)
 		        \item [Pre-cons:] The registered user has logged into MyTaxiService.
 		        \item [Post-cons:] MyTaxiService(B) receives the ride request and tries to find an available mtaxi to fulfill it.
@@ -485,8 +492,8 @@
 		\begin{center}
 		\includegraphics[scale=0.52]{usecase1.png}
 		\end{center}
-	
-	
+
+
 	      \item A registered user makes a booking request
 		\begin{description}
 		         \item [Use case name:] Booking request
@@ -517,7 +524,7 @@
 		\begin{center}
 		\includegraphics[scale=0.52]{usecase2.png}
 		\end{center}
-	
+
 	      \item  MyTaxiService(B) forwards a received ride request to a mtaxi driver
 		\begin{description}
 		        \item [Use case name:] Forward request
@@ -552,7 +559,7 @@
 		\includegraphics[scale=0.52]{usecase3.png}
 		\end{center}
 
-	
+
 	       \item A mtaxi driver informs MyTaxiService(B) that he has finished serving a passenger
 		\begin{description}
 		        \item [Use case name:] Notify ride end
@@ -577,8 +584,8 @@
 		\begin{center}
 		\includegraphics[scale=0.52]{usecase4.png}
 		\end{center}
-	
-	
+
+
 	        \item A mtaxi driver manages a ride request from MyTaxiService(B)
 		\begin{description}
 		        \item [Use case name]: Manage request
@@ -605,8 +612,8 @@
 		\begin{center}
 		\includegraphics[scale=0.52]{usecase5.png}
 		\end{center}
-	
-	
+
+
 	        \item A registered user logs into MyTaxiService
 		\begin{description}
 		        \item [Use case name:] Login
@@ -637,7 +644,7 @@
 		\begin{center}
 		\includegraphics[scale=0.52]{usecase6.png}
 		\end{center}
-	
+
 	       \item A registered user logs out from MyTaxiService
 		\begin{description}
 		        \item [Use case name:] Logout
@@ -664,7 +671,7 @@
 		\begin{center}
 		\includegraphics[scale=0.52]{usecase7.png}
 		\end{center}
-	
+
 	       \item A User wants to register to MyTaxiService
 		\begin{description}
 		        \item [Use case name:] User Registration
@@ -695,8 +702,8 @@
 		\begin{center}
 		\includegraphics[scale=0.52]{usecase8.png}
 		\end{center}
-	
-	
+
+
 	       \item A registered user undoes a mtaxi booking
 		\begin{description}
 		        \item [Use case name:] Mtaxi booking undo
@@ -726,8 +733,8 @@
 		\begin{center}
 		\includegraphics[scale=0.52]{usecase9.png}
 		\end{center}
-	
-	
+
+
 	      \item A mtaxi driver receives a zone change order
 		\begin{description}
 		        \item [Use case name:] Zone change
@@ -755,8 +762,8 @@
 		\begin{center}
 		\includegraphics[scale=0.52]{usecase10.png}
 		\end{center}
-	
-	
+
+
 	      \item A mtaxi driver reports an accident
 		\begin{description}
 		        \item [Use case name:] Accident report
@@ -781,8 +788,8 @@
 		\begin{center}
 		\includegraphics[scale=0.52]{usecase11.png}
 		\end{center}
-	
-	
+
+
 	      \item A taxi driver wants to register to MyTaxiService
 		\begin{description}
 		        \item [Use case name:] Taxi driver Registration
@@ -817,7 +824,7 @@
 
 	\subsection{State chart diagrams}
 	In this section are present some state chart diagrams to illustrate the dynamic behaviour of MyTaxiService.\newline
-	\newline 
+	\newline
 	This state chart diagram illustrates the state of a generic Mytaxi driver
 	\begin{center}
 	\includegraphics[scale=0.52]{statechartdriver.png}
@@ -832,7 +839,7 @@
 	\newline
 	\begin{center}
 	\includegraphics[scale=0.52]{statechartgeneral.png}
-	\end{center} 
+	\end{center}
 	\newpage
 	\subsection{Class diagram}
 	\includegraphics[scale=0.55]{classdiagram.png}
@@ -843,7 +850,7 @@
 		\includegraphics[scale=0.8]{sig1.png}
 		\newpage
 		\includegraphics[scale=0.8]{sig2.png}
-		
+
 	\subsection{Facts}
 		\includegraphics[scale=0.78]{fact1.png}
 		\newpage
@@ -884,5 +891,13 @@
 			\item Giorgio Pea: 36 hours
 			\item Andrea Sessa: 36 hours
 		\end{itemize}
-		
+	\subsection{Revision}
+		\begin{table}[h]
+		\centering
+		\begin{tabular}{lll}
+		Date       & Description & Authors    \\
+		13/11/2015 & Modified assumption section& Pea, Sessa
+		\end{tabular}
+		\end{table}
+
 \end{document}

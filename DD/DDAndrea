@@ -26,8 +26,10 @@
     - Glossary
 
     - Acronyms
-      DD: Design Document
-      MVC: Model View Controller
+        DD: Design Document
+        MVC: Model View Controller
+        FIFO: First In First Out
+        API: Application Programming Interface
 
   - Reference Documents
     - RASD v1.1
@@ -46,7 +48,7 @@
 
     - Algorithms Design
       The section aims to provide a very low-level description of some routine functionalities of MyTaxiService.
-      Some code(Javascript???) is included
+      Some code(Javascript???!!) is included
 
     - User Interface Design
       In this section are provided some mockups describing some base level requirements of the user interface to-be
@@ -54,3 +56,48 @@
     - Requirements Traceability
       This section provides a matrix of traceability that allows the reader to map functional requirements on the
       previously defined software components
+
+2 - Architectural Design
+
+  - Overview
+      The architectural design section is divided into two main parts:
+        - Software components description and interaction
+          In this sub section is provided a detailed description of the main components of the software system.
+          Further the attention is focused on the interaction of the various components, also providing a high level description
+          of such interfaces. To exemplify the above mentioned description a set of UML diagrams(Component, Deployment, Sequence diagrams) is
+          included.
+        - Architectural styles and patterns
+          This second section illustrates the chosen architectural style providing a schematic diagram and a
+          detailed description and motivation of the architectural choices.
+
+  - High level components and their interactions
+
+      Controller Components:
+        - Dispatcher:
+            This component provides the functionality of dispatching messages from MyTaxiService(B) to a generic
+            mtaxi driver. This notification includes pick up requests and general alert messages.
+
+        - Queue Manager:
+            This component is the part of MyTaxiService(B) in charge of the managing of queues associated to
+            each city zone. The queue are managed according to the usual FIFO policy.
+
+        - Request Manager:
+            This component is in charge of managing ride/booking request coming from the API manager.
+            In case of a simple ride request the module interacts with the queue manager to get an available
+            mtaxi driver, after that through the interaction with the Dispatcher component the selected driver is
+            informed of the ride request
+            In case of a booking ride request the component stores the request in the DB through the Data Manager component.
+            Ten  minutes before the booking time the Request manager selects a valid mtaxi driver through the Queue manager
+            and notifies the selected driver via the Dispatcher component.
+
+        - External Communication manager:
+            This component is in charge of the interaction of MyTaxiService(B) with external services such as
+            the traffic information service and permits other components to use the corresponding information.
+
+        - MTaxi Manager:
+          
+
+        - API Manager:
+            This component provides the functionality of invoking the correct component according to type of message received.
+            If the sender message of the message is a non-driver user of MyTaxiService then the API manager will interact with
+            the Request Manager. Otherwise if sender is a mtaxi driver then MTaxi Manager is invoked to take care of the notification.

@@ -14,8 +14,6 @@ Controller
   - Location Manager
 
 
-
-
 Alg. Ideas
 - Given the average number of requests per zone in the last hour and historical data about the numbers of requests per zone
   adapt the distribution of taxies zone per zone

@@ -13,6 +13,8 @@ Controller
   - ExternalCommunicationManager:
   - Location Manager
 
+Architecture Idea:
+  - 3 tier client/server + Pub/Sub
 
 Alg. Ideas
 - Given the average number of requests per zone in the last hour and historical data about the numbers of requests per zone

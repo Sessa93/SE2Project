@@ -71,15 +71,10 @@
           detailed description and motivation of the architectural choices.
 
   - High level components and their interactions
-
       Controller Components:
         - Dispatcher:
             This component provides the functionality of dispatching messages from MyTaxiService(B) to a generic
             mtaxi driver. This notification includes pick up requests and general alert messages.
-
-        - Queue Manager:
-            This component is the part of MyTaxiService(B) in charge of the managing of queues associated to
-            each city zone. The queue are managed according to the usual FIFO policy.
 
         - Request Manager:
             This component is in charge of managing ride/booking request coming from the API manager.
@@ -94,10 +89,30 @@
             This component is in charge of the interaction of MyTaxiService(B) with external services such as
             the traffic information service and permits other components to use the corresponding information.
 
-        - MTaxi Manager:
-          
+        - Queue Manager:
+            This component is in charge of managing the distribution of mtaxies in the city's zone.
+            The MTaxi manager assigns to each zone a queue(manged with the usual FIFO policy).
+            Taking into account some historical data(last day), date and time and traffic information the MTaxi manager can
+            decide to move some mtaxies from one zone to another. The change zone order is sent to the selected mtaxi drivers
+            via the Dispatcher component.
+
+        - Driver State Manager
+            This component manages the state of each mtaxi driver accordingly with the work time table(provided at the moment of the driver registration)
+            and eventual notifications of accident.
 
         - API Manager:
             This component provides the functionality of invoking the correct component according to type of message received.
             If the sender message of the message is a non-driver user of MyTaxiService then the API manager will interact with
-            the Request Manager. Otherwise if sender is a mtaxi driver then MTaxi Manager is invoked to take care of the notification.
+            the Request Manager. else if sender is a mtaxi driver then Driver State Manager is invoked to take care of the notification.
+            Otherwise if the message regards a user/taxi driver registration the Data Manger is invoked to store the new data in the database.
+
+      Model Components
+        - Data Manager:
+            This component is in charge of managing all accesses to the database system. It works as a sort of
+            intermediate layer between the application logic and the database system.
+            It offers the functionalities of user/driver registration and information access/updating.
+
+      View Components:
+        - Interaction Manager:
+            This components work as compatibility layer between the driver/user presentation component and the application logic
+            ??

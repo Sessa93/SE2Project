@@ -100,10 +100,10 @@
             This component manages the state of each mtaxi driver accordingly with the work time table(provided at the moment of the driver registration)
             and eventual notifications of accident.
 
-        - API Manager:
+        - Request Receiver:
             This component provides the functionality of invoking the correct component according to type of message received.
             If the sender message of the message is a non-driver user of MyTaxiService then the API manager will interact with
-            the Request Manager. else if sender is a mtaxi driver then Driver State Manager is invoked to take care of the notification.
+            the Request Manager. Else if the sender is a mtaxi driver then Driver State Manager is invoked to take care of the notification.
             Otherwise if the message regards a user/taxi driver registration the Data Manger is invoked to store the new data in the database.
 
       Model Components
@@ -113,6 +113,7 @@
             It offers the functionalities of user/driver registration and information access/updating.
 
       View Components:
-        - Interaction Manager:
-            This components work as compatibility layer between the driver/user presentation component and the application logic
-            ??
+        - MyTaxiServiceAppUserUI:
+            This component is in charge of managing the interaction with MyTaxiService of a generic user
+        - MyTaxiServiceAppDriverUI:
+            This component is in charge of managing the interaction with MyTaxiService of a generic mtaxi driver

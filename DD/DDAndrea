@@ -72,7 +72,7 @@
 
   - High level components and their interactions
       Controller Components:
-        - Dispatcher:
+        - Request Dispatcher:
             This component provides the functionality of dispatching messages from MyTaxiService(B) to a generic
             mtaxi driver. This notification includes pick up requests and general alert messages.
 
@@ -87,8 +87,12 @@
 
         - External Communication manager:
             This component is in charge of the interaction of MyTaxiService(B) with external services such as
-            the traffic information service and permits other components to use the corresponding information.
+            the traffic information service or the mtaxi GPS data and permits other components to access the corresponding information.
 
+        - Location Manager
+            This component manages the GPS data provided by the External Communication manager.
+            The component operates in order to provide to the Queue manager GPS data in suitable form.
+            
         - Queue Manager:
             This component is in charge of managing the distribution of mtaxies in the city's zone.
             The MTaxi manager assigns to each zone a queue(manged with the usual FIFO policy).

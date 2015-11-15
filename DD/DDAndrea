@@ -1,0 +1,118 @@
+1) Introduction
+
+  - Purpose
+    This document represent the Desing Document(DD)
+    The purpose of the Design Document is to provide a medium/base level description of the design of MyTaxiService
+    in order to allow for software development to proceed with an understanding of what is to be
+    built and how it is expected to built.
+    The main goal of this document is to completely describe the system-to-be by:
+      - Detecting high-level components of the software to be
+      - Describing how these components communicates and interact with each other
+      - Describing how software components are distributed on the architecture's tiers
+      - Motivating and describing the adopted architecture style
+
+  - Scope
+    The aim of this project is to develop MyTaxiService, a web/mobile application that
+    makes easier and quicker taking taxies within the city’s borders. Thanks to MyTaxiService,
+    anyone can request or book a taxi and get realtime information about how long
+    it will take to be picked up or about the taxi’s current position and identification code.
+    In addition to that, MyTaxiService provides an efficient way to allocate taxies by dividing
+    the city in zones and using a queue based allocation system, in order to reduce the
+    average waiting time and city’s traffic.
+    This Software Design is focused on the base level system and critical parts
+    of the system.
+
+  - Terms Definition
+    - Glossary
+
+    - Acronyms
+        DD: Design Document
+        MVC: Model View Controller
+        FIFO: First In First Out
+        API: Application Programming Interface
+
+  - Reference Documents
+    - RASD v1.1
+
+  - Document Structure
+    - Introduction
+      This section provides a general description of the Design Document by clearly stating purpose an aim of the project.
+      It also include a disambiguation section to help the reader in the process of resolving the ambiguity generate by
+      the use of natural language
+
+    - Architecture Design
+      The first part of this section provides a detailed description of the high-level components of MyTaxiService and of how
+      these components interact.
+      The second part introduces the architecture style chosen for MyTaxiService. The focus is on motivation, advantages and possible
+      disadvantages of chosen architecture.
+
+    - Algorithms Design
+      The section aims to provide a very low-level description of some routine functionalities of MyTaxiService.
+      Some code(Javascript???!!) is included
+
+    - User Interface Design
+      In this section are provided some mockups describing some base level requirements of the user interface to-be
+
+    - Requirements Traceability
+      This section provides a matrix of traceability that allows the reader to map functional requirements on the
+      previously defined software components
+
+2 - Architectural Design
+
+  - Overview
+      The architectural design section is divided into two main parts:
+        - Software components description and interaction
+          In this sub section is provided a detailed description of the main components of the software system.
+          Further the attention is focused on the interaction of the various components, also providing a high level description
+          of such interfaces. To exemplify the above mentioned description a set of UML diagrams(Component, Deployment, Sequence diagrams) is
+          included.
+        - Architectural styles and patterns
+          This second section illustrates the chosen architectural style providing a schematic diagram and a
+          detailed description and motivation of the architectural choices.
+
+  - High level components and their interactions
+      Controller Components:
+        - Dispatcher:
+            This component provides the functionality of dispatching messages from MyTaxiService(B) to a generic
+            mtaxi driver. This notification includes pick up requests and general alert messages.
+
+        - Request Manager:
+            This component is in charge of managing ride/booking request coming from the API manager.
+            In case of a simple ride request the module interacts with the queue manager to get an available
+            mtaxi driver, after that through the interaction with the Dispatcher component the selected driver is
+            informed of the ride request
+            In case of a booking ride request the component stores the request in the DB through the Data Manager component.
+            Ten  minutes before the booking time the Request manager selects a valid mtaxi driver through the Queue manager
+            and notifies the selected driver via the Dispatcher component.
+
+        - External Communication manager:
+            This component is in charge of the interaction of MyTaxiService(B) with external services such as
+            the traffic information service and permits other components to use the corresponding information.
+
+        - Queue Manager:
+            This component is in charge of managing the distribution of mtaxies in the city's zone.
+            The MTaxi manager assigns to each zone a queue(manged with the usual FIFO policy).
+            Taking into account some historical data(last day), date and time and traffic information the MTaxi manager can
+            decide to move some mtaxies from one zone to another. The change zone order is sent to the selected mtaxi drivers
+            via the Dispatcher component.
+
+        - Driver State Manager
+            This component manages the state of each mtaxi driver accordingly with the work time table(provided at the moment of the driver registration)
+            and eventual notifications of accident.
+
+        - API Manager:
+            This component provides the functionality of invoking the correct component according to type of message received.
+            If the sender message of the message is a non-driver user of MyTaxiService then the API manager will interact with
+            the Request Manager. else if sender is a mtaxi driver then Driver State Manager is invoked to take care of the notification.
+            Otherwise if the message regards a user/taxi driver registration the Data Manger is invoked to store the new data in the database.
+
+      Model Components
+        - Data Manager:
+            This component is in charge of managing all accesses to the database system. It works as a sort of
+            intermediate layer between the application logic and the database system.
+            It offers the functionalities of user/driver registration and information access/updating.
+
+      View Components:
+        - Interaction Manager:
+            This components work as compatibility layer between the driver/user presentation component and the application logic
+            ??

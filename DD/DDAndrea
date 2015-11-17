@@ -30,6 +30,8 @@
         MVC: Model View Controller
         FIFO: First In First Out
         API: Application Programming Interface
+        UI: User Interface
+        GPS: Global Positioning System
 
   - Reference Documents
     - RASD v1.1
@@ -48,7 +50,7 @@
 
     - Algorithms Design
       The section aims to provide a very low-level description of some routine functionalities of MyTaxiService.
-      Some code(Javascript???!!) is included
+      Some code is included(see algorithms design section).
 
     - User Interface Design
       In this section are provided some mockups describing some base level requirements of the user interface to-be
@@ -77,38 +79,40 @@
             mtaxi driver. This notification includes pick up requests and general alert messages.
 
         - Request Manager:
-            This component is in charge of managing ride/booking request coming from the API manager.
+            This component is in charge of managing all types of requests coming from the Requests Receiver.
+            Other requests could also come from the Queue manager in case if the distribution of mtaxies over the zones is needed.
             In case of a simple ride request the module interacts with the queue manager to get an available
             mtaxi driver, after that through the interaction with the Dispatcher component the selected driver is
-            informed of the ride request
+            informed of the ride request.
             In case of a booking ride request the component stores the request in the DB through the Data Manager component.
             Ten  minutes before the booking time the Request manager selects a valid mtaxi driver through the Queue manager
             and notifies the selected driver via the Dispatcher component.
+            In case of zone change order request coming from the Queue manager a message is forwarded to all the mtaxies
+            subscribed to the interested zone, the message includes the identificators of the mtaxies that are subjected to
+            the change zone order.
+            Finally this component also manages the state of each mtaxi driver accordingly with the work time table(provided at the moment of the driver registration
+            and stored in the database system) and eventual notifications of accident.
 
         - External Communication manager:
             This component is in charge of the interaction of MyTaxiService(B) with external services such as
             the traffic information service or the mtaxi GPS data and permits other components to access the corresponding information.
 
+
         - Location Manager
             This component manages the GPS data provided by the External Communication manager.
             The component operates in order to provide to the Queue manager GPS data in suitable form.
-            
+
         - Queue Manager:
             This component is in charge of managing the distribution of mtaxies in the city's zone.
             The MTaxi manager assigns to each zone a queue(manged with the usual FIFO policy).
             Taking into account some historical data(last day), date and time and traffic information the MTaxi manager can
             decide to move some mtaxies from one zone to another. The change zone order is sent to the selected mtaxi drivers
-            via the Dispatcher component.
-
-        - Driver State Manager
-            This component manages the state of each mtaxi driver accordingly with the work time table(provided at the moment of the driver registration)
-            and eventual notifications of accident.
+            by invoking services of the request manager.
 
         - Request Receiver:
-            This component provides the functionality of invoking the correct component according to type of message received.
-            If the sender message of the message is a non-driver user of MyTaxiService then the API manager will interact with
-            the Request Manager. Else if the sender is a mtaxi driver then Driver State Manager is invoked to take care of the notification.
-            Otherwise if the message regards a user/taxi driver registration the Data Manger is invoked to store the new data in the database.
+            This component represents an input communication layer that manages incoming messages from users and mtaxies.
+            According to the type of message, the request receiver will properly invoke services provided by the request manager
+            using different interfaces.
 
       Model Components
         - Data Manager:
@@ -118,6 +122,39 @@
 
       View Components:
         - MyTaxiServiceAppUserUI:
-            This component is in charge of managing the interaction with MyTaxiService of a generic user
+            This component is in charge of managing the interaction with MyTaxiService of a generic user via the mobile application
         - MyTaxiServiceAppDriverUI:
-            This component is in charge of managing the interaction with MyTaxiService of a generic mtaxi driver
+            This component is in charge of managing the interaction with MyTaxiService of a generic mtaxi driver via the MYT device
+        - MyTaxiServiceWebUserUI:
+            This component is in charge of managing the interaction with MyTaxiService of a generic user via the web site version of MyTaxiService
+
+    - Components Interfaces
+
+    - Architecture Styles Description
+      Some general considerations on the domain of the environment:
+        - The number of available mtaxies within the city could be very high(ie a thousand of mtaxies).
+        - The number of requests by active users could also be very high typically in the order of the available mtaxies.
+      Due to those simple considerations the chosen architecture style is a mix of two well known styles:
+        - 3 tiers Client/Server architecture
+        - Event Based architecture(Publisher/Subscriber)
+      The Client/Server architectures is used to manage all types of critical requests(booking/ride requests, login, registration and ) coming from the users of MyTaxiService(drivers and passenger).
+      Such an architecture introduce a sort of synchronization between the central system and the clients of the system.
+      This synchronization guarantees to the clients that all requests are correctly received and stored by the central system.
+      The event base architecture is used for non critical communications i.e. zone specific alert messages or change zone orders
+      forwarded to a specific subset of mtaxies present in a particular zone.
+      In particular each "topic" of the publisher corresponds to a particular city zone, all the mtaxies present in the zone
+      are automatically subscribed to the corresponding topic. Events are generated internally in the central system, change zone event
+      are produced by the Queue manager component while eventual zone specific alert are generated by the Request manager in case problems
+      are detected in a particular zone.
+      The client/server styles, as stated above, is a typical 3-tier architecture composed by:
+        - One web server hosting the web ui interface of MyTaxiService
+        - One or more application server(in order to guarantee the availabilty/relaiabilty of the system) hosting
+          the core logic of MyTaxiService, this tier also includes the servers needed to implements the Event Based styles
+        - A distributed database system to store the informations related to users and mtaxi drivers.
+
+      Follows a schematic diagram of the architecture:
+      TODO GIORGIO
+
+      As already mentioned above the central system makes use of external service regarding the traffic information in the
+      city. It could be assumed that information are distributed to MyTaxiService via a SOA architecture because this is
+      the most suitable(and most used) way to distribute data and services to external companies.

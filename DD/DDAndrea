@@ -151,6 +151,10 @@
           the core logic of MyTaxiService, this tier also includes the servers needed to implements the Event Based styles
         - A distributed database system to store the informations related to users and mtaxi drivers.
 
+      The client in this architecture is a "thin" client, it just contains only an interaction/visualization layer, all
+      the logic of the application is condensed in the server side of the architecture, so the server can be considered
+      a "fat" server.
+
       The number of each server in each tier could be greater than one. In this case each tier can be seen as distributed
       interconnection of servers. Very useful to manage in a flexible way a high number of request(and connection) coming
       from the external environment.
@@ -160,7 +164,7 @@
         Indeed the organization of the server side of the architecture guarantees a strong division
         between the data and the logic of the application. All zones within the architecture are divided
         by means of a firewall which restricts users access in order to prevent maliciuos users to access
-        criticals zones of the server side. 
+        criticals zones of the server side.
 
 
       Follows a schematic diagram of the architecture:

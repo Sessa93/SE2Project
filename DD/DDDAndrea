@@ -126,6 +126,29 @@
         and the response messages from MyTaxiService(b)
 
     - Components Interfaces
+      See the component diagram in component view section for a schematic representation
+      - Request Receiver
+          This component interfaces itself with presentation layer with two main interfaces; the first is to receive and
+          process data relative to users requests and the second is to receive and process mtaxi requests.
+          The request receiver directly communicates with the request manager component by means of two interfaces one dedicated
+          to business requests and the second dedicated to other requests.
+          All messages are exchanged in synchronous way on both side.
+
+      - Request Manager
+          This components interfaces itself with all the components contained in the controller module.
+          In general it offers to the others components the functionality to store data, notifies users and to manage users request.
+          To accomplish its tasks the component requires data coming from the Queue Manager and Location Manager
+          In particular it communicates with:
+            - Location Manager: via the Approx Waiting Time interface(synchronous)
+            - Queue Manager: via three interfaces:
+                - TaxiByZone: synchronous, get the set of taxies in the given zone
+                - NonFairDistribution: asynchronous, used in case the Queue manager detects a non fair distribution of taxies among queues
+                - RemoveFromQueue: asynchronous, to remove a taxi from a queue
+            - Dispatcher: via two synchronous interfaces used to notify mtaxi and users
+            - Data Manager: via three synchronous interfaces in order to store data relative to users, mtaxies and information about requests
+
+       - Data Manager
+          This component from one side communicates
 
     - Architecture Styles Description
         Some general considerations on the domain of the environment:

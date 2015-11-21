@@ -148,7 +148,15 @@
             - Data Manager: via three synchronous interfaces in order to store data relative to users, mtaxies and information about requests
 
        - Data Manager
-          This component from one side communicates
+          This component side communicates with the Request Manager offering, with the exchange of asynchronous messages, the
+          possibility to store data(users, mtaxies or requests) on the DB system.
+
+      - Location Manager
+          This component from one side requires data elaborated by the External Comm Manager(via the GPS and Traffic interface)
+          and offers to the Queue Manager(TaxiPositions synchronous interface) the positions of all mtaxies and to the Request manager
+          (Approx. Waiting Time synchronous interface) the approximal waiting time for a given taxi to reach a certain position.
+
+      - Dispatcher
 
     - Architecture Styles Description
         Some general considerations on the domain of the environment:

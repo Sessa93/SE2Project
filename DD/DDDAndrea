@@ -176,8 +176,7 @@
             (asynchronous communication)
           - Data Manager via two already considered interfaces:
             - Taxies : in order to retrieve data about mtaxies and populate the zone per zone queues
-            - Requests : in order to retrieve data about booking requests
-            (synchronous communication)
+
        - Data Manager
           This component offers to the Request Manager the interfaces already described above to retrieve/store data
           from to the database
@@ -216,45 +215,52 @@
           (asynchronous communication)
 
 
-    - Architecture Styles Description
-        Some general considerations on the domain of the environment:
-          - The number of available mtaxies within the city could be very high(ie a thousand of mtaxies).
-          - The number of requests by active users could also be very high, typically in the order of the available mtaxies.
-        Due to those simple considerations the chosen architectural style is a 3 tiers Client/Server architecture.
-        The Client/Server architecture is used to manage all types of critical requests(booking/ride requests, login, registration, etc.. ) coming from the users of MyTaxiService(drivers and passenger).
-        Such an architecture introduce a sort of synchronization between the central system and the clients of the system.
-        This synchronization guarantees to the clients that all requests are correctly received and stored by the central system.
-        Also due to the possible high number of requests coming from users this particular style reveals to be very scalable and reliable.
+    - Architectural Style Description
 
-        Mtaxi drivers are notified by the system by means of a "polling" technique:
-        The MYT device periodically queries the central system about new messages for the mtaxi driver, if some messages are present
-        the the MYT device will present them to the driver via a suitable visualization.
+        Preliminary considerations:
+        - The number of requests and of users could be very high
+        - In the future MyTaxiService can be made available for other cities
+        - The number of requests can have a very high variance(e.g if an important event is held in the city then the number
+        of requests will probably increase by a lot)
 
-        The client/server styles, as stated above, is a typical 3-tier architecture composed by:
-          - One web server hosting the web ui interface of MyTaxiService and three client gui: passengers, mtaxi driver and system administrator
-          - One or more application server(in order to guarantee the availabilty/relaiabilty of the system) hosting
-            the core logic of MyTaxiService, this tier also includes the servers needed to implements the Event Based styles
-          - A distributed database system to store the informations related to users and mtaxi drivers.
+        Due to these simple considerations the chosen architecture for MyTaxiService is a 3 tiers Client/Server architecture.
+        This kind of architecture has been chosen because it guarantees:
+        - Scalability: the nodes that compose the application server and db server can be increased in number without the need
+        of redesign the whole system
+        - Reliability: since the chosen architecture is distributed, failures can be isolated easily and db replications can be
+        implemented without impacting too much on the design of the whole system
+        - Adaptability: the chosen architecture can easily be enriched with a load balancer that distributes and activates nodes
+        in relation to the number of incoming requests
+        - Security: since the chosen architecture divides strictly business logic and data and since the application server
+        and the db server are isolated from the web using firewalls, malicious attacks can be prevented and high level of
+        security granted
+
+
+        The chosen architecture composes of:
+          - A tier(view) which include:
+            - Smartphones in which the MyTaxiService mobile app is installed
+            - Smartphones and computers trough which MyTaxiService User website is accessible
+            - Smartphones and computers trough which MyTaxiService Admin website is accessible
+            - MYT devices trough which mtaxi drivers can manage ride requests
+            The websites assets are hosted by a webserver
+          - A tier(controller) that is composed by an application server(can be distributed) that manages requests coming from users
+          and mtaxies by applying the bussines logic at the base of the whole system
+          - A tier that is composed by a database server(can be distributed) that manages data manipulation and access requests from
+          the system's application server
+          - A set of external services used by the application server to implement part of its logic. It is supposed that these
+          services are distributed to the system using a SOA architecture.
+
 
         The client in this architecture is a "thin" client, it just contains only an interaction/visualization layer, all
-        the logic of the application is condensed in the server side of the architecture, so the server can be considered
-        a "fat" server.
+        the logic of the application is condensed in the application server, which is, in this way, a "fat" server.
 
-        The number of each server in each tier could be greater than one. In this case each tier can be seen as distributed
-        interconnection of servers. Very useful to manage in a flexible way a high number of request(and connection) coming
-        from the external environment.
-
-        Security Considerations:
-          The selected architecture styles also guarantee a flexible management of security issues.
-          Indeed the organization of the server side of the architecture guarantees a strong division
-          between the data and the logic of the application. All zones within the architecture are divided
-          by means of a firewall which restricts users access in order to prevent maliciuos users to access
-          criticals zones of the server side.
-
-        Follows a schematic diagram of the architecture:
-
-        -> Arch.jpg
 
         As already mentioned above the central system makes use of external service regarding the traffic information in the
         city. It could be assumed that information are distributed to MyTaxiService via a SOA architecture because this is
         the most suitable(and most used) way to distribute data and services to external companies.
+
+        The role of polling
+        The business logic behind the system demands that users and mtaxies don't  receive information only as a response to a request, but
+        also as a non requested message from MyTaxiService(B). Mantaining a continuosly opened connection between the client and the application server
+        seems not an efficient and sustainable strategy, so is assumed that users and mtaxies checks periodically if MyTaxiService(B) has any messages
+        for them. This strategy is known as polling

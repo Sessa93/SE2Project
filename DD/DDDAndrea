@@ -24,8 +24,8 @@
 
   - Terms Definition
     - Glossary
-        Tier: Refers to a possible hardware level in a generic architecture style
-        Layer: Refers to a possible software level in generic software application
+        Tier: Refers to a possible hardware level in a generic architecture
+        Layer: Refers to a possible software level in a generic software system
 
     - Acronyms
         DD: Design Document
@@ -77,10 +77,11 @@
   - High level components and their interactions
       Controller Components:
         - Dispatcher:
-            This component provides the functionality of dispatching messages from MyTaxiService(B) to users and mtaxies.
+            This component provides the functionality of dispatching messages from MyTaxiService(B) to users, mtaxies and administrators.
             Examples of these messages are :
             - for users : aproximate waiting time for being picked up, the requested mtaxi's identification code
             - for mtaxies : zone change order, new ride request
+            - for administrators : report of an accident, report of bad behavior
 
         - Request Manager:
             This component is in charge of:
@@ -90,10 +91,9 @@
             - managing a situation of non fair distribution of mtaxies in the city's zones(this requires an interaction
             with the Queue Manager)
 
-        - External Communication manager:
+        - External Services manager:
             This component is in charge of the interaction of MyTaxiService(B) with external services such as
-            the traffic information service or the mtaxies GPS data and allows other components to access these pieces of information.
-
+            the traffic information service or the mtaxies GPS data and allows other components to access these data.
 
         - Location Manager
             This component requests and digests data from the External Communication Manager; the Location Manager
@@ -106,82 +106,122 @@
             that need to be moved to other zones
 
         - Request Receiver:
-            This component manages incoming messages from users and mtaxies.
+            This component manages incoming messages from users, mtaxies and administrators.
             According to the type of message, the request receiver will properly invoke services provided by the Request Manager.
 
-      Model Components
+      Model Components:
         - Data Manager:
             This component is in charge of managing all accesses to the database system. It works as a sort of
             intermediate layer between the application logic and the database system
 
       View Components:
         - MyTaxiServiceAppUserGUI:
-            This component manages the direct interaction between a user and MyTaxiService via the MyTaxiService mobile app GUI
+            This component manages the interaction between a user and the whole software system. This interaction refers to the
+            MyTaxiService mobile app
         - MyTaxiServiceAppDriverGUI:
-            This component manages the direct interaction between a mtaxi driver and MyTaxiService via the MYT device GUI
+            This component manages the interaction between a mtaxi driver and the whole software system. This interaction refers to
+            the MYT device
         - MyTaxiServiceWebUserGUI:
-            This component manages the direct interaction between a user and a taxi driver and MyTaxiService via the MyTaxiService web app GUI
+          This component manages the interaction between a user/a taxi driver and the whole software system. This interaction refers to
+          the MyTaxiService web app
+        - MyTaxiServiceWebAdminGUI:
+          This component manages the interaction between an administrator and the whole software system. This interaction refers to
+          the MyTaxiService web app for administrators
 
-        For each of these view components a communication manager is associated: this component manages the dispatching of requests to MyTaxiService(b)
-        and the response messages from MyTaxiService(b)
+        For each of these view components a communication manager is associated: this component manages the dispatching of requests to and the responses from MyTaxiService(B)
 
     - Components Interfaces
-      See the component diagram in component view section for a schematic representation
+
       - Request Receiver
-          This component interfaces itself with presentation layer with two main interfaces; the first is to receive and
-          process data relative to users requests and the second is to receive and process mtaxi requests.
-          The request receiver directly communicates with the request manager component by means of two interfaces one dedicated
-          to business requests and the second dedicated to other requests.
+          This component interfaces with the communication managers of the view in three ways: it receives and pre-process requests from users
+          (users requests), from mtaxi drivers(taxies requests) and from
+          administrators(admin requests). In addition to that, it
+          directly communicates with the Request Manager so that the above  mentioned requests are
+          fully elaborated and executed; this is done using three interfaces: one for other requests, another for business
+          requests and last one for admin requests.
           All messages are exchanged in synchronous way on both side.
 
       - Request Manager
-          This components interfaces itself with all the components contained in the controller module.
-          In general it offers to the others components the functionality to store data, notifies users and to manage users request.
-          To accomplish its tasks the component requires data coming from the Queue Manager and Location Manager
-          In particular it communicates with:
-            - Location Manager: via the Approx Waiting Time interface(synchronous)
+          This components interfaces with all the components of the controller except for the External Services Manager, it also interfaces
+          all the components of the model.
+          In particular the Request Manager communicates with:
+            - Location Manager: via the AWT interface in order to get the AWT for a mtaxi to reach a user
+            (synchronous communication)
             - Queue Manager: via three interfaces:
-                - TaxiByZone: synchronous, get the set of taxies in the given zone
-                - NonFairDistribution: asynchronous, used in case the Queue manager detects a non fair distribution of taxies among queues
-                - RemoveFromQueue: asynchronous, to remove a taxi from a queue
-            - Dispatcher: via two synchronous interfaces used to notify mtaxi and users
-            - Data Manager: via three synchronous interfaces in order to store data relative to users, mtaxies and information about requests
-
+                - TaxiByZone: in order to get the first available mtaxi for a given zone
+                (synchronous communication)
+                - NonFairDistribution: the Request Manager observes the Queue Manager for a non fair distribution of mtaxies among city's zones and so for a set of mtaxies
+                the need to be moved to other specified zones
+                (asynchronous communication)
+                - ManipulateQueue: in order to manipulate the mtaxies in a given queue (for example when a mtaxi reports and accident, then it should be
+                made non available and removed by its zone associated queue)
+                (synchronous communication)
+            - Dispatcher: via two interfaces:
+                - Users messages : in order to send a response to a user request
+                - Taxi messages : in order to send a response to a mtaxi request
+                - Admin messages : in order to send a response to an admin request
+                (synchronous communications)
+            - Data Manager: via three interfaces:
+                - Users : in order to store/retrieve data about users
+                - Taxies : in order to store/retrieve data about mtaxies
+                - Requests : in order to store/retrieve data about requests
+                (synchronous communications)
+      - Queue Manager
+          This components offers to the Request Manager the interfaces already described above. In addition to that
+          it communicates with:
+          - Location manager : via two interfaces:
+            - Taxi positions: in order to get the position(in terms of city zone) of mtaxies
+            - LevelOfTraffic : in order to get the level of traffic for a mtaxi and so use another mtaxi
+            to fullfil a request
+            (asynchronous communication)
+          - Data Manager via two already considered interfaces:
+            - Taxies : in order to retrieve data about mtaxies and populate the zone per zone queues
+            - Requests : in order to retrieve data about booking requests
+            (synchronous communication)
        - Data Manager
-          This component side communicates with the Request Manager offering, with the exchange of asynchronous messages, the
-          possibility to store data(users, mtaxies or requests) on the DB system.
+          This component offers to the Request Manager the interfaces already described above to retrieve/store data
+          from to the database
 
       - Location Manager
-          This component from one side requires data elaborated by the External Comm Manager(via the GPS and Traffic interface)
-          and offers to the Queue Manager(TaxiPositions synchronous interface) the positions of all mtaxies and to the Request manager
-          (Approx. Waiting Time synchronous interface) the approximate extimation waiting time for a given taxi to reach a certain position.
+          This component offers to the Request Manager and to the Queue Manager the interfaces already described above. In addition to that it communicates
+          with the External Services Manager via two interfaces:
+          - GPS : in order to get raw gps data from mtaxies thanks to to GPS system integrated in their MYT
+          - Traffic : in order to get raw data about the traffic from a generic external provider
+          (synchronous communication)
 
       - Dispatcher
-          This component offers directly interfaces itself with the Request Manager offering the functionality to
-          notify, in a asynchronous way users and mtaxi drivers.
+          This component offers to the Request Manager the interfaces already described above.
+          In addition to that, it communicates(indirectly using the web) with the communication managers of the view
+          via the event response interfaces; this is done in order to deliver responses to requests and to deliver asynchronous messages
+          (asynchronous and synchronous communication)
 
-      - External Communication Manager
-          This component requires raw data coming from the GPS and traffic information service.
-          It offers this information to the Location Manger component via two suitable interfaces.
+      - External Services Manager
+          This component offers to the Location Manager the interfaces already described aboive.
+          In addition to that, it communicates with:
+          - The MYT device GPS system via the data interface; this is done in order to get the gps coordinates of a mtaxi
+          - A generic traffic source via the data interface; this is done in order to get raw data about the traffic
+          conditions of the city
+          (asynchronous communications)
 
-      - MyTaxiServiceApp/MyTaxiServiceWeb/MYT GUI
-          This three components interface thyself on one side with the user/mtaxi driver and on
-          the other side with the relevant Interaction manager component via two interfaces(Message, Event Request)
-          in an asynchronous way. Event Request is used to trigger the relevant communication manager when a user
-          requires some service, while Messages offers the possibility to display a messages on the GUI.
+      - MyTaxiServiceApp/MyTaxiServiceUserWeb/MyTaxiServiceAdminWeb/MYT GUI
+          These components offers to their relative communication managers a message interface
+          They communicate with their relative communication managers via the event request interface; this is
+          done in order to forward a generic request to MyTaxiService(B)
+          (synchronous communication)
 
-      - MyTaxiServiceApp/MyTaxiServiceWeb/MYT Communication manager
-          This three components requires on one side events coming from the relevant GUI and from the Dispatcher.
-          On the other side these components offers to the Request Receiver information concerning requests
-          (via the two synchronous remote interfaces Taxi Request and User Request, according to the type of request)
+      - MyTaxiServiceApp/MyTaxiServiceWeb/MYT/MyTaxiServiceAdminWeb Communication manager
+          These components offers to the Dispatcher the already described interfaces. In addition to that
+          they communicate with the relative GUIs using the message interfaces; this is done in order
+          to make the GUI display a response to a request or an asynchronous message
+          (asynchronous communication)
 
 
     - Architecture Styles Description
         Some general considerations on the domain of the environment:
           - The number of available mtaxies within the city could be very high(ie a thousand of mtaxies).
-          - The number of requests by active users could also be very high typically in the order of the available mtaxies.
-        Due to those simple considerations the chosen architecture style is a 3 tiers Client/Server architecture.
-        The Client/Server architectures is used to manage all types of critical requests(booking/ride requests, login, registration and ) coming from the users of MyTaxiService(drivers and passenger).
+          - The number of requests by active users could also be very high, typically in the order of the available mtaxies.
+        Due to those simple considerations the chosen architectural style is a 3 tiers Client/Server architecture.
+        The Client/Server architecture is used to manage all types of critical requests(booking/ride requests, login, registration, etc.. ) coming from the users of MyTaxiService(drivers and passenger).
         Such an architecture introduce a sort of synchronization between the central system and the clients of the system.
         This synchronization guarantees to the clients that all requests are correctly received and stored by the central system.
         Also due to the possible high number of requests coming from users this particular style reveals to be very scalable and reliable.

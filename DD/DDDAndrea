@@ -168,10 +168,12 @@
           This three components interface thyself on one side with the user/mtaxi driver and on
           the other side with the relevant Interaction manager component via two interfaces(Message, Event Request)
           in an asynchronous way. Event Request is used to trigger the relevant communication manager when a user
-          requires some service, while Messages offers the possibility to display a messages on the GUI. 
+          requires some service, while Messages offers the possibility to display a messages on the GUI.
 
       - MyTaxiServiceApp/MyTaxiServiceWeb/MYT Communication manager
-          This three components requires on one side
+          This three components requires on one side events coming from the relevant GUI and from the Dispatcher.
+          On the other side these components offers to the Request Receiver information concerning requests
+          (via the two synchronous remote interfaces Taxi Request and User Request, according to the type of request)
 
 
     - Architecture Styles Description

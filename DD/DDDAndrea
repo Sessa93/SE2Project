@@ -154,9 +154,25 @@
       - Location Manager
           This component from one side requires data elaborated by the External Comm Manager(via the GPS and Traffic interface)
           and offers to the Queue Manager(TaxiPositions synchronous interface) the positions of all mtaxies and to the Request manager
-          (Approx. Waiting Time synchronous interface) the approximal waiting time for a given taxi to reach a certain position.
+          (Approx. Waiting Time synchronous interface) the approximate extimation waiting time for a given taxi to reach a certain position.
 
       - Dispatcher
+          This component offers directly interfaces itself with the Request Manager offering the functionality to
+          notify, in a asynchronous way users and mtaxi drivers.
+
+      - External Communication Manager
+          This component requires raw data coming from the GPS and traffic information service.
+          It offers this information to the Location Manger component via two suitable interfaces.
+
+      - MyTaxiServiceApp/MyTaxiServiceWeb/MYT GUI
+          This three components interface thyself on one side with the user/mtaxi driver and on
+          the other side with the relevant Interaction manager component via two interfaces(Message, Event Request)
+          in an asynchronous way. Event Request is used to trigger the relevant communication manager when a user
+          requires some service, while Messages offers the possibility to display a messages on the GUI. 
+
+      - MyTaxiServiceApp/MyTaxiServiceWeb/MYT Communication manager
+          This three components requires on one side
+
 
     - Architecture Styles Description
         Some general considerations on the domain of the environment:
@@ -195,7 +211,7 @@
 
         Follows a schematic diagram of the architecture:
 
-        TODO GIORGIO
+        -> Arch.jpg
 
         As already mentioned above the central system makes use of external service regarding the traffic information in the
         city. It could be assumed that information are distributed to MyTaxiService via a SOA architecture because this is

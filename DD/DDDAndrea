@@ -79,7 +79,7 @@
         - Dispatcher:
             This component provides the functionality of dispatching messages from MyTaxiService(B) to users, mtaxies and administrators.
             Examples of these messages are :
-            - for users : aproximate waiting time for being picked up, the requested mtaxi's identification code
+            - for users : approximate waiting time for being picked up, the requested mtaxi's identification code
             - for mtaxies : zone change order, new ride request
             - for administrators : report of an accident, report of bad behavior
 
@@ -172,7 +172,7 @@
           - Location manager : via two interfaces:
             - Taxi positions: in order to get the position(in terms of city zone) of mtaxies
             - LevelOfTraffic : in order to get the level of traffic for a mtaxi and so use another mtaxi
-            to fullfil a request
+            to fullfill a request
             (asynchronous communication)
           - Data Manager via two already considered interfaces:
             - Taxies : in order to retrieve data about mtaxies and populate the zone per zone queues

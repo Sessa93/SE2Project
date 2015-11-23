@@ -1,4 +1,36 @@
+/*
+  The following algorithm is run in the Queue Manager component periodically(each hour).
+  Its objective is to try to reditribute taxies present in the city's zones in order
+  to match the expected demand of taxies in each zone.
+  To accomplish this objective the first part of the algorithm computes, for each zone,
+  the expected demand by means of the following formula:
 
+    expectedTaxies = ((historicalAvg*w1+currentAvg*w2)*zone.getWeight())/2
+
+  This formula is based both on historical data for the current day and time and
+  the last hour data registered in the database.
+  Each of this two terms is "weighted" (w1,w2) in order to determine how
+  the old and new data contributes to the final result.
+  The above formula takes also into account the size of the by means of a third
+  weight typical of each zone(zone.getWeight()), the more the value is near to 1
+  the more the zone is bigger. This is necessary to consider the fact that smaller
+  zones in general have a smaller number of request wrt to bigger zones.
+  For each zone the number of taxies already present is subtracted from the
+  expectedTaxies value(for that zone). This operation produces the taxiesToMove
+  variable that if positive indicates a zones that has a "surplus" of taxies and
+  if negative indicates a zone with a "deficit" of taxies.
+  Queues are then divided into two separated lists(surplusQueues, deficitQueues)
+  according to the value of taxiesToMove.
+  The lists are sorted according to the value of taxiesToMove.
+  The algorithm reditribute the taxies by initially considering the couple of queues which
+  has the highest number of taxies in respectively in deficit/surplus.
+  The algorithm proceeds by selecting queues with deacreasing number of taxiesToMove.
+  The function return when:
+    - The expected demand of taxies has been fullfilled
+    - There are no more taxies to fullfill the expected demand
+*/
+
+// 0 < w1, w2 < 1
 function computeDistribution(float w1, float w2) {
   /*The following for cycle computes, for each zone, the number of taxies
    *required(taxiesToMove < 0) or the number of taxies in surplus(taxiesToMove > 0)
@@ -60,11 +92,9 @@ function computeDistribution(float w1, float w2) {
         moveTaxi(deficitQueues[j],taxi)
       }
 
-      //Select the new surplus/deficitQueues 
+      //Select the new surplus/deficitQueues
       i++;
       j++;
-      //move actual taxies between queues
-      //send order
     }
     deficitQueuesurplusQueues[i].getTaxiesToMove
   }

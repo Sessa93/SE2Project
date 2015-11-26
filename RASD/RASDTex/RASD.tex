@@ -154,6 +154,7 @@
 	      \item [User] \hfill \\A generic person not registered to MyTaxiService
 	      \item [Passenger] \hfill \\ A registered user that has requested a mtaxi ride/booking
 	      \item [Registered User] \hfill \\ A generic person that is registered to MyTaxiService
+	      \item [Administrator] \hfill \\ A supervisor in charge of managing non-automated procedures
 	      \item [Mtaxi] \hfill \\ A taxi that joined MyTaxiService
 	      \item [MyTaxiService(B)] \hfill \\ The back end of MyTaxiService, that is to say, those software components
 	        that manage the forwarding of ride/booking requests to mtaxi drivers, the search of available mtaxies compatible with the received ride/booking requests, the distribution
@@ -200,6 +201,7 @@
 	        \item Mtaxi driver
 	        \item Taxi driver
 	        \item MyTaxiService(B)
+	        \item Adimistrator
 	\end{itemize}
 
 \section{Requirements Specification}
@@ -240,6 +242,12 @@
 		      \item Complete a ride
 		      \item View the details of ride request/booking
 		      \item Report an accident
+		\end{enumerate}
+	
+	      \item ADMINISTRATOR
+		 \begin{enumerate}
+			\item View taxies reports
+			\item Reactivate accidented taxies
 		\end{enumerate}
 
 	      \item A user can register to MyTaxiService only and only once

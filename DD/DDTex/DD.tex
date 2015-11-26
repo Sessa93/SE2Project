@@ -102,6 +102,9 @@
    captionpos=b
 }
 
+%Table Formatting
+\usepackage{tabularx,hhline}
+
 %%% END Article customizations
 
 %%% The "real" document content comes below...
@@ -642,5 +645,36 @@ Following several graphs showing the evaluation of the expectedTaxies function i
 
 \newpage
 \section{Requirements Traceability}
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{|| c || c ||}
+			\hhline{|t:==:t|}
+  			\textbf{Component} & \textbf{Requirements} \\
+			\hhline{|:=|=:|}
+ 			Dispatcher & (32)  (34) (42)\\
+			\hhline{|:-|-:|}
+ 			Request Manager &  (1a) (2a) (2b) (3a) (3b) (3c) (3e) (4a) (6) (15) (29) (34) (42)\\
+			\hhline{|:-|-:|}
+ 			External Services Manager &  (19) (20)\\
+			\hhline{|:-|-:|}
+ 			Location Manager & (19) (20) (26) (30) (41) (42)\\
+			\hhline{|:-|-:|}
+ 			Queue Manager &  (27) (28) (31) (33) (39)\\
+			\hhline{|:-|-:|}
+ 			Request Receiver &  \\
+			\hhline{|:-|-:|}
+ 			Data Manager &  (1a) (2a)(3b) (3c) (4a) (37) (38) \\
+			\hhline{|:-|-:|}
+ 			&  \\
+			\hhline{|:-|-:|}
+ 			&  \\
+			\hhline{|:-|-:|}
+ 			&  \\
+			\hhline{|:-|-:|}
+			&  \\
+			\hhline{|b:==:b|}
+		\end{tabular}
+		\caption{Requirements Traceability matrix}
+\end{table}
 
 \end{document}

@@ -67,7 +67,7 @@ function seachTaxi(zone,limitTo){
       zone = firstHelperQueue.pop();
       result = checkTaxi(zone,limitTo);
       if(result !== -1){
-        return result
+        return result;
       }
     }
     //depth = 2
@@ -76,14 +76,14 @@ function seachTaxi(zone,limitTo){
       //fills the third helper queue with the zones adjacent to the ones
       //adjacent to the initial one
       foreach(z in zone.adjacentZones){
-        thirdHeleprQueue.push(z)
+        thirdHeleprQueue.push(z);
       }
       //extracts the adjacent zones and checks them for mtaxies
       while(thirdHeleprQueue.length !== 0){
         zone = thirdHeleprQueue.pop();
         result = checkTaxi(zone, limitTo);
         if(result !== -1){
-          return result
+          return result;
         }
       }
       //empties the third helper queue

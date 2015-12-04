@@ -62,7 +62,7 @@
 
 %%% The "real" document content comes below...
 \titlepic{\includegraphics[scale=0.60]{polimi_logo.jpg}}
-\title{\textbf{R}equirements \textbf{A}nalysis and \textbf{S}pecifications \textbf{D}ocument \\ \vspace{1cm} \large{Version 1.1}} 
+\title{\textbf{R}equirements \textbf{A}nalysis and \textbf{S}pecifications \textbf{D}ocument \\ \vspace{1cm} \large{Version 1.1}}
 \author{Giorgio Pea(Mat. 853872), Andrea Sessa(Mat. 850082)}
 \date{13/11/2015} % Activate to display a given date or no date (if empty),
          % otherwise the current date is printed
@@ -153,7 +153,7 @@
 	      \item [User] \hfill \\A generic person not registered to MyTaxiService
 	      \item [Passenger] \hfill \\ A registered user that has requested a mtaxi ride/booking
 	      \item [Registered User] \hfill \\ A generic person that is registered to MyTaxiService
-	      \item [Administrator] \hfill \\ A supervisor in charge of managing non-automated procedures
+	      \item [Administrator] \hfill \\ A supervisor of the mtaxies activities
 	      \item [Mtaxi] \hfill \\ A taxi that joined MyTaxiService
 	      \item [MyTaxiService(B)] \hfill \\ The back end of MyTaxiService, that is to say, those software components
 	        that manage the forwarding of ride/booking requests to mtaxi drivers, the search of available mtaxies compatible with the received ride/booking requests, the distribution
@@ -243,11 +243,12 @@
 		      \item View the details of ride request/booking
 		      \item Report an accident
 		\end{enumerate}
-	
+
 	      \item ADMINISTRATOR
 		 \begin{enumerate}
-			\item View taxies reports
-			\item Reactivate accidented taxies
+			\item View mtaxies reports of accidents and bad behaviors
+			\item Reactivate accidented or suspended mtaxies
+      \item Suspend a mtaxies from the service
 		\end{enumerate}
 
 	      \item A user can register to MyTaxiService only and only once
@@ -306,7 +307,10 @@
 	      are taking a break according to the work timetable, no other exceptions are allowed
 	      \item MyTaxiService has to offer to mtaxi drivers the possibility of reporting an accident and therefore be considered unavailable
 	      \item MyTaxiService has to be able to check if the location of a Mtaxi ,when its driver taps the "END RIDE" button, is the ending location of its current ride. If this check fails MyTaxiService has to report this behavior to the Mtaxi driver supervisor
-	     \item MyTaxiService(B) has to be able to manage a situation in which a mtaxi that has arrived to the ending location of its current ride doesn't tap the "END RIDE" button within 10 mins. In this situation MyTaxiService has to report this behavior to the Mtaxi driver's supervisor.
+	      \item MyTaxiService(B) has to be able to manage a situation in which a mtaxi that has arrived to the ending location of its current ride doesn't tap the "END RIDE" button within 10 mins. In this situation MyTaxiService has to report this behavior to the Mtaxi driver's supervisor.
+        \item MyTaxiService has to allow administrators to see reports about accidented mtaxies or mtaxies that have behaved in an improper way
+        \item MyTaxiService has to allow adminstrators to suspend mtaxies from the service
+        \item MyTaxiService has to allow adminstrators to reintegrate suspended mtaxies to the service
 	\end{enumerate}
 
     \subsection{Non functional requirements}

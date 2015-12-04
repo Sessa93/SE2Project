@@ -220,12 +220,22 @@
 	            In addition to that all the architectural choices, patterns and styles considered are motivated and described.
 	\end{description}
 
+\subsection{Software Design Patterns}
+	\textbf{Model View Controller(MVC)} \hfill \\
+		MyTaxiService's components are organized and designed  such that they comply with the  MVC philosophy; \newline
+		components are classified in:
+		\begin{itemize}
+			\item Model Components: Those components which manage the persistent data of the application
+			\item Controller Components: Those components which implement the business logic of the application
+			\item View Components: Those components which manage the interaction between the application and its users(the general meaning of the term)
+		\end{itemize}
+\newpage
 \subsection{High level components and their interaction}
 	For a detailed description of the components interaction see section 2.5 and 2.6\newline
 	\begin{description}
 		\item [Controller Components:] 
 		           \item [Dispatcher] \hfill \\
-		           This component provides the functionality of dispatching messages from MyTaxiService(B) to users, mtaxies and administrators
+		           This component provides the functionality of dispatching messages from MyTaxiService(B) to users, mtaxies and administrators.
 		            Examples of these messages are :
 			 \begin{enumerate}
 			            \item For users : approximate waiting time for being picked up, the requested mtaxi's identification code
@@ -262,7 +272,7 @@
 
 	      \item [Model Components:] 
 		        \item [Data Manager] \hfill \\
-		            This component is in charge of managing all accesses to the database system. It works as a sort of
+		            This component is in charge of the interaction with the database system. It works as a sort of
 		            intermediate layer between the application logic and the database system
 	
 	      \item [View Components:] \hfill \\
@@ -276,7 +286,7 @@
 		        \item [MyTaxiServiceWebUser GUI] \hfill \\
 		          This component manages the user interaction. This interaction refers to
 		          the MyTaxiService web app
-		        \item [MyTaxiServiceWebAdmin GUI] \hfill
+		        \item [MyTaxiServiceWebAdmin GUI] \hfill \\
 		          This component manages the administrators interaction. This interaction refers to
 		          the MyTaxiService web app for administrators
 	\end{description}
@@ -519,6 +529,7 @@ In this section is included a deployment diagram showing how high level componen
 \newpage
 
 \section{Algorithms Design}
+\textbf{Distribution Checker} \hfill \\
 The following algorithm is run in the Queue Manager component periodically(each hour).
   Its objective is to try to reditribute taxies present in the city's zones in order
   to match the expected demand of taxies in each zone.
@@ -638,7 +649,8 @@ Following several graphs showing the evaluation of the expectedTaxies function i
 	\includegraphics[scale=0.5]{graph3.png}
 \end{changemargin}
 \newpage
-Follows a second algorithm to model the selection of a taxi driver to fullfill a ride/booking request.\newline
+Taxies Extractor
+\noindent Follows a second algorithm to model the selection of a taxi driver to fullfill a ride/booking request.\newline
 \begin{lstlisting}
 /**
   Checks if there exists a mtaxi in the queue relative to the specified zone.
@@ -683,7 +695,7 @@ specified(depth = 2)
 @param firstLimitTo The upper bound limit on the position of a mtaxi from the top of its queue so that it can be selected
 to fullfill a ride request
 **/
-function seachTaxi(zone,limitTo){
+function searchTaxi(zone,limitTo){
   //Helper queues
   firstHelperQueue = [];
   secondHelperQueue = [];

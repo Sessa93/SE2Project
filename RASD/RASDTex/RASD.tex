@@ -62,9 +62,9 @@
 
 %%% The "real" document content comes below...
 \titlepic{\includegraphics[scale=0.60]{polimi_logo.jpg}}
-\title{\textbf{R}equirements \textbf{A}nalysis and \textbf{S}pecifications \textbf{D}ocument \\ \vspace{1cm} \large{Version 1.1}}
+\title{\textbf{R}equirements \textbf{A}nalysis and \textbf{S}pecifications \textbf{D}ocument \\ \vspace{1cm} \large{Version 1.2}}
 \author{Giorgio Pea(Mat. 853872), Andrea Sessa(Mat. 850082)}
-\date{13/11/2015} % Activate to display a given date or no date (if empty),
+\date{3/12/2015} % Activate to display a given date or no date (if empty),
          % otherwise the current date is printed
 
 \begin{document}
@@ -177,6 +177,7 @@
 	      associated with the request
 	      \item [The city] \hfill \\The city that is served by MyTaxyService and its taxies
 	     \item [Fair distribution of taxi zones] \hfill \\ A management of  mtaxies in the city zones such that number of mtaxies in those zones is proportional to the average number of requests and to the zone sizes
+	     \item [Bad Behavior/Beahave Properly(Mtaxies)] An mtaxi doesn't beahave properly: does not respect the work turn, does not accept a ride request within 10 mins and does not end a ride in the destination place or within a fixed time after he has reached the destination location
 	\end{description}
 
     \subsection{Acronyms}
@@ -308,9 +309,10 @@
 	      \item MyTaxiService has to offer to mtaxi drivers the possibility of reporting an accident and therefore be considered unavailable
 	      \item MyTaxiService has to be able to check if the location of a Mtaxi ,when its driver taps the "END RIDE" button, is the ending location of its current ride. If this check fails MyTaxiService has to report this behavior to the Mtaxi driver supervisor
 	      \item MyTaxiService(B) has to be able to manage a situation in which a mtaxi that has arrived to the ending location of its current ride doesn't tap the "END RIDE" button within 10 mins. In this situation MyTaxiService has to report this behavior to the Mtaxi driver's supervisor.
-        \item MyTaxiService has to allow administrators to see reports about accidented mtaxies or mtaxies that have behaved in an improper way
-        \item MyTaxiService has to allow adminstrators to suspend mtaxies from the service
-        \item MyTaxiService has to allow adminstrators to reintegrate suspended mtaxies to the service
+        	      \item MyTaxiService has to allow administrators to see reports about accidented mtaxies or mtaxies that have behaved in an improper way
+        	      \item MyTaxiService has to allow adminstrators to suspend mtaxies from the service
+        	      \item MyTaxiService has to allow adminstrators to reintegrate suspended mtaxies to the service
+                \item MyTaxiService has to allow administrators to keep a list of mtaxies that have not behaved properly
 	\end{enumerate}
 
     \subsection{Non functional requirements}
@@ -383,6 +385,22 @@
         \newline
         \includegraphics[scale=0.52]{deleteBookInt.png}\newline
         \newline
+        \newpage
+        This mockup shows the view accident reports page with one element\newline
+        \newline
+        \includegraphics[scale=0.52]{viewAccidentsOpen.png}\newline
+        \newline
+        \newpage
+        This mockup shows the dashboard page of the administrators\newline
+        \newline
+        \includegraphics[scale=0.42]{dashboard.png}\newline
+        \newline
+        \newpage
+        This mockup shows the black list administrators page with one element\newline
+        \newline
+        \includegraphics[scale=0.52]{blacklist.png}\newline
+        \newline
+        \newpage
 
     \subsection{Constraints}
 	\begin{enumerate}
@@ -471,7 +489,7 @@
     \subsection{Use cases of the application}
 	\subsubsection{General use case diagram}
 	\begin{center}
-	\includegraphics[scale=0.52]{usecaseGeneral.png}
+	\includegraphics[scale=0.49]{usecaseGeneral.png}
 	\end{center}
 	\begin{enumerate}
 	      \item A registered user makes a ride request
@@ -908,7 +926,8 @@
 		\centering
 		\begin{tabular}{lll}
 		Date       & Description & Authors    \\
-		13/11/2015 & Modified assumption section& Pea, Sessa
+		13/11/2015 & Modified assumption section& Pea, Sessa \\
+		3/12/2015 & Added administrator requirements and mockups & Pea, Sessa
 		\end{tabular}
 		\end{table}
 

@@ -326,7 +326,7 @@ Methods under inspection:
 \noindent File: /appserver/web/web-core/src/main/java/org/apache/catalina/ssi/\textbf{SSIMediator.java}\newline\newline
 Methods under inspection:
   \begin{itemize}
-    \item \textbf{\textit{substituteVariables(String val)}}
+    \item \textbf{\textit{substituteVariables( String val )}}
   \end{itemize}
   
 \begin{lstlisting}[language=java]
@@ -418,23 +418,28 @@ Methods under inspection:
 	  return ssiExternalResolver.getFileLastModified(path, virtual);
       }
 
+
       public String getFileText(String path, boolean virtual) throws IOException {
 	  return ssiExternalResolver.getFileText(path, virtual);
       }
+
 
       protected boolean isNameReserved(String name) {
 	  return name.startsWith(className + ".");
       }
 
+
       public String getVariableValue(String variableName) {
 	  return getVariableValue(variableName, "none");
       }
+
 
       public void setVariableValue(String variableName, String variableValue) {
 	  if (!isNameReserved(variableName)) {
 	      ssiExternalResolver.setVariableValue(variableName, variableValue);
 	  }
       }
+
 
       public String getVariableValue(String variableName, String encoding) {
 	  String lowerCaseVariableName = variableName.toLowerCase(Locale.ENGLISH);

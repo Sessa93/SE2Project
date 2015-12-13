@@ -82,7 +82,7 @@
    showspaces=false,
    numbers=left,
    numberstyle=\footnotesize,
-   numbersep=9pt,
+   numbersep=7pt,
    tabsize=2,
    breaklines=true,
    showtabs=false,
@@ -139,7 +139,9 @@ Methods under inspection:
 
 \subsection{SSIServlet.java}
 
-  From the Javadoc:\newline \indent \textit{`Servlet to process SSI requests within a webpage.`}
+  From the Javadoc:
+  
+  \lstinputlisting[language=Java, firstnumber=78, firstline=78, lastline=81]{SSIServlet.java}
 
   \noindent This class represents a Java EE servlet used to process requests that include some SSI instruction.\newline
   SSI(Server Side Include) that is a simple interpreted server-side scripting language.
@@ -148,7 +150,7 @@ Methods under inspection:
   \begin{itemize}
     \item \textit{Init()}
     \item \textit{requestHandler()}
-      From the inspection of the code this function is only called when the servelet receives a http Get or Post request.
+      \newline From the inspection of the code this function is only called when the servelet receives a http Get or Post request.
       The javadoc for the method, included in the code, states:
       
       \lstinputlisting[language=Java, firstnumber=173, firstline=173, lastline=180]{SSIServlet.java}
@@ -159,25 +161,62 @@ Methods under inspection:
       Now the objective of the method is to retrieve the correct resource from the servelet context.
       If the debug level is greater than zero then log a message into the logger for debug purposes.
       \lstinputlisting[language=Java, firstnumber=183, firstline=183, lastline=188]{SSIServlet.java}
-      
-      \newpage
-      
+
       The comment is very clear: it checks if the resource is either in the `WEB-INF` or `META-INF` subdirectories;
       if so the function return with an error code.
       \lstinputlisting[language=Java, firstnumber=189, firstline=189, lastline=196]{SSIServlet.java}
       
-      
+      Here the fucntion tries to retrieve the URL to the resource; it also performs an existence check on the resource,
+      if the resource doesn't exist the function return an error.
       \lstinputlisting[language=Java, firstnumber=197, firstline=197, lastline=202]{SSIServlet.java}
       
+      In the final part, the function starts to initialize the header of the HttpServletResponse by setting:
+      the mime type, the encoding of the output text and the expiration time for the response(in seconds, see init()).\newline
+      Finally the processSSI() function is invoked passing as parameters the original request, the reference to the response and the resource.
       \lstinputlisting[language=Java, firstnumber=203, firstline=203, lastline=213]{SSIServlet.java}
-
+      \newpage
+    \item \textit{processSSI()}
 
   \end{itemize}
+
+\subsection{SSIMediator.java}
 
 
 
 \section{Issues}
+In this section is included a list of problems found during the ispection of the assigned code.
+\subsection{SSIServlet.java}
+  \textbf{General Considerations} \hfill \\
+  In general the class lacks of documentation: comments and javadoc are not complete and where inserted are sometimes meaningless and very short.
+  \begin{itemize}
+   \item \textit{init()}
+   \item \textit{requestHandler()}
+    \begin{enumerate}
+     \item Checklist[8,9]: All indentations in the class are made by means of tabs
+     \item Checklist[18]: The function is not fully commented, some instructions(lines 197 to 213) are not commented at all
+     \item Checklist[11]: The conditional block
+      \lstinputlisting[language=Java, firstnumber=185, firstline=185, lastline=188]{SSIServlet.java}
+      uses no enclosing braces
+     \item Checklist[40]: the lines
+      \lstinputlisting[language=Java, firstnumber=191, firstline=191, lastline=191]{SSIServlet.java}
+      \lstinputlisting[language=Java, firstnumber=198, firstline=198, lastline=198]{SSIServlet.java}
+      \lstinputlisting[language=Java, firstnumber=204, firstline=204, lastline=204]{SSIServlet.java}
+      \lstinputlisting[language=Java, firstnumber=208, firstline=208, lastline=208]{SSIServlet.java}
+      uses for comparation `==` instead of `equals()`
+    \end{enumerate}
+   \item \textit{processSSI()}
+  \end{itemize}
+
+
+\subsection{SSIMediator.java}
+  \begin{itemize}
+   \item \textit{substituteVariables()}
+  \end{itemize}
 
 \section{Additional Considerations}
+
+\section{Appendix}
+\subsection{Java Checklist}
+\subsection{Statistics}
 
 \end{document}

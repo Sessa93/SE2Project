@@ -115,7 +115,7 @@
 
 \section{Classes}
 
-Included in this section the two java classes subjected to the analisys.\newline
+Included in this section the two java classes subjected to the analysis.\newline
 
 \noindent File: /appserver/web/web-core/src/main/java/org/apache/catalina/ssi/\textbf{SSIServlet.java}\newline\newline
 Methods under inspection:
@@ -150,7 +150,7 @@ Methods under inspection:
   \begin{itemize}
     \item \textit{Init()}
     \item \textit{requestHandler()}
-      \newline From the inspection of the code this function is only called when the servelet receives a http Get or Post request.
+      \newline From the inspection of the code this function is only called when the serverlet receives a HTTP Get or Post request.
       The javadoc for the method, included in the code, states:
       
       \lstinputlisting[language=Java, firstnumber=173, firstline=173, lastline=180]{SSIServlet.java}
@@ -158,7 +158,7 @@ Methods under inspection:
       Hence the method accepts as parameters a HttpServletRequest,the incoming request, and a HttpServletResponse that is a reference
       to the response.\newline
       
-      Now the objective of the method is to retrieve the correct resource from the servelet context.
+      Now the objective of the method is to retrieve the correct resource from the serverlet context.
       If the debug level is greater than zero then log a message into the logger for debug purposes.
       \lstinputlisting[language=Java, firstnumber=183, firstline=183, lastline=188]{SSIServlet.java}
 
@@ -166,7 +166,7 @@ Methods under inspection:
       if so the function return with an error code.
       \lstinputlisting[language=Java, firstnumber=189, firstline=189, lastline=196]{SSIServlet.java}
       
-      Here the fucntion tries to retrieve the URL to the resource; it also performs an existence check on the resource,
+      Here the function tries to retrieve the URL to the resource; it also performs an existence check on the resource,
       if the resource doesn't exist the function return an error.
       \lstinputlisting[language=Java, firstnumber=197, firstline=197, lastline=202]{SSIServlet.java}
       
@@ -180,11 +180,46 @@ Methods under inspection:
   \end{itemize}
 
 \subsection{SSIMediator.java}
+  From the Javadoc of the class:
+  
+  \lstinputlisting[language=Java, firstnumber=75, firstline=75, lastline=78]{SSIMediator.java}
+  
+  The class is inserted into the context of SSI processing, in particular this class take care of
+  how many different implementations of the SSI instructions can communicate and exchange data with each other.\newline
+  Follows a detailed description of the assigned methods:
+  \begin{itemize}
+   \item \textit{substituteVariables()}
+    \lstinputlisting[language=Java, firstnumber=246, firstline=246, lastline=249]{SSIMediator.java}
+    The method accepts as parameter a string and returns a new string to which a variables substitution process has been applied.
+    \lstinputlisting[language=Java, firstnumber=251, firstline=251, lastline=253]{SSIMediator.java}
+    It checks if the string contains `\$` or `\&`, if not there is nothing to substitute so the original string is simply returned.
+    Otherwise: 
+    \lstinputlisting[language=Java, firstnumber=253, firstline=253, lastline=259]{SSIMediator.java}
+    It's easy to understand(from the comments and javadoc) that above snippet of code substitute each occurrence of HTML special codes with the real character. \newline
+    \lstinputlisting[language=Java, firstnumber=261, firstline=261, lastline=274]{SSIMediator.java}
+    This part of the code takes care of substuting `\&\#n` with `n` where `n` is an integer number.
+    See the javadoc of StringBuilder(Java SE 7 class) for a detailed explanation of the methods.\newline
+    The remaining code processes variables and substitutes their current value.\newline
+    Variables are always in the form `\$ varName` and could possibly be wrapped, ie. `\$\{varName\}`. 
+    This information has been collected by an direct analysis of the code and by means of the few comments inserted. 
+    The actual value of the variables found in the string are retrieved by means of the `getVariablesValue()` function(also defined in SSIMediator.java).\newline
+    Find the first `\$`, eventually escaped.
+    \lstinputlisting[language=Java, firstnumber=277, firstline=277, lastline=290]{SSIMediator.java}
+    Identifies the portion string to substitute [nameStart, nameEnd] and the name of the variable [start, end].
+    Also the functions consider the possibility that the variable could be wrapped so it processes the presence of `\{` and `\}` that
+    are wrapping the variable name.
+    \lstinputlisting[language=Java, firstnumber=291, firstline=291, lastline=307]{SSIMediator.java}
+    Finally the variable name has been identified in the original string [start, end] and the `getVariablesValue()` method is called
+    to retrieve the value of the variable. The value is then substituted and the function seeks for the presence of other variables.
+    If no more variables are found, the function returns the processed string.
+    \lstinputlisting[language=Java, firstnumber=308, firstline=308, lastline=318]{SSIMediator.java}
 
+
+  \end{itemize}
 
 
 \section{Issues}
-In this section is included a list of problems found during the ispection of the assigned code.
+In this section is included a list of problems found during the inspection of the assigned code.
 \subsection{SSIServlet.java}
   \textbf{General Considerations} \hfill \\
   In general the class lacks of documentation: comments and javadoc are not complete and where inserted are sometimes meaningless and very short.
@@ -197,18 +232,26 @@ In this section is included a list of problems found during the ispection of the
      \item Checklist[11]: The conditional block
       \lstinputlisting[language=Java, firstnumber=185, firstline=185, lastline=188]{SSIServlet.java}
       uses no enclosing braces
-     \item Checklist[40]: the lines
+     \item Checklist[33]: The declarations of variables in lines
+      \lstinputlisting[language=Java, firstnumber=197, firstline=197, lastline=197]{SSIServlet.java}
+      \lstinputlisting[language=Java, firstnumber=203, firstline=203, lastline=203]{SSIServlet.java}
+      should be placed at the start of the function block
+     \item Checklist[40]: The lines
       \lstinputlisting[language=Java, firstnumber=191, firstline=191, lastline=191]{SSIServlet.java}
       \lstinputlisting[language=Java, firstnumber=198, firstline=198, lastline=198]{SSIServlet.java}
       \lstinputlisting[language=Java, firstnumber=204, firstline=204, lastline=204]{SSIServlet.java}
       \lstinputlisting[language=Java, firstnumber=208, firstline=208, lastline=208]{SSIServlet.java}
       uses for comparation `==` instead of `equals()`
+     \item Checklist[52,53]: The line 
+      \lstinputlisting[language=Java, firstnumber=197, firstline=197, lastline=197]{SSIServlet.java}
+      may throws a `MalformedURLException`, neither actions are taken to manage the exception nor the exception is explicitly re-thrown
     \end{enumerate}
    \item \textit{processSSI()}
   \end{itemize}
 
 
 \subsection{SSIMediator.java}
+  \textbf{General Considerations} \hfill \\
   \begin{itemize}
    \item \textit{substituteVariables()}
   \end{itemize}

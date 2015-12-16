@@ -109,7 +109,9 @@ public class SSIServlet extends HttpServlet {
       * (too general)
      */
     public void init() throws ServletException {
-
+        //At least one line that exceeds 80 spaces and is that can be fixed
+        //easily
+        //Wrong if styles
         //Inefficiency: continuos calls of getServeletConfig -> just assign it to a variable
         if (getServletConfig().getInitParameter("debug") != null)
             debug = Integer.parseInt(getServletConfig().getInitParameter("debug"));
@@ -227,13 +229,28 @@ public class SSIServlet extends HttpServlet {
     //Where's the javadoc and the comments??
     protected void processSSI(HttpServletRequest req, HttpServletResponse res,
             URL resource) throws IOException {
+
+
+        //SSI command -> a class for the ssi command(name, params name, params value)
+        //In order to do data you need a ssi mediator that a communication middleware for ssi commands OK
+        //Resolves files included or manipulated in html documents with ssi given a serverlet OK
         SSIExternalResolver ssiExternalResolver =
+            //checkVisibility of getServletContext, config
+            //public -> OK
+            //and the constructors
+            //No jdoc
+            //OK the constructor
             new SSIServletExternalResolver(getServletContext(), req, res,
                     isVirtualWebappRelative, debug, inputEncoding);
+
+        //Parses and process ssi in html files
+        //
         SSIProcessor ssiProcessor = new SSIProcessor(ssiExternalResolver,
                 debug);
         //Is it really necessary?
+        //Prints formatted representations of objects to a text-output stream
         PrintWriter printWriter = null;
+        //A character stream that collects its output in a string buffer, which can then be used to construct a string.
         StringWriter stringWriter = null;
 
         if (buffered) {
@@ -252,6 +269,7 @@ public class SSIServlet extends HttpServlet {
         //If replication and var in the middle, nonsense else
         InputStreamReader isr;
         if (encoding == null) {
+            //sets a reader for the file with ssi inside
             isr = new InputStreamReader(resourceInputStream);
         } else {
             isr = new InputStreamReader(resourceInputStream, encoding);
@@ -259,6 +277,7 @@ public class SSIServlet extends HttpServlet {
         //Vars in the middle
         BufferedReader bufferedReader = new BufferedReader(isr);
 
+        //Parses and processes and puts the result in the printWriter
         long lastModified = ssiProcessor.process(bufferedReader,
                 resourceInfo.getLastModified(), printWriter);
         if (lastModified > 0) {

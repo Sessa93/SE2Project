@@ -78,7 +78,7 @@ import java.util.Locale;
 /**
  * Servlet to process SSI requests within a webpage. Mapped to a path from
  * within web.xml.
- * 
+ *
  * @author Bip Thelin
  * @author Amy Roh
  * @author Dan Sandberg
@@ -102,29 +102,40 @@ public class SSIServlet extends HttpServlet {
 
     //----------------- Public methods.
     /**
-     * Initialize this servlet.
-     * 
+     * Initialize this servlet. (What does it mean?)
+     *
      * @exception ServletException
      *                if an error occurs
+      * (too general)
      */
     public void init() throws ServletException {
-        
+
+        //Inefficiency: continuos calls of getServeletConfig -> just assign it to a variable
         if (getServletConfig().getInitParameter("debug") != null)
             debug = Integer.parseInt(getServletConfig().getInitParameter("debug"));
-        
-        isVirtualWebappRelative = 
+
+        //Inspection: this var must be assigned a value in the top of the body of the function
+        //since this assigned doesn't depend from previous instructions in the body of the function
+        //use this.
+        //Check if getInitParameter("isVirtualWebappRelative") returns a boolean, if so this is a overehead or
+        //an error to use Boolean.parseBoolean -> it can also throw and exception
+        isVirtualWebappRelative =
             Boolean.parseBoolean(getServletConfig().getInitParameter("isVirtualWebappRelative"));
-        
+
         if (getServletConfig().getInitParameter("expires") != null)
             expires = Long.valueOf(getServletConfig().getInitParameter("expires"));
-        
+
+        //Check if getInitParameter("buffered") returns a boolean, if so this is a overehead or
+        //an error to use Boolean.parseBoolean -> it can also throw and exception
         buffered = Boolean.parseBoolean(getServletConfig().getInitParameter("buffered"));
-        
+
         inputEncoding = getServletConfig().getInitParameter("inputEncoding");
-        
+
+        //Inefficiency
         if (getServletConfig().getInitParameter("outputEncoding") != null)
             outputEncoding = getServletConfig().getInitParameter("outputEncoding");
-        
+
+        //Need comment
         if (debug > 0)
             log("SSIServlet.init() SSI invoker started with 'debug'=" + debug);
 
@@ -133,7 +144,7 @@ public class SSIServlet extends HttpServlet {
 
     /**
      * Process and forward the GET request to our <code>requestHandler()</code>*
-     * 
+     *
      * @param req
      *            a value of type 'HttpServletRequest'
      * @param res
@@ -153,7 +164,7 @@ public class SSIServlet extends HttpServlet {
     /**
      * Process and forward the POST request to our
      * <code>requestHandler()</code>.
-     * 
+     *
      * @param req
      *            a value of type 'HttpServletRequest'
      * @param res
@@ -172,7 +183,7 @@ public class SSIServlet extends HttpServlet {
 
     /**
      * Process our request and locate right SSI command.
-     * 
+     *
      * @param req
      *            a value of type 'HttpServletRequest'
      * @param res
@@ -213,7 +224,7 @@ public class SSIServlet extends HttpServlet {
         processSSI(req, res, resource);
     }
 
-
+    //Where's the javadoc and the comments??
     protected void processSSI(HttpServletRequest req, HttpServletResponse res,
             URL resource) throws IOException {
         SSIExternalResolver ssiExternalResolver =
@@ -221,27 +232,31 @@ public class SSIServlet extends HttpServlet {
                     isVirtualWebappRelative, debug, inputEncoding);
         SSIProcessor ssiProcessor = new SSIProcessor(ssiExternalResolver,
                 debug);
+        //Is it really necessary?
         PrintWriter printWriter = null;
         StringWriter stringWriter = null;
+
         if (buffered) {
             stringWriter = new StringWriter();
             printWriter = new PrintWriter(stringWriter);
         } else {
             printWriter = res.getWriter();
         }
-
+        //this vars should be declared on top
         URLConnection resourceInfo = resource.openConnection();
         InputStream resourceInputStream = resourceInfo.getInputStream();
         String encoding = resourceInfo.getContentEncoding();
         if (encoding == null) {
             encoding = inputEncoding;
         }
+        //If replication and var in the middle, nonsense else
         InputStreamReader isr;
         if (encoding == null) {
             isr = new InputStreamReader(resourceInputStream);
         } else {
             isr = new InputStreamReader(resourceInputStream, encoding);
         }
+        //Vars in the middle
         BufferedReader bufferedReader = new BufferedReader(isr);
 
         long lastModified = ssiProcessor.process(bufferedReader,
@@ -251,6 +266,7 @@ public class SSIServlet extends HttpServlet {
         }
         if (buffered) {
             printWriter.flush();
+            //Var in the middle
             String text = stringWriter.toString();
             res.getWriter().write(text);
         }

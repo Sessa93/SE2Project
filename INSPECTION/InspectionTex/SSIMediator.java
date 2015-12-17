@@ -75,7 +75,7 @@ import org.glassfish.grizzly.http.util.HttpUtils;
 /**
  * Allows the different SSICommand implementations to share data/talk to each
  * other
- * 
+ *
  * @author Bip Thelin
  * @author Amy Roh
  * @author Paul Speed
@@ -250,7 +250,7 @@ public class SSIMediator {
     public String substituteVariables(String val) {
         // If it has no references or HTML entities then no work
         // need to be done
-        if (val.indexOf('$') < 0 && val.indexOf('&') < 0) return val;
+      if (val.indexOf('$') < 0 && val.indexOf('&') < 0) return val;
 
         // HTML decoding
         val = val.replace("&lt;", "<");
@@ -261,13 +261,13 @@ public class SSIMediator {
         StringBuilder sb = new StringBuilder(val);
         int charStart = sb.indexOf("&#");
         while (charStart > -1) {
-            int charEnd = sb.indexOf(";", charStart);
+        int charEnd = sb.indexOf(";", charStart);
             if (charEnd > -1) {
                 char c = (char) Integer.parseInt(
                         sb.substring(charStart + 2, charEnd));
                 sb.delete(charStart, charEnd + 1);
                 sb.insert(charStart, c);
-                charStart = sb.indexOf("&#");
+        charStart = sb.indexOf("&#");
             } else {
                 break;
             }
@@ -276,15 +276,15 @@ public class SSIMediator {
         for (int i = 0; i < sb.length();) {
             // Find the next $
             for (; i < sb.length(); i++) {
-                if (sb.charAt(i) == '$') {
+        if (sb.charAt(i) == '$') {
                     i++;
                     break;
                 }
             }
             if (i == sb.length()) break;
             // Check to see if the $ is escaped
-            if (i > 1 && sb.charAt(i - 2) == '\\') {
-                sb.deleteCharAt(i - 2);
+        if (i > 1 && sb.charAt(i - 2) == '\\') {
+        sb.deleteCharAt(i - 2);
                 i--;
                 continue;
             }
@@ -294,7 +294,7 @@ public class SSIMediator {
             int nameEnd = -1;
             char endChar = ' ';
             // Check for {} wrapped var
-            if (sb.charAt(i) == '{') {
+        if (sb.charAt(i) == '{') {
                 nameStart++;
                 endChar = '}';
             }

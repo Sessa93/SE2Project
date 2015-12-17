@@ -228,14 +228,14 @@ In this section is included a list of problems found during the inspection of th
    \item \textit{requestHandler()}
     \begin{enumerate}
      \item Checklist[8,9]: All indentations in the class are made by means of tabs
-     \item Checklist[18]: The function is not fully commented, some instructions(lines 197 to 213) are not commented at all
      \item Checklist[11]: The conditional block
       \lstinputlisting[language=Java, firstnumber=185, firstline=185, lastline=188]{SSIServlet.java}
       uses no enclosing braces
-     \item Checklist[33]: The declarations of variables in lines
-      \lstinputlisting[language=Java, firstnumber=197, firstline=197, lastline=197]{SSIServlet.java}
-      \lstinputlisting[language=Java, firstnumber=203, firstline=203, lastline=203]{SSIServlet.java}
-      should be placed at the start of the function block
+     \item Checklist[18]: No comments from line 210 to the end of the function
+     %\item Checklist[33]: The declarations of variables in lines
+      %\lstinputlisting[language=Java, firstnumber=197, firstline=197, lastline=197]{SSIServlet.java}
+      %\lstinputlisting[language=Java, firstnumber=203, firstline=203, lastline=203]{SSIServlet.java}
+      %should be placed at the start of the function block
      \item Checklist[40]: The lines
       \lstinputlisting[language=Java, firstnumber=191, firstline=191, lastline=191]{SSIServlet.java}
       \lstinputlisting[language=Java, firstnumber=198, firstline=198, lastline=198]{SSIServlet.java}
@@ -252,14 +252,48 @@ In this section is included a list of problems found during the inspection of th
 
 \subsection{SSIMediator.java}
   \textbf{General Considerations} \hfill \\
+  In general the class lacks of documentation: the javadoc is not complete and many instructions blocks are left with no comments at all.
   \begin{itemize}
    \item \textit{substituteVariables()}
+   \item Checklist[8,9]: Tabs are used for identation for all the function
+   \item Checklist[23]: The Javadoc provided for the function is not complete 
+   \item Checklist[11]: No enclosing braces in the following if statements:
+    \lstinputlisting[language=Java, firstnumber=253, firstline=253, lastline=253]{SSIMediator.java}
+    \lstinputlisting[language=Java, firstnumber=303, firstline=303, lastline=303]{SSIMediator.java}
+    \lstinputlisting[language=Java, firstnumber=307, firstline=307, lastline=307]{SSIMediator.java}
+    \lstinputlisting[language=Java, firstnumber=311, firstline=311, lastline=311]{SSIMediator.java}
+
+
+   \item Checklist[52,53]: No action are taken in case one of the following lines throws a NullPointerException:
+    \lstinputlisting[language=Java, firstnumber=262, firstline=262, lastline=262]{SSIMediator.java}
+    \lstinputlisting[language=Java, firstnumber=264, firstline=264, lastline=264]{SSIMediator.java}
+    \lstinputlisting[language=Java, firstnumber=270, firstline=270, lastline=270]{SSIMediator.java}
+    
+   \item Checklist[52,53]: No action are taken in case one of the following lines throws IndexOutOfBoundsException:
+    \lstinputlisting[language=Java, firstnumber=266, firstline=266, lastline=267]{SSIMediator.java}
+    \lstinputlisting[language=Java, firstnumber=268, firstline=268, lastline=268]{SSIMediator.java}
+    \lstinputlisting[language=Java, firstnumber=269, firstline=269, lastline=269]{SSIMediator.java}
+    \lstinputlisting[language=Java, firstnumber=279, firstline=279, lastline=279]{SSIMediator.java}
+    \lstinputlisting[language=Java, firstnumber=286, firstline=286, lastline=286]{SSIMediator.java}
+    \lstinputlisting[language=Java, firstnumber=287, firstline=287, lastline=287]{SSIMediator.java}
+    \lstinputlisting[language=Java, firstnumber=297, firstline=297, lastline=297]{SSIMediator.java}
+    \lstinputlisting[language=Java, firstnumber=313, firstline=313, lastline=313]{SSIMediator.java}
+    
+   \item Checklist[40]: The line
+    \lstinputlisting[language=Java, firstnumber=311, firstline=311, lastline=311]{SSIMediator.java}
+    uses for comparation `==` instead of `equals()`
+
+
+
+
+
   \end{itemize}
 
 \section{Additional Considerations}
 
 \section{Appendix}
 \subsection{Java Checklist}
+
 \subsection{Statistics}
 
 \end{document}

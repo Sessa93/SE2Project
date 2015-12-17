@@ -75,7 +75,7 @@ import org.glassfish.grizzly.http.util.HttpUtils;
 /**
  * Allows the different SSICommand implementations to share data/talk to each
  * other
- * 
+ *
  * @author Bip Thelin
  * @author Amy Roh
  * @author Paul Speed
@@ -261,13 +261,13 @@ public class SSIMediator {
         StringBuilder sb = new StringBuilder(val);
         int charStart = sb.indexOf("&#");
         while (charStart > -1) {
-            int charEnd = sb.indexOf(";", charStart);
+        int charEnd = sb.indexOf(";", charStart);
             if (charEnd > -1) {
                 char c = (char) Integer.parseInt(
                         sb.substring(charStart + 2, charEnd));
                 sb.delete(charStart, charEnd + 1);
                 sb.insert(charStart, c);
-                charStart = sb.indexOf("&#");
+        charStart = sb.indexOf("&#");
             } else {
                 break;
             }

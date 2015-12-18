@@ -261,7 +261,11 @@ public class SSIServlet extends HttpServlet {
         }
         //this vars should be declared on top
         URLConnection resourceInfo = resource.openConnection();
+        //Should try and catch IOException
         InputStream resourceInputStream = resourceInfo.getInputStream();
+        //Should try and catch IOException and Unknown service exception
+        //Terrible error : cannot get input stream from resourceInfo if i do not establish a con to the server
+        // that stores the remote resource and this is done using the connect method
         String encoding = resourceInfo.getContentEncoding();
         if (encoding == null) {
             encoding = inputEncoding;

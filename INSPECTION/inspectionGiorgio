@@ -1,0 +1,112 @@
+init()
+  Issues
+    All the if statements present in the body of this method
+    do not use curly braces
+
+    The javadoc written for this method is not sufficient to explain its role and its
+    behavior in the context of the SSIServlet class. The javadoc written for this method is not sufficient to explain
+    the reasons behind the throwing of a ServerletException
+
+    All the comparisons present in the body of this method use improper
+    operators(== or !== instead of equals or !..equals), in fact the elements in comparison
+    are always objects(strings in particular)
+
+    Lines[124,127,134][Commented class version]
+    In these lines we have the assignment of properties of the class, and this assignment does not
+    depend from the result of previous instructions. Given that, these instructions should be
+    put in the top of the body of the method
+
+
+    None of the instructions present in the body of this method is commented. This may be
+    correct if all these instructions are self explicative, but at least the last if statement
+    needs comments to explain what it tries to achieve
+
+    Lines[125,128,138][Commented class version]
+    These lines exceed the length of 80 characters.
+
+    In the body of this method continuos calls to the methods of the object returned by the
+    getServletConfig() method are performed.
+    This is inefficient since the above mentioned object can be stored in a local variable
+    and so made accessible without method calls
+
+    Methods and properties of the superclass of a class must be referenced by that class using
+    the "super." prefix. This should be done for reasons of clarity and readability, so that
+    the developer can immediately distinguish the manipulation of methods and properties of the superclass of the current class
+    from the manipulation of those which belong to the current class.
+    This behavior is not followed in this method[All lines]
+
+    Methods and properties of the current class must be referenced within the class using the "this." prefix.
+    This should be done for reasons of clarity and readability, so that the developer can immediately distinguish
+    the manipulation of methods and properties of the current class from the manipulation of those which belong
+    to the superclass of the current class. This is also useful for distinguish the manipulation of properties of
+    the current class and local variables.
+    This behavior is not followed in this method[Lines 124,127,134][Commented class version]
+
+    [Line 117][Commented version]
+    The Integer.parseInt method wants an additional parameter which is an integer that speciefies
+    the radix of the integer to be parsed out of the given string.
+    The Integer.parseInt method throws a NumberFormatException which is not managed and must be imported.
+
+    [Line 128][Commented version]
+    The Long.valueOf method throws a NumberFormatException which is not managed and must be imported
+
+    The indentation of lines is made using tabs and not spaces
+
+
+
+
+
+processSSI()
+  Issues
+    No javadoc has been written for this method
+
+    None of the instructions present in the body of this method is commented. This may be
+    correct if all these instructions are self explicative, but most of the instructions
+    present in this method are not self explicative
+
+    Lines 263,265,274
+    In these lines local variables are defined and assigned to a value. Since these assigments and definitions
+    do not depend from the result of previous instructions, they must be put in the top
+    of the body of the method
+
+    Lines 274
+    In this line a local variable of the type "InputStreamReader" is defined. The name of
+    this variable is "isr" which does not convey any immediate meaning about the role and the
+    use of this variable
+
+    Lines 263, 265
+    The method openConnection throws an IOException that is not managed
+    The method getInputStream throws an IOException that is not managed
+
+    Line 265,
+    The getInputStream and getContentEncoding methods cannot be called on a "URLConnection" object before opening an actual connection
+    to the resource referred by object itself (to solve this problem the "connect" method must be called on the
+    "URLConnection" object before calling getInputStream)
+
+    Line 260,294
+    the getWriter method on the HttpServletResponse object throws a IOException, a IllegalStateException, UnsupportedEncodingException
+    which are neither managed nor imported (IllegalStateException)
+
+    Line 286
+    The method close should be invoked on the bufferedReader variable and on the
+    isr variable, since these variables are not used anymore in the rest of the method
+    and they represent streams of bytes readers
+
+    All the comparisons present in the body of this method use improper
+    operators(== or !== instead of equals or !..equals), in fact the elements in comparison
+    are always objects(strings in particular)
+
+
+
+    Methods and properties of the superclass of a class must be referenced by that class using
+    the "super." prefix. This should be done for reasons of clarity and readability, so that
+    the developer can immediately distinguish the manipulation of methods and properties of the superclass of the current class
+    from the manipulation of those which belong to the current class.
+    This behavior is not followed in this method[All lines]
+
+    Methods and properties of the current class must be referenced within the class using the "this." prefix.
+    This should be done for reasons of clarity and readability, so that the developer can immediately distinguish
+    the manipulation of methods and properties of the current class from the manipulation of those which belong
+    to the superclass of the current class. This is also useful for distinguish the manipulation of properties of
+    the current class and local variables.
+    This behavior is not followed in this method[Lines 124,127,134][Commented class version]

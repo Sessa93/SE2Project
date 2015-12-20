@@ -99,7 +99,7 @@ processSSI()
 
 
     Methods and properties of the superclass of a class must be referenced by that class using
-    the "super" prefix. This should be done for reasons of clarity and readability, so that
+    the "super." prefix. This should be done for reasons of clarity and readability, so that
     the developer can immediately distinguish the manipulation of methods and properties of the superclass of the current class
     from the manipulation of those which belong to the current class.
     This behavior is not followed in this method[All lines]

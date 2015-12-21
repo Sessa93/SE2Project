@@ -219,7 +219,7 @@ public class SSIServlet extends HttpServlet {
         SSIExternalResolver ssiExternalResolver =
             new SSIServletExternalResolver(getServletContext(), req, res,
                     isVirtualWebappRelative, debug, inputEncoding);
-        SSIProcessor ssiProcessor = new SSIProcessor(ssiExternalResolver,
+        SSIProcessor ssiProcessor = new SSIProcessor(ssiExternalResolver)
                 debug);
         PrintWriter printWriter = null;
         StringWriter stringWriter = null;

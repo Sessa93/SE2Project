@@ -276,7 +276,7 @@ public class SSIMediator {
         for (int i = 0; i < sb.length();) {
             // Find the next $
             for (; i < sb.length(); i++) {
-        if (sb.charAt(i) == '$') {
+              if (sb.charAt(i) == '$') {
                     i++;
                     break;
                 }

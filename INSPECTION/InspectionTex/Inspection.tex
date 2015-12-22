@@ -270,7 +270,8 @@ Methods under inspection:
 In this section is included a list of problems found during the inspection of the assigned code.
 \subsection{SSIServlet.java}
   \textbf{General Considerations} \hfill \\
-  In general the class lacks of documentation: comments and javadoc are not complete and where inserted are sometimes meaningless and very short.
+  In general the class lacks of documentation: comments and javadoc are not complete and where inserted are sometimes meaningless and very short.\newline
+  All the member(internal) variables are declared as `protected`, it is always preferable to use the `private` access modifier(see checklist 28). 
   \begin{itemize}
    \item \textbf{\textit{init()}}
    \begin{enumerate}
@@ -322,6 +323,7 @@ In this section is included a list of problems found during the inspection of th
    \item \textbf{\textit{processSSI()}}
     \begin{itemize}
      \item Checklist[23]: No javadoc has been written for this method
+     \item Checklist[28]: The method has the proctected access modifier but it is never invoked from its subclasses. \newline It should be declared as `private`
      \item Checklist[18]: None of the instructions present in the body of this method is commented. This may be
       correct if all these instructions are self explicative, but most of the instructions
       present in this method are not self explicative
@@ -359,7 +361,8 @@ In this section is included a list of problems found during the inspection of th
 
 \subsection{SSIMediator.java}
   \textbf{General Considerations} \hfill \\
-  In general the class lacks of documentation: the javadoc is not complete and many instructions blocks are left with no comments at all.
+  In general the class lacks of documentation: the javadoc is not complete and many instructions blocks are left with no comments at all.\newline
+  All the member(internal) variables are declared as `protected`, it is always preferable to use the `private` access modifier(see checklist 28). 
   \begin{itemize}
    \item \textbf{\textit{substituteVariables()}}
    \item Checklist[8,9]: Tabs are used for identation for all the function

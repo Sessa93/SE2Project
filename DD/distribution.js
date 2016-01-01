@@ -30,6 +30,11 @@
     - There are no more taxies to fullfill the expected demand
 */
 
+/* This constant represents the maximum admissable distance between
+ * two exchanging zones(in kilometers)
+ */
+const MAX_DISTANCE = 1;
+
 // 0 < w1, w2 < 1
 function computeDistribution(float w1, float w2) {
   /*The following for cycle computes, for each zone, the number of taxies
@@ -60,12 +65,28 @@ function computeDistribution(float w1, float w2) {
   //j iterates over deficitQueues
   while(i < surplusQueues.length  && j < deficitQueues.length){
 
+    /*Tries to minimize the distance between the two exchanging zones
+    * by selecting a new deficitQueue. The procedure is repeated at most
+    * 3 times(count variable).
+    */
+    if(distance(deficitQueues[i], surplusQueues[j]) > MAX_DISTANCE) {
+      count = 0;
+      actualQueue = deficitQueues[i];
+      do {
+        ShiftOne(deficitQueue, deficitQueues);
+        count++;
+      }while(distance(deficitQueues[i], surplusQueues[j]) > MAX_DISTANCE && count < 3);
+      //Sorts deficitQueues starting from the position j
+      PartialSort(deficitQueues,j);
+    }
+
     //If the current surplusQueues has more taxies to offer than the current deficitQueues
     if(surplusQueues[i].getTaxiesToMove > deficitQueues[j].getTaxiesToMove){
       deficitQueues[j].setTaxiesToMove(0);
       surplusQueues[i].setTaxiesToMove(oldValue-deficitQueues[j].getTaxiesToMove);
       //Select the next deficitQueues
       j++;
+
       //Send the order
       foreach(taxi in surplusQueues[i].getTaxies()) {
         moveTaxi(deficitQueues[j],taxi)
@@ -107,4 +128,17 @@ function computeDistribution(float w1, float w2) {
 function moveTaxi(endingQueue, taxi) {
   endingQueue.add(taxi);
   sendChangeOrder(taxi);
+}
+
+/*
+* Moves the swappingQueue at the end of queuesList
+*/
+function ShiftOne(swappingQueue, queuesList) {
+  queuePosition = queuesList.indexOf(swappingQueue);
+  Queue tmpQueue = queuesList[queuePosition];
+  //Shift the queues
+  for(int i = queuePosition; i < queuesList.length; i++) {
+      queuesList[i]  = queuesList[i+1];
+  }
+  queuesList[queuesList.length-1] = tmpQueue;
 }

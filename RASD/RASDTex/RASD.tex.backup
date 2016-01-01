@@ -454,16 +454,6 @@
 	      \item GPS data are reliable
 	      \item If a registered user requests a ride request then he will be present at the starting point when the mtaxi arrives
 	\end{enumerate}
-    \subsection{Jackson-Zave Model}
-        In this section is included a possible formulation of the problem in term of the model proposed by Jackson and Zave.\newline
-        In the `Machine` circle are included the main events that can only be observed by the system.\newline
-        In the `World` circle are included the main events that can only be observed in the external environment.\newline
-        Finally in the intersection of the two circles(`Shared Phenomena`) are inserted the events that are observed(controlled) by the
-        environment and controlled(obeserved) by the system.\newline
-        \begin{center}
-         \includegraphics[scale=0.48]{jz.png}
-        \end{center}
-        
 
 \section {Scenarios, Use Case and UML diagrams}
 

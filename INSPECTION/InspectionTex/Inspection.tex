@@ -112,10 +112,15 @@
 \newpage
 
 \section{Introduction}
+  The inspection document that follows contains the results of an inspection process on
+  the classes and the methods listed below.\newline
+  These results inspection process is based on a given checklist(see reference section) that enumerates a series of
+  code errors and software aspects to be considered. Additional considerations over the quality and the functional 
+  role of the software artifacts analyzed are also mentioned. 
 
 \section{Classes}
 
-Included in this section the two java classes subjected to the analysis.\newline
+Included in this section are two java classes under analysis.\newline
 
 \noindent File: /appserver/web/web-core/src/main/java/org/apache/catalina/ssi/\textbf{SSIServlet.java}\newline\newline
 Methods under inspection:
@@ -135,7 +140,7 @@ Methods under inspection:
 
 
 \section{Functional Role}
-  In this section are included some information about the functioning of tha analyzed classes and methods.\newline
+  Included in this section is some information about the functional behavior of the analyzed classes and methods.\newline
 
 \subsection{SSIServlet.java}
 
@@ -143,125 +148,130 @@ Methods under inspection:
   
   \lstinputlisting[language=Java, firstnumber=78, firstline=78, lastline=81]{SSIServlet.java}
 
-  \noindent This class represents a Java EE servlet used to process requests that include some SSI instruction.\newline
-  SSI(Server Side Include) that is a simple interpreted server-side scripting language.
-  The most frequent use of SSI is to include the contents of one or more files into a web page on a web server.
+  \noindent This class represents a Java EE Servlet used to process HTTP requests that includes some SSI instructions.\newline
+  SSI(Server Side Include) is a interpreted server-side scripting language,
+  that is usually used to include the contents of one or more files into a web page.\newline
+  Follows a description of the methods the analyzed for this class.
 
   \begin{itemize}
     \item \textbf{\textit{Init()}}
       \newline From the javadoc of the method:
       \lstinputlisting[language=Java, firstnumber=104, firstline=104, lastline=109]{SSIServlet.java}
-      It is clear that the method take care of initialize the Java EE servlet by retrieving the configuration
-      parameters(through the methods provided by the superclass: `GenericServlet`)\newline
-      Follows an explanation of the initialization parameters(obtained by analyzing the comments provided with the method):
+      This method takes care of initialize the Java EE Servlet by retrieving and setting the configuration
+      parameters.\newline
+      The role of these configuration parameters is explained below:
       \begin{itemize}
        \item \textbf{debug}:
-	Specifies the debug level of the servlet, if 0 no debug message are logged
+	A flag used to manage debug messages: if debug = 0 then no debug messages logged
        \item \textbf{isVirtualWebappRelative}:
-	Specifies if the paths can be webapp relative
+	A flag used to manage how file paths in SSI instructions are processed: if isVirtualWebappRelative is true then all the file path are
+	considered relative to the root of the web-server.
        \item \textbf{expires}:
-	Specifies the expiration time of this servlet(in seconds)
+	Specifies the expiration time of the HTTP request managed by Servlet(in seconds)
        \item \textbf{buffered}:
-	Specifies if the output response of the servlet should be buffered first or not(see processSSI() for more details)
+	A flag used to manage how the content of HTTP responses processed by this Servlet are written on the output stram:
+	if buffered is true then this writing is buffered(see processSSI() for additional explanations)
        \item \textbf{inputEncoding}:
-	Specifies the encoding of the HttpServletRequest
+	Specifies the characters encoding of the HTTP requests processed by this Servlet
        \item \textbf{outputEncoding}:
-	Specifies the encoding of the HttpServletResponse
+	Specifies the characters encoding of the HTTP responses processed by this Servlet
       \end{itemize}
 
       
 
     \item \textbf{\textit{requestHandler()}}
-      \newline From the inspection of the code this function is only called when the servlet receives a HTTP Get or Post request.
-      The javadoc for the method, included in the code, states:
+      \newlines From the Javadoc of the method:
       
       \lstinputlisting[language=Java, firstnumber=173, firstline=173, lastline=180]{SSIServlet.java}
       
-      Hence the method accepts as parameters a HttpServletRequest,the incoming request, and a HttpServletResponse that is a reference
-      to the response.\newline
+      This method takes care of process HTTP get or post requests managed by this Servelet. In particular 
+      requestHandler() retrieves the file paths present in eventual SSI commands, checks if they points to an
+      existing resource on the web server, sets some configuration parameters for the processed HTTP request, and 
+      invokes processSSI().\newline
       
-      Now the objective of the method is to retrieve the correct resource from the serverlet context.
-      If the debug level is greater than zero then log a message into the logger for debug purposes.
+      In this block of code the method checks the debug flag of the Servelet;
+      If debug is greater than zero then logs a message into the logger for debug purposes.
       \lstinputlisting[language=Java, firstnumber=183, firstline=183, lastline=188]{SSIServlet.java}
 
-      The comment is very clear: it checks if the resource is either in the `WEB-INF` or `META-INF` subdirectories;
-      if so the function return with an error code.
+      This block of code checks if the file paths present in the SSI commands does exists or points to a resource in the `WEB-INF` or `META-INF` subdirectories,
+      if so the method terminates and logs an error message.
       \lstinputlisting[language=Java, firstnumber=189, firstline=189, lastline=196]{SSIServlet.java}
       
-      Here the function tries to retrieve the URL to the resource; it also performs an existence check on the resource,
-      if the resource doesn't exist the function return an error.
+      In this block of code the method tries to retrieve the resource associated with the file path present in the SSI commands.
+      If this resource doesn't exist the method terminates and logs an error message.
       \lstinputlisting[language=Java, firstnumber=197, firstline=197, lastline=202]{SSIServlet.java}
       
-      In the final part, the function starts to initialize the header of the HttpServletResponse by setting:
-      the mime type, the encoding of the output text and the expiration time for the response(in seconds, see init()).\newline
-      Finally the processSSI() function is invoked passing as parameters the original request, the reference to the response and the resource.
+      In this block of code the method sets some header fields of the HTTP response to be processed:
+      it sets the mime type, the character encoding of the output text and the expiration time for the response(in seconds, see init()).
+      At the end of the method the processSSI() method is invoked.\newline
+      
       \lstinputlisting[language=Java, firstnumber=203, firstline=203, lastline=213]{SSIServlet.java}
       \newpage
       
     \item \textbf{\textit{processSSI()}}
-      The method is totally uncommented, but thanks to a meaningful choice of the variables names it is quite easy to understand
-      the role of the method within the class.
-      The objectives of processSSI() are:
-	\begin{itemize}
-	  \item Parse the SSI code contained in the resource(passed as parameter) via the SSIProcessor class
-	  \item Write the output of the parsing phase in the response(passed as parameter)
-	\end{itemize}
-      The lines:
-	\lstinputlisting[language=Java, firstnumber=233, firstline=233, lastline=245]{SSIServlet.java}
-      take care of the initialization of the stream used to parse the resource(`InputStream`) and retrieves the encoding
-      of the data contained in the resource
+      \textit{No Javadoc is available for this method}
+      This method parses the SSI commands contained in a given HTTP request via the SSIProcessor class and writes the result
+      of this processing in the output stream of the Servlet.\newline
       
-      The lines:
+      In this block of code the method takes care of the initialization of the stream used to read the data contained
+      in the resource and checks the characters encoding of this data according to the character encoding configuration of the Servelet
+      \lstinputlisting[language=Java, firstnumber=233, firstline=233, lastline=245]{SSIServlet.java}
+      
+      
+      In this block of code the method parses the SSI commands contained in the web page by using the process() method of the SSIProcessor class.
+      The results are written on the Servlet output stream.\newline
       \lstinputlisting[language=Java, firstnumber=222, firstline=222, lastline=222]{SSIServlet.java}
       \lstinputlisting[language=Java, firstnumber=247, firstline=247, lastline=248]{SSIServlet.java}
-      parse the SSI code contained in the resource.
       
-      The two blocks:
+
+      In this block of code the method sets different types of output stream for the given HTTP response accordingly to buffered flag of the Servelet,
+      and flushes them.
+      
       \lstinputlisting[language=Java, firstnumber=226, firstline=226, lastline=231]{SSIServlet.java}
       \lstinputlisting[language=Java, firstnumber=252, firstline=252, lastline=256]{SSIServlet.java}
-      Initialize the streams to write the output of the parsing phase also taking into account the necessity
-      to buffer the output stream(buffered boolean variable).\newline
-      If buffered is true the output of the parser is written first to a buffer(StringWriter) and then, only in a separate moment
-      the output is written to the actual destination.Otherwise if buffered is equal to false then SSIProcessor(the actual SSI parser)
-      writes the parsed information directly to the output stream.
 
   \end{itemize}
 
 \subsection{SSIMediator.java}
-  From the Javadoc of the class:
+  From the Javadoc:
   
   \lstinputlisting[language=Java, firstnumber=75, firstline=75, lastline=78]{SSIMediator.java}
   
-  The class is inserted into the context of SSI processing, in particular this class take care of
+  This class take care of
   how many different implementations of the SSI instructions can communicate and exchange data with each other.\newline
-  Follows a detailed description of the assigned methods:
+  Follows a description of the methods the analyzed for this class.
   \begin{itemize}
    \item \textbf{\textit{substituteVariables()}}
+    From the Javadoc:
     \lstinputlisting[language=Java, firstnumber=246, firstline=246, lastline=249]{SSIMediator.java}
-    The method accepts as parameter a string and returns a new string to which a variables substitution process has been applied.
+    %This method accepts as parameter a string and returns a new string to which a variables substitution process has been applied.
+    This method processes a given string in a way that HTML special characters are normalized and SSI variable are replaced with their
+    actual value.
+    
+    In this block of code the method checks the string contains `\$` or `\&, if not so the method terminates returning the original string(no processing  is needed)
     \lstinputlisting[language=Java, firstnumber=251, firstline=251, lastline=253]{SSIMediator.java}
-    It checks if the string contains `\$` or `\&`, if not there is nothing to substitute so the original string is simply returned.
-    Otherwise: 
-    \lstinputlisting[language=Java, firstnumber=253, firstline=253, lastline=259]{SSIMediator.java}
-    It's easy to understand(from the comments and javadoc) that above snippet of code substitute each occurrence of HTML special codes with the real character. \newline
-    \lstinputlisting[language=Java, firstnumber=261, firstline=261, lastline=274]{SSIMediator.java}
-    This part of the code takes care of substuting `\&\#n` with `n` where `n` is an integer number.
+    
+    In this block of code the method normalizes HTML special characters.
+    \lstinputlisting[language=Java, firstnumber=255, firstline=255, lastline=259]{SSIMediator.java}
+    
+  
+    In this block of code the method takes care of substuting `\&\#n` with `n` where `n` is an integer number.
     See the javadoc of StringBuilder(Java SE 7 class) for a detailed explanation of the methods.\newline
-    The remaining code processes variables and substitutes their current value.\newline
+    The remaining code replaces SSI variables with their current value.\newline
     Variables are always in the form `\$ varName` and could possibly be wrapped, ie. `\$\{varName\}`. 
     This information has been collected by an direct analysis of the code and by means of the few comments inserted. 
-    The actual value of the variables found in the string are retrieved by means of the `getVariablesValue()` function(also defined in SSIMediator.java).\newline
-    Find the first `\$`, eventually escaped.
+    The actual value of the variables found in the string is retrieved using the `getVariablesValue()` method(also defined in SSIMediator.java).\newline
+    \lstinputlisting[language=Java, firstnumber=261, firstline=261, lastline=274]{SSIMediator.java}
+    
+    In this block of code the methods finds the position of the first `\$, eventually escaped, in the string.\newline
     \lstinputlisting[language=Java, firstnumber=277, firstline=277, lastline=290]{SSIMediator.java}
-    The following code identifies the portion string to substitute [nameStart, nameEnd] and the name of the variable [start, end].
-    Also the functions consider the possibility that the variable could be wrapped so it processes the presence of `\{` and `\}` that
-    are wrapping the variable name.
+        
+    In this block of code the method identifies the SSI variable name 
+    considering also the possibility that the variable name could be wrapped in curly braces.
     \lstinputlisting[language=Java, firstnumber=291, firstline=291, lastline=307]{SSIMediator.java}
-    Finally the variable name has been identified in the original string [start, end] and the `getVariablesValue()` method is called
-    to retrieve the value of the variable. The value is then substituted and the function seeks for the presence of other variables.
-    If no more variables are found, the function returns the processed string.
+    
+    In this block of code the method replaces the variable name with its actual value using the substituteVariables() method.
     \lstinputlisting[language=Java, firstnumber=308, firstline=308, lastline=318]{SSIMediator.java}
-
 
   \end{itemize}
 

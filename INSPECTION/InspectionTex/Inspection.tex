@@ -209,7 +209,7 @@ Methods under inspection:
       \newpage
       
     \item \textbf{\textit{processSSI()}}
-      \textit{No Javadoc is available for this method}
+      \newline\textit{No Javadoc is available for this method}\newline
       This method parses the SSI commands contained in a given HTTP request via the SSIProcessor class and writes the result
       of this processing in the output stream of the Servlet.\newline
       
@@ -237,12 +237,12 @@ Methods under inspection:
   
   \lstinputlisting[language=Java, firstnumber=75, firstline=75, lastline=78]{SSIMediator.java}
   
-  This class take care of
+  \noindent This class takes care of
   how many different implementations of the SSI instructions can communicate and exchange data with each other.\newline
   Follows a description of the methods the analyzed for this class.
   \begin{itemize}
    \item \textbf{\textit{substituteVariables()}}
-    From the Javadoc:
+    \newline From the Javadoc:
     \lstinputlisting[language=Java, firstnumber=246, firstline=246, lastline=249]{SSIMediator.java}
     %This method accepts as parameter a string and returns a new string to which a variables substitution process has been applied.
     This method processes a given string in a way that HTML special characters are normalized and SSI variable are replaced with their
@@ -255,8 +255,8 @@ Methods under inspection:
     \lstinputlisting[language=Java, firstnumber=255, firstline=255, lastline=259]{SSIMediator.java}
     
   
-    In this block of code the method takes care of substuting `\&\#n` with `n` where `n` is an integer number.
-    See the javadoc of StringBuilder(Java SE 7 class) for a detailed explanation of the methods.\newline
+    In this block of code the method takes care of substituting `\&\#n` with `n` where `n` is an integer number.
+    See the Javadoc of StringBuilder(Java SE 7 class) for a detailed explanation of the methods.\newline
     The remaining code replaces SSI variables with their current value.\newline
     Variables are always in the form `\$ varName` and could possibly be wrapped, ie. `\$\{varName\}`. 
     This information has been collected by an direct analysis of the code and by means of the few comments inserted. 
@@ -280,7 +280,7 @@ Methods under inspection:
 In this section is included a list of problems found during the inspection of the assigned code.
 \subsection{SSIServlet.java}
   \textbf{General Considerations} \hfill \\
-  In general the class lacks of documentation: comments and javadoc are not complete and where inserted are sometimes meaningless and very short.\newline
+  In general the class lacks of documentation: comments and Javadoc are not complete and where inserted are sometimes meaningless and very short.\newline
   All the member(internal) variables are declared as `protected`, it is always preferable to use the `private` access modifier(see checklist 28). 
   \begin{itemize}
    \item \textbf{\textit{init()}}
@@ -333,8 +333,8 @@ In this section is included a list of problems found during the inspection of th
     
    \item \textbf{\textit{processSSI()}}
     \begin{itemize}
-     \item Checklist[23]: No javadoc has been written for this method
-     \item Checklist[28]: The method has the proctected access modifier but it is never invoked from its subclasses. \newline It should be declared as `private`
+     \item Checklist[23]: No Javadoc has been written for this method
+     \item Checklist[28]: The method has the protected access modifier but it is never invoked from its subclasses. \newline It should be declared as `private`
      \item Checklist[18]: None of the instructions present in the body of this method is commented. This may be
       correct if all these instructions are self explicative, but most of the instructions
       present in this method are not self explicative
@@ -373,7 +373,7 @@ In this section is included a list of problems found during the inspection of th
 
 \subsection{SSIMediator.java}
   \textbf{General Considerations} \hfill \\
-  In general the class lacks of documentation: the javadoc is not complete and many instructions blocks are left with no comments at all.\newline
+  In general the class lacks of documentation: the Javadoc is not complete and many instructions blocks are left with no comments at all.\newline
   All the member(internal) variables are declared as `protected`, it is always preferable to use the `private` access modifier(see checklist 28). 
   \begin{itemize}
    \item \textbf{\textit{substituteVariables()}}

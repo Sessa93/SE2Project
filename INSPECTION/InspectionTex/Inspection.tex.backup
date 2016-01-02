@@ -248,28 +248,29 @@ Methods under inspection:
     This method processes a given string in a way that HTML special characters are normalized and SSI variable are replaced with their
     actual value.
     
-    In this block of code the method checks the string contains `\$` or `\&`
-    It checks if the string contains `\$` or `\&`, if not there is nothing to substitute so the original string is simply returned.
+    In this block of code the method checks the string contains `\$` or `\&, if not so the method terminates returning the original string(no processing  is needed)
     \lstinputlisting[language=Java, firstnumber=251, firstline=251, lastline=253]{SSIMediator.java}
-
+    
+    In this block of code the method normalizes HTML special characters.
     \lstinputlisting[language=Java, firstnumber=255, firstline=255, lastline=259]{SSIMediator.java}
-    It's easy to understand(from the comments and javadoc) that above snippet of code substitute each occurrence of HTML special codes with the real character. \newline
-    \lstinputlisting[language=Java, firstnumber=261, firstline=261, lastline=274]{SSIMediator.java}
-    This part of the code takes care of substuting `\&\#n` with `n` where `n` is an integer number.
+    
+  
+    In this block of code the method takes care of substuting `\&\#n` with `n` where `n` is an integer number.
     See the javadoc of StringBuilder(Java SE 7 class) for a detailed explanation of the methods.\newline
-    The remaining code processes variables and substitutes their current value.\newline
+    The remaining code replaces SSI variables with their current value.\newline
     Variables are always in the form `\$ varName` and could possibly be wrapped, ie. `\$\{varName\}`. 
     This information has been collected by an direct analysis of the code and by means of the few comments inserted. 
-    The actual value of the variables found in the string are retrieved by means of the `getVariablesValue()` function(also defined in SSIMediator.java).\newline
-    Find the first `\$`, eventually escaped.
+    The actual value of the variables found in the string is retrieved using the `getVariablesValue()` method(also defined in SSIMediator.java).\newline
+    \lstinputlisting[language=Java, firstnumber=261, firstline=261, lastline=274]{SSIMediator.java}
+    
+    In this block of code the methods finds the position of the first `\$, eventually escaped, in the string.\newline
     \lstinputlisting[language=Java, firstnumber=277, firstline=277, lastline=290]{SSIMediator.java}
-    The following code identifies the portion string to substitute [nameStart, nameEnd] and the name of the variable [start, end].
-    Also the functions consider the possibility that the variable could be wrapped so it processes the presence of `\{` and `\}` that
-    are wrapping the variable name.
+        
+    In this block of code the method identifies the SSI variable name 
+    considering also the possibility that the variable name could be wrapped in curly braces.
     \lstinputlisting[language=Java, firstnumber=291, firstline=291, lastline=307]{SSIMediator.java}
-    Finally the variable name has been identified in the original string [start, end] and the `getVariablesValue()` method is called
-    to retrieve the value of the variable. The value is then substituted and the function seeks for the presence of other variables.
-    If no more variables are found, the function returns the processed string.
+    
+    In this block of code the method replaces the variable name with its actual value using the substituteVariables() method.
     \lstinputlisting[language=Java, firstnumber=308, firstline=308, lastline=318]{SSIMediator.java}
 
   \end{itemize}
@@ -283,12 +284,12 @@ In this section is included a list of problems found during the inspection of th
   All the member(internal) variables are declared as `protected`, it is always preferable to use the `private` access modifier(see checklist 28). 
   \begin{itemize}
    \item \textbf{\textit{init()}}
-   \begin{enumerate}
+   \begin{itemize}
     \item Checklist[11]: All the if statements present in the body of this method do not use curly braces
     \item Checklist[23]: The javadoc written for this method is not sufficient to explain its role and its behavior in the context of the SSIServlet class
     \item Checklist[40]: All the comparisons present in the body of this method use improper operators, in fact the elements in comparison are always objects(strings in particular)
     \item Checklist[18]: None of the instructions present in the body of this method is commented. This may be correct if all these instructions are self explicative, but at least the last if statement needs comments to explain what it tries to achieve
-    \item Checklist[14]: Lines
+    \item Checklist[14]: The following lines:
       \lstinputlisting[language=Java, firstnumber=113, firstline=113, lastline=113]{SSIServlet.java}
       \lstinputlisting[language=Java, firstnumber=116, firstline=116, lastline=116]{SSIServlet.java}
       \lstinputlisting[language=Java, firstnumber=119, firstline=119, lastline=119]{SSIServlet.java}
@@ -296,38 +297,39 @@ In this section is included a list of problems found during the inspection of th
       \lstinputlisting[language=Java, firstnumber=126, firstline=126, lastline=126]{SSIServlet.java}
       exceed the length of 80 characters
     \item Checklist[8,9]: The indentation of lines is made using tabs and not spaces
-    \item Checklist[52,53]: In the line
+    \item Checklist[52,53]: In the following lines
       \lstinputlisting[language=Java, firstnumber=119, firstline=119, lastline=119]{SSIServlet.java}
       the Long.valueOf method throws a NumberFormatException which is not managed and must be imported
+      
       \lstinputlisting[language=Java, firstnumber=113, firstline=113, lastline=113]{SSIServlet.java}
       The Integer.parseInt method throws a NumberFormatException which is not managed and must be imported.
-   \end{enumerate}
+   \end{itemize}
 
    
    \item \textbf{\textit{requestHandler()}}
-    \begin{enumerate}
-     \item Checklist[8,9]: All indentations in the class are made by means of tabs
-     \item Checklist[11]: The conditional block
+    \begin{itemize}
+     \item Checklist[8,9]: All indentations in the class are made using tabs and not spaces
+     \item Checklist[11]: The following conditional block
       \lstinputlisting[language=Java, firstnumber=185, firstline=185, lastline=188]{SSIServlet.java}
       uses no enclosing braces
      \item Checklist[18]: No comments from line 210 to the end of the function
-     \item Checklist[29,33]: The declarations of variables in lines
+     \item Checklist[29,33]: The following declarations of variables in lines
       \lstinputlisting[language=Java, firstnumber=197, firstline=197, lastline=197]{SSIServlet.java}
       \lstinputlisting[language=Java, firstnumber=203, firstline=203, lastline=203]{SSIServlet.java}
-      should be placed at the start of the function block
-     \item Checklist[40]: The lines
+      should be placed in top of the body of the method.
+     \item Checklist[40]: The comparisons presen following lines
       \lstinputlisting[language=Java, firstnumber=191, firstline=191, lastline=191]{SSIServlet.java}
       \lstinputlisting[language=Java, firstnumber=198, firstline=198, lastline=198]{SSIServlet.java}
       \lstinputlisting[language=Java, firstnumber=204, firstline=204, lastline=204]{SSIServlet.java}
       \lstinputlisting[language=Java, firstnumber=208, firstline=208, lastline=208]{SSIServlet.java}
-      uses for comparation `==` instead of `equals()`
-     \item Checklist[52,53]: The line 
+      uses improper operator in fact the elements in comparison are object(`==` instead of `equals()`)
+     \item Checklist[52,53]: The following line 
       \lstinputlisting[language=Java, firstnumber=197, firstline=197, lastline=197]{SSIServlet.java}
-      may throws a `MalformedURLException`, neither actions are taken to manage the exception nor the exception is explicitly re-thrown
-     \item Checklist[15]: Wrong line breaking in
+      may throw a `MalformedURLException`, neither managed nor re-thrown
+     \item Checklist[15]: Wrong line breaking in the following lines
       \lstinputlisting[language=Java, firstnumber=191, firstline=191, lastline=192]{SSIServlet.java}
 
-    \end{enumerate}
+    \end{itemize}
     
    \item \textbf{\textit{processSSI()}}
     \begin{itemize}
@@ -336,33 +338,34 @@ In this section is included a list of problems found during the inspection of th
      \item Checklist[18]: None of the instructions present in the body of this method is commented. This may be
       correct if all these instructions are self explicative, but most of the instructions
       present in this method are not self explicative
-     \item Checklist[40]: All the comparisons present in the body of this method use improper
-      operators(== or !== instead of equals or !..equals), in fact the elements in comparison
-      are always objects(strings in particular)
-     \item Checklist[29,33]: In these lines
-      \lstinputlisting[language=Java, firstnumber=233, firstline=233, lastline=235]{SSIServlet.java}
-      \lstinputlisting[language=Java, firstnumber=239, firstline=239, lastline=239]{SSIServlet.java}
+    \item Checklist[40]: All the comparisons present in the body of this method use improper operators, in fact the elements in comparison are always objects(strings in particular)
+     \item Checklist[29,33]: In these following lines
       local variables are defined and assigned to a value. Since these assigments and definitions
       do not depend from the result of previous instructions, they must be put in the top
       of the body of the method
-     \item Checklist[1]:
+      \lstinputlisting[language=Java, firstnumber=233, firstline=233, lastline=235]{SSIServlet.java}
       \lstinputlisting[language=Java, firstnumber=239, firstline=239, lastline=239]{SSIServlet.java}
+     \item Checklist[1]:
       In this line a local variable of the type "InputStreamReader" is defined. The name of
       this variable is "isr" which does not convey any immediate meaning about the role and the
       use of this variable
+      \lstinputlisting[language=Java, firstnumber=239, firstline=239, lastline=239]{SSIServlet.java}
+
      \item Checklist[52,53]:
-      \lstinputlisting[language=Java, firstnumber=233, firstline=233, lastline=234]{SSIServlet.java}
       The method openConnection throws an IOException that is not managed\newline
       The method getInputStream throws an IOException that is not managed\newline\newline
+      \lstinputlisting[language=Java, firstnumber=233, firstline=233, lastline=234]{SSIServlet.java}
+      The getWriter method on the HttpServletResponse object throws a IOException, a IllegalStateException, UnsupportedEncodingException
+      which are neither managed nor re-thrown (IllegalStateException)
       \lstinputlisting[language=Java, firstnumber=230, firstline=230, lastline=230]{SSIServlet.java}
       \lstinputlisting[language=Java, firstnumber=255, firstline=255, lastline=255]{SSIServlet.java}
-      The getWriter method on the HttpServletResponse object throws a IOException, a IllegalStateException, UnsupportedEncodingException
-      which are neither managed nor imported (IllegalStateException)
+
      \item Checklist[58]:
-      \lstinputlisting[language=Java, firstnumber=247, firstline=247, lastline=248]{SSIServlet.java}
       The method close should be invoked on the bufferedReader variable and on the
       isr variable, since these variables are not used anymore in the rest of the method
       and they represent streams of bytes readers
+      \lstinputlisting[language=Java, firstnumber=247, firstline=247, lastline=248]{SSIServlet.java}
+
     \end{itemize}
 
   \end{itemize}
@@ -374,41 +377,42 @@ In this section is included a list of problems found during the inspection of th
   All the member(internal) variables are declared as `protected`, it is always preferable to use the `private` access modifier(see checklist 28). 
   \begin{itemize}
    \item \textbf{\textit{substituteVariables()}}
-   \item Checklist[8,9]: Tabs are used for identation for all the function
-   \item Checklist[23]: The Javadoc provided for the function is not complete 
-   \item Checklist[11]: No enclosing braces in the following if statements:
-    \lstinputlisting[language=Java, firstnumber=253, firstline=253, lastline=253]{SSIMediator.java}
-    \lstinputlisting[language=Java, firstnumber=303, firstline=303, lastline=303]{SSIMediator.java}
-    \lstinputlisting[language=Java, firstnumber=307, firstline=307, lastline=307]{SSIMediator.java}
-    \lstinputlisting[language=Java, firstnumber=311, firstline=311, lastline=311]{SSIMediator.java}
+   \begin{itemize}
+    \item Checklist[8,9]: Tabs are used for identation for all the function
+    \item Checklist[23]: The Javadoc provided for the function is not complete 
+    \item Checklist[11]: No enclosing braces in the following if statements:
+      \lstinputlisting[language=Java, firstnumber=253, firstline=253, lastline=253]{SSIMediator.java}
+      \lstinputlisting[language=Java, firstnumber=303, firstline=303, lastline=303]{SSIMediator.java}
+      \lstinputlisting[language=Java, firstnumber=307, firstline=307, lastline=307]{SSIMediator.java}
+      \lstinputlisting[language=Java, firstnumber=311, firstline=311, lastline=311]{SSIMediator.java}
+      
+    \item Checklist[1]: The parameter of the method is named `val` which  which does not convey any immediate meaning about its role and use
     
-   \item Checklist[1]: The parameter of the function is named `val` which is not meaningfull to understand its role in the function execution
-   
-   \item Checklist[15]: Wrong line breking in the line
-    \lstinputlisting[language=Java, firstnumber=266, firstline=266, lastline=267]{SSIMediator.java}
+    \item Checklist[15]: Wrong line breaking in the following line
+      \lstinputlisting[language=Java, firstnumber=266, firstline=266, lastline=267]{SSIMediator.java}
 
-   \item Checklist[52,53]: No action are taken in case one of the following lines throws a NullPointerException:
-    \lstinputlisting[language=Java, firstnumber=262, firstline=262, lastline=262]{SSIMediator.java}
-    \lstinputlisting[language=Java, firstnumber=264, firstline=264, lastline=264]{SSIMediator.java}
-    \lstinputlisting[language=Java, firstnumber=270, firstline=270, lastline=270]{SSIMediator.java}
-    
-   %\item Checklist[52,53]: No action are taken in case one of the following lines throws IndexOutOfBoundsException:
-    %\lstinputlisting[language=Java, firstnumber=266, firstline=266, lastline=267]{SSIMediator.java}
-    %\lstinputlisting[language=Java, firstnumber=268, firstline=268, lastline=268]{SSIMediator.java}
-    %\lstinputlisting[language=Java, firstnumber=269, firstline=269, lastline=269]{SSIMediator.java}
-    %\lstinputlisting[language=Java, firstnumber=279, firstline=279, lastline=279]{SSIMediator.java}
-    %\lstinputlisting[language=Java, firstnumber=286, firstline=286, lastline=286]{SSIMediator.java}
-    %\lstinputlisting[language=Java, firstnumber=287, firstline=287, lastline=287]{SSIMediator.java}
-    %\lstinputlisting[language=Java, firstnumber=297, firstline=297, lastline=297]{SSIMediator.java}
-    %\lstinputlisting[language=Java, firstnumber=313, firstline=313, lastline=313]{SSIMediator.java}
-    
-   \item Checklist[40]: The line
-    \lstinputlisting[language=Java, firstnumber=311, firstline=311, lastline=311]{SSIMediator.java}
-    uses for comparation `==` instead of `equals()`
-   \item Checklist[33]: The variables in lines
-    \lstinputlisting[language=Java, firstnumber=309, firstline=309, lastline=310]{SSIMediator.java}
-    should be placed at the top of the function
-
+    \item Checklist[52,53]: No action are taken in case one of the following lines throws a NullPointerException,  which are neither managed nor re-thrown:
+      \lstinputlisting[language=Java, firstnumber=262, firstline=262, lastline=262]{SSIMediator.java}
+      \lstinputlisting[language=Java, firstnumber=264, firstline=264, lastline=264]{SSIMediator.java}
+      \lstinputlisting[language=Java, firstnumber=270, firstline=270, lastline=270]{SSIMediator.java}
+      
+    %\item Checklist[52,53]: No action are taken in case one of the following lines throws IndexOutOfBoundsException:
+      %\lstinputlisting[language=Java, firstnumber=266, firstline=266, lastline=267]{SSIMediator.java}
+      %\lstinputlisting[language=Java, firstnumber=268, firstline=268, lastline=268]{SSIMediator.java}
+      %\lstinputlisting[language=Java, firstnumber=269, firstline=269, lastline=269]{SSIMediator.java}
+      %\lstinputlisting[language=Java, firstnumber=279, firstline=279, lastline=279]{SSIMediator.java}
+      %\lstinputlisting[language=Java, firstnumber=286, firstline=286, lastline=286]{SSIMediator.java}
+      %\lstinputlisting[language=Java, firstnumber=287, firstline=287, lastline=287]{SSIMediator.java}
+      %\lstinputlisting[language=Java, firstnumber=297, firstline=297, lastline=297]{SSIMediator.java}
+      %\lstinputlisting[language=Java, firstnumber=313, firstline=313, lastline=313]{SSIMediator.java}
+      
+    \item Checklist[40]: The following line
+      \lstinputlisting[language=Java, firstnumber=311, firstline=311, lastline=311]{SSIMediator.java}
+      uses improper operator in fact the elements in comparison are object(`==` instead of `equals()`)
+    \item Checklist[29,33]: The variables in following lines
+      \lstinputlisting[language=Java, firstnumber=309, firstline=309, lastline=310]{SSIMediator.java}
+      should be placed at the top of the function
+    \end{itemize}
   \end{itemize}
 \newpage
 \section{Additional Issues}

@@ -191,15 +191,15 @@ Methods under inspection:
 
       In this block of code the method checks the debug flag of the Servelet;
       If debug is greater than zero then logs a message into the logger for debug purposes.
-      \lstinputlisting[language=Java, firstnumber=183, firstline=183, lastline=188]{SSIServlet.java}\newline
+      \lstinputlisting[language=Java, firstnumber=183, firstline=183, lastline=188]{SSIServlet.java}
 
       In this block of code the method checks if the url associated with the given request does not exists or points to a resource in the `WEB-INF` or `META-INF` subdirectories,
       if so the method terminates and logs an error message.
-      \lstinputlisting[language=Java, firstnumber=189, firstline=189, lastline=196]{SSIServlet.java}\newline
+      \lstinputlisting[language=Java, firstnumber=189, firstline=189, lastline=196]{SSIServlet.java}
 
       In this block of code the method tries to retrieve the resource associated with the url of the given request.
       If this resource doesn't exist the method terminates and logs an error message.
-      \lstinputlisting[language=Java, firstnumber=197, firstline=197, lastline=202]{SSIServlet.java}\newline
+      \lstinputlisting[language=Java, firstnumber=197, firstline=197, lastline=202]{SSIServlet.java}
 
       In this block of code the method sets some header fields of the HTTP response to be processed:
       it sets the mime type, the characters encoding of the output text and the expiration time(in seconds, see init()).
@@ -215,20 +215,20 @@ Methods under inspection:
 
       In this block of code the method takes care of the initialization of the stream used to read the data contained
       in a given resource and checks the characters encoding of this data according to the configuration of the Servelet
-      \lstinputlisting[language=Java, firstnumber=233, firstline=233, lastline=245]{SSIServlet.java}\newline
+      \lstinputlisting[language=Java, firstnumber=233, firstline=233, lastline=245]{SSIServlet.java}
 
 
       In this block of code the method parses the SSI commands contained in the web page by using the process() method of the SSIProcessor class.
       The results are written on the Servlet output stream.\newline
       \lstinputlisting[language=Java, firstnumber=222, firstline=222, lastline=222]{SSIServlet.java}
-      \lstinputlisting[language=Java, firstnumber=247, firstline=247, lastline=248]{SSIServlet.java}\newline
+      \lstinputlisting[language=Java, firstnumber=247, firstline=247, lastline=248]{SSIServlet.java}
 
 
       In this block of code the method sets different types of output stream for the given HTTP response accordingly to the buffered flag of the Servelet,
       and flushes them.
 
       \lstinputlisting[language=Java, firstnumber=226, firstline=226, lastline=231]{SSIServlet.java}
-      \lstinputlisting[language=Java, firstnumber=252, firstline=252, lastline=256]{SSIServlet.java}\newline
+      \lstinputlisting[language=Java, firstnumber=252, firstline=252, lastline=256]{SSIServlet.java}
 
   \end{itemize}
 

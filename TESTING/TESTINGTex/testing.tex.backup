@@ -156,26 +156,12 @@
   \begin{enumerate}
     \item \textbf{Client side Component}
 	  \begin{itemize}
-	    \item MyTaxiServiceAppUser GUI
-	    \item MyTaxiServiceMYT GUI
-	    \item MyTaxiServiceWebUser GUI
-	    \item MyTaxiServiceWebAdmin GUI
-	    
-	    \item MyTaxiServiceAppUser Communication Manager
-	    \item MyTaxiServiceMYT Communication Manager
-	    \item MyTaxiServiceWebUser Communication Manager
-	    \item MyTaxiServiceWebAdmin Communication Manager
+	   \item 
 	  \end{itemize}
     
     \item \textbf{Server side Component}
 	  \begin{itemize}
-	    \item Dispatcher
-	    \item Request Manager
-	    \item External Services Manager
-	    \item Location Manager
-	    \item Queue Manager
-	    \item Request Receiver
-	    \item Data Manager
+	   \item 
 	  \end{itemize}
 
 

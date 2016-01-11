@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1233px" height="280px" viewBox="0 0 1233 280" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.3 (16618) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Desktop-HD" sketch:type="MSArtboardGroup" transform="translate(-104.000000, -372.000000)">
+            <g id="Group" sketch:type="MSLayerGroup" transform="translate(104.000000, 372.000000)">
+                <rect id="Rectangle-17" stroke="#979797" fill="#FFFFFF" sketch:type="MSShapeGroup" x="0" y="0" width="349" height="280"></rect>
+                <rect id="Rectangle-17-Copy" stroke="#979797" fill="#FFFFFF" sketch:type="MSShapeGroup" x="442" y="0" width="349" height="280"></rect>
+                <rect id="Rectangle-17-Copy-2" stroke="#979797" fill="#FFFFFF" sketch:type="MSShapeGroup" x="884" y="0" width="349" height="280"></rect>
+                <text id="MyTaxiService-Model-" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="30" font-weight="normal" sketch:alignment="middle" letter-spacing="0.8" fill="#000000">
+                    <tspan x="906.05" y="133">MyTaxiService Model </tspan>
+                    <tspan x="980.95" y="174">Subsystem</tspan>
+                </text>
+                <text id="MyTaxiService-Contro" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="30" font-weight="normal" sketch:alignment="middle" letter-spacing="0.8" fill="#000000">
+                    <tspan x="514.57" y="110">MyTaxiService </tspan>
+                    <tspan x="543.01" y="151">Controller </tspan>
+                    <tspan x="538.95" y="192">Subsystem</tspan>
+                </text>
+                <text id="MyTaxiService" sketch:type="MSTextLayer" font-family="Avenir Next" font-size="30" font-weight="normal" sketch:alignment="middle" letter-spacing="0.8" fill="#000000">
+                    <tspan x="72.97" y="133">MyTaxiService</tspan>
+                    <tspan x="136.425" y="174"> View</tspan>
+                </text>
+                <path d="M884,133 L791,133" id="Line" stroke="#979797" stroke-width="2" stroke-linecap="square" sketch:type="MSShapeGroup"></path>
+                <path id="Line-decoration-1" d="M791,133 L801.8,136 L801.8,130 L791,133 Z" stroke="#979797" stroke-width="2" stroke-linecap="square"></path>
+                <path d="M441.5,133 L349,133" id="Line-Copy" stroke="#979797" stroke-width="2" stroke-linecap="square" sketch:type="MSShapeGroup"></path>
+                <path id="Line-Copy-decoration-1" d="M359.8,130 L349,133 L359.8,136" stroke="#979797" stroke-width="2" stroke-linecap="square"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -156,21 +156,37 @@
   \begin{enumerate}
     \item \textbf{Client side Component}
 	  \begin{itemize}
-	   \item 
+	    \item MyTaxiServiceAppUser GUI
+	    \item MyTaxiServiceMYT GUI
+	    \item MyTaxiServiceWebUser GUI
+	    \item MyTaxiServiceWebAdmin GUI
+	    
+	    \item MyTaxiServiceAppUser Communication Manager
+	    \item MyTaxiServiceMYT Communication Manager
+	    \item MyTaxiServiceWebUser Communication Manager
+	    \item MyTaxiServiceWebAdmin Communication Manager
 	  \end{itemize}
     
     \item \textbf{Server side Component}
 	  \begin{itemize}
-	   \item 
+	    \item Dispatcher
+	    \item Request Manager
+	    \item External Services Manager
+	    \item Location Manager
+	    \item Queue Manager
+	    \item Request Receiver
+	    \item Data Manager
 	  \end{itemize}
-
-
   \end{enumerate}
 
 
 \subsection{Integration Testing Strategy}
+  The strategy chosen for the integration of the components of the application is a Bottom-Up integration: 
+  the orchestration of such components begins at the low level of the component's dependency tree(see DD's component diagram).\newline
+  This approach seems to mimic very well the structure and the connections of the software's modules and, for these reasons, has been preferred. 
 
-\subsection{Sequence of Component/Function Integration}  
+\subsection{Sequence of Component/Function Integration} 
+
 
 \section{Individual Step and Test Description}
 

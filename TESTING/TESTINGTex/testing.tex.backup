@@ -65,6 +65,8 @@
 %Table Formatting
 \usepackage{tabularx,hhline}
 \usepackage{pbox}
+\usepackage{booktabs}
+\usepackage{makecell}
 
 %%% END Article customizations
 
@@ -128,13 +130,15 @@
       \item \textbf{API:} Application Programming Interface
       \item \textbf{GUI:} Graphic User Interface
       \item \textbf{GPS:} Global Positioning System
-      \item \textbf{AWT:} Approximate waiting time to be picked up
+      \item \textbf{CM:} Communication Manager
      \end{itemize}
 
 \subsection{Reference Documents}
   \begin{itemize}
-   \item \textbf{[RASD]}Requirements and analisys specification document(RASD)
+   \item \textbf{[RASD]} Requirements and analisys specification document(RASD)
    \item \textbf{[DD]} Design Document(DD)
+   \item \textbf{[A1]} Project's assignement number 1
+   \item \textbf{[A2]} Project's assignement number 2
   \end{itemize}
 
 \newpage
@@ -152,9 +156,9 @@
 
 \subsection{Elements to be integrated}
   For a detailed description of each components function and interaction refer to the \textbf{DD} \newline
-  Two main subsystem can be individuated in the general architecture of MyTaxiService:
+  Three main subsystem can be individuated in the general architecture of MyTaxiService:
   \begin{enumerate}
-    \item \textbf{Client side Component}
+    \item \textbf{Client Side Components}
 	  \begin{itemize}
 	    \item MyTaxiServiceAppUser GUI
 	    \item MyTaxiServiceMYT GUI
@@ -167,7 +171,7 @@
 	    \item MyTaxiServiceWebAdmin Communication Manager
 	  \end{itemize}
     
-    \item \textbf{Server side Component}
+    \item \textbf{Server Side Components}
 	  \begin{itemize}
 	    \item Dispatcher
 	    \item Request Manager
@@ -175,24 +179,227 @@
 	    \item Location Manager
 	    \item Queue Manager
 	    \item Request Receiver
-	    \item Data Manager
 	  \end{itemize}
+    \item \textbf{Model Side Components}
+	  \begin{itemize}
+	   \item Data Manager
+	  \end{itemize}
+
   \end{enumerate}
 
 
 \subsection{Integration Testing Strategy}
-  The strategy chosen for the integration of the components of the application is a Bottom-Up integration: 
-  the orchestration of such components begins at the low level of the component's dependency tree(see DD's component diagram).\newline
-  This approach seems to mimic very well the structure and the connections of the software's modules and, for these reasons, has been preferred. 
-
+  The strategy chosen for the integration of the components of the application is a grouped Bottom-Up integration: 
+  for each subsystem S of MyTaxiService, its components are orchestrated together following a bottom-up approach, 
+  when this procedure is finished a general integration of the subsystems of the application with each other is performed.\newline
+  This integration testing strategy has been selected because it mimics very well the structure and the modularity of the software system.
+  The bottom-up approach consists in integrating first those components that are at the low level of the component's dependency tree
+  (see DD's component diagram).
+  
 \subsection{Sequence of Component/Function Integration} 
+  In this section we included the integration sequence for the software components.\newline
+  The arrows used in the following diagrams reflects the bottom-up integration sequence.\newline
+  
+  \subsubsection{Software Integration Sequence}
+    In the following diagram is represented the integration of the View subsystem\newline
+    \begin{center}
+      \includegraphics[scale=0.25]{Integration-1.png}
+    \end{center}
+    
+\newpage
 
+     \noindent In the following diagram is represented the integration of the Controller subsystem\newline
+    \begin{center}
+      \includegraphics[scale=0.3]{Integration-2.png}
+    \end{center}
+  \subsubsection{Subsystem Integration Sequence}
+    In the following diagram is rapresented the general integration sequence between the three subsystems.
+    \begin{center}
+      \includegraphics[scale=0.3]{Integration-3.png}
+    \end{center}
 
+\newpage
 \section{Individual Step and Test Description}
+  In this section is included the high level description for each step in the integration plan.
+  Each test case correspond with one arrow in the previous diagram(see chapter 2)
+  
+  \begin{table}[ht!]
+    \begin{tabular*}{16cm}{ll}
+	\hline
+	\textbf{Test Case Identifier} & I1\\
+	\hline
+	\textbf{Test Item(s)} & MyTaxiServiceApp CM $ \longrightarrow $ MyTaxiServiceApp GUI \\
+	\hline
+	\textbf{Input Specification} & Create the typical input for MyTaxiServiceApp CM\\
+	\hline
+	\textbf{Output Specification} & Check if the correct method are called in MyTaxiServiceApp GUI\\
+	\hline
+	\textbf{Environmental Needs} & MyTaxiServiceApp GUI driver\\
+	\hline
+	\textbf{Purpose} & Verifies if MyTaxiServiceApp CM can handle user inputs \\
+	\hline
+    \end{tabular*}
+  \end{table}
+  
+  \begin{table}[ht!]
+    \begin{tabular*}{16cm}{ll}
+	\hline
+	\textbf{Test Case Identifier} & I2\\
+	\hline
+	\textbf{Test Item(s)} & MyTaxiServiceWeb CM $ \longrightarrow $ MyTaxiServiceWeb User GUI \\
+	\hline
+	\textbf{Input Specification} & Create the typical input for MyTaxiServiceWeb CM\\
+	\hline
+	\textbf{Output Specification} & Check if the correct method are called in MyTaxiServiceWeb User GUI\\
+	\hline
+	\textbf{Environmental Needs} & MyTaxiServiceWeb User GUI driver\\
+	\hline
+	\textbf{Purpose} & Verifies if MyTaxiServiceWeb CM can handle user inputs coming from the Web site \\
+	\hline
+    \end{tabular*}
+  \end{table}
+  
+  \begin{table}[ht!]
+    \begin{tabular*}{16cm}{ll}
+	\hline
+	\textbf{Test Case Identifier} & I3\\
+	\hline
+	\textbf{Test Item(s)} & MYT CM $ \longrightarrow $ MYT GUI \\
+	\hline
+	\textbf{Input Specification} & Create the typical input for MYT CM\\
+	\hline
+	\textbf{Output Specification} & Check if the correct method are called in MYT GUI\\
+	\hline
+	\textbf{Environmental Needs} & MYT GUI driver \\
+	\hline 
+	\textbf{Purpose} & Verifies if MYT CM can handle user inputs coming from a taxi driver\\
+	\hline
+    \end{tabular*}
+  \end{table}
+  
+  \begin{table}[ht!]
+    \begin{tabular*}{16cm}{ll}
+	\hline
+	\textbf{Test Case Identifier} & I4\\
+	\hline
+	\textbf{Test Item(s)} & MyTaxiServiceWeb Admin CM $ \longrightarrow $ MyTaxiServiceWeb Admin GUI \\
+	\hline
+	\textbf{Input Specification} & Create the typical input for MyTaxiServiceWeb Admin CM\\
+	\hline
+	\textbf{Output Specification} & Check if the correct method are called in MyTaxiServiceWeb Admin GUI\\
+	\hline
+	\textbf{Environmental Needs} & MyTaxiServiceWeb Admin GUI\\
+	\hline
+	\textbf{Purpose} & Verifies if MyTaxiServiceWeb Admin CM can handle user inputs coming from the admin interface \\
+	\hline
+    \end{tabular*}
+  \end{table}
+  
+  \begin{table}[ht!]
+    \begin{tabular*}{16cm}{ll}
+	\hline
+	\textbf{Test Case Identifier} & I5 \\
+	\hline
+	\textbf{Test Item(s)} & External Services Manager  $ \longrightarrow $ Location Manager \\
+	\hline
+	\textbf{Input Specification} & Create the typical input for External Services Manger\\
+	\hline
+	\textbf{Output Specification} & Check if the correct method are called into Location Manager\\
+	\hline
+	\textbf{Environmental Needs} & Location Manager driver\\
+	\hline
+	\textbf{Purpose} & Verifies can correctly provide location data to the Location Manager\\
+	\hline
+    \end{tabular*}
+  \end{table}
+  
+  \begin{table}[ht!]
+    \begin{tabular*}{16cm}{ll}
+	\hline
+	\textbf{Test Case Identifier} & I6\\
+	\hline
+	\textbf{Test Item(s)} & Location Manager $ \longrightarrow $ Queue Manager \\
+	\hline
+	\textbf{Input Specification} & Create the typical input for Location Manager\\
+	\hline
+	\textbf{Output Specification} & Check if Queue Manger driver receives the correct data according to the input\\
+	\hline
+	\textbf{Environmental Needs} & I5 succeeded and Queue Manager driver \\
+	\hline
+	\textbf{Purpose} & Verifies if Location Manager produces and formats the location data needed for the Queue Manager\\
+	\hline
+    \end{tabular*}
+  \end{table}
+  
+  \begin{table}[ht!]
+    \begin{tabular*}{16cm}{ll}
+	\hline
+	\textbf{Test Case Identifier} & I7 \\
+	\hline
+	\textbf{Test Item(s)} & Location Manager $ \longrightarrow $ Request Manager \\
+	\hline
+	\textbf{Input Specification} & Create the typical input for Location Manager \\
+	\hline
+	\textbf{Output Specification} & Check if Queue Manger driver receives the correct data according to the input \\
+	\hline
+	\textbf{Environmental Needs} & I5 succeeded and Request Manager driver \\
+	\hline
+	\textbf{Purpose} & Verifies if Location Manager produces and formats the location data needed for the Request Manager \\
+	\hline
+    \end{tabular*}
+  \end{table}
+  
+  \begin{table}[ht!]
+    \begin{tabular*}{16cm}{ll}
+	\hline
+	\textbf{Test Case Identifier} & I8 \\
+	\hline
+	\textbf{Test Item(s)} & Queue Manager $ \longrightarrow $ Request Receiver \\
+	\hline
+	\textbf{Input Specification} & Create the typical input for Queue Manager \\
+	\hline
+	\textbf{Output Specification} & Check if Request Receiver driver receives the correct data according to the input \\
+	\hline
+	\textbf{Environmental Needs} & I6 and I7 succeeded and Request Receiver driver \\
+	\hline
+	\textbf{Purpose} & Verifies if Queue Manager produces and formats the data needed to manage a request\\
+	\hline
+    \end{tabular*}
+  \end{table}
+  
+  \begin{table}[ht!]
+    \begin{tabular*}{16cm}{ll}
+	\hline
+	\textbf{Test Case Identifier} & I9 \\
+	\hline
+	\textbf{Test Item(s)} & Request Manager $ \longrightarrow $ Dispatcher \\
+	\hline
+	\textbf{Input Specification} & Create the typical input for Queue Manager \\
+	\hline
+	\textbf{Output Specification} & Check if correct methods are called in Dispatcher \\
+	\hline
+	\textbf{Environmental Needs} & I6 and I7 succeeded and Dispatcher driver \\
+	\hline
+	\textbf{Purpose} & Verifies if Request Manager produces the correct answers \newline according to the type of manager \\
+	\hline
+    \end{tabular*}
+  \end{table}
+    
+\newpage
 
 \section{Tools and Test Equipment Required}
 
 \section{Program Stub and Test Data Required}
 
+\section{Appendix}
+  \subsection{Hours Of Work}
+    \begin{itemize}
+     \item Giorgio Pea: xxx hours
+     \item Andrea Sessa: xxx hours
+    \end{itemize}
 
+  \subsection{Tools Used}
+    \begin{itemize}
+     \item  Atom/\LaTeX: to redact this document
+    \end{itemize}
 \end{document}

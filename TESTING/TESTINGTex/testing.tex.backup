@@ -234,7 +234,7 @@
 	\hline
 	\textbf{Output Specification} & Check if the correct method are called in MyTaxiServiceApp GUI\\
 	\hline
-	\textbf{Environmental Needs} & MyTaxiServiceApp GUI driver\\
+	\textbf{Environmental Needs} & N/A\\
 	\hline
 	\textbf{Purpose} & Verifies if MyTaxiServiceApp CM can handle user inputs \\
 	\hline
@@ -250,11 +250,11 @@
 	\hline
 	\textbf{Input Specification} & Create the typical input for MyTaxiServiceWeb CM\\
 	\hline
-	\textbf{Output Specification} & Check if the correct method are called in MyTaxiServiceWeb User GUI\\
+	\textbf{Output Specification} & \pbox{20cm}{Check if the correct method are called \\ in MyTaxiServiceWeb User GUI} \\
 	\hline
-	\textbf{Environmental Needs} & MyTaxiServiceWeb User GUI driver\\
+	\textbf{Environmental Needs} & N/A\\
 	\hline
-	\textbf{Purpose} & Verifies if MyTaxiServiceWeb CM can handle user inputs coming from the Web site \\
+	\textbf{Purpose} & \pbox{20cm}{Verifies if MyTaxiServiceWeb CM can handle user inputs \\ coming from the Web site} \\
 	\hline
     \end{tabular*}
   \end{table}
@@ -270,9 +270,9 @@
 	\hline
 	\textbf{Output Specification} & Check if the correct method are called in MYT GUI\\
 	\hline
-	\textbf{Environmental Needs} & MYT GUI driver \\
+	\textbf{Environmental Needs} & N/A\\
 	\hline 
-	\textbf{Purpose} & Verifies if MYT CM can handle user inputs coming from a taxi driver\\
+	\textbf{Purpose} & \pbox{20cm}{Verifies if MYT CM can handle user inputs coming \\ from a taxi driver} \\
 	\hline
     \end{tabular*}
   \end{table}
@@ -286,11 +286,11 @@
 	\hline
 	\textbf{Input Specification} & Create the typical input for MyTaxiServiceWeb Admin CM\\
 	\hline
-	\textbf{Output Specification} & Check if the correct method are called in MyTaxiServiceWeb Admin GUI\\
+	\textbf{Output Specification} & \pbox{20cm}{Check if the correct method are called \\ in MyTaxiServiceWeb Admin GUI} \\
 	\hline
-	\textbf{Environmental Needs} & MyTaxiServiceWeb Admin GUI\\
+	\textbf{Environmental Needs} & N/A\\
 	\hline
-	\textbf{Purpose} & Verifies if MyTaxiServiceWeb Admin CM can handle user inputs coming from the admin interface \\
+	\textbf{Purpose} & \pbox{20cm}{Verifies if MyTaxiServiceWeb Admin CM can handle user inputs \\ coming from the admin interface} \\
 	\hline
     \end{tabular*}
   \end{table}
@@ -306,12 +306,14 @@
 	\hline
 	\textbf{Output Specification} & Check if the correct method are called into Location Manager\\
 	\hline
-	\textbf{Environmental Needs} & Location Manager driver\\
+	\textbf{Environmental Needs} & N/A\\
 	\hline
-	\textbf{Purpose} & Verifies can correctly provide location data to the Location Manager\\
+	\textbf{Purpose} & \pbox{20cm}{Verifies can correctly provide location data to \\ the Location Manager} \\
 	\hline
     \end{tabular*}
   \end{table}
+  
+  \vspace{15cm}
   
   \begin{table}[ht!]
     \begin{tabular*}{16cm}{ll}
@@ -322,11 +324,11 @@
 	\hline
 	\textbf{Input Specification} & Create the typical input for Location Manager\\
 	\hline
-	\textbf{Output Specification} & Check if Queue Manger driver receives the correct data according to the input\\
+	\textbf{Output Specification} & \pbox{20cm}{Check if Queue Manger driver receives the correct data \\ according to the input} \\
 	\hline
-	\textbf{Environmental Needs} & I5 succeeded and Queue Manager driver \\
+	\textbf{Environmental Needs} & I5 succeeded \\
 	\hline
-	\textbf{Purpose} & Verifies if Location Manager produces and formats the location data needed for the Queue Manager\\
+	\textbf{Purpose} & \pbox{20cm}{Verifies if Location Manager produces and formats the location \\ data needed for the Queue Manager} \\
 	\hline
     \end{tabular*}
   \end{table}
@@ -340,11 +342,11 @@
 	\hline
 	\textbf{Input Specification} & Create the typical input for Location Manager \\
 	\hline
-	\textbf{Output Specification} & Check if Queue Manger driver receives the correct data according to the input \\
+	\textbf{Output Specification} & \pbox{20cm}{Check if Queue Manger driver receives the correct data \\ according to the input} \\
 	\hline
-	\textbf{Environmental Needs} & I5 succeeded and Request Manager driver \\
+	\textbf{Environmental Needs} & I5 succeeded \\
 	\hline
-	\textbf{Purpose} & Verifies if Location Manager produces and formats the location data needed for the Request Manager \\
+	\textbf{Purpose} & \pbox{20cm}{Verifies if Location Manager produces and formats the location \\ data needed for the Request Manager} \\
 	\hline
     \end{tabular*}
   \end{table}
@@ -358,11 +360,11 @@
 	\hline
 	\textbf{Input Specification} & Create the typical input for Queue Manager \\
 	\hline
-	\textbf{Output Specification} & Check if Request Receiver driver receives the correct data according to the input \\
+	\textbf{Output Specification} & \pbox{20cm}{Check if Request Receiver driver receives the correct data \\ according to the input} \\
 	\hline
-	\textbf{Environmental Needs} & I6 and I7 succeeded and Request Receiver driver \\
+	\textbf{Environmental Needs} & I6 and I7 succeeded\\
 	\hline
-	\textbf{Purpose} & Verifies if Queue Manager produces and formats the data needed to manage a request\\
+	\textbf{Purpose} & \pbox{20cm}{Verifies if Queue Manager produces and formats the data needed \\ to manage a request} \\
 	\hline
     \end{tabular*}
   \end{table}
@@ -378,9 +380,9 @@
 	\hline
 	\textbf{Output Specification} & Check if correct methods are called in Dispatcher \\
 	\hline
-	\textbf{Environmental Needs} & I6 and I7 succeeded and Dispatcher driver \\
+	\textbf{Environmental Needs} & I6 and I7 succeeded\\
 	\hline
-	\textbf{Purpose} & Verifies if Request Manager produces the correct answers \newline according to the type of manager \\
+	\textbf{Purpose} & \pbox{20cm}{Verifies if Request Manager produces the correct answers \\ according to the type of action requested} \\
 	\hline
     \end{tabular*}
   \end{table}
@@ -388,6 +390,16 @@
 \newpage
 
 \section{Tools and Test Equipment Required}
+  In this section is included a set of suggestion about possible testing tools than could be used to perform the integration 
+  testing describe above.\newline
+  The selection of the tools depends on the selection of the programming language made by the developer.\newline
+  If the chosen programming language is Java EE:
+  \begin{enumerate}
+   \item To perform the integration testing between the components the Java EE Arquillian Framework can be used;
+	 it provides an environment in which the components under testing are inserted and tested. The specific 
+	 test protocols wil be specified and written in further documents.
+   \item Manual Testi
+  \end{enumerate}
 
 \section{Program Stub and Test Data Required}
 

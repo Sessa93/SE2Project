@@ -67,13 +67,14 @@
 \usepackage{pbox}
 \usepackage{booktabs}
 \usepackage{makecell}
+\usepackage{float}
 
 %%% END Article customizations
 
 %%% The "real" document content comes below...
 
 \titlepic{\includegraphics[scale=0.60]{polimi_logo.jpg}}
-\title{Integration Test Plan Document \\ \vspace{1cm} \large{Version 1.0}}
+\title{\textbf{I}ntegration \textbf{T}est \textbf{P}lan \textbf{D}ocument \\ \vspace{1cm} \large{Version 1.0}}
 \author{Giorgio Pea(Mat. 853872), Andrea Sessa(Mat. 850082)}
 \date{21/1/2016}
 
@@ -131,6 +132,7 @@
       \item \textbf{GUI:} Graphic User Interface
       \item \textbf{GPS:} Global Positioning System
       \item \textbf{CM:} Communication Manager
+      \item \textbf{DB:} DataBase
      \end{itemize}
 
 \subsection{Reference Documents}
@@ -198,7 +200,8 @@
   
 \subsection{Sequence of Component/Function Integration} 
   In this section we included the integration sequence for the software components.\newline
-  The arrows used in the following diagrams reflects the bottom-up integration sequence.\newline
+  The arrows used in the following diagrams reflects the bottom-up integration sequence; in case the arrows does not fix a particular
+  ordering in the integration of some components then the testing phase should give priority to the more critical or more complex component.
   
   \subsubsection{Software Integration Sequence}
     In the following diagram is represented the integration of the View subsystem\newline
@@ -223,10 +226,9 @@
   In this section is included the high level description for each step in the integration plan.
   Each test case correspond with one arrow in the previous diagram(see chapter 2)
   
+  \subsection{Test Case I1}
   \begin{table}[ht!]
     \begin{tabular*}{16cm}{ll}
-	\hline
-	\textbf{Test Case Identifier} & I1\\
 	\hline
 	\textbf{Test Item(s)} & MyTaxiServiceApp CM $ \longrightarrow $ MyTaxiServiceApp GUI \\
 	\hline
@@ -241,10 +243,9 @@
     \end{tabular*}
   \end{table}
   
+  \subsection{Test Case I2}
   \begin{table}[ht!]
     \begin{tabular*}{16cm}{ll}
-	\hline
-	\textbf{Test Case Identifier} & I2\\
 	\hline
 	\textbf{Test Item(s)} & MyTaxiServiceWeb CM $ \longrightarrow $ MyTaxiServiceWeb User GUI \\
 	\hline
@@ -259,10 +260,9 @@
     \end{tabular*}
   \end{table}
   
+  \subsection{Test Case I3}
   \begin{table}[ht!]
     \begin{tabular*}{16cm}{ll}
-	\hline
-	\textbf{Test Case Identifier} & I3\\
 	\hline
 	\textbf{Test Item(s)} & MYT CM $ \longrightarrow $ MYT GUI \\
 	\hline
@@ -277,10 +277,9 @@
     \end{tabular*}
   \end{table}
   
-  \begin{table}[ht!]
+  \subsection{Test Case I4}
+  \begin{table}[H]
     \begin{tabular*}{16cm}{ll}
-	\hline
-	\textbf{Test Case Identifier} & I4\\
 	\hline
 	\textbf{Test Item(s)} & MyTaxiServiceWeb Admin CM $ \longrightarrow $ MyTaxiServiceWeb Admin GUI \\
 	\hline
@@ -295,10 +294,9 @@
     \end{tabular*}
   \end{table}
   
+  \subsection{Test Case I5}
   \begin{table}[ht!]
     \begin{tabular*}{16cm}{ll}
-	\hline
-	\textbf{Test Case Identifier} & I5 \\
 	\hline
 	\textbf{Test Item(s)} & External Services Manager  $ \longrightarrow $ Location Manager \\
 	\hline
@@ -313,12 +311,9 @@
     \end{tabular*}
   \end{table}
   
-  \vspace{15cm}
-  
+  \subsection{Test Case I6}
   \begin{table}[ht!]
     \begin{tabular*}{16cm}{ll}
-	\hline
-	\textbf{Test Case Identifier} & I6\\
 	\hline
 	\textbf{Test Item(s)} & Location Manager $ \longrightarrow $ Queue Manager \\
 	\hline
@@ -333,10 +328,9 @@
     \end{tabular*}
   \end{table}
   
+  \subsection{Test Case I7}
   \begin{table}[ht!]
     \begin{tabular*}{16cm}{ll}
-	\hline
-	\textbf{Test Case Identifier} & I7 \\
 	\hline
 	\textbf{Test Item(s)} & Location Manager $ \longrightarrow $ Request Manager \\
 	\hline
@@ -351,10 +345,9 @@
     \end{tabular*}
   \end{table}
   
+  \subsection{Test Case I8}
   \begin{table}[ht!]
     \begin{tabular*}{16cm}{ll}
-	\hline
-	\textbf{Test Case Identifier} & I8 \\
 	\hline
 	\textbf{Test Item(s)} & Queue Manager $ \longrightarrow $ Request Receiver \\
 	\hline
@@ -369,10 +362,9 @@
     \end{tabular*}
   \end{table}
   
-  \begin{table}[ht!]
+  \subsection{Test Case I9}
+  \begin{table}[H]
     \begin{tabular*}{16cm}{ll}
-	\hline
-	\textbf{Test Case Identifier} & I9 \\
 	\hline
 	\textbf{Test Item(s)} & Request Manager $ \longrightarrow $ Dispatcher \\
 	\hline
@@ -386,7 +378,41 @@
 	\hline
     \end{tabular*}
   \end{table}
-    
+  
+  \subsection{Test Case I10}
+  \begin{table}[ht!]
+    \begin{tabular*}{16cm}{ll}
+	\hline
+	\textbf{Test Item(s)} & Data Manager $ \longrightarrow $ MyTaxiService Controller Subsystem \\
+	\hline
+	\textbf{Input Specification} & \pbox{20cm}{Create the typical memory situation in the DB \\ and create the typical input for MyTaxiService Controller Subsystem} \\
+	\hline
+	\textbf{Output Specification} & \pbox{20cm}{Check if correct methods are called in Data Manager \\ and the correct data are retrieved} \\
+	\hline
+	\textbf{Environmental Needs} & All the previous test phase has succeeded\\
+	\hline
+	\textbf{Purpose} & \pbox{20cm}{Verifies if the Controller Subsystem can \\ retrieve data from the DB system and if the Data Manager \\ can correctly handle data request coming from the Controller} \\
+	\hline
+    \end{tabular*}
+  \end{table}
+  
+  \subsection{Test Case I11}
+  \begin{table}[ht!]
+    \begin{tabular*}{16cm}{ll}
+	\hline
+	\textbf{Test Item(s)} & MyTaxiService Controller Subsystem $ \longrightarrow $ MyTaxiService View Subsystem \\
+	\hline
+	\textbf{Input Specification} & Create the typical for MyTaxiService Controller \\
+	\hline
+	\textbf{Output Specification} & Check if correct data are retrieved by MyTaxiService View Subsystem \\
+	\hline
+	\textbf{Environmental Needs} & All the previous test phase has succeeded\\
+	\hline
+	\textbf{Purpose} & \pbox{20cm}{Verifies if the View Subsystem can correctly \\ interact with the Controller subsystem} \\
+	\hline
+    \end{tabular*}
+  \end{table}
+
 \newpage
 
 \section{Tools and Test Equipment Required}
@@ -397,14 +423,23 @@
   \begin{enumerate}
    \item To perform the integration testing between the components the Java EE Arquillian Framework can be used;
 	 it provides an environment in which the components under testing are inserted and tested. The specific 
-	 test protocols wil be specified and written in further documents.
+	 test protocols will be specified and written in further documents.
    \item Manual testing could also be needed to simulate the input of the user in order to generate typical
-	 input needed to integrate the various components.
+	 input data used to integrate the various components.
   \end{enumerate}
 
 \section{Program Stub and Test Data Required}
+  In this section are included any specification of particular input data or component's stub/driver needed to 
+  perform the integration steps describe in the previous section.\newline
   
-
+  \noindent In order to perform the test case \textbf{I10} some anonymized user data should be inserted into the database system.\newline
+  Appropriates drivers are needed to replace the two external systems: the GPS device and the Traffic Info Services
+  These drivers should simulate external data needed to the External Services Manager to correctly perform the test case \textbf{I1} \newline
+  In general more driver can be introduced: If the integration test phase is run in parallel with the developing phase then some components may no
+  be already available for the integration test phase, such components will be replace with an appropriate driver.
+  
+  
+\newpage
 \section{Appendix}
   \subsection{Hours Of Work}
     \begin{itemize}

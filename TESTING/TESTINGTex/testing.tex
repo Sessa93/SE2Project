@@ -125,10 +125,9 @@
    
   \subsubsection{Acronyms}
     \begin{itemize}
+      \item \textbf{RASD:} Requirements Analisys and Specification Document
       \item \textbf{DD:} Design Document
       \item \textbf{MVC:} Model View Controller
-      \item \textbf{FIFO:} First In First Out
-      \item \textbf{API:} Application Programming Interface
       \item \textbf{GUI:} Graphic User Interface
       \item \textbf{GPS:} Global Positioning System
       \item \textbf{CM:} Communication Manager
@@ -217,28 +216,28 @@
     \end{center}
   \subsubsection{Subsystem Integration Sequence}
     In the following diagram is rapresented the general integration sequence between the three subsystems.
+    \newline
     \begin{center}
       \includegraphics[scale=0.3]{Integration-3.png}
     \end{center}
 
 \newpage
 \section{Individual Step and Test Description}
-  In this section is included the high level description for each step in the integration plan.
-  Each test case correspond with one arrow in the previous diagram(see chapter 2)
-  
+  In this section is included the high level description for each step of the integration plan.
+  Each test case corresponds with to an arrow in the previous diagram(see chapter 2)
   \subsection{Test Case I1}
   \begin{table}[ht!]
     \begin{tabular*}{16cm}{ll}
 	\hline
-	\textbf{Test Item(s)} & MyTaxiServiceApp CM $ \longrightarrow $ MyTaxiServiceApp GUI \\
+	\textbf{Test Item(s)} & MyTaxiServiceApp CM $ \longleftrightarrow $ MyTaxiServiceApp GUI \\
 	\hline
-	\textbf{Input Specification} & Create the typical input for MyTaxiServiceApp CM\\
+	\textbf{Input Specification} & \pbox{20cm}{Create a typical set of methods calls performed \\ by MyTaxiServiceApp GUI on MyTaxiServiceApp CM}\\
 	\hline
-	\textbf{Output Specification} & Check if the correct method are called in MyTaxiServiceApp GUI\\
+	\textbf{Output Specification} & \pbox{20cm}{Check if the method calls mentioned above \\ produce the expected results}\\
 	\hline
 	\textbf{Environmental Needs} & N/A\\
 	\hline
-	\textbf{Purpose} & Verifies if MyTaxiServiceApp CM can handle user inputs \\
+	\textbf{Purpose} & \pbox{20cm}{Verifies if MyTaxiServiceApp CM can handle \\ correctly MyTaxiServiceApp GUI methods calls} \\
 	\hline
     \end{tabular*}
   \end{table}
@@ -247,15 +246,15 @@
   \begin{table}[ht!]
     \begin{tabular*}{16cm}{ll}
 	\hline
-	\textbf{Test Item(s)} & MyTaxiServiceWeb CM $ \longrightarrow $ MyTaxiServiceWeb User GUI \\
+	\textbf{Test Item(s)} & MyTaxiServiceWeb CM $ \longleftrightarrow $ MyTaxiServiceWeb User GUI \\
 	\hline
-	\textbf{Input Specification} & Create the typical input for MyTaxiServiceWeb CM\\
+	\textbf{Input Specification} & \pbox{20cm}{Create a typical set of methods calls performed \\ by MyTaxiServiceWeb GUI on MyTaxiServiceWeb User CM} \\
 	\hline
-	\textbf{Output Specification} & \pbox{20cm}{Check if the correct method are called \\ in MyTaxiServiceWeb User GUI} \\
+	\textbf{Output Specification} & \pbox{20cm}{Check if the method calls mentioned above \\ produce the expected results} \\
 	\hline
 	\textbf{Environmental Needs} & N/A\\
 	\hline
-	\textbf{Purpose} & \pbox{20cm}{Verifies if MyTaxiServiceWeb CM can handle user inputs \\ coming from the Web site} \\
+	\textbf{Purpose} & \pbox{20cm}{ Verifies if MyTaxiServiceApp CM can handle \\ correctly MyTaxiServiceApp GUI methods calls} \\
 	\hline
     \end{tabular*}
   \end{table}
@@ -264,15 +263,15 @@
   \begin{table}[ht!]
     \begin{tabular*}{16cm}{ll}
 	\hline
-	\textbf{Test Item(s)} & MYT CM $ \longrightarrow $ MYT GUI \\
+	\textbf{Test Item(s)} & MYT CM $ \longleftrightarrow $ MYT GUI \\
 	\hline
-	\textbf{Input Specification} & Create the typical input for MYT CM\\
+	\textbf{Input Specification} & \pbox{20cm}{Create a typical set of methods calls \\ performed by MYT GUI on MYT CM} \\
 	\hline
-	\textbf{Output Specification} & Check if the correct method are called in MYT GUI\\
+	\textbf{Output Specification} & \pbox{20cm}{Check if the method calls mentioned above \\ produce the expected results} \\
 	\hline
 	\textbf{Environmental Needs} & N/A\\
 	\hline 
-	\textbf{Purpose} & \pbox{20cm}{Verifies if MYT CM can handle user inputs coming \\ from a taxi driver} \\
+	\textbf{Purpose} & \pbox{20cm}{ Verifies if MYT CM can handle correctly MYT GUI methods calls} \\
 	\hline
     \end{tabular*}
   \end{table}
@@ -281,130 +280,155 @@
   \begin{table}[H]
     \begin{tabular*}{16cm}{ll}
 	\hline
-	\textbf{Test Item(s)} & MyTaxiServiceWeb Admin CM $ \longrightarrow $ MyTaxiServiceWeb Admin GUI \\
+	\textbf{Test Item(s)} & MyTaxiServiceWeb Admin CM $ \longleftrightarrow $ MyTaxiServiceWeb Admin GUI \\
 	\hline
-	\textbf{Input Specification} & Create the typical input for MyTaxiServiceWeb Admin CM\\
+	\textbf{Input Specification} & \pbox{20cm}{Create a typical set of methods calls performed by \\ MyTaxiServiceWeb Admin GUI on MyTaxiServiceWeb Admin CM} \\
 	\hline
-	\textbf{Output Specification} & \pbox{20cm}{Check if the correct method are called \\ in MyTaxiServiceWeb Admin GUI} \\
+	\textbf{Output Specification} & \pbox{20cm}{Check if the method calls mentioned above \\ produce the expected results} \\
 	\hline
 	\textbf{Environmental Needs} & N/A\\
 	\hline
-	\textbf{Purpose} & \pbox{20cm}{Verifies if MyTaxiServiceWeb Admin CM can handle user inputs \\ coming from the admin interface} \\
+	\textbf{Purpose} & \pbox{20cm}{ Verifies if MYT CM can handle correctly \\ MyTaxiServiceWeb Admin GUI methods calls} \\
 	\hline
     \end{tabular*}
   \end{table}
   
   \subsection{Test Case I5}
-  \begin{table}[ht!]
+  \begin{table}[H]
     \begin{tabular*}{16cm}{ll}
 	\hline
-	\textbf{Test Item(s)} & External Services Manager  $ \longrightarrow $ Location Manager \\
+	\textbf{Test Item(s)} & External Services Manager  $ \longleftrightarrow $ Location Manager \\
 	\hline
-	\textbf{Input Specification} & Create the typical input for External Services Manger\\
+	\textbf{Input Specification} & \pbox{20cm}{Create a typical set of methods calls performed \\ by Location Manager  on  External Services Manager} \\
 	\hline
-	\textbf{Output Specification} & Check if the correct method are called into Location Manager\\
+	\textbf{Output Specification} & \pbox{20cm}{Check if the method calls mentioned above \\ produce the expected results}\\
 	\hline
-	\textbf{Environmental Needs} & N/A\\
+	\textbf{Environmental Needs} & GPS and traffic sample data available\\
 	\hline
-	\textbf{Purpose} & \pbox{20cm}{Verifies can correctly provide location data to \\ the Location Manager} \\
+	\textbf{Purpose} & \pbox{20cm}{Verifies if External Services Manager can handle correctly \\ Location Manager methods calls 
+					and can provide to the Location \\ Manager digestable data about traffic and positions} \\
 	\hline
     \end{tabular*}
   \end{table}
   
   \subsection{Test Case I6}
-  \begin{table}[ht!]
+  \begin{table}[H]
     \begin{tabular*}{16cm}{ll}
 	\hline
-	\textbf{Test Item(s)} & Location Manager $ \longrightarrow $ Queue Manager \\
+	\textbf{Test Item(s)} & Location Manager $ \longleftrightarrow $ Queue Manager \\
 	\hline
-	\textbf{Input Specification} & Create the typical input for Location Manager\\
+	\textbf{Input Specification} & \pbox{20cm}{Create a typical set of methods calls performed \\ by Queue Manager on Location Manager}\\
 	\hline
-	\textbf{Output Specification} & \pbox{20cm}{Check if Queue Manger driver receives the correct data \\ according to the input} \\
+	\textbf{Output Specification} & \pbox{20cm}{Check if the method calls mentioned above \\ produce the expected results} \\
 	\hline
 	\textbf{Environmental Needs} & I5 succeeded \\
 	\hline
-	\textbf{Purpose} & \pbox{20cm}{Verifies if Location Manager produces and formats the location \\ data needed for the Queue Manager} \\
+	\textbf{Purpose} & \pbox{20cm}{ Verifies if Location Manager can handle correctly Queue Manager \\ methods calls 
+					 ,can successfully provide traffic levels for a given \\ zone and can properly provide mtaxies' positions  } \\
 	\hline
     \end{tabular*}
   \end{table}
   
   \subsection{Test Case I7}
-  \begin{table}[ht!]
+  \begin{table}[H]
     \begin{tabular*}{16cm}{ll}
 	\hline
-	\textbf{Test Item(s)} & Location Manager $ \longrightarrow $ Request Manager \\
+	\textbf{Test Item(s)} & Location Manager $ \longleftrightarrow $ Request Manager \\
 	\hline
-	\textbf{Input Specification} & Create the typical input for Location Manager \\
+	\textbf{Input Specification} & \pbox{20cm}{Create a typical set of methods calls performed by \\ Request Manager on Location Manager}\\
 	\hline
-	\textbf{Output Specification} & \pbox{20cm}{Check if Queue Manger driver receives the correct data \\ according to the input} \\
+	\textbf{Output Specification} & \pbox{20cm}{Check if the method calls mentioned above \\ produce the expected results} \\
 	\hline
 	\textbf{Environmental Needs} & I5 succeeded \\
 	\hline
-	\textbf{Purpose} & \pbox{20cm}{Verifies if Location Manager produces and formats the location \\ data needed for the Request Manager} \\
+	\textbf{Purpose} & \pbox{20cm}{Verifies if Location Manager can handle correctly Request Manager \\methods calls 
+					and can provide successfully AWT information \\ about an mtaxi request} \\
 	\hline
     \end{tabular*}
   \end{table}
   
   \subsection{Test Case I8}
-  \begin{table}[ht!]
+  \begin{table}[H]
     \begin{tabular*}{16cm}{ll}
 	\hline
-	\textbf{Test Item(s)} & Queue Manager $ \longrightarrow $ Request Receiver \\
+	\textbf{Test Item(s)} & Queue Manager $ \longleftrightarrow $ Request Manager \\
 	\hline
-	\textbf{Input Specification} & Create the typical input for Queue Manager \\
+	\textbf{Input Specification} &  \pbox{20cm}{Create a typical set of methods calls performed by \\ Request Manager on Queue Manager} \\
 	\hline
-	\textbf{Output Specification} & \pbox{20cm}{Check if Request Receiver driver receives the correct data \\ according to the input} \\
+	\textbf{Output Specification} & \pbox{20cm}{Check if the method calls mentioned above \\ produce the expected results} \\
 	\hline
-	\textbf{Environmental Needs} & I6 and I7 succeeded\\
+	\textbf{Environmental Needs} & \pbox{20cm}{I6 and I7 succeeded and sample data about mtaxies \\ distribution in city zones}\\
 	\hline
-	\textbf{Purpose} & \pbox{20cm}{Verifies if Queue Manager produces and formats the data needed \\ to manage a request} \\
+	\textbf{Purpose} & \pbox{20cm}{Verifies if Queue Manager can handle correctly Request Manager \\ methods calls 
+					and can properly provide mtaxies' queues information} \\
 	\hline
     \end{tabular*}
   \end{table}
+  
+
   
   \subsection{Test Case I9}
   \begin{table}[H]
     \begin{tabular*}{16cm}{ll}
 	\hline
-	\textbf{Test Item(s)} & Request Manager $ \longrightarrow $ Dispatcher \\
+	\textbf{Test Item(s)} & Request Manager $ \longleftrightarrow $ Dispatcher \\
 	\hline
-	\textbf{Input Specification} & Create the typical input for Queue Manager \\
+	\textbf{Input Specification} & \pbox{20cm}{Create a typical set of methods calls performed by \\ Request Manager on Dispatcher} \\
 	\hline
-	\textbf{Output Specification} & Check if correct methods are called in Dispatcher \\
+	\textbf{Output Specification} & \pbox{20cm}{Check if the method calls mentioned above \\ produce the expected results}\\
 	\hline
 	\textbf{Environmental Needs} & I6 and I7 succeeded\\
 	\hline
-	\textbf{Purpose} & \pbox{20cm}{Verifies if Request Manager produces the correct answers \\ according to the type of action requested} \\
+	\textbf{Purpose} & \pbox{20cm}{Verifies if Dispatcher can handle correctly methods calls performed \\ by Request Manager
+					and can correctly deliver client addressed \\ messages to the Dispatcher} \\
 	\hline
     \end{tabular*}
   \end{table}
   
   \subsection{Test Case I10}
-  \begin{table}[ht!]
+  \begin{table}[H]
     \begin{tabular*}{16cm}{ll}
 	\hline
-	\textbf{Test Item(s)} & Data Manager $ \longrightarrow $ MyTaxiService Controller Subsystem \\
+	\textbf{Test Item(s)} & Request Manager $ \longleftrightarrow $ Request Receiver \\
 	\hline
-	\textbf{Input Specification} & \pbox{20cm}{Create the typical memory situation in the DB \\ and create the typical input for MyTaxiService Controller Subsystem} \\
+	\textbf{Input Specification} &  \pbox{20cm}{Create a typical set of methods calls performed \\ by Request Receiver on Request Manager} \\
 	\hline
-	\textbf{Output Specification} & \pbox{20cm}{Check if correct methods are called in Data Manager \\ and the correct data are retrieved} \\
+	\textbf{Output Specification} & \pbox{20cm}{Check if the method calls mentioned above \\ produce the expected results} \\
 	\hline
-	\textbf{Environmental Needs} & All the previous test phase has succeeded\\
+	\textbf{Environmental Needs} & I8 and I7 succeeded\\
 	\hline
-	\textbf{Purpose} & \pbox{20cm}{Verifies if the Controller Subsystem can \\ retrieve data from the DB system and if the Data Manager \\ can correctly handle data request coming from the Controller} \\
+	\textbf{Purpose} & \pbox{20cm}{Verifies if Request Manager can handle correctly Request Receiver \\ methods calls 
+					and can properly manage different \\ types of client requests} \\
 	\hline
     \end{tabular*}
   \end{table}
   
   \subsection{Test Case I11}
-  \begin{table}[ht!]
+  \begin{table}[H]
     \begin{tabular*}{16cm}{ll}
 	\hline
-	\textbf{Test Item(s)} & MyTaxiService Controller Subsystem $ \longrightarrow $ MyTaxiService View Subsystem \\
+	\textbf{Test Item(s)} & MyTaxiService Model $ \longleftrightarrow $ MyTaxiService Controller Subsystem \\
 	\hline
-	\textbf{Input Specification} & Create the typical for MyTaxiService Controller \\
+	\textbf{Input Specification} & \pbox{20cm}{Create a typical set of remote methods calls performed \\ by MyTaxiService Controller on MyTaxiService Model} \\
 	\hline
-	\textbf{Output Specification} & Check if correct data are retrieved by MyTaxiService View Subsystem \\
+	\textbf{Output Specification} & \pbox{20cm}{Check if correct methods are called in MyTaxiService Model \\ and the correct data are retrieved} \\
+	\hline
+	\textbf{Environmental Needs} & \pbox{20cm}{All the previous test phase has succeeded and \\ sample data must be present in the DB}\\
+	\hline
+	\textbf{Purpose} & \pbox{20cm}{Verifies if the MyTaxiService Controller Subsystem can \\ retrieve data from the DB system and if the MyTaxiService Model \\ can correctly handle data request coming from the Controller} \\
+	\hline
+    \end{tabular*}
+  \end{table}
+  
+  \subsection{Test Case I12}
+  \begin{table}[H]
+    \begin{tabular*}{16cm}{ll}
+	\hline
+	\textbf{Test Item(s)} & \pbox{20cm}{MyTaxiService Controller Subsystem $ \longleftrightarrow $ \\ MyTaxiService View Subsystem} \\
+	\hline
+	\textbf{Input Specification} & \pbox{20cm}{Create a typical set of remote methods calls performed\\ by MyTaxiService View Subsystem on MyTaxiService \\ Controller Subsystem}  \\
+	\hline
+	\textbf{Output Specification} & \pbox{20cm}{Check if correct methods are called in MyTaxiService Controller \\ and the correct data are retrieved} \\
 	\hline
 	\textbf{Environmental Needs} & All the previous test phase has succeeded\\
 	\hline
@@ -416,35 +440,34 @@
 \newpage
 
 \section{Tools and Test Equipment Required}
-  In this section is included a set of suggestion about possible testing tools than could be used to perform the integration 
-  testing describe above.\newline
-  The selection of the tools depends on the selection of the programming language made by the developer.\newline
-  If the chosen programming language is Java EE:
+  In this section is included a set of suggestions about possible tools than could be used to perform the integration 
+  testing describe in this document.\newline
+  The selection of these tools depends on the programming language chosen by the developer.\newline
+  If the chosen programming language is Java:
   \begin{enumerate}
-   \item To perform the integration testing between the components the Java EE Arquillian Framework can be used;
-	 it provides an environment in which the components under testing are inserted and tested. The specific 
-	 test protocols will be specified and written in further documents.
+   \item To perform integration testing the developers can adopt Arquillian framework. This framework provides a series of preset
+	 environment configuration and utilities that can be used to test the integration of the different components of MyTaxiService.
+	 The specific test protocols will be specified and written in further documents.
    \item Manual testing could also be needed to simulate the input of the user in order to generate typical
-	 input data used to integrate the various components.
+	 input data used useful to integrate the various components of MyTaxiService.
   \end{enumerate}
 
 \section{Program Stub and Test Data Required}
-  In this section are included any specification of particular input data or component's stub/driver needed to 
+  In this section is included each specification of particular input data or component's stub/driver needed to 
   perform the integration steps describe in the previous section.\newline
   
-  \noindent In order to perform the test case \textbf{I10} some anonymized user data should be inserted into the database system.\newline
-  Appropriates drivers are needed to replace the two external systems: the GPS device and the Traffic Info Services
-  These drivers should simulate external data needed to the External Services Manager to correctly perform the test case \textbf{I1} \newline
-  In general more driver can be introduced: If the integration test phase is run in parallel with the developing phase then some components may no
-  be already available for the integration test phase, such components will be replace with an appropriate driver.
-  
+  \noindent In order to perform some test cases sample user data should be inserted into the database system and made available for testing.\newline
+  Proper stubs are needed to replace the two external systems: the GPS information and Traffic info providers.
+  These stubs should provide sample data needed to the External Services Manager to correctly perform the test case \textbf{I1} \newline
+  In general more drivers could be introduced: if the integration test phase is run in parallel with the development phase then some components may not
+  be available yet for the integration test phase, such components will be replaced with an appropriate driver.
   
 \newpage
 \section{Appendix}
   \subsection{Hours Of Work}
     \begin{itemize}
-     \item Giorgio Pea: xxx hours
-     \item Andrea Sessa: xxx hours
+     \item Giorgio Pea: 6 hours
+     \item Andrea Sessa: 10.5 hours
     \end{itemize}
 
   \subsection{Tools Used}

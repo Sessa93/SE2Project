@@ -89,12 +89,23 @@
 \newpage
 
 \section{Introduction}
-  \subsection{Purpose and Scope}
+  \subsection{Purpose}
+    The main purpose of this document is to analyze effort and cost for MyTaxiService.
+    The analisys is performed using two different models:
+    \begin{itemize}
+     \item Function Points: to determine the size and the overall complexity of the project
+     \item COCOMO II: to determine the effort and cost of the project
+    \end{itemize}
+    In the final part of the document are also included a Gantt diagram to visualize thepage
+    general schedule of the project and a resource allocation diagram to show how the team 
+    members have been assigned to the variuos tasks.
+
   \subsection{Acronyms}
     \begin{itemize}
      \item \textbf{RASD:} Requirements Analisys and Specification Document
      \item \textbf{DD:} Design Document
      \item \textbf{ITPD:} Integration Test Plan Document
+     \item \textbf{AWT:} Approximate Waiting Time
     \end{itemize}
   \subsection{References}
     \begin{itemize}
@@ -103,40 +114,118 @@
 
 \section{Function Point Analisys}
   \subsection{Internal Logic Files}
-    The system needs to store information about:
-    \begin{itemize}
-     \item Users: Simple
-     \item Administrators: Simple
-     \item Mtaxi drivers: Simple
-     \item Ride Request: Medium
-     \item Reservation Request: Medium
-     \item Queue entity management: Hard
-    \end{itemize}
-    
+     The system needs to store information about: \newline \newline
+     \textbf{User}\newline
+     This data entity consist in a small set of information, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+     \textbf{Administrator}\newline
+     This data entity consist in a small set of information, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+     \textbf{Mtaxi driver}\newline
+     This data entity consist in a small set of information, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+     
+     \newpage
+     
+     \noindent \textbf{Mtaxi}\newline
+     This data entity consist in a small set of information, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+     \textbf{WorkTime Table}\newline
+     This data entity consist in a small set of information, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+     \textbf{Zone}\newline
+     This data entity consist in a small set of information, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+     \textbf{Location}\newline
+     This data entity consist in a small set of information, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+     \textbf{Ride Request} 
+     This data entity consist in a small set of information, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+     \textbf{Booking Request}
+     This data entity consist in a small set of information, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+     \textbf{Queue}
+     This data entity consist in a small set of information, for this reason its complexity has been considered \textbf{SIMPLE}\newline
+     
+     \begin{center}
+      $ ILF Function Points = numberOfILF * 7 = 7 * 7 = 49 $
+     \end{center}
+
    \subsection{External Logic Files}
-    The system needs to access data about:
-    \begin{itemize}
-     \item External Traffic information: Medium
-    \end{itemize}
+    The system needs to access data about:\newline\newline
+    \textbf{External Traffic data}\newline
+    The structure of this data could be complex and could need a digest process, for this reason its complexity has been considered \textbf{MEDIUM}\newline
+    
+    \begin{center}
+     $ ILF Function Points = numberOfELF * 7 = 1 * 7 = 7 $
+    \end{center}
     
     \subsection{External Input}
-     The system needs to process the following input:
-     \begin{itemize}
-      \item Ride Request Input: Simple
-      \item Ride Reservation Input: Simple
-      \item Users Login/Logout: Simple
-      \item User Registration: Simple
-      \item Mtaxies drivers Registration: Medium
-      \item Driver Notification: Medium
-     \end{itemize}
+     The system needs to process the following input: \newline
+
+      \noindent \textbf{Ride Request creation}\newline
+      This operation requires the user to perform few and simple actions and the system to perform straightforward checks and data procedures,
+      for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+      
+      \noindent \textbf{Booking Request creation}\newline
+      This operation requires the user to perform few and simple actions and the system to perform straightforward checks and data procedures,
+      for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+      
+      \noindent \textbf{Booking Request editing}\newline
+      This operation requires the user to perform few and simple actions and the system to perform straightforward checks and data procedures,
+      for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+      
+      \noindent \textbf{User Login/Logout}\newline
+      This operation requires the user to perform few and simple actions and the system to perform straightforward checks and data procedures,
+      for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+      
+      \noindent \textbf{User Registration}\newline
+      This operation requires the user to perform few and simple actions and the system to perform straightforward checks and data procedures,
+      for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+      
+      \noindent \textbf{Mtaxi Driver Registration}\newline
+      This operation requires the Mtaxi driver to perform few and simple actions and the system to perform straightforward checks and data procedures,
+      for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+      
+      \noindent \textbf{Driver Notification}\newline
+      This operation requires the user to perform few and simple actions and the system(including the MYT device) more complex and numerous procedures,
+      for this reason its complexity has been considered \textbf{MEDIUM}\newline\newline
+      
+      \noindent \textbf{Administrator Operations}\newline
+      This operation requires the administrator to perform few and simple actions and the system to perform straightforward checks and data procedures,
+      for this reason its complexity has been considered \textbf{SIMPLE}\newline
+      
+      \begin{center}
+	$ EI Function Points = numberOfSimpleEI * 3 + numberOfMediumEI * 4 = 7 * 3 + 1 * 4 = 25 $
+      \end{center}
     
+    \subsection{External Output}
+      This operation requires the system to perform complex calculations on traffic data and Mtaxi positions, for this reason its complexity has been considered \textbf{COMPLEX}\newline\newline
+      \textbf{AWT Notification}\newline
+      
+      \textbf{Zone Change Notification}\newline
+      This operation implies that the system noticed an unbalanced distribution of Mtaxi in city zones; this last process requires complex and numerous
+      calculations and data checks, this operation requires the system to perform complex calculations on traffic data and Mtaxi positions, for this reason its complexity has been considered \textbf{COMPLEX}\newline
+      \begin{center}
+	$ EO Function Points = numberOfEO * 7 = 2 * 7 = 14 $
+      \end{center}
+      
     \subsection{External Inquiry}
-      \begin{itemize}
-       \item Users' Profile Visiualization: Simple
-       \item Mtaxi driver Notification: Medium
-       \item 
-      \end{itemize}
-   
+       \textbf{User Profile Visualization}\newline
+       This operation the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+       \textbf{User Ride Request Visualization}\newline
+       This operation the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+       \textbf{User Booking Request Visualization}\newline
+       This operation the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+       \textbf{Mtaxi Notification Visualization}\newline
+       This operation the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+       \textbf{Mtaxi Accident Reports Visualization}\newline
+       This operation the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+       \newpage
+       \textbf{Mtaxi Bad Behavior Reports Visualization}\newline
+       This operation the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline
+       \begin{center}
+	$ EI Function Points = numberOfEI * 3 = 6 * 3 = 18 $
+       \end{center}
+     
+     \subsection{Summary}
+	\begin{center}
+	$ Total Function Points = 49 + 7 + 25 + 14 + 18  = 113 $
+        $ Number of SLOC = JavaFPConversionFactor * TFP = 46 * 113 = 5198 \: SLOCs $
+	\end{center}
+
 \section{COCOMO II Analisys}
 
 \newpage

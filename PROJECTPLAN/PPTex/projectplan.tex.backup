@@ -109,10 +109,27 @@
     \end{itemize}
   \subsection{References}
     \begin{itemize}
-     \item 
+     \item COCOMO II Specification
+     \item Function Point Specification
     \end{itemize}
 
 \section{Function Point Analisys}
+  \subsection{Introduction}
+    The function point approach is a tecnique that allows the project manager to extimate 
+    the size of the project.\newline
+    It is based on a combination of the project charateristics:
+    \begin{itemize}
+     \item \textbf{Internal Logic Files:} It represents a homogeneous set of data managed by the application
+     \item \textbf{External Logic Files:} It represents a homogeneous set of data used by the application but generated and maintained by other applications
+     \item \textbf{External Input:} It represents a set of elementary procedures to eleborate data coming from the external environment
+     \item \textbf{External Output:} It represents a set of procedures that generates data for the external environment with a significant eleboration of data from logic files
+     \item \textbf{External Inquiry:} It represents a set of input/output operation that do not require a significant eleaboration of logic data files.
+    \end{itemize}
+    The following table outline the number of Functional Point based on functionality and relative complexity:\newline
+    \begin{center}
+      \includegraphics[scale=0.5]{fptable.png}
+    \end{center}
+
   \subsection{Internal Logic Files}
      The system needs to store information about: \newline \newline
      \textbf{User}\newline
@@ -121,9 +138,6 @@
      This data entity consist in a small set of information, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
      \textbf{Mtaxi driver}\newline
      This data entity consist in a small set of information, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
-     
-     \newpage
-     
      \noindent \textbf{Mtaxi}\newline
      This data entity consist in a small set of information, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
      \textbf{WorkTime Table}\newline
@@ -213,7 +227,6 @@
        This operation the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
        \textbf{Mtaxi Accident Reports Visualization}\newline
        This operation the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
-       \newpage
        \textbf{Mtaxi Bad Behavior Reports Visualization}\newline
        This operation the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline
        \begin{center}
@@ -222,12 +235,35 @@
      
      \subsection{Summary}
 	\begin{center}
-	$ Total Function Points = 49 + 7 + 25 + 14 + 18  = 113 $
-        $ Number of SLOC = JavaFPConversionFactor * TFP = 46 * 113 = 5198 \: SLOCs $
+	$ Total Function Points(UFP) = 49 + 7 + 25 + 14 + 18  = 113 $
 	\end{center}
 
+\newpage
 \section{COCOMO II Analisys}
-
+  \subsection{Introduction}
+    The COCOMO II calculations are based on estimates of a project's size in Source Lines of Code (SLOC).
+    In this case the previous Function Points analysis is used to estimate the SLOC number.\newline
+    Assuming that the programming language used for the will be Java EE, the conversion factor between the 
+    total function point counts(UFP) and the SLOC is 46.
+    \begin{equation}
+     SLOCs = conversionFactor * UFP = 113 * 46 = 5198
+    \end{equation}
+    The SLOC number represents the entry point, the analysis proceeds by defining:
+    \begin{itemize}
+     \item \textbf{Cost Drivers:} COCOMO II has 17 cost drivers, i.e. multiplicative factors that determine the effort required to complete the software project
+     \item \textbf{Scale Drivers:} COCOMO II has 5 scale driver that defines the most important factors to determine cost and duration of the project
+    \end{itemize}
+    The method defines the effort equation:
+    \begin{equation}
+     effor = 2.94 * EAF * (KSLOC)^E
+    \end{equation}
+    where EAF(Effort Adjustment Factor) depends on the Cost Drivers and E is derived from the Scale Driver.\newline
+    The duration of the project is defined as:
+    \begin{equation}
+     duration = 3.67 * (effort)^E
+    \end{equation}
+  \subsection{Analisys}
+    In this section is included 
 \newpage
 
 \section{Task Gantt Diagram}

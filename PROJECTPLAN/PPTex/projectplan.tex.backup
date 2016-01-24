@@ -262,8 +262,16 @@
     \begin{equation}
      duration = 3.67 * (effort)^E
     \end{equation}
+  \newpage
   \subsection{Analisys}
-    In this section is included 
+    In this section is included the final COCOMO analisys performed using a tool available at:\newline
+    http://csse.usc.edu/tools/COCOMOII.php\newline
+    \includegraphics[scale=0.5]{cocomo1.png}
+    \newpage
+    \begin{center}
+      \includegraphics[scale=0.6]{cocomo2.png}
+    \end{center}
+
 \newpage
 
 \section{Task Gantt Diagram}
@@ -291,7 +299,64 @@ In the following paragraph is included an explanation of each task and of its du
 
 \newpage
 \section{Resource Allocation Diagram}
+  In this section are included two diagrams showing how the two team members(Andrea Sessa, Giorgio Pea) have been allocated to the tasks
+  described in the prevoius section.\newline
+  In grey is indicated the work time while in green the free time, besides each task is indicated the percentage of time allocated for that 
+  particular activity\newline
+  Due to space constraints the diagrams are shown in the next to pages.\newline
+  \newpage
+  \textbf{Allocation Diagram: Andrea Sessa}\newline
+  \begin{center}
+       \includegraphics[scale=0.4]{res1.png}
+  \end{center}
+  \newpage
+  \textbf{Allocation Diagram: Giorgio Pea}\newline
+  \begin{center}
+       \includegraphics[scale=0.4]{res2.png}
+  \end{center}
+
+\newpage
+\section{Risks Detection and Management}
+In this section is included a list of possible risks that can occur during the project.\newline
+
+\subsection{Project Risks}
+  \begin{enumerate}
+   \item Key staff are ill at critical times in the project\newline
+	 \textbf{Probability:} Moderate\newline
+	 \textbf{Effect:} Serious\newline
+	 \textbf{Recover Strategy:} Reorganize team so that there is more overlap of work and people therefore understand each other’s jobs\newline
+  \item Changes to requirements that require major design rework Moderate are proposed
+	 \textbf{Probability:} Low\newline
+	 \textbf{Effect:} Critical\newline
+	 \textbf{Recover Strategy:} Use previously derived traceability information to assess requirements change impact
+  \item Key staff is busy at critical times in the project\newline
+	\textbf{Probability:} Moderate\newline
+	\textbf{Effect:} Serious\newline
+	\textbf{Recover Strategy: } Reorganize the resource allocation plan to match the availability of the staff with the project schedule 
+  \end{enumerate}
+
+\subsection{Technical Risks}
+  \begin{enumerate}
+   \item Database or other key components in the architecture do not perform as expected\newline
+   \textbf{Probability:} Low\newline
+   \textbf{Effect:} Catastrophic\newline
+   \textbf{Recover Strategy:} Investigate the possibility of buying a higher-performance components.\newline
+  \end{enumerate}
+
+
+\newpage
 
 \section{Appendix}
+  	\subsection{Tools}
+		\begin{itemize}
+			\item \textbf{Planner:} to draw gantt and reseource diagrams
+			\item \LaTeX \textbf{/ Atom:} to redact this document
+		\end{itemize}
+
+	\subsection{Hours}
+		\begin{itemize}
+			\item Andrea Sessa: 12 hours
+			\item Giorgio Pea: 8 hours
+		\end{itemize}
 
 \end{document}

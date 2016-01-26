@@ -91,18 +91,18 @@
 \section{Introduction}
   \subsection{Purpose}
     The main purpose of this document is to analyze effort and cost for MyTaxiService.
-    The analisys is performed using two different models:
+    The analysis is performed using two different models:
     \begin{itemize}
      \item Function Points: to determine the size and the overall complexity of the project
      \item COCOMO II: to determine the effort and cost of the project
     \end{itemize}
-    In the final part of the document are also included a Gantt diagram to visualize thepage
+    In the final part of the document are also included a Gantt diagram to visualize the page
     general schedule of the project and a resource allocation diagram to show how the team 
-    members have been assigned to the variuos tasks.
+    members have been assigned to the various tasks.
 
   \subsection{Acronyms}
     \begin{itemize}
-     \item \textbf{RASD:} Requirements Analisys and Specification Document
+     \item \textbf{RASD:} Requirements Analysis and Specification Document
      \item \textbf{DD:} Design Document
      \item \textbf{ITPD:} Integration Test Plan Document
      \item \textbf{AWT:} Approximate Waiting Time
@@ -113,19 +113,18 @@
      \item Function Point Specification
     \end{itemize}
 
-\section{Function Point Analisys}
+\section{Function Point Analysis}
   \subsection{Introduction}
-    The function point approach is a tecnique that allows the project manager to extimate 
-    the size of the project.\newline
-    It is based on a combination of the project charateristics:
+    The function point analysis is a technique that provides an algorithmic and statistical estimation of the size of a software project.\newline
+    This estimation is based on the following elements of the product model:
     \begin{itemize}
-     \item \textbf{Internal Logic Files:} It represents a homogeneous set of data managed by the application
+     \item \textbf{Internal Logic Files:} It represents a homogeneous set of data managed and created by the application
      \item \textbf{External Logic Files:} It represents a homogeneous set of data used by the application but generated and maintained by other applications
-     \item \textbf{External Input:} It represents a set of elementary procedures to eleborate data coming from the external environment
-     \item \textbf{External Output:} It represents a set of procedures that generates data for the external environment with a significant eleboration of data from logic files
-     \item \textbf{External Inquiry:} It represents a set of input/output operation that do not require a significant eleaboration of logic data files.
+     \item \textbf{External Input:} It represents a set of elementary procedures to elaborate data coming from the external environment
+     \item \textbf{External Output:} It represents a set of procedures that generate data for the external environment with a significant elaboration of logic files
+     \item \textbf{External Inquiry:} It represents a set of input/output operations that do not require a significant elaboration of logic files
     \end{itemize}
-    The following table outline the number of Functional Point based on functionality and relative complexity:\newline
+    The following table shows the coefficients to be used in the UFP computations and relative to the different function types and their estimated complexity:\newline
     \begin{center}
       \includegraphics[scale=0.5]{fptable.png}
     \end{center}
@@ -140,7 +139,7 @@
      This data entity consist in a small set of information, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
      \noindent \textbf{Mtaxi}\newline
      This data entity consist in a small set of information, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
-     \textbf{WorkTime Table}\newline
+     \textbf{Work Time Table}\newline
      This data entity consist in a small set of information, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
      \textbf{Zone}\newline
      This data entity consist in a small set of information, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
@@ -206,10 +205,12 @@
       \end{center}
     
     \subsection{External Output}
-      This operation requires the system to perform complex calculations on traffic data and Mtaxi positions, for this reason its complexity has been considered \textbf{COMPLEX}\newline\newline
       \textbf{AWT Notification}\newline
+      This operation requires the system to perform complex calculations on traffic data and Mtaxi positions, for this reason its complexity has been considered \textbf{COMPLEX}\newline\newline
+
       
-      \textbf{Zone Change Notification}\newline
+      
+      \noindent \textbf{Zone Change Notification}\newline
       This operation implies that the system noticed an unbalanced distribution of Mtaxi in city zones; this last process requires complex and numerous
       calculations and data checks, this operation requires the system to perform complex calculations on traffic data and Mtaxi positions, for this reason its complexity has been considered \textbf{COMPLEX}\newline
       \begin{center}
@@ -218,17 +219,17 @@
       
     \subsection{External Inquiry}
        \textbf{User Profile Visualization}\newline
-       This operation the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+       This operation requires the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
        \textbf{User Ride Request Visualization}\newline
-       This operation the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+       This operation requires the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
        \textbf{User Booking Request Visualization}\newline
-       This operation the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+       This operation requires the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
        \textbf{Mtaxi Notification Visualization}\newline
-       This operation the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+       This operation requires the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
        \textbf{Mtaxi Accident Reports Visualization}\newline
-       This operation the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
+       This operation requires the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline\newline
        \textbf{Mtaxi Bad Behavior Reports Visualization}\newline
-       This operation the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline
+       This operation requires the system to retrieve and elaborate data in a simple way, for this reason its complexity has been considered \textbf{SIMPLE}\newline
        \begin{center}
 	$ EI Function Points = numberOfEI * 3 = 6 * 3 = 18 $
        \end{center}
@@ -239,32 +240,35 @@
 	\end{center}
 
 \newpage
-\section{COCOMO II Analisys}
+\section{COCOMO II Analysis}
   \subsection{Introduction}
-    The COCOMO II calculations are based on estimates of a project's size in Source Lines of Code (SLOC).
+    COCOMO II is algorithmic and statistical methodology used to estimate the effort of a software project.
+    This estimation requires, as input data, the project size(SLOCs) and the project's scale and cost drivers coefficients.\newline
+    
+    \begin{itemize}
+     \item \textbf{Cost Drivers:} COCOMO II has 17 cost drivers, which represent factors that contribute in significant way to the effort required to complete the software project
+     \item \textbf{Scale Drivers:} COCOMO II has 5 scale driver which represent process specific factors that contribute in significant way to the effort required to complete the software project
+    \end{itemize}
+    
     In this case the previous Function Points analysis is used to estimate the SLOC number.\newline
     Assuming that the programming language used for the will be Java EE, the conversion factor between the 
     total function point counts(UFP) and the SLOC is 46.
     \begin{equation}
      SLOCs = conversionFactor * UFP = 113 * 46 = 5198
     \end{equation}
-    The SLOC number represents the entry point, the analysis proceeds by defining:
-    \begin{itemize}
-     \item \textbf{Cost Drivers:} COCOMO II has 17 cost drivers, i.e. multiplicative factors that determine the effort required to complete the software project
-     \item \textbf{Scale Drivers:} COCOMO II has 5 scale driver that defines the most important factors to determine cost and duration of the project
-    \end{itemize}
-    The method defines the effort equation:
+
+    The COCOMO II methodology estimates the effort needed to complete a software project via following equation:
     \begin{equation}
-     effor = 2.94 * EAF * (KSLOC)^E
+     effort = 2.94 * EAF * (KSLOC)^E
     \end{equation}
-    where EAF(Effort Adjustment Factor) depends on the Cost Drivers and E is derived from the Scale Driver.\newline
-    The duration of the project is defined as:
+    where EAF(Effort Adjustment Factor) depends on the Cost Drivers and E is derived from the Scale Drivers.\newline
+    COCOMO II estimates also the duration of a software project via following equation:
     \begin{equation}
      duration = 3.67 * (effort)^E
     \end{equation}
   \newpage
-  \subsection{Analisys}
-    In this section is included the final COCOMO analisys performed using a tool available at:\newline
+  \subsection{Analysis}
+    In this section is included the final COCOMO analysis performed using a tool available at:\newline
     http://csse.usc.edu/tools/COCOMOII.php\newline
     \includegraphics[scale=0.5]{cocomo1.png}
     \newpage
@@ -277,11 +281,11 @@
 \section{Task Gantt Diagram}
  In this section is included a gantt diagram that represents the tasks in which the project is divided.\newline
  \begin{center}
-  \includegraphics[scale=0.4]{gantt.png}
+  \includegraphics[scale=0.35]{ganttnew.png}
  \end{center}
 \newpage
 
-In the following paragraph is included an explanation of each task and of its duration in terms of work
+\noindent In the following paragraph is included an explanation of each task and of its duration in terms of work hours
 \begin{itemize}
  \item \textbf{T1:} Requirements Specification - Duration: 29h
  \item \textbf{T2:} RASD Diagrams Specification - Duration: 29h
@@ -296,14 +300,23 @@ In the following paragraph is included an explanation of each task and of its du
  \item \textbf{T11:} Integration Test Plan Definition - Duration: 8h
  \item \textbf{T12:} ITPD Revision: Duration: 1h
 \end{itemize}
+ For the following tasks we assume that the implementation phase is divided into two main development activities(Backend and Frontend implementation).
+ The duration of the development phase is estimated both on the base of the COCOMO analysis and on our previous experience with others projects.\newline
+\begin{itemize}
+ \item \textbf{T13:} Backend implementation - Duration: 2 months
+ \item \textbf{T14:} Frontend implementation - Duration: 1.5 months
+ \item \textbf{T15:} Acceptance Testing - Duration: 0.5 months
+\end{itemize}
+
+ 
 
 \newpage
 \section{Resource Allocation Diagram}
   In this section are included two diagrams showing how the two team members(Andrea Sessa, Giorgio Pea) have been allocated to the tasks
-  described in the prevoius section.\newline
-  In grey is indicated the work time while in green the free time, besides each task is indicated the percentage of time allocated for that 
-  particular activity\newline
-  Due to space constraints the diagrams are shown in the next to pages.\newline
+  described in the previous section.\newline
+  The work time is indicated in gray while the free time is indicated in green.
+  For each activity its allocated time is indicated in percentage with respect to the total amount of time available for the set of activities this one belongs to.\newline
+  Due to space constraints the diagrams are shown in the next two pages.\newline
   \newpage
   \textbf{Allocation Diagram: Andrea Sessa}\newline
   \begin{center}
@@ -319,37 +332,57 @@ In the following paragraph is included an explanation of each task and of its du
 \section{Risks Detection and Management}
 In this section is included a list of possible risks that can occur during the project.\newline
 
-\subsection{Project Risks}
+\subsection{Process Risks}
   \begin{enumerate}
-   \item Key staff are ill at critical times in the project\newline
+   \item Key development figures may be ill at critical times during the project\newline
 	 \textbf{Probability:} Moderate\newline
 	 \textbf{Effect:} Serious\newline
-	 \textbf{Recover Strategy:} Reorganize team so that there is more overlap of work and people therefore understand each other’s jobs\newline
-  \item Changes to requirements that require major design rework Moderate are proposed
+	 \textbf{Recovery Strategy:} Reorganize the team so that there is more overlap of work and people therefore understand each other’s jobs\newline
+  \item Important changes to the project's requirements and design may occur.
 	 \textbf{Probability:} Low\newline
 	 \textbf{Effect:} Critical\newline
-	 \textbf{Recover Strategy:} Use previously derived traceability information to assess requirements change impact
-  \item Key staff is busy at critical times in the project\newline
+	 \textbf{Recover Strategy:} Use previously derived traceability information to assess requirements the impact of the requirements' change\newline
+  \item Key development figures may be busy at critical times during the project\newline
 	\textbf{Probability:} Moderate\newline
 	\textbf{Effect:} Serious\newline
-	\textbf{Recover Strategy: } Reorganize the resource allocation plan to match the availability of the staff with the project schedule 
+	\textbf{Recover Strategy: } Reorganize the resource allocation plan to match the availability of the staff with the project schedule
+  \item Underestimated development time\newline
+    \textbf{Probability:} Moderate\newline
+    \textbf{Effect:} Serious\newline
+    \textbf{Recover Strategy:} Investigate the possibility of using COTS or try to renegotiate the deadlines.\newline
   \end{enumerate}
 
 \subsection{Technical Risks}
   \begin{enumerate}
    \item Database or other key components in the architecture do not perform as expected\newline
-   \textbf{Probability:} Low\newline
-   \textbf{Effect:} Catastrophic\newline
-   \textbf{Recover Strategy:} Investigate the possibility of buying a higher-performance components.\newline
+    \textbf{Probability:} Low\newline
+    \textbf{Effect:} Serious\newline
+    \textbf{Recover Strategy:} Investigate the possibility of buying a higher-performance components.\newline
+   \item The architecture proposed for the project cannot be implemented due to economical or other reasons\newline
+    \textbf{Probability:} Moderate\newline
+    \textbf{Effect:} Serious\newline
+    \textbf{Recover Strategy:} Investigate the possibility of finding a feasible architecture that can be as much compatible as possible with the previous one.\newline
   \end{enumerate}
 
+\subsection{Business Risks}
+  We assume for this section that we are developing MyTaxiService for a real-world company.\newline
+  \begin{enumerate}
+   \item The organization is restructured, so that its to management changes\newline
+    \textbf{Probability:} Low\newline
+    \textbf{Effect:} Serious\newline
+    \textbf{Recover Strategy:} Prepare a briefing document for the top management showing how the project is making a very important contribution to the goals of the business.\newline
+   \item The organization find itself in serious financial problems\newline
+    \textbf{Probability:} Low/Moderate\newline
+    \textbf{Effect:} Catastrophic\newline
+    \textbf{Recover Strategy:} Prepare a briefing document for the management showing how the project goals are fundamental for the company's business \newline
+  \end{enumerate}
 
 \newpage
 
 \section{Appendix}
   	\subsection{Tools}
 		\begin{itemize}
-			\item \textbf{Planner:} to draw gantt and reseource diagrams
+			\item \textbf{Planner:} to draw gantt and resource diagrams
 			\item \LaTeX \textbf{/ Atom:} to redact this document
 		\end{itemize}
 

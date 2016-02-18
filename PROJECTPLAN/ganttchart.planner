@@ -17,34 +17,38 @@
         </overridden-day-type>
       </overridden-day-types>
       <days>
-        <day date="20151011" type="day-type" id="0"/>
-        <day date="20151212" type="day-type" id="0"/>
-        <day date="20151121" type="day-type" id="0"/>
-        <day date="20151031" type="day-type" id="0"/>
-        <day date="20151010" type="day-type" id="0"/>
-        <day date="20151018" type="day-type" id="0"/>
-        <day date="20160110" type="day-type" id="0"/>
-        <day date="20160109" type="day-type" id="0"/>
-        <day date="20151220" type="day-type" id="0"/>
-        <day date="20151129" type="day-type" id="0"/>
         <day date="20151108" type="day-type" id="0"/>
-        <day date="20151219" type="day-type" id="0"/>
-        <day date="20151128" type="day-type" id="0"/>
-        <day date="20151107" type="day-type" id="0"/>
-        <day date="20151017" type="day-type" id="0"/>
-        <day date="20151025" type="day-type" id="0"/>
-        <day date="20151227" type="day-type" id="0"/>
-        <day date="20151206" type="day-type" id="0"/>
-        <day date="20151115" type="day-type" id="0"/>
+        <day date="20151011" type="day-type" id="0"/>
+        <day date="20160123" type="day-type" id="0"/>
         <day date="20151226" type="day-type" id="0"/>
+        <day date="20151128" type="day-type" id="0"/>
+        <day date="20151031" type="day-type" id="0"/>
+        <day date="20160110" type="day-type" id="0"/>
+        <day date="20151213" type="day-type" id="0"/>
+        <day date="20151115" type="day-type" id="0"/>
+        <day date="20151018" type="day-type" id="0"/>
+        <day date="20160102" type="day-type" id="0"/>
         <day date="20151205" type="day-type" id="0"/>
+        <day date="20151107" type="day-type" id="0"/>
+        <day date="20151010" type="day-type" id="0"/>
+        <day date="20160117" type="day-type" id="0"/>
+        <day date="20151220" type="day-type" id="0"/>
+        <day date="20151122" type="day-type" id="0"/>
+        <day date="20151025" type="day-type" id="0"/>
+        <day date="20160109" type="day-type" id="0"/>
+        <day date="20151212" type="day-type" id="0"/>
         <day date="20151114" type="day-type" id="0"/>
+        <day date="20151017" type="day-type" id="0"/>
+        <day date="20160124" type="day-type" id="0"/>
+        <day date="20151227" type="day-type" id="0"/>
+        <day date="20151129" type="day-type" id="0"/>
+        <day date="20151101" type="day-type" id="0"/>
+        <day date="20160116" type="day-type" id="0"/>
+        <day date="20151219" type="day-type" id="0"/>
+        <day date="20151121" type="day-type" id="0"/>
         <day date="20151024" type="day-type" id="0"/>
         <day date="20160103" type="day-type" id="0"/>
-        <day date="20160102" type="day-type" id="0"/>
-        <day date="20151213" type="day-type" id="0"/>
-        <day date="20151122" type="day-type" id="0"/>
-        <day date="20151101" type="day-type" id="0"/>
+        <day date="20151206" type="day-type" id="0"/>
       </days>
     </calendar>
   </calendars>
@@ -59,7 +63,7 @@
         <predecessor id="1" predecessor-id="2" type="FS"/>
       </predecessors>
     </task>
-    <task id="4" name="RASD Revision" note="" work="27000" start="20151102T170000Z" end="20151103T163000Z" work-start="20151103T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="4" name="RASD Revision" note="" work="28800" start="20151102T170000Z" end="20151103T170000Z" work-start="20151103T080000Z" percent-complete="48" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="3" type="FS"/>
       </predecessors>
@@ -91,7 +95,7 @@
         <predecessor id="1" predecessor-id="8" type="FS"/>
       </predecessors>
     </task>
-    <task id="10" name="DD Revision 2" note="" work="28800" start="20151211T000000Z" end="20151211T170000Z" work-start="20151211T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="10" name="DD Revision 2" note="" work="28800" start="20151211T000000Z" end="20151211T170000Z" work-start="20151211T080000Z" percent-complete="29" priority="0" type="normal" scheduling="fixed-work">
       <constraint type="start-no-earlier-than" time="20151211T000000Z"/>
       <predecessors>
         <predecessor id="1" predecessor-id="9" type="FS"/>
@@ -102,7 +106,7 @@
         <predecessor id="1" predecessor-id="10" type="FS"/>
       </predecessors>
     </task>
-    <task id="12" name="InspectionPhase2" note="" work="28800" start="20160102T000000Z" end="20160102T142000Z" work-start="20160102T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="12" name="InspectionPhase2" note="" work="28800" start="20160102T000000Z" end="20160102T170000Z" work-start="20160102T080000Z" percent-complete="52" priority="0" type="normal" scheduling="fixed-work">
       <constraint type="start-no-earlier-than" time="20160102T000000Z"/>
       <predecessors>
         <predecessor id="1" predecessor-id="11" type="FS"/>
@@ -119,6 +123,21 @@
         <predecessor id="1" predecessor-id="13" type="FS"/>
       </predecessors>
     </task>
+    <task id="15" name="Backend Impl" note="" work="144000" start="20160113T170000Z" end="20160118T170000Z" work-start="20160114T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="14" type="FS"/>
+      </predecessors>
+    </task>
+    <task id="16" name="Frontend Impl" note="" work="86400" start="20160118T170000Z" end="20160121T170000Z" work-start="20160119T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="15" type="FS"/>
+      </predecessors>
+    </task>
+    <task id="17" name="Acceptance Testing" note="" work="57600" start="20160121T170000Z" end="20160123T170000Z" work-start="20160122T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="16" type="FS"/>
+      </predecessors>
+    </task>
   </tasks>
   <resource-groups/>
   <resources>
@@ -126,6 +145,9 @@
     <resource id="2" name="Giorgio Pea" short-name="" type="1" units="0" email="" note="" std-rate="0"/>
   </resources>
   <allocations>
+    <allocation task-id="17" resource-id="1" units="50"/>
+    <allocation task-id="16" resource-id="1" units="10"/>
+    <allocation task-id="15" resource-id="1" units="80"/>
     <allocation task-id="14" resource-id="1" units="50"/>
     <allocation task-id="13" resource-id="1" units="50"/>
     <allocation task-id="12" resource-id="1" units="50"/>
@@ -138,21 +160,24 @@
     <allocation task-id="5" resource-id="1" units="50"/>
     <allocation task-id="4" resource-id="1" units="50"/>
     <allocation task-id="3" resource-id="1" units="50"/>
-    <allocation task-id="1" resource-id="1" units="10"/>
     <allocation task-id="2" resource-id="1" units="90"/>
-    <allocation task-id="8" resource-id="2" units="50"/>
+    <allocation task-id="1" resource-id="1" units="10"/>
+    <allocation task-id="17" resource-id="2" units="50"/>
+    <allocation task-id="16" resource-id="2" units="90"/>
+    <allocation task-id="15" resource-id="2" units="20"/>
     <allocation task-id="14" resource-id="2" units="50"/>
     <allocation task-id="13" resource-id="2" units="50"/>
-    <allocation task-id="12" resource-id="2" units="100"/>
+    <allocation task-id="12" resource-id="2" units="50"/>
     <allocation task-id="11" resource-id="2" units="40"/>
     <allocation task-id="10" resource-id="2" units="50"/>
     <allocation task-id="9" resource-id="2" units="50"/>
+    <allocation task-id="8" resource-id="2" units="50"/>
     <allocation task-id="7" resource-id="2" units="20"/>
     <allocation task-id="6" resource-id="2" units="80"/>
     <allocation task-id="5" resource-id="2" units="50"/>
     <allocation task-id="4" resource-id="2" units="50"/>
     <allocation task-id="3" resource-id="2" units="50"/>
-    <allocation task-id="1" resource-id="2" units="90"/>
     <allocation task-id="2" resource-id="2" units="10"/>
+    <allocation task-id="1" resource-id="2" units="90"/>
   </allocations>
 </project>

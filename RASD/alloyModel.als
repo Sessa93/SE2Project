@@ -21,6 +21,10 @@ sig RegisteredUser extends Person {
 	userState: one UserState
 }
 
+sig Administrator extends Person {
+	ID: on Strings
+}
+
 abstract sig UserState{}
 
 one sig Logged, NonLogged extends UserState {}

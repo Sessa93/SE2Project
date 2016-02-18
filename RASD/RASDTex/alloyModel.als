@@ -21,6 +21,10 @@ sig RegisteredUser extends Person {
 	userState: one UserState
 }
 
+sig Administrator extends Person {
+	ID: on Strings
+}
+
 abstract sig UserState{}
 
 one sig Logged, NonLogged extends UserState {}
@@ -173,13 +177,13 @@ fact WorktimeTableConsistency {
 }
 //A registered user can't book two or more taxies for the same date and time
 fact NonUbiquosUsers {
-	all u: RegisteredUser | all b1,b2:BookingRequest | b1 != b2 and b2 in u.bookingRequest and b1 in u.bookingRequest implies b2.date != b1.date and b2.time != b1.time
+	all u: RegisteredUser | all b1,b2:BookingRequest | b1 != b2 and b2 in u.bookingRequest and b1 in u.bookingRequest implies b2.date != b1.date and b2.time != b1.time 
 }
 //A queue aggregates only available mtaxies
 fact queuesOfAvailableTaxies {
 	all q: Queue, t: Mtaxi | t in q.taxies implies t.state = Available
 }
-//Each mtaxi belong(if available) to exactly one queue
+//Each mtaxi belong(if available) to exactly one queue 
 fact EachQueueDiffTaxi {
 	all q1, q2: Queue | no t: Mtaxi | q1 != q2 and t in q1.taxies and t in q2.taxies
 }
@@ -188,9 +192,9 @@ fact EachQueueDiffTaxi {
 
 assert  NoRequestsWithoutUserOrMtaxies {
 	//RideRequest case
-	all r: RideRequest | one u: RegisteredUser, t: Mtaxi | r.taxi = t and r.user = u
+	all r: RideRequest | one u: RegisteredUser, t: Mtaxi | r.taxi = t and r.user = u 
 	//BookingRequest case
-	all r: BookingRequest | one u: RegisteredUser, t: Mtaxi | r.taxi = t and r.user = u
+	all r: BookingRequest | one u: RegisteredUser, t: Mtaxi | r.taxi = t and r.user = u 
 }
 check  NoRequestsWithoutUserOrMtaxies for 5
 
@@ -258,3 +262,10 @@ pred RideBookingRequestProperties {
 }
 
 run RideBookingRequestProperties for 3
+
+
+
+
+
+
+
